@@ -1,16 +1,17 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DiceRoll : MonoBehaviour
 {
-    public Sprite[] Dices; // Inspector¿¡¼­ Dice_1~Dice_6 ¼ø¼­·Î ¿¬°á
-    private SpriteRenderer renderer;
-    public int diceResult { get; private set; } // 0~5 ¢¡ +1ÇÏ¸é 1~6
+    public Sprite[] dices; // Inspectorï¿½ï¿½ï¿½ï¿½ Dice_1~Dice_6 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private SpriteRenderer _renderer;
+    public int DiceResult { get; private set; } // 0~5 ï¿½ï¿½ +1ï¿½Ï¸ï¿½ 1~6
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        _renderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -26,16 +27,16 @@ public class DiceRoll : MonoBehaviour
         for (int i = 0; i < 15; i++)
         {
             seq.AppendCallback(() => {
-                randomSprite = Random.Range(0, Dices.Length);
-                renderer.sprite = Dices[randomSprite];
+                randomSprite = Random.Range(0, dices.Length);
+                _renderer.sprite = dices[randomSprite];
             });
             seq.AppendInterval(0.05f);
         }
 
         seq.AppendCallback(() => {
-            diceResult = Random.Range(0, Dices.Length);
-            renderer.sprite = Dices[diceResult];
-            onResult?.Invoke(diceResult + 1); // 1~6 Àü´Þ
+            DiceResult = Random.Range(0, dices.Length);
+            _renderer.sprite = dices[DiceResult];
+            onResult?.Invoke(DiceResult + 1); // 1~6 ï¿½ï¿½ï¿½ï¿½
         });
     }
 }
