@@ -12,8 +12,8 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     void OnDiceRolled(int value)
     {
         int totalDamage = baseValue * value;
-        Debug.Log($"ÁÖ»çÀ§: {value} / ÃÑ µ¥¹ÌÁö: {totalDamage}");
-        // totalDamage¸¦ ÀûÀÌ³ª ÇÃ·¹ÀÌ¾îÀÇ Ã¼·Â µî¿¡ Àû¿ë
+        Debug.Log($"ï¿½Ö»ï¿½ï¿½ï¿½: {value} / ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: {totalDamage}");
+        // totalDamageï¿½ï¿½ ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½î¿¡ ï¿½ï¿½ï¿½ï¿½
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

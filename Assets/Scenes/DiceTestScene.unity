@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668d2610b9719384094920e63061ed60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dices:
+  dices:
   - {fileID: -5420220854288092238, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
   - {fileID: 7934114944782325874, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
   - {fileID: 7117374334740126191, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}

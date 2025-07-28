@@ -10,10 +10,6 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
         _currentHp = _maxHp;
     }
     

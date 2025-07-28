@@ -11,13 +11,20 @@ public class Enemy : MonoBehaviour
     private int _maxHp;
     private int _currentHp;
 
-    public void SetEnemy(Sprite enemySprite, AnimatorController enemyAnimatorController)
+    public void SetEnemy(int maxHp, Sprite enemySprite, AnimatorController enemyAnimatorController) // 적 설정
     {
+        _maxHp = maxHp;
+        _currentHp = maxHp;
         sprite = enemySprite;
         animatorController = enemyAnimatorController;
         if (spriteRenderer != null)
         {
             spriteRenderer.sprite = sprite;
+        }
+
+        if (animatorController != null)
+        {
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animatorController;
         }
     }
 
