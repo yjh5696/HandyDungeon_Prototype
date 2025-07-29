@@ -20,4 +20,5 @@ public class CardSO : ScriptableObject
     public float Damage { get => damage; }
     [SerializeField] private float diceMultiplier;
     public float DiceMultiplier { get => diceMultiplier; }
+
 }

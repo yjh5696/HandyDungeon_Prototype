@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+
 public enum Style
 {
     Attack,
@@ -10,10 +11,10 @@ public enum Style
 
 public enum State
 {
-    None,
-    Fire,
-    Water,
-    Wind
+    None = 0,
+    Fire = 1,
+    Water = 2,
+    Wind= 3
 }
 
 public class Card : MonoBehaviour
