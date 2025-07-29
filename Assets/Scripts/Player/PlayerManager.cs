@@ -4,32 +4,13 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
-    private int _maxHp = 100;
-    private int _currentHp;
+    public Player Player;
 
     private void Awake()
     {
         Instance = this;
-        _currentHp = _maxHp;
-    }
-    
-    public int GetMaxHp()
-    {
-        return _maxHp;
-    }
-
-    public int GetCurrentHp()
-    {
-        return _currentHp;
-    }
-    
-    public void SetMaxHp(int maxHp)
-    {
-        _maxHp = maxHp;
-    }
-
-    public void SetCurrentHp(int currentHp)
-    {
-        _currentHp = currentHp;
+        Player = new Player();
+        Player.SetMaxHp(100);
+        Player.SetCurrentHp(Player.GetMaxHp());
     }
 }

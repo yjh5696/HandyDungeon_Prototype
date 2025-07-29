@@ -6,14 +6,41 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
-    [SerializeField] private GameObject prefab;
-    public Enemy _enemy;
+    public Enemy Enemy;
     
-    public void SpawnEnemy(Sprite sprite, AnimatorController animatorController) // 적 소환
-    {
-        var enemy = Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation);
+    [SerializeField] private GameObject prefab;
+    private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
 
-        _enemy = enemy.GetComponent<Enemy>();
-        _enemy.SetEnemy(100, sprite, animatorController);
+    private void Awake()
+    {
+        Instance = this;
+        _spriteRenderer = prefab.GetComponent<SpriteRenderer>();
+        _animator = prefab.GetComponent<Animator>();
+    }
+
+    public void SetEnemy(int maxHp, Sprite enemySprite, AnimatorController enemyAnimatorController) // 적 설정
+    {
+        Enemy.SetMaxHp(maxHp);
+        Enemy.SetCurrentHp(maxHp);
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = enemySprite;
+        }
+
+        if (_animator != null)
+        {
+            _animator.runtimeAnimatorController = enemyAnimatorController;
+        }
+    }
+    
+    public void SpawnEnemy(EnemySO enemy) // 적 소환
+    {
+        var e = Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation);
+        e.transform.parent = gameObject.transform;
+
+        Enemy = new Enemy();
+        Enemy.SetEnemySo(enemy);
+        SetEnemy(enemy.Health, enemy.Sprite, enemy.AnimatorController);
     }
 }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b389ca25969e86c40af4481905597feb, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 4723107735738678597, guid: da5a72139ad0c5945a93674a1a5f9c19, type: 3}
+  animatorController: {fileID: 9100000, guid: 13dea5066b71fc64b8c5e89ffe3d493f, type: 2}
+  name: Skeleton
+  health: 100
+  description: "\uBF08\uB2E4\uADC0"
+  enemyCards:
+  - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
+  - {fileID: 11400000, guid: 83e6a91cc939de345ae109982a1cd0a9, type: 2}
+  - {fileID: 11400000, guid: 9b742f6408bdfef46beca0d32a07d07f, type: 2}

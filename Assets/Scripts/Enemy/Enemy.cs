@@ -1,50 +1,43 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite sprite;
-    [SerializeField] private AnimatorController animatorController;
-    private int _maxHp;
-    private int _currentHp;
+    private EnemySO _enemySo;
+    private CardSO _currentEnemyCard;
 
-    public void SetEnemy(int maxHp, Sprite enemySprite, AnimatorController enemyAnimatorController) // 적 설정
+    public EnemySO GetEnemySo()
     {
-        _maxHp = maxHp;
-        _currentHp = maxHp;
-        sprite = enemySprite;
-        animatorController = enemyAnimatorController;
-        if (spriteRenderer != null)
+        return _enemySo;
+    }
+    public void SetEnemySo(EnemySO enemy)
+    {
+        _enemySo = enemy;
+    }
+    
+    public void DrawAndUseCard()
+    {
+        List<CardSO> cards = _enemySo.EnemyCards;
+        int result = Random.Range(0, cards.Count);
+        _currentEnemyCard = cards[result];
+        
+        switch (_currentEnemyCard.Style)
         {
-            spriteRenderer.sprite = sprite;
+            case Style.Attack:
+                break;
+            case Style.Defence:
+                break;
+            case Style.Special:
+                break;
+            default:
+                break;
         }
-
-        if (animatorController != null)
-        {
-            gameObject.GetComponent<Animator>().runtimeAnimatorController = animatorController;
-        }
-    }
-
-    public int GetMaxHp()
-    {
-        return _maxHp;
-    }
-
-    public int GetCurrentHp()
-    {
-        return _currentHp;
-    }
-
-    public void SetMaxHp(int maxHp)
-    {
-        _maxHp = maxHp;
-    }
-
-    public void SetCurrentHp(int currentHp)
-    {
-        _currentHp = currentHp;
+        
+        LogManager.Instance.AddLog($"{_enemySo.Name}이/가 {_currentEnemyCard.CardName}을 사용하였습니다!");
+        GameManager.Instance.diceRoll.OnAttackButtonClicked();
+        
     }
 }

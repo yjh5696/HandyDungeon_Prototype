@@ -1,14 +1,33 @@
+using TMPro;
 using UnityEngine;
+
+public enum Style
+{
+    Attack,
+    Defence,
+    Special
+}
+
+public enum State
+{
+    None,
+    Fire,
+    Water,
+    Wind
+}
 
 public class Card : MonoBehaviour
 {
-    private string _name;
-    private string _description;
-    [SerializeField] private Sprite sprite;
+    private CardSO _currentCard;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text descriptionText;
 
-    public void SetCard(string name, string description)
+    public void SetCard(CardSO card)
     {
-        _name = name;
-        _description = description;
+        _currentCard = card;
+        spriteRenderer.sprite = card.CardSprite;
+        nameText.text = card.CardName;
+        descriptionText.text = card.CardDescription;
     }
 }
