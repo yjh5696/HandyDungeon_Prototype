@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor.Animations;
+#endif
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemySO", menuName = "Scriptable Objects/EnemySO")]
@@ -7,8 +9,8 @@ public class EnemySO : ScriptableObject
 {
     [SerializeField] private Sprite sprite;
     public Sprite Sprite { get => sprite; }
-    [SerializeField] private AnimatorController animatorController;
-    public AnimatorController AnimatorController{ get => animatorController; }
+    [SerializeField] private RuntimeAnimatorController animatorController;
+    public RuntimeAnimatorController AnimatorController { get => animatorController; }
     [SerializeField] private new string name;
     public string Name { get => name; }
     [SerializeField] private int health;

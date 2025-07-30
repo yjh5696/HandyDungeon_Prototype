@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor.Animations;
+#endif
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,10 +11,10 @@ public class Enemy : Character
     private EnemySO _enemySo;
     private CardSO _currentEnemyCard;
 
-    private StatusEffect currentStatus = StatusEffect.None;
+    private EnemyStatusEffect currentStatus = EnemyStatusEffect.None;
     private int statusTurnCount = 0;
 
-    public enum StatusEffect
+    public enum EnemyStatusEffect
     {
         None = 0,
         Fire = 1,
@@ -28,7 +30,7 @@ public class Enemy : Character
         _enemySo = enemy;
     }
 
-    public void ApplyStatus(StatusEffect status)
+    public void EnemyApplyStatus(EnemyStatusEffect status)
     {
         currentStatus = status;
         statusTurnCount = 1;  // 1턴 유지
@@ -43,25 +45,70 @@ public class Enemy : Character
             if (statusTurnCount <= 0)
             {
                 Debug.Log($"{_enemySo.Name}의 상태이상 {currentStatus}가 사라졌습니다.");
-                currentStatus = StatusEffect.None;
+                currentStatus = EnemyStatusEffect.None;
             }
         }
     }
 
-    public void TakeDamage(float damage)
+    public void EnemyTakeDamage(float damage, EnemyStatusEffect status)
     {
         float modifiedDamage = damage;
 
         switch (currentStatus)
         {
-            case StatusEffect.Fire:
-                modifiedDamage += 5f;
+            case EnemyStatusEffect.Fire:
+                if(status == EnemyStatusEffect.Water)
+                {
+                    modifiedDamage *= 0.8f;
+                }
+                else if (status == EnemyStatusEffect.Wind)
+                {
+                    modifiedDamage *= 1.2f;
+                }
+                else if (status == EnemyStatusEffect.Fire)
+                {
+                    modifiedDamage *= 1f;
+                }
+                else
+                {
+                    modifiedDamage *= 1.0f;
+                }
                 break;
-            case StatusEffect.Water:
-                modifiedDamage -= 5f;
+            case EnemyStatusEffect.Water:
+                if (status == EnemyStatusEffect.Water)
+                {
+                    modifiedDamage *= 1f;
+                }
+                else if (status == EnemyStatusEffect.Wind)
+                {
+                    modifiedDamage *= 1.2f;
+                }
+                else if (status == EnemyStatusEffect.Fire)
+                {
+                    modifiedDamage *= 0.8f;
+                }
+                else
+                {
+                    modifiedDamage *= 1.0f;
+                }
                 break;
-            case StatusEffect.Wind:
-                modifiedDamage *= 0.9f;
+            case EnemyStatusEffect.Wind:
+                if (status == EnemyStatusEffect.Water)
+                {
+                    modifiedDamage *= 0.8f;
+                }
+                else if (status == EnemyStatusEffect.Wind)
+                {
+                    modifiedDamage *= 1f;
+                }
+                else if (status == EnemyStatusEffect.Fire)
+                {
+                    modifiedDamage *= 1.2f;
+                }
+                else
+                {
+                    modifiedDamage *= 1.0f; // 불 상태로 인해 추가 피해
+                }
                 break;
         }
 
@@ -69,12 +116,12 @@ public class Enemy : Character
         Debug.Log($"{_enemySo.Name}이(가) {modifiedDamage}의 피해를 받았습니다! 현재 체력: {GetCurrentHp()}"); 
         if (GetCurrentHp() <= 0)
         {
-            Die();
+            EnemyDie();
         }
     }
 
     // 적 사망 처리 함수
-    private void Die()
+    private void EnemyDie()
     {
         Debug.Log($"{_enemySo.Name}이(가) 사망했습니다!");
 

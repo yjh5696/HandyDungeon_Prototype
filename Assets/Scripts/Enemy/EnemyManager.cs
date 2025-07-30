@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor.Animations;
+#endif
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -27,8 +29,8 @@ public class EnemyManager : MonoBehaviour
         _spriteRenderer = prefab.GetComponent<SpriteRenderer>();
         _animator = prefab.GetComponent<Animator>();
     }
-
-    public void SetEnemy(int maxHp, Sprite enemySprite, AnimatorController enemyAnimatorController) // 적 설정
+    
+    public void SetEnemy(int maxHp, Sprite enemySprite, RuntimeAnimatorController enemyAnimatorController) // 적 설정
     {
         Enemy.SetMaxHp(maxHp);
         Enemy.SetCurrentHp(maxHp);
@@ -53,7 +55,10 @@ public class EnemyManager : MonoBehaviour
 
         Enemy = new Enemy();
         Enemy.SetEnemySo(enemy);
+
+        
         SetEnemy(enemy.Health, enemy.Sprite, enemy.AnimatorController);
+        
 
         _spriteRenderer = enemyInstance.GetComponent<SpriteRenderer>();
         _animator = enemyInstance.GetComponent<Animator>();

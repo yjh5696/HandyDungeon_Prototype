@@ -42,16 +42,19 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             LogManager.Instance.AddLog("");
             LogManager.Instance.AddSpacingLine();
             //EnemyManager.Instance.Enemy.SetCurrentHp(EnemyManager.Instance.Enemy.GetCurrentHp() - totalDamage);
-            EnemyManager.Instance.Enemy.TakeDamage(totalDamage);
-            State cardState = selectedCard.State+1;
-            currentEnemy.ApplyStatus((Enemy.StatusEffect)cardState);
+            State enemyCardState = selectedCard.State + 1;
+            EnemyManager.Instance.Enemy.EnemyTakeDamage(totalDamage, (Enemy.EnemyStatusEffect)enemyCardState);
+            currentEnemy.EnemyApplyStatus((Enemy.EnemyStatusEffect)enemyCardState);
         }
         else
         {
             LogManager.Instance.AddLog($"플레이어에게 {totalDamage}의 데미지를 주었습니다!");
             LogManager.Instance.AddLog("");
             LogManager.Instance.AddSpacingLine();
-            PlayerManager.Instance.Player.SetCurrentHp(PlayerManager.Instance.Player.GetCurrentHp() - totalDamage);
+            //PlayerManager.Instance.Player.SetCurrentHp(PlayerManager.Instance.Player.GetCurrentHp() - totalDamage);
+            State playerCardState = selectedCard.State + 1;
+            PlayerManager.Instance.Player.PlayerTakeDamage(totalDamage, (Player.PlayerStatusEffect)playerCardState);
+            PlayerManager.Instance.Player.PlayerApplyStatus((Player.PlayerStatusEffect)playerCardState);
         }
         GameManager.Instance.SwitchTurn();
     }
