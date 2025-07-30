@@ -56,6 +56,12 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             PlayerManager.Instance.Player.PlayerTakeDamage(totalDamage, (Player.PlayerStatusEffect)playerCardState);
             PlayerManager.Instance.Player.PlayerApplyStatus((Player.PlayerStatusEffect)playerCardState);
         }
+        StartCoroutine(SwitchTurnWithDelay(3f));
+    }
+
+    private System.Collections.IEnumerator SwitchTurnWithDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
         GameManager.Instance.SwitchTurn();
     }
 }
