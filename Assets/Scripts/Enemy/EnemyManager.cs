@@ -34,12 +34,12 @@ public class EnemyManager : MonoBehaviour
     {
         Enemy.SetMaxHp(maxHp);
         Enemy.SetCurrentHp(maxHp);
-        if (_spriteRenderer != null)
+        if (_spriteRenderer)
         {
             _spriteRenderer.sprite = enemySprite;
         }
 
-        if (_animator != null)
+        if (_animator)
         {
             _animator.runtimeAnimatorController = enemyAnimatorController;
         }
@@ -47,13 +47,12 @@ public class EnemyManager : MonoBehaviour
     
     public void SpawnEnemy(EnemySO enemy) // 적 소환
     {
-        if (enemyInstance != null)
+        if (enemyInstance)
             Destroy(enemyInstance);
 
         enemyInstance = Instantiate(prefab, transform.position, transform.rotation);
         enemyInstance.transform.parent = transform;
-
-        Enemy = new Enemy();
+        Enemy = enemyInstance.GetComponent<Enemy>();
         Enemy.SetEnemySo(enemy);
 
         
@@ -74,11 +73,11 @@ public class EnemyManager : MonoBehaviour
         Debug.Log("EnemyManager: 적이 사망했습니다.");
 
         // 사망 스프라이트로 교체
-        if (_spriteRenderer != null && deathSprite != null)
+        if (_spriteRenderer && deathSprite)
             _spriteRenderer.sprite = deathSprite;
 
         // 애니메이터 중지
-        if (_animator != null)
+        if (_animator)
             _animator.runtimeAnimatorController = null;
 
         // 2초 딜레이 후 오브젝트 파괴 및 초기화
@@ -89,7 +88,7 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (enemyInstance != null)
+        if (enemyInstance)
         {
             Destroy(enemyInstance);
             enemyInstance = null;
@@ -97,7 +96,7 @@ public class EnemyManager : MonoBehaviour
 
         Enemy = null;
 
-        if (_spriteRenderer != null)
+        if (_spriteRenderer)
             _spriteRenderer.sprite = null;
 
         StartCoroutine(HandleEnemyDeath());
@@ -108,7 +107,7 @@ public class EnemyManager : MonoBehaviour
         // 2초 정도 사망 스프라이트 노출 (필요 시 변경)
         yield return new WaitForSeconds(deathShowTime);
 
-        if (enemyInstance != null)
+        if (enemyInstance)
             enemyInstance.SetActive(false);
 
         Enemy = null;
@@ -118,7 +117,7 @@ public class EnemyManager : MonoBehaviour
 
         Debug.Log("EnemyManager: 다음 적 소환");
 
-        if (currentEnemySO != null)
+        if (currentEnemySO)
             SpawnEnemy(currentEnemySO);
         else
             Debug.LogWarning("EnemyManager: 다음 적 데이터가 없습니다!");

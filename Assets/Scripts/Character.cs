@@ -1,11 +1,25 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Character
+public class Character : MonoBehaviour
 {
     protected float MaxHp; 
     protected float CurrentHp;
     protected State CurrentState;
-    
+    protected HPBar HpBar;
+    public event EventHandler OnHpChanged;
+
+    private void Awake()
+    {
+        HpBar = GetComponentInChildren<HPBar>();
+    }
+
+    private void Start()
+    {
+        OnHpChanged += HpChanged;
+    }
+
     public float GetMaxHp()
     {
         return MaxHp;
@@ -29,11 +43,16 @@ public class Character
     public void SetCurrentHp(float currentHp)
     {
         CurrentHp = currentHp;
+        OnHpChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetCurrentState(State currentState)
     {
         CurrentState = currentState;
     }
-    
+
+    protected virtual void HpChanged(object sender, EventArgs e)
+    {
+        HpBar.HpChanged(CurrentHp, MaxHp);
+    }
 }

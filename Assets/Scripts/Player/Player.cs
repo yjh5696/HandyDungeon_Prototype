@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static Enemy;
 
@@ -17,8 +18,8 @@ public class Player : Character
     public void PlayerApplyStatus(PlayerStatusEffect status)
     {
         currentStatus = status;
-        //statusTurnCount = 1;  // 1ÅÏ À¯Áö
-        Debug.Log($"Player¿¡°Ô {status} »óÅÂÀÌ»ó Àû¿ë!");
+        //statusTurnCount = 1;  // 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        Debug.Log($"Playerï¿½ï¿½ï¿½ï¿½ {status} ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½!");
     }
 
     public void PlayerTakeDamage(float damage, PlayerStatusEffect status)
@@ -78,13 +79,13 @@ public class Player : Character
                 }
                 else
                 {
-                    modifiedDamage *= 1.0f; // ºÒ »óÅÂ·Î ÀÎÇØ Ãß°¡ ÇÇÇØ
+                    modifiedDamage *= 1.0f; // ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
                 break;
         }
 
         SetCurrentHp(GetCurrentHp() - modifiedDamage);
-        Debug.Log($"PlayerÀÌ(°¡) {modifiedDamage}ÀÇ ÇÇÇØ¸¦ ¹Þ¾Ò½À´Ï´Ù! ÇöÀç Ã¼·Â: {GetCurrentHp()}");
+        Debug.Log($"Playerï¿½ï¿½(ï¿½ï¿½) {modifiedDamage}ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¸ï¿½ ï¿½Þ¾Ò½ï¿½ï¿½Ï´ï¿½! ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½: {GetCurrentHp()}");
         if (GetCurrentHp() <= 0)
         {
             PlayerDie();
@@ -93,9 +94,9 @@ public class Player : Character
 
     private void PlayerDie()
     {
-        Debug.Log($"PlayerÀÌ(°¡) »ç¸ÁÇß½À´Ï´Ù!");
+        Debug.Log($"Playerï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½!");
 
-        // »ç¸Á ½Ã EnemyManager¿¡ ¾Ë¸² (½Ã°¢ ¹× ¿ÀºêÁ§Æ® Ã³¸® ´ã´ç)
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ EnemyManagerï¿½ï¿½ ï¿½Ë¸ï¿½ (ï¿½Ã°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½)
         if (PlayerManager.Instance != null)
         {
             PlayerManager.Instance.OnPlayerDied();

@@ -20,13 +20,13 @@ public class LogManager : MonoBehaviour
 
     public void AddLog(string msg) //로그 추가하기
     {
-        if(text != null)
+        if(text)
             text.text += "\n" + msg;
     }
 
     public void AddSpacingLine()
     {
-        if (text != null)
+        if (text)
             text.text += "\n----------------------------------\n";
     }
 }

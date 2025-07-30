@@ -10,20 +10,19 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Player = new Player();
         Player.SetMaxHp(100);
         Player.SetCurrentHp(Player.GetMaxHp());
     }
 
     public void OnPlayerDied()
     {
-        Debug.Log("Player°¡ »ç¸ÁÇÏ¿´½À´Ï´Ù!");
+        Debug.Log("Playerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
         StartCoroutine(GameOverDelayCoroutine());
     }
     private IEnumerator GameOverDelayCoroutine()
     {
-        yield return new WaitForSeconds(2f); // 2ÃÊ µô·¹ÀÌ
-        // °ÔÀÓ Á¾·á ·ÎÁ÷ ½ÇÇà
+        yield return new WaitForSeconds(2f); // 2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Application.Quit();
     }
 }

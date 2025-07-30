@@ -55,7 +55,11 @@ public class GameManager : MonoBehaviour
 
     public void StartEnemyTurn()
     {
-        LogManager.Instance.AddSpacingLine();
+        if (!EnemyManager.Instance.Enemy)
+        {
+            isPlayerTurn = !isPlayerTurn;
+            return;
+        }
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog("적의 차례입니다.");
         EnemyManager.Instance.Enemy.DrawAndUseCard();
