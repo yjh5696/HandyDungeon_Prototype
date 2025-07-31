@@ -72,7 +72,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         
         if (GameManager.Instance.isPlayerTurn)
         {
-            PlayerManager.Instance.PlayerAnimator.PlayAttackAnimation();
+            PlayerManager.Instance.PlayAttackAnimation();
             EnemyManager.Instance.EnemyHitAnimation();
             //LogManager.Instance.AddLog($"{EnemyManager.Instance.Enemy.GetEnemySo().Name}에게 {totalDamage}의 데미지를 주었습니다!"); 
             //EnemyManager.Instance.Enemy.SetCurrentHp(EnemyManager.Instance.Enemy.GetCurrentHp() - totalDamage);
@@ -85,7 +85,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         else
         {
             EnemyManager.Instance.EnemyAttackAnimation();
-            PlayerManager.Instance.PlayerAnimator.PlayHitAnimation();
+            PlayerManager.Instance.PlayHitAnimation();
             //LogManager.Instance.AddLog($"플레이어에게 {totalDamage}의 데미지를 주었습니다!");
             //PlayerManager.Instance.Player.SetCurrentHp(PlayerManager.Instance.Player.GetCurrentHp() - totalDamage);
             State playerCardState = selectedCard.State;

@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
         
         hpBar.SetCharacter(Player);
 
-        _animator = GetComponent<Animator>();
+        _animator = Player.GetComponent<Animator>();
     }
 
     public void OnPlayerDied()
