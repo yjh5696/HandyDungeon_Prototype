@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static Attack_Button_DiceRoll;
 using static Enemy;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Attack_Button_DiceRoll : MonoBehaviour
 {
     public DiceRoll diceRoll;
-    public int baseValue = 5;
-    public bool playing = false;
+    [SerializeField] private float switchTurnDelay = 3.0f;
+    [SerializeField] private float showDiceResultTime = 3.0f;
     public enum AttackType { Fire, Water, Wind }
     
 
@@ -27,41 +28,52 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     }
     void OnDiceRolled(int value)
     {
-        CardSO selectedCard = CardManager.Instance.selectedCard;
-        Enemy currentEnemy = EnemyManager.Instance.Enemy;
-        float totalDamage = CardManager.Instance.selectedCard.Damage * (value * CardManager.Instance.selectedCard.DiceMultiplier);
+        //CardSO selectedCard = CardManager.Instance.selectedCard;
+        //Enemy currentEnemy = EnemyManager.Instance.Enemy;
+        //float totalDamage = CardManager.Instance.selectedCard.Damage * (value * CardManager.Instance.selectedCard.DiceMultiplier);
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog($"주사위 눈이 {value}가/이 나왔습니다!");
         Debug.Log($"주사위 눈이 {value}가/이 나왔습니다!");
-        LogManager.Instance.AddSpacingLine();
-        LogManager.Instance.AddLog("액션!");
-        LogManager.Instance.AddLog("");
-        if (GameManager.Instance.isPlayerTurn)
-        {
-            LogManager.Instance.AddLog($"{EnemyManager.Instance.Enemy.GetEnemySo().Name}에게 {totalDamage}의 데미지를 주었습니다!");
-            LogManager.Instance.AddLog("");
-            LogManager.Instance.AddSpacingLine();
-            //EnemyManager.Instance.Enemy.SetCurrentHp(EnemyManager.Instance.Enemy.GetCurrentHp() - totalDamage);
-            State enemyCardState = selectedCard.State + 1;
-            EnemyManager.Instance.Enemy.EnemyTakeDamage(totalDamage, (Enemy.EnemyStatusEffect)enemyCardState);
-            currentEnemy.EnemyApplyStatus((Enemy.EnemyStatusEffect)enemyCardState);
-        }
-        else
-        {
-            LogManager.Instance.AddLog($"플레이어에게 {totalDamage}의 데미지를 주었습니다!");
-            LogManager.Instance.AddLog("");
-            LogManager.Instance.AddSpacingLine();
-            //PlayerManager.Instance.Player.SetCurrentHp(PlayerManager.Instance.Player.GetCurrentHp() - totalDamage);
-            State playerCardState = selectedCard.State + 1;
-            PlayerManager.Instance.Player.PlayerTakeDamage(totalDamage, (Player.PlayerStatusEffect)playerCardState);
-            PlayerManager.Instance.Player.PlayerApplyStatus((Player.PlayerStatusEffect)playerCardState);
-        }
-        StartCoroutine(SwitchTurnWithDelay(3f));
+
+        StartCoroutine(ShowDiceResultWithDelay(showDiceResultTime, value));
     }
 
     private System.Collections.IEnumerator SwitchTurnWithDelay(float delaySeconds)
     {
         yield return new WaitForSeconds(delaySeconds);
         GameManager.Instance.SwitchTurn();
+    }
+    
+    private System.Collections.IEnumerator ShowDiceResultWithDelay(float delaySeconds, int value)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        CardSO selectedCard = CardManager.Instance.selectedCard;
+        Enemy currentEnemy = EnemyManager.Instance.Enemy;
+        float totalDamage = CardManager.Instance.selectedCard.Damage * (value * CardManager.Instance.selectedCard.DiceMultiplier);
+
+        LogManager.Instance.AddSpacingLine();
+        LogManager.Instance.AddLog("액션!");
+        LogManager.Instance.AddLog("");
+        if (GameManager.Instance.isPlayerTurn)
+        {
+            //LogManager.Instance.AddLog($"{EnemyManager.Instance.Enemy.GetEnemySo().Name}에게 {totalDamage}의 데미지를 주었습니다!"); 
+            //EnemyManager.Instance.Enemy.SetCurrentHp(EnemyManager.Instance.Enemy.GetCurrentHp() - totalDamage);
+            State enemyCardState = selectedCard.State;
+            EnemyManager.Instance.Enemy.EnemyTakeDamage(totalDamage, (Enemy.EnemyStatusEffect)enemyCardState);
+            currentEnemy.EnemyApplyStatus((Enemy.EnemyStatusEffect)enemyCardState);
+            LogManager.Instance.AddLog("");
+            LogManager.Instance.AddSpacingLine();
+        }
+        else
+        {
+            //LogManager.Instance.AddLog($"플레이어에게 {totalDamage}의 데미지를 주었습니다!");
+            //PlayerManager.Instance.Player.SetCurrentHp(PlayerManager.Instance.Player.GetCurrentHp() - totalDamage);
+            State playerCardState = selectedCard.State;
+            PlayerManager.Instance.Player.PlayerTakeDamage(totalDamage, (Player.PlayerStatusEffect)playerCardState);
+            PlayerManager.Instance.Player.PlayerApplyStatus((Player.PlayerStatusEffect)playerCardState);
+            LogManager.Instance.AddLog("");
+            LogManager.Instance.AddSpacingLine();
+        }
+        StartCoroutine(SwitchTurnWithDelay(switchTurnDelay));
     }
 }

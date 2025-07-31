@@ -113,7 +113,7 @@ public class Enemy : Character
         }
 
         SetCurrentHp(GetCurrentHp() - modifiedDamage);
-        Debug.Log($"{_enemySo.Name}이(가) {modifiedDamage}의 피해를 받았습니다! 현재 체력: {GetCurrentHp()}"); 
+        LogManager.Instance.AddLog($"{EnemyManager.Instance.Enemy.GetEnemySo().Name}에게 {modifiedDamage}의 데미지를 주었습니다!");
         if (GetCurrentHp() <= 0)
         {
             EnemyDie();
@@ -137,7 +137,9 @@ public class Enemy : Character
         List<CardSO> cards = _enemySo.EnemyCards;
         int result = Random.Range(0, cards.Count);
         _currentEnemyCard = cards[result];
-        
+
+        CardManager.Instance.selectedCard = _currentEnemyCard;
+
         switch (_currentEnemyCard.Style)
         {
             case Style.Attack:

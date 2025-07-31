@@ -123,7 +123,12 @@ public class EnemyManager : MonoBehaviour
         Debug.Log("EnemyManager: 다음 적 소환");
 
         if (currentEnemySO)
+        {
             SpawnEnemy(currentEnemySO);
+            GameManager.Instance.SwitchTurn();
+        }
+            
+      
         else
             Debug.LogWarning("EnemyManager: 다음 적 데이터가 없습니다!");
     }

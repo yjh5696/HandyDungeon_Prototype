@@ -64,4 +64,21 @@ public class GameManager : MonoBehaviour
         LogManager.Instance.AddLog("적의 차례입니다.");
         EnemyManager.Instance.Enemy.DrawAndUseCard();
     }
+
+    public void EnemyDieTurn()
+    {
+        isPlayerTurn = !isPlayerTurn;
+        if (isPlayerTurn)
+        {
+            log.SetActive(true);
+            buttons.SetActive(true);
+            card.SetActive(false);
+            action.SetActive(false);
+            dice.SetActive(false);
+            dicebtn.SetActive(true);
+            StartPlayerTurn();
+        }
+        else
+            StartEnemyTurn();
+    }
 }

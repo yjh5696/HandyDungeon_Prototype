@@ -6,6 +6,7 @@ public class DiceRoll : MonoBehaviour
 {
     public Sprite[] dices; // Inspector���� Dice_1~Dice_6 ������ ����
     private SpriteRenderer _renderer;
+    [SerializeField] private int DiceRollTime = 3;
     public int DiceResult { get; private set; } // 0~5 �� +1�ϸ� 1~6
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,7 +25,8 @@ public class DiceRoll : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
         int randomSprite = 0;
-        for (int i = 0; i < 60; i++)
+        int animationFrameCount = DiceRollTime * 20;
+        for (int i = 0; i < animationFrameCount; i++)
         {
             seq.AppendCallback(() => {
                 randomSprite = Random.Range(0, dices.Length);

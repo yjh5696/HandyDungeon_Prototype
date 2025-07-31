@@ -19,7 +19,7 @@ public class Player : Character
     {
         currentStatus = status;
         //statusTurnCount = 1;  // 1�� ����
-        Debug.Log($"Player���� {status} �����̻� ����!");
+        Debug.Log($"Player에게 {status} 상태이상 적용!");
     }
 
     public void PlayerTakeDamage(float damage, PlayerStatusEffect status)
@@ -85,7 +85,7 @@ public class Player : Character
         }
 
         SetCurrentHp(GetCurrentHp() - modifiedDamage);
-        Debug.Log($"Player��(��) {modifiedDamage}�� ���ظ� �޾ҽ��ϴ�! ���� ü��: {GetCurrentHp()}");
+        LogManager.Instance.AddLog($"플레이어에게 {modifiedDamage}의 데미지를 주었습니다!");
         if (GetCurrentHp() <= 0)
         {
             PlayerDie();
