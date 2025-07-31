@@ -20,11 +20,11 @@ public class HPBar : MonoBehaviour
     { 
         float ratio = currentHp / maxHp;
         hpText.text = $"{currentHp:F2} / {maxHp:F2}";
-        if (ratio is <= 1 and > 5f / 6f)
+        if (ratio is 1)
         {
             hpRenderers.sprite = hpSprites[0];
         }
-        else if (ratio is <= 5f / 6f and > 4f / 6f)
+        else if (ratio is < 1 and > 4f / 6f)
         {
             hpRenderers.sprite = hpSprites[1];
         }
