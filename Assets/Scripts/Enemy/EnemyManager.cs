@@ -73,7 +73,7 @@ public class EnemyManager : MonoBehaviour
     // Enemy가 사망했을 때 Enemy에서 호출하는 함수
     public void OnEnemyDied()
     {
-        LogManager.Instance.AddLog("적이 사망했습니다.");
+        //LogManager.Instance.AddLog("적이 사망했습니다.");
         Debug.Log("EnemyManager: 적이 사망했습니다.");
 
         if (_animator != null)
@@ -82,7 +82,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         // 2초 딜레이 후 오브젝트 파괴 및 초기화
-        StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
+        //StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
     }
 
     private IEnumerator DestroyEnemyAfterDelay(float delay)

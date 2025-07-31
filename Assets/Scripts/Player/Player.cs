@@ -6,7 +6,7 @@ public class Player : Character
 {
     private PlayerStatusEffect currentStatus = PlayerStatusEffect.None;
     //private int statusTurnCount = 0;
-
+    private float newHP;
     public enum PlayerStatusEffect
     {
         None = 0,
@@ -84,7 +84,13 @@ public class Player : Character
                 break;
         }
 
-        SetCurrentHp(GetCurrentHp() - modifiedDamage);
+        newHP = GetCurrentHp() - modifiedDamage;
+        if(newHP < 0)
+        {
+            newHP = 0; // HP가 음수가 되지 않도록 보정
+        }
+        newHP = Mathf.Round(newHP * 10f) / 10f;
+        SetCurrentHp(newHP);
         LogManager.Instance.AddLog($"플레이어에게 {modifiedDamage}의 데미지를 주었습니다!");
         if (GetCurrentHp() <= 0)
         {
