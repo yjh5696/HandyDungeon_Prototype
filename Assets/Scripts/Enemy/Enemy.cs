@@ -129,6 +129,7 @@ public class Enemy : Character
         if (EnemyManager.Instance != null)
         {
             EnemyManager.Instance.OnEnemyDied();
+            GameManager.Instance.SwitchTurn();
         }
     }
 
@@ -156,4 +157,5 @@ public class Enemy : Character
         GameManager.Instance.diceRoll.OnAttackButtonClicked();
         
     }
+
 }

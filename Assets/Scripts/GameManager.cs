@@ -42,8 +42,12 @@ public class GameManager : MonoBehaviour
             StartPlayerTurn();
         }
         else
+        {
             StartEnemyTurn();
+        }
+            
     }
+
 
     public void StartPlayerTurn()
     {
@@ -67,18 +71,12 @@ public class GameManager : MonoBehaviour
 
     public void EnemyDieTurn()
     {
-        isPlayerTurn = !isPlayerTurn;
-        if (isPlayerTurn)
-        {
-            log.SetActive(true);
-            buttons.SetActive(true);
-            card.SetActive(false);
-            action.SetActive(false);
-            dice.SetActive(false);
-            dicebtn.SetActive(true);
-            StartPlayerTurn();
-        }
-        else
-            StartEnemyTurn();
+        log.SetActive(true);
+        buttons.SetActive(true);
+        card.SetActive(false);
+        action.SetActive(false);
+        dice.SetActive(false);
+        dicebtn.SetActive(true);
+        StartPlayerTurn();
     }
 }

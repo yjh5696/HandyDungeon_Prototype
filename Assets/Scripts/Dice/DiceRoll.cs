@@ -6,7 +6,7 @@ public class DiceRoll : MonoBehaviour
 {
     public Sprite[] dices; // Inspector���� Dice_1~Dice_6 ������ ����
     private SpriteRenderer _renderer;
-    [SerializeField] private int DiceRollTime = 3;
+    [SerializeField] private int DiceRollTime;
     public int DiceResult { get; private set; } // 0~5 �� +1�ϸ� 1~6
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

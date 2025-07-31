@@ -6,9 +6,10 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Attack_Button_DiceRoll : MonoBehaviour
 {
+    private Animator _animator;
     public DiceRoll diceRoll;
-    [SerializeField] private float switchTurnDelay = 3.0f;
-    [SerializeField] private float showDiceResultTime = 3.0f;
+    [SerializeField] private float switchTurnDelay;
+    [SerializeField] private float showDiceResultTime;
     public enum AttackType { Fire, Water, Wind }
     
 
@@ -54,8 +55,11 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         LogManager.Instance.AddSpacingLine();
         LogManager.Instance.AddLog("액션!");
         LogManager.Instance.AddLog("");
+        
         if (GameManager.Instance.isPlayerTurn)
         {
+            PlayerManager.Instance.PlayerAnimator.PlayAttackAnimation();
+            EnemyManager.Instance.EnemyHitAnimation();
             //LogManager.Instance.AddLog($"{EnemyManager.Instance.Enemy.GetEnemySo().Name}에게 {totalDamage}의 데미지를 주었습니다!"); 
             //EnemyManager.Instance.Enemy.SetCurrentHp(EnemyManager.Instance.Enemy.GetCurrentHp() - totalDamage);
             State enemyCardState = selectedCard.State;
@@ -66,6 +70,8 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         }
         else
         {
+            EnemyManager.Instance.EnemyAttackAnimation();
+            PlayerManager.Instance.PlayerAnimator.PlayHitAnimation();
             //LogManager.Instance.AddLog($"플레이어에게 {totalDamage}의 데미지를 주었습니다!");
             //PlayerManager.Instance.Player.SetCurrentHp(PlayerManager.Instance.Player.GetCurrentHp() - totalDamage);
             State playerCardState = selectedCard.State;

@@ -6,6 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
     public Player Player;
+    public PlayerAnimator PlayerAnimator;
+    private Animator _animator;
     [SerializeField] private HPBar hpBar;
 
     private void Awake()
@@ -16,6 +18,8 @@ public class PlayerManager : MonoBehaviour
         Player.SetHpBar(hpBar);
         
         hpBar.SetCharacter(Player);
+
+        _animator = GetComponent<Animator>();
     }
 
     public void OnPlayerDied()
@@ -28,5 +32,15 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(2f); // 2�� ������
         // ���� ���� ���� ����
         Application.Quit();
+    }
+    public void PlayAttackAnimation()
+    {
+        Debug.Log("PlayerAttack");
+        _animator.SetTrigger("playerIsAttack");
+    }
+    public void PlayHitAnimation()
+    {
+        Debug.Log("PlayerHit");
+        _animator.SetTrigger("playerIsHit");
     }
 }
