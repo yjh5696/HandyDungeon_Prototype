@@ -6,15 +6,20 @@ public class HPBar : MonoBehaviour
 {
     [SerializeField] private Sprite[] hpSprites;
     [SerializeField] private SpriteRenderer hpRenderers;
+    [SerializeField] private TMP_Text hpText;
+    private Character _character;
 
-    private void Start()
+    public void SetCharacter(Character character)
     {
-        HpChanged(GetComponentInParent<Character>().GetCurrentHp(), GetComponentInParent<Character>().GetMaxHp()); //생성 시 실행
+        _character = character;
+        if (_character)
+            HpChanged(_character.GetCurrentHp(), _character.GetMaxHp());
     }
 
     public void HpChanged(float currentHp, float maxHp)
     { 
         float ratio = currentHp / maxHp;
+        hpText.text = $"{currentHp:F2} / {maxHp:F2}";
         if (ratio is <= 1 and > 5f / 6f)
         {
             hpRenderers.sprite = hpSprites[0];

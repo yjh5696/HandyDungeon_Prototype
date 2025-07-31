@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditor.Animations;
 #endif
@@ -11,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance;
     public Enemy Enemy;
     
-
+    [SerializeField] private HPBar hpBar;
     [SerializeField] private GameObject prefab;
     [SerializeField] private Sprite deathSprite;
     [SerializeField] private float deathShowTime = 2f;
@@ -28,12 +29,16 @@ public class EnemyManager : MonoBehaviour
         Instance = this;
         _spriteRenderer = prefab.GetComponent<SpriteRenderer>();
         _animator = prefab.GetComponent<Animator>();
+        
+        hpBar.SetCharacter(Enemy);
     }
     
     public void SetEnemy(int maxHp, Sprite enemySprite, RuntimeAnimatorController enemyAnimatorController) // 적 설정
     {
         Enemy.SetMaxHp(maxHp);
         Enemy.SetCurrentHp(maxHp);
+        Enemy.SetHpBar(hpBar);
+        hpBar.SetCharacter(Enemy);
         if (_spriteRenderer)
         {
             _spriteRenderer.sprite = enemySprite;

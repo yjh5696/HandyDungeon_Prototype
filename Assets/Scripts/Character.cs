@@ -10,11 +10,6 @@ public class Character : MonoBehaviour
     protected HPBar HpBar;
     public event EventHandler OnHpChanged;
 
-    private void Awake()
-    {
-        HpBar = GetComponentInChildren<HPBar>();
-    }
-
     private void Start()
     {
         OnHpChanged += HpChanged;
@@ -38,6 +33,11 @@ public class Character : MonoBehaviour
     public void SetMaxHp(float maxHp)
     {
         MaxHp = maxHp;
+    }
+
+    public void SetHpBar(HPBar hpBar)
+    {
+        HpBar = hpBar;
     }
 
     public void SetCurrentHp(float currentHp)

@@ -12,7 +12,7 @@ public class ButtonOnOff : MonoBehaviour
 
     private void Update()
     {
-        // ÀûÀÌ ¾ø°Å³ª Ã¼·ÂÀÌ 0ÀÌ¸é ¹öÆ° ºñÈ°¼ºÈ­
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì¸ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­
         if (EnemyManager.Instance == null || EnemyManager.Instance.Enemy == null || EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
             _button.interactable = false;
         else

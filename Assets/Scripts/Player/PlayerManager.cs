@@ -6,12 +6,16 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
     public Player Player;
+    [SerializeField] private HPBar hpBar;
 
     private void Awake()
     {
         Instance = this;
         Player.SetMaxHp(100);
         Player.SetCurrentHp(Player.GetMaxHp());
+        Player.SetHpBar(hpBar);
+        
+        hpBar.SetCharacter(Player);
     }
 
     public void OnPlayerDied()
