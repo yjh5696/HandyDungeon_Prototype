@@ -10,7 +10,8 @@ public class LogManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
     }
 
     private void Start()

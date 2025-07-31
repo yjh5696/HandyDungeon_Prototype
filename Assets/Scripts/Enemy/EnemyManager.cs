@@ -26,7 +26,8 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+            Instance = this;
         _spriteRenderer = prefab.GetComponent<SpriteRenderer>();
         _animator = prefab.GetComponent<Animator>();
         

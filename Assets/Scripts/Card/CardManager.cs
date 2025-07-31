@@ -22,7 +22,8 @@ public class CardManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
     }
 
     public void DrawCard() //카드 랜덤 뽑기

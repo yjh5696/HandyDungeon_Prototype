@@ -10,7 +10,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
         Player.SetMaxHp(100);
         Player.SetCurrentHp(Player.GetMaxHp());
         Player.SetHpBar(hpBar);
