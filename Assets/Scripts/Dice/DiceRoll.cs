@@ -24,7 +24,7 @@ public class DiceRoll : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
         int randomSprite = 0;
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 60; i++)
         {
             seq.AppendCallback(() => {
                 randomSprite = Random.Range(0, dices.Length);
