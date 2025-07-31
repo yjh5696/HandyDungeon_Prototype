@@ -29,6 +29,7 @@ public class CardManager : MonoBehaviour
     {
         int result = Random.Range(0, cards.Count);
         _currentAttackCard = cards[result];
+        attackText.text = _currentAttackCard.CardName;
     }
 
     public void SetStyleToAttack()
