@@ -6,6 +6,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Attack_Button_DiceRoll : MonoBehaviour
 {
+    public static Attack_Button_DiceRoll Instance;
     private Animator _animator;
     public DiceRoll diceRoll;
     [SerializeField] private float switchTurnDelay;
@@ -42,7 +43,20 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     private System.Collections.IEnumerator SwitchTurnWithDelay(float delaySeconds)
     {
         yield return new WaitForSeconds(delaySeconds);
-        GameManager.Instance.SwitchTurn();
+        if(PlayerManager.Instance.Player.GetCurrentHp() <= 0)
+        {
+            //PlayerManager.Instance.Player.PlayerDie();
+            yield break; // 플레이어가 사망한 경우 더 이상 진행하지 않음
+        }
+        else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
+        {
+            //EnemyManager.Instance.Enemy.EnemyDie();
+            yield break; // 적이 사망한 경우 더 이상 진행하지 않음
+        }
+        else {
+            GameManager.Instance.SwitchTurn();
+        }
+            
     }
     
     private System.Collections.IEnumerator ShowDiceResultWithDelay(float delaySeconds, int value)

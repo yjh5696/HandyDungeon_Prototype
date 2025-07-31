@@ -79,4 +79,22 @@ public class GameManager : MonoBehaviour
         dicebtn.SetActive(true);
         StartPlayerTurn();
     }
+
+    public void EndGame()
+    {
+        LogManager.Instance.AddSpacingLine();
+        LogManager.Instance.AddLog("");
+        LogManager.Instance.AddLog("전투 종료");
+        LogManager.Instance.AddLog("");
+        if( PlayerManager.Instance.Player.GetCurrentHp() <= 0)
+        {
+            LogManager.Instance.AddLog("플레이어 패배");
+        }
+        else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
+        {
+            LogManager.Instance.AddLog("플레이어 승리");
+        }
+        LogManager.Instance.AddSpacingLine();
+
+    }
 }

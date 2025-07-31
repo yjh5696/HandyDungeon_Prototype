@@ -114,6 +114,7 @@ public class Enemy : Character
 
         SetCurrentHp(GetCurrentHp() - modifiedDamage);
         LogManager.Instance.AddLog($"{EnemyManager.Instance.Enemy.GetEnemySo().Name}에게 {modifiedDamage}의 데미지를 주었습니다!");
+        
         if (GetCurrentHp() <= 0)
         {
             EnemyDie();
@@ -121,15 +122,16 @@ public class Enemy : Character
     }
 
     // 적 사망 처리 함수
-    private void EnemyDie()
+    public void EnemyDie()
     {
         Debug.Log($"{_enemySo.Name}이(가) 사망했습니다!");
 
         // 사망 시 EnemyManager에 알림 (시각 및 오브젝트 처리 담당)
         if (EnemyManager.Instance != null)
         {
-            EnemyManager.Instance.OnEnemyDied();
-            GameManager.Instance.SwitchTurn();
+            GameManager.Instance.EndGame();
+            //EnemyManager.Instance.OnEnemyDied();
+            //GameManager.Instance.SwitchTurn();
         }
     }
 

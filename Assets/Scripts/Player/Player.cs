@@ -92,14 +92,15 @@ public class Player : Character
         }
     }
 
-    private void PlayerDie()
+    public void PlayerDie()
     {
         Debug.Log($"Player��(��) ����߽��ϴ�!");
 
         // ��� �� EnemyManager�� �˸� (�ð� �� ������Ʈ ó�� ���)
         if (PlayerManager.Instance != null)
         {
-            PlayerManager.Instance.OnPlayerDied();
+            //PlayerManager.Instance.OnPlayerDied();
+            GameManager.Instance.EndGame();
         }
     }
 }
