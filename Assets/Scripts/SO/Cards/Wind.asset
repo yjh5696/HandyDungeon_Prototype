@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b466b70745278f468ae7aec23dea6d1, type: 3}
   m_Name: Wind
   m_EditorClassIdentifier: 
-  cardName: "\uBC14\uB78C\uBD88\uAE30"
+  cardName: "\uAC80\uD48D"
   style: 0
   cardSprite: {fileID: 0}
-  state: 2
-  cardDescription: "\uBC14\uB78C\uC744 \uBD88\uC5B4\uC11C \uB370\uBBF8\uC9C0\uB97C
-    \uC900\uB2E4."
+  state: 3
+  cardDescription: "\uAC80\uC744 \uD718\uB458\uB7EC \uBC14\uB78C\uC744 \uB9CC\uB4E0\uB2E4."
   stateStrat: 
-  damage: 5
+  damage: 10
   diceMultiplier: 0.5

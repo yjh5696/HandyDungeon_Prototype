@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b466b70745278f468ae7aec23dea6d1, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  cardName: "\uBD88\uBD99\uC774\uAE30"
+  cardName: "\uBD88 \uAC19\uC774 \uB0B4\uB824\uCE58\uAE30"
   style: 0
   cardSprite: {fileID: 0}
-  state: 0
-  cardDescription: "\uBD88\uC744 \uBD99\uC5EC\uC11C \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4."
+  state: 1
+  cardDescription: "\uBD88 \uAC19\uC774 \uB0B4\uB824 \uCE5C\uB2E4."
   stateStrat: 
-  damage: 5
+  damage: 10
   diceMultiplier: 0.5
