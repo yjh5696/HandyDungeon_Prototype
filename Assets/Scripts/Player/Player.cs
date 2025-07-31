@@ -6,7 +6,7 @@ public class Player : Character
 {
     private PlayerStatusEffect currentStatus = PlayerStatusEffect.None;
     //private int statusTurnCount = 0;
-
+    private float newHP;
     public enum PlayerStatusEffect
     {
         None = 0,
@@ -19,7 +19,7 @@ public class Player : Character
     {
         currentStatus = status;
         //statusTurnCount = 1;  // 1�� ����
-        Debug.Log($"Player���� {status} �����̻� ����!");
+        Debug.Log($"Player에게 {status} 상태이상 적용!");
     }
 
     public void PlayerTakeDamage(float damage, PlayerStatusEffect status)
@@ -84,22 +84,29 @@ public class Player : Character
                 break;
         }
 
-        SetCurrentHp(GetCurrentHp() - modifiedDamage);
-        Debug.Log($"Player��(��) {modifiedDamage}�� ���ظ� �޾ҽ��ϴ�! ���� ü��: {GetCurrentHp()}");
+        newHP = GetCurrentHp() - modifiedDamage;
+        if(newHP < 0)
+        {
+            newHP = 0; // HP가 음수가 되지 않도록 보정
+        }
+        newHP = Mathf.Round(newHP * 10f) / 10f;
+        SetCurrentHp(newHP);
+        LogManager.Instance.AddLog($"플레이어에게 {modifiedDamage}의 데미지를 주었습니다!");
         if (GetCurrentHp() <= 0)
         {
             PlayerDie();
         }
     }
 
-    private void PlayerDie()
+    public void PlayerDie()
     {
         Debug.Log($"Player��(��) ����߽��ϴ�!");
 
         // ��� �� EnemyManager�� �˸� (�ð� �� ������Ʈ ó�� ���)
         if (PlayerManager.Instance != null)
         {
-            PlayerManager.Instance.OnPlayerDied();
+            //PlayerManager.Instance.OnPlayerDied();
+            GameManager.Instance.EndGame();
         }
     }
 }

@@ -43,8 +43,12 @@ public class GameManager : MonoBehaviour
             StartPlayerTurn();
         }
         else
+        {
             StartEnemyTurn();
+        }
+            
     }
+
 
     public void StartPlayerTurn()
     {
@@ -64,5 +68,34 @@ public class GameManager : MonoBehaviour
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog("적의 차례입니다.");
         EnemyManager.Instance.Enemy.DrawAndUseCard();
+    }
+
+    public void EnemyDieTurn()
+    {
+        log.SetActive(true);
+        buttons.SetActive(true);
+        card.SetActive(false);
+        action.SetActive(false);
+        dice.SetActive(false);
+        dicebtn.SetActive(true);
+        StartPlayerTurn();
+    }
+
+    public void EndGame()
+    {
+        LogManager.Instance.AddSpacingLine();
+        LogManager.Instance.AddLog("");
+        LogManager.Instance.AddLog("전투 종료");
+        LogManager.Instance.AddLog("");
+        if( PlayerManager.Instance.Player.GetCurrentHp() <= 0)
+        {
+            LogManager.Instance.AddLog("플레이어 패배");
+        }
+        else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
+        {
+            LogManager.Instance.AddLog("플레이어 승리");
+        }
+        LogManager.Instance.AddSpacingLine();
+
     }
 }

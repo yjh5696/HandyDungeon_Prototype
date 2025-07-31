@@ -13,7 +13,7 @@ public class Enemy : Character
 
     private EnemyStatusEffect currentStatus = EnemyStatusEffect.None;
     private int statusTurnCount = 0;
-
+    private float newHP;
     public enum EnemyStatusEffect
     {
         None = 0,
@@ -112,8 +112,16 @@ public class Enemy : Character
                 break;
         }
 
-        SetCurrentHp(GetCurrentHp() - modifiedDamage);
-        Debug.Log($"{_enemySo.Name}이(가) {modifiedDamage}의 피해를 받았습니다! 현재 체력: {GetCurrentHp()}"); 
+        //SetCurrentHp(GetCurrentHp() - modifiedDamage);
+        newHP = GetCurrentHp() - modifiedDamage;
+        if (newHP < 0)
+        {
+            newHP = 0; // HP가 음수가 되지 않도록 보정
+        }
+        newHP = Mathf.Round(newHP * 10f) / 10f;
+        SetCurrentHp(newHP);
+        LogManager.Instance.AddLog($"{EnemyManager.Instance.Enemy.GetEnemySo().Name}에게 {modifiedDamage}의 데미지를 주었습니다!");
+        
         if (GetCurrentHp() <= 0)
         {
             EnemyDie();
@@ -121,14 +129,16 @@ public class Enemy : Character
     }
 
     // 적 사망 처리 함수
-    private void EnemyDie()
+    public void EnemyDie()
     {
         Debug.Log($"{_enemySo.Name}이(가) 사망했습니다!");
 
         // 사망 시 EnemyManager에 알림 (시각 및 오브젝트 처리 담당)
         if (EnemyManager.Instance != null)
         {
-            EnemyManager.Instance.OnEnemyDied();
+            GameManager.Instance.EndGame();
+            //EnemyManager.Instance.OnEnemyDied();
+            //GameManager.Instance.SwitchTurn();
         }
     }
 
@@ -137,7 +147,9 @@ public class Enemy : Character
         List<CardSO> cards = _enemySo.EnemyCards;
         int result = Random.Range(0, cards.Count);
         _currentEnemyCard = cards[result];
-        
+
+        CardManager.Instance.selectedCard = _currentEnemyCard;
+
         switch (_currentEnemyCard.Style)
         {
             case Style.Attack:
@@ -154,4 +166,5 @@ public class Enemy : Character
         GameManager.Instance.diceRoll.OnAttackButtonClicked();
         
     }
+
 }

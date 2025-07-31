@@ -14,9 +14,8 @@ public class EnemyManager : MonoBehaviour
     
     [SerializeField] private HPBar hpBar;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private Sprite deathSprite;
     [SerializeField] private float deathShowTime = 2f;
-    [SerializeField] private float respawnDelay = 10f;
+    [SerializeField] public float respawnDelay = 10f;
 
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
@@ -75,19 +74,16 @@ public class EnemyManager : MonoBehaviour
     // Enemy가 사망했을 때 Enemy에서 호출하는 함수
     public void OnEnemyDied()
     {
-        LogManager.Instance.AddLog("적이 사망했습니다.");
+        //LogManager.Instance.AddLog("적이 사망했습니다.");
         Debug.Log("EnemyManager: 적이 사망했습니다.");
 
-        // 사망 스프라이트로 교체
-        if (_spriteRenderer && deathSprite)
-            _spriteRenderer.sprite = deathSprite;
-
-        // 애니메이터 중지
-        if (_animator)
-            _animator.runtimeAnimatorController = null;
+        if (_animator != null)
+        {
+            _animator.SetBool("enemyIsDie", true);
+        }
 
         // 2초 딜레이 후 오브젝트 파괴 및 초기화
-        StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
+        //StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
     }
 
     private IEnumerator DestroyEnemyAfterDelay(float delay)
@@ -110,7 +106,6 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator HandleEnemyDeath()
     {
-        // 2초 정도 사망 스프라이트 노출 (필요 시 변경)
         yield return new WaitForSeconds(deathShowTime);
 
         if (enemyInstance)
@@ -118,14 +113,26 @@ public class EnemyManager : MonoBehaviour
 
         Enemy = null;
 
-        // 사망 후 10초 대기
         yield return new WaitForSeconds(respawnDelay);
 
         Debug.Log("EnemyManager: 다음 적 소환");
 
         if (currentEnemySO)
+        {
             SpawnEnemy(currentEnemySO);
+            GameManager.Instance.EnemyDieTurn();
+        }
+            
         else
             Debug.LogWarning("EnemyManager: 다음 적 데이터가 없습니다!");
+    }
+
+    public void EnemyAttackAnimation()
+    {
+        _animator.SetTrigger("enemyIsAttack");
+    }
+    public void EnemyHitAnimation()
+    {
+        _animator.SetTrigger("enemyIsHit");
     }
 }
