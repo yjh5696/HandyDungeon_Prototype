@@ -517,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 844405481}
+  PlayerAnimator: {fileID: 0}
   hpBar: {fileID: 1946190309}
 --- !u!1 &404460641
 GameObject:
@@ -1838,6 +1839,7 @@ MonoBehaviour:
   - {fileID: 1094064525842813209, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
   - {fileID: -880043905950401250, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
   - {fileID: -5478230469006044976, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  DiceRollTime: 3
 --- !u!212 &872432976
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2063,7 +2065,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999774
+  m_Size: 0.99999565
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2157,8 +2159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceRoll: {fileID: 872432975}
-  baseValue: 5
-  playing: 0
+  switchTurnDelay: 3
+  showDiceResultTime: 3
 --- !u!1 &996459328
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,7 +3044,6 @@ MonoBehaviour:
   Enemy: {fileID: 0}
   hpBar: {fileID: 1942893057}
   prefab: {fileID: 97619965090742576, guid: 586241b73e7261946979b57b5e6e1078, type: 3}
-  deathSprite: {fileID: 1400002288684528572, guid: f0e2b5c40447d00418a158520169075c, type: 3}
   deathShowTime: 2
   respawnDelay: 5
 --- !u!1 &1385838094
