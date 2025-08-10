@@ -16,9 +16,9 @@ public class toCSV
         {
             string [] splitData = allLine.Split(',');
 
-            if(splitData.Length != 3)
+            if(splitData.Length != 4)
             {
-                Debug.Log(allLine + " Does not have 3 values");
+                Debug.Log(allLine + " Does not have 4 values");
             }
 
             EnemySO enemy = ScriptableObject.CreateInstance<EnemySO>();
