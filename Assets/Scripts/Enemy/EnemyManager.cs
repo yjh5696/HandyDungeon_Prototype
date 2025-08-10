@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
         hpBar.SetCharacter(Enemy);
     }
     
-    public void SetEnemy(int maxHp, Sprite enemySprite, RuntimeAnimatorController enemyAnimatorController) // 적 설정
+    public void SetEnemy(float maxHp, Sprite enemySprite, RuntimeAnimatorController enemyAnimatorController) // 적 설정
     {
         Enemy.SetMaxHp(maxHp);
         Enemy.SetCurrentHp(maxHp);
