@@ -39,7 +39,7 @@ public class toCSV
     [MenuItem("Utilities/Generate Cards")]
     public static void GenerateCards()
     {
-        string[] allLines = File.ReadAllLines(Application.dataPath + enemyCSVPath);
+        string[] allLines = File.ReadAllLines(Application.dataPath + cardCSVPath);
 
         foreach(string allLine in allLines)
         {
