@@ -27,7 +27,7 @@ public class toCSV
             enemy.Description = splitData[2];
             string [] cards = splitData[3].Split('/');
             foreach(string card in cards)
-                enemy.EnemyCards.Add(AssetDatabase.LoadAssetAtPath<CardSO>(card));
+                enemy.EnemyCards.Add(AssetDatabase.LoadAssetAtPath<CardSO>($"Assets/SO/Cards/{card}.asset"));
             
 
             AssetDatabase.CreateAsset(enemy, $"Assets/SO/Enemies/{enemy.Name}.asset");
