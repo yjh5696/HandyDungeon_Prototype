@@ -12,15 +12,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        else
+        if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         Player.SetMaxHp(100);
         Player.SetCurrentHp(Player.GetMaxHp());

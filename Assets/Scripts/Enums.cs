@@ -31,3 +31,10 @@ public enum PlayerStatusEffect
     Water = 2,
     Wind = 3,
 }
+
+public enum RoomType
+{
+    Event = 0,
+    Treasure = 1,
+    Battle = 2,
+}

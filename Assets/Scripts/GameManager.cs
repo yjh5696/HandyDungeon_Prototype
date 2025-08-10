@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public bool isPlayerTurn = true;
+    public bool isPlayerinBattle = false;
     public Attack_Button_DiceRoll diceRoll;
     [SerializeField] private List<EnemySO> enemySOs;
     [SerializeField] private List<CardSO> cardSOs;
@@ -33,8 +34,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
-        StartPlayerTurn();
+        //EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
+        //StartPlayerTurn();
     }
 
     public void SwitchTurn()
