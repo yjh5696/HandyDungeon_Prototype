@@ -33,9 +33,10 @@ public enum PlayerStatusEffect
     Wind = 3,
 }
 
-public enum RoomType
+public enum ChoiceType
 {
     Event = 0,
     Treasure = 1,
     Battle = 2,
+    Rest = 3,
 }

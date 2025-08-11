@@ -6,6 +6,7 @@ public class toCSV
 {
     private static string enemyCSVPath = "/CSV/Enemies.csv";
     private static string cardCSVPath = "/CSV/Cards.csv";
+    private static string choiceCSVPath = "/CSV/Choices.csv";
     
     [MenuItem("Utilities/Generate Enemies")]
     public static void GenerateEnemies()
@@ -87,6 +88,34 @@ public class toCSV
             
 
             AssetDatabase.CreateAsset(card, $"Assets/SO/Cards/{card.CardName}.asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+    
+    [MenuItem("Utilities/Generate Choices")]
+    public static void GenerateChoices()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + choiceCSVPath);
+
+        foreach(string allLine in allLines)
+        {
+            string [] splitData = allLine.Split(',');
+
+            if(splitData.Length != 5)
+            {
+                Debug.Log(allLine + " Does not have 5 values");
+            }
+
+            ChoiceSO choice = ScriptableObject.CreateInstance<ChoiceSO>();
+            choice.ChoiceName = splitData[0];
+            choice.ChoiceType = splitData[1];
+            choice.ChoiceDifficulty = splitData[2];
+            choice.ChoiceSuccess = splitData[3];
+            choice.ChoiceFail = splitData[4];
+            
+
+            AssetDatabase.CreateAsset(choice, $"Assets/SO/Choices/{choice.ChoiceName}.asset");
         }
 
         AssetDatabase.SaveAssets();

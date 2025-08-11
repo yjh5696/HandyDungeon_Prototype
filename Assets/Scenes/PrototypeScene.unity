@@ -830,7 +830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &332620290
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2367,6 +2367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choiceText: {fileID: 1106894816}
   choiceTypeText: {fileID: 276154062}
+  choiceTypeSprite: {fileID: 711171443}
   choiceDifficultyText: {fileID: 974789147}
   choiceSuccessText: {fileID: 1392971463}
   choiceFailText: {fileID: 759360979}
@@ -3192,6 +3193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choiceText: {fileID: 198530957}
   choiceTypeText: {fileID: 1230442084}
+  choiceTypeSprite: {fileID: 2097036522}
   choiceDifficultyText: {fileID: 747811912}
   choiceSuccessText: {fileID: 588941526}
   choiceFailText: {fileID: 354686742}
@@ -4594,6 +4596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choiceText: {fileID: 636371435}
   choiceTypeText: {fileID: 1014143359}
+  choiceTypeSprite: {fileID: 1157793828}
   choiceDifficultyText: {fileID: 908395260}
   choiceSuccessText: {fileID: 1340468536}
   choiceFailText: {fileID: 1723066193}
@@ -5217,7 +5220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -585.40906}
+  m_AnchoredPosition: {x: 0.00012207031, y: -585.4093}
   m_SizeDelta: {x: -1270, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1055311458
@@ -5770,7 +5773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1155125379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6689,6 +6692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choiceText: {fileID: 345555354}
   choiceTypeText: {fileID: 978157089}
+  choiceTypeSprite: {fileID: 939130472}
   choiceDifficultyText: {fileID: 1867895983}
   choiceSuccessText: {fileID: 1310571500}
   choiceFailText: {fileID: 1124718113}
