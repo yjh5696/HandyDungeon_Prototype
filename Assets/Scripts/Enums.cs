@@ -13,7 +13,8 @@ public enum State
     None = 0,
     Fire = 1,
     Water = 2,
-    Wind= 3
+    Wind= 3,
+    Earth = 4,
 }
 
 public enum EnemyStatusEffect

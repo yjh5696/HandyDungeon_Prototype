@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
@@ -34,8 +35,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
-        //StartPlayerTurn();
+        EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
+        StartPlayerTurn();
     }
 
     public void SwitchTurn()
@@ -92,19 +93,25 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        StartCoroutine(EndGameAfterDelay(3f));
+    }
+
+    private IEnumerator EndGameAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         LogManager.Instance.AddSpacingLine();
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog("전투 종료");
         LogManager.Instance.AddLog("");
-        if( PlayerManager.Instance.Player.GetCurrentHp() <= 0)
-        {
+
+        if (PlayerManager.Instance.Player.GetCurrentHp() <= 0)
             LogManager.Instance.AddLog("플레이어 패배");
-        }
         else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
-        {
             LogManager.Instance.AddLog("플레이어 승리");
-        }
+
         LogManager.Instance.AddSpacingLine();
 
+        EndGame();  // 실제 게임 종료 호출
     }
 }

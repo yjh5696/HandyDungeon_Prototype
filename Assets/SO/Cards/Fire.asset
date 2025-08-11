@@ -20,3 +20,4 @@ MonoBehaviour:
   stateStrat: 
   damage: 10
   diceMultiplier: 0.5
+  elementType: 0

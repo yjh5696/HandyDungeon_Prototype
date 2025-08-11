@@ -12,14 +12,13 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
-        {
+        if (Instance == null)
             Instance = this;
-        }
+
         Player.SetMaxHp(100);
         Player.SetCurrentHp(Player.GetMaxHp());
+
         Player.SetHpBar(hpBar);
-        
         hpBar.SetCharacter(Player);
 
         _animator = Player.GetComponent<Animator>();
@@ -27,23 +26,26 @@ public class PlayerManager : MonoBehaviour
 
     public void OnPlayerDied()
     {
-        Debug.Log("Player�� ����Ͽ����ϴ�!");
+        Debug.Log("플레이어 사망!");
         StartCoroutine(GameOverDelayCoroutine());
     }
+
     private IEnumerator GameOverDelayCoroutine()
     {
-        yield return new WaitForSeconds(2f); // 2�� ������
-        // ���� ���� ���� ����
-        Application.Quit();
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.EndGame();
     }
+
     public void PlayAttackAnimation()
     {
-        Debug.Log("PlayerAttack");
+        Debug.Log("플레이어 공격 애니메이션");
         _animator.SetTrigger("playerIsAttack");
     }
+
     public void PlayHitAnimation()
     {
-        Debug.Log("PlayerHit");
+        Debug.Log("플레이어 피격 애니메이션");
         _animator.SetTrigger("playerIsHit");
     }
 }
+
