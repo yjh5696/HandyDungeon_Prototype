@@ -7,7 +7,7 @@ public static class BattleSystem
 {
     public static void ExecuteAttack(Character attacker, Character target, CardSO card, int diceValue)
     {
-        // 1. 주사위 눈 침식 보정
+        // 1. 침식 보정 (주사위 눈 감소)
         diceValue = attacker.ModifyDiceRoll(diceValue);
 
         // 2. 기본 데미지 계산

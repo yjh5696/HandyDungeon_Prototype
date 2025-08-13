@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class ElementEffect
 {
+    // 속성 배율 계산 (우선은 1f로 설정) *필요 없으면 제거 예정
     public static float GetMultiplier(State attack, State defense) => 1f;
 
     public static string ApplyElementEffect(Character target, State newElement, int baseStacks)
@@ -13,7 +14,7 @@ public static class ElementEffect
             target.AddStatusStacks(newElement, baseStacks);
             return $"{newElement} 스택 {baseStacks} 증가";
         }
-
+        // 발화 발생
         if (currentElement == State.Fire && newElement == State.Wind)
         {
             int stacks = target.GetStatusStacks(State.Fire);
@@ -22,6 +23,7 @@ public static class ElementEffect
             target.TakeDamage(3 * stacks);
             return $"발화 발생! {3 * stacks} 피해";
         }
+        // 와류 발생
         if (currentElement == State.Wind && newElement == State.Water)
         {
             int stacks = target.GetStatusStacks(State.Wind);
@@ -30,6 +32,7 @@ public static class ElementEffect
             target.TakeDamage(5 * stacks);
             return $"와류 발생! {5 * stacks} 피해";
         }
+        // 침전 발생
         if (currentElement == State.Water && newElement == State.Earth)
         {
             int stacks = target.GetStatusStacks(State.Water);
@@ -39,6 +42,7 @@ public static class ElementEffect
             target.ModifyDiceRoll(stacks);
             return $"침전 발생! {4 * stacks} 피해";
         }
+        // 용암 발생
         if (currentElement == State.Earth && newElement == State.Fire)
         {
             int stacks = target.GetStatusStacks(State.Earth);
@@ -54,6 +58,7 @@ public static class ElementEffect
         return $"{newElement} 디버프 {baseStacks} 스택 부여";
     }
 
+    // 기본 디버프 적용 (연계 X)
     static void ApplyBaseDebuff(Character target, State element, int stacks)
     {
         switch (element)

@@ -66,7 +66,7 @@ public class Character : MonoBehaviour
         elementStacks[mapped] = stacks;
         CurrentElement = mapped;
     }
-
+    
     State MapStatusNameToState(string statusName)
     {
         switch (statusName)
@@ -78,7 +78,7 @@ public class Character : MonoBehaviour
             default: return State.None;
         }
     }
-
+    // 풍식 : 공격력 감소
     public float ModifyOutgoingDamage(float baseDamage)
     {
         if (elementStacks.ContainsKey(State.Wind))
@@ -88,7 +88,7 @@ public class Character : MonoBehaviour
         }
         return baseDamage;
     }
-
+    // 진창 : 받는 피해 증가
     public float ModifyIncomingDamage(float damage)
     {
         if (elementStacks.ContainsKey(State.Earth))
@@ -98,7 +98,7 @@ public class Character : MonoBehaviour
         }
         return damage;
     }
-
+    // 침식 : 주사위 눈 감소
     public int ModifyDiceRoll(int diceValue)
     {
         if (elementStacks.ContainsKey(State.Water))
@@ -108,7 +108,7 @@ public class Character : MonoBehaviour
         }
         return diceValue;
     }
-
+   
     public void TakeDamage(float amount)
     {
         if (extraDamageStacks > 0) amount += extraDamageStacks;
@@ -120,6 +120,7 @@ public class Character : MonoBehaviour
     public void SetExtraDamageTaken(int stacks) => extraDamageStacks = stacks;
     public virtual void ApplyStatusEffect(State state) { }
 
+    // 턴 종료 시 상태 효과 처리
     public virtual void ProcessEndTurnEffects()
     {
         List<State> removeList = new List<State>();
@@ -129,6 +130,7 @@ public class Character : MonoBehaviour
             var element = kvp.Key;
             int stacks = kvp.Value;
 
+            // 점화 : 매 턴 피해
             if (element == State.Fire) TakeDamage(stacks);
 
             stacks--;
