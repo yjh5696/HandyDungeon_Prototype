@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -6,15 +7,16 @@ public class Choice : MonoBehaviour
     [SerializeField] private TMP_Text choiceText;
     [SerializeField] private TMP_Text choiceTypeText;
     [SerializeField] SpriteRenderer choiceTypeSprite;
-    [SerializeField] private TMP_Text choiceDifficultyText;
+    [SerializeField] private TMP_Text choiceRateText;
     [SerializeField] private TMP_Text choiceSuccessText;
     [SerializeField] private TMP_Text choiceFailText;
     private ChoiceType RoomType { get; set; }
+    private List<CardSO> _choiceRewardCard;
 
-    public void SetChoice(string choice, string roomType, string difficulty, string success, string fail)
+    public void SetChoice(string choice, ChoiceType type, int rate)
     {
         choiceText.text = choice;
-        switch (roomType)
+        switch (choice)
         {
             case "Battle":
                 RoomType = ChoiceType.Battle;
@@ -37,22 +39,28 @@ public class Choice : MonoBehaviour
                 choiceTypeSprite.color = Color.green;
                 break;
         }
-        switch (difficulty)
+        switch (rate)
         {
-            case "Low":
-                choiceDifficultyText.text = "낮음";
-                choiceDifficultyText.color = Color.red;
+            case 0:
+                choiceRateText.text = "낮음";
+                choiceRateText.color = Color.red;
                 break;
-            case "Middle":
-                choiceDifficultyText.text = "보통";
-                choiceDifficultyText.color = Color.orange;
+            case 1:
+                choiceRateText.text = "보통";
+                choiceRateText.color = Color.orange;
                 break;
-            case "High":
-                choiceDifficultyText.text = "높음";
-                choiceDifficultyText.color = Color.green;
+            case 2:
+                choiceRateText.text = "높음";
+                choiceRateText.color = Color.green;
                 break;
         }
-        choiceSuccessText.text = success;
-        choiceFailText.text = fail;
+    }
+
+    public void ChoiceClicked()
+    {
+        if (ChoiceManager.Instance != null)
+        {
+            
+        }
     }
 }

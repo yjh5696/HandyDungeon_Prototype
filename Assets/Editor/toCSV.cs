@@ -56,25 +56,25 @@ public class toCSV
             card.CardDescription = splitData[1];
             switch (splitData[2])
             {
-                case "Attack":
+                case "Attack" or "attack":
                     card.Style = Style.Attack;
                     break;
-                case "Defense":
+                case "Defense" or "defense":
                     card.Style = Style.Defence;
                     break;
-                case "Special":
+                case "Special" or "special":
                     card.Style = Style.Special;
                     break;
             }
             switch (splitData[3])
             {
-                case "Fire":
+                case "Fire" or "fire":
                     card.State = State.Fire;
                     break;
-                case "Water":
+                case "Water" or "water":
                     card.State = State.Water;
                     break;
-                case "Wind":
+                case "Wind" or "wind":
                     card.State = State.Wind;
                     break;
                 default:
@@ -88,34 +88,6 @@ public class toCSV
             
 
             AssetDatabase.CreateAsset(card, $"Assets/SO/Cards/{card.CardName}.asset");
-        }
-
-        AssetDatabase.SaveAssets();
-    }
-    
-    [MenuItem("Utilities/Generate Choices")]
-    public static void GenerateChoices()
-    {
-        string[] allLines = File.ReadAllLines(Application.dataPath + choiceCSVPath);
-
-        foreach(string allLine in allLines)
-        {
-            string [] splitData = allLine.Split(',');
-
-            if(splitData.Length != 5)
-            {
-                Debug.Log(allLine + " Does not have 5 values");
-            }
-
-            ChoiceSO choice = ScriptableObject.CreateInstance<ChoiceSO>();
-            choice.ChoiceName = splitData[0];
-            choice.ChoiceType = splitData[1];
-            choice.ChoiceDifficulty = splitData[2];
-            choice.ChoiceSuccess = splitData[3];
-            choice.ChoiceFail = splitData[4];
-            
-
-            AssetDatabase.CreateAsset(choice, $"Assets/SO/Choices/{choice.ChoiceName}.asset");
         }
 
         AssetDatabase.SaveAssets();

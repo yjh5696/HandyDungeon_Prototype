@@ -2370,7 +2370,7 @@ MonoBehaviour:
   choiceText: {fileID: 1106894816}
   choiceTypeText: {fileID: 276154062}
   choiceTypeSprite: {fileID: 711171443}
-  choiceDifficultyText: {fileID: 974789147}
+  choiceRateText: {fileID: 974789147}
   choiceSuccessText: {fileID: 1392971463}
   choiceFailText: {fileID: 759360979}
 --- !u!114 &727306029
@@ -2616,7 +2616,7 @@ GameObject:
   - component: {fileID: 747811913}
   - component: {fileID: 747811912}
   m_Layer: 5
-  m_Name: Diff_Text
+  m_Name: Rate_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2661,7 +2661,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Difficulty
+  m_text: Rate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 277a8923b262ad842844c5be7968e934, type: 2}
   m_sharedMaterial: {fileID: 5573592120968712582, guid: 277a8923b262ad842844c5be7968e934, type: 2}
@@ -3196,7 +3196,7 @@ MonoBehaviour:
   choiceText: {fileID: 198530957}
   choiceTypeText: {fileID: 1230442084}
   choiceTypeSprite: {fileID: 2097036522}
-  choiceDifficultyText: {fileID: 747811912}
+  choiceRateText: {fileID: 747811912}
   choiceSuccessText: {fileID: 588941526}
   choiceFailText: {fileID: 354686742}
 --- !u!114 &844952118
@@ -3516,7 +3516,7 @@ GameObject:
   - component: {fileID: 908395261}
   - component: {fileID: 908395260}
   m_Layer: 5
-  m_Name: Diff_Text
+  m_Name: Rate_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3561,7 +3561,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Difficulty
+  m_text: Rate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 277a8923b262ad842844c5be7968e934, type: 2}
   m_sharedMaterial: {fileID: 5573592120968712582, guid: 277a8923b262ad842844c5be7968e934, type: 2}
@@ -3810,7 +3810,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9996642
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4044,7 +4044,7 @@ GameObject:
   - component: {fileID: 974789148}
   - component: {fileID: 974789147}
   m_Layer: 5
-  m_Name: Diff_Text
+  m_Name: Rate_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4089,7 +4089,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Difficulty
+  m_text: Rate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 277a8923b262ad842844c5be7968e934, type: 2}
   m_sharedMaterial: {fileID: 5573592120968712582, guid: 277a8923b262ad842844c5be7968e934, type: 2}
@@ -4599,7 +4599,7 @@ MonoBehaviour:
   choiceText: {fileID: 636371435}
   choiceTypeText: {fileID: 1014143359}
   choiceTypeSprite: {fileID: 1157793828}
-  choiceDifficultyText: {fileID: 908395260}
+  choiceRateText: {fileID: 908395260}
   choiceSuccessText: {fileID: 1340468536}
   choiceFailText: {fileID: 1723066193}
 --- !u!1 &1004122170
@@ -5222,7 +5222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -585.4093}
+  m_AnchoredPosition: {x: 0.00012207031, y: -585.409}
   m_SizeDelta: {x: -1270, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1055311458
@@ -6695,7 +6695,7 @@ MonoBehaviour:
   choiceText: {fileID: 345555354}
   choiceTypeText: {fileID: 978157089}
   choiceTypeSprite: {fileID: 939130472}
-  choiceDifficultyText: {fileID: 1867895983}
+  choiceRateText: {fileID: 1867895983}
   choiceSuccessText: {fileID: 1310571500}
   choiceFailText: {fileID: 1124718113}
 --- !u!114 &1437175581
@@ -7810,7 +7810,7 @@ GameObject:
   - component: {fileID: 1867895984}
   - component: {fileID: 1867895983}
   m_Layer: 5
-  m_Name: Diff_Text
+  m_Name: Rate_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7855,7 +7855,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Difficulty
+  m_text: Rate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 277a8923b262ad842844c5be7968e934, type: 2}
   m_sharedMaterial: {fileID: 5573592120968712582, guid: 277a8923b262ad842844c5be7968e934, type: 2}
