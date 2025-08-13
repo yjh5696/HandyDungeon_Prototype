@@ -6,7 +6,6 @@ public class toCSV
 {
     private static string enemyCSVPath = "/CSV/Enemies.csv";
     private static string cardCSVPath = "/CSV/Cards.csv";
-    private static string choiceCSVPath = "/CSV/Choices.csv";
     
     [MenuItem("Utilities/Generate Enemies")]
     public static void GenerateEnemies()
@@ -84,8 +83,6 @@ public class toCSV
             card.StateStrat = splitData[4];
             card.Damage = float.Parse(splitData[5]);
             card.DiceMultiplier = float.Parse(splitData[6]);
-            
-            
 
             AssetDatabase.CreateAsset(card, $"Assets/SO/Cards/{card.CardName}.asset");
         }

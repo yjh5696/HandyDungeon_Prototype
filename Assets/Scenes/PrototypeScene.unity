@@ -867,6 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4125b0ef2d4b3794188fddc23103880a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choices: {fileID: 11400000, guid: 7080097298a46164fba556380fa0a1f7, type: 2}
   choice1: {fileID: 1002616194}
   choice2: {fileID: 1437175580}
   choice3: {fileID: 844952117}

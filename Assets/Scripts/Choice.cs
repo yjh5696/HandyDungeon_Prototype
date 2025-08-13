@@ -10,36 +10,42 @@ public class Choice : MonoBehaviour
     [SerializeField] private TMP_Text choiceRateText;
     [SerializeField] private TMP_Text choiceSuccessText;
     [SerializeField] private TMP_Text choiceFailText;
-    private ChoiceType RoomType { get; set; }
+    private ChoiceType ChoiceType { get; set; }
     private List<CardSO> _choiceRewardCard;
+    private string[] _subChoices;
+    private int _rate;
 
-    public void SetChoice(string choice, ChoiceType type, int rate)
+    public void SetChoice(string choice, ChoiceType type, string[] subChoices)
     {
         choiceText.text = choice;
-        switch (choice)
+        switch (type)
         {
-            case "Battle":
-                RoomType = ChoiceType.Battle;
+            case ChoiceType.Battle:
+                ChoiceType = ChoiceType.Battle;
                 choiceTypeText.text = "전투";
                 choiceTypeSprite.color = Color.red;
                 break;
-            case "Event":
-                RoomType = ChoiceType.Event;
+            case ChoiceType.Event:
+                ChoiceType = ChoiceType.Event;
                 choiceTypeText.text = "이벤트";
                 choiceTypeSprite.color = Color.blue;
                 break;
-            case "Treasure":
-                RoomType = ChoiceType.Treasure;
+            case ChoiceType.Treasure:
+                ChoiceType = ChoiceType.Treasure;
                 choiceTypeText.text = "보물";
                 choiceTypeSprite.color = Color.yellow;
                 break;
-            case "Rest":
-                RoomType = ChoiceType.Rest;
+            case ChoiceType.Rest:
+                ChoiceType = ChoiceType.Rest;
                 choiceTypeText.text = "휴식";
                 choiceTypeSprite.color = Color.green;
                 break;
         }
-        switch (rate)
+
+        int[] rates = { 20, 50, 70 };
+        int r = Random.Range(0, rates.Length - 1);
+        _rate = rates[r];
+        switch (r)
         {
             case 0:
                 choiceRateText.text = "낮음";

@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
-        StartPlayerTurn();
+        ChoiceManager.Instance.GetRandomChoice();
+        //EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
+        //StartPlayerTurn();
     }
 
     public void SwitchTurn()
