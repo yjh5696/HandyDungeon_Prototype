@@ -18,6 +18,7 @@ public class Enemy : Character
         Debug.Log($"{_enemySo.Name}이(가) 사망했습니다!");
         if (EnemyManager.Instance != null)
         {
+            EnemyManager.Instance.OnEnemyDied();
             GameManager.Instance.EndGame();
         }
     }

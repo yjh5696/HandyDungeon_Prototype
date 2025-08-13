@@ -15,6 +15,7 @@ public enum State
     Water = 2,
     Wind= 3,
     Earth = 4,
+    Ignition = 5, // 점화
 }
 
 public enum EnemyStatusEffect

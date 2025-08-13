@@ -14,7 +14,7 @@ public static class BattleSystem
         float baseDamage = card.Damage * (diceValue * card.DiceMultiplier);
 
         // 3. 풍식 효과 (공격력 감소)
-        baseDamage = attacker.ModifyOutgoingDamage(baseDamage);
+        baseDamage = attacker.ModifyOutgoingDamage(baseDamage, diceValue);
 
         // 4. 속성 배율
         float multiplier = ElementEffect.GetMultiplier(card.State, target.GetCurrentElement());
@@ -48,7 +48,7 @@ public static class BattleSystem
 
         // 9. 속성/디버프 적용
         string effectLog = ElementEffect.ApplyElementEffect(target, card.State, 1);
-        target.ApplyStatusEffect(card.State);
+        
 
         // 10. 속성 디버프 로그 출력
         if (!string.IsNullOrEmpty(effectLog))

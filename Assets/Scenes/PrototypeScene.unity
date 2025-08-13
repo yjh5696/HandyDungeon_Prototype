@@ -174,6 +174,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
   - {fileID: 11400000, guid: 83e6a91cc939de345ae109982a1cd0a9, type: 2}
   - {fileID: 11400000, guid: 9b742f6408bdfef46beca0d32a07d07f, type: 2}
+  - {fileID: 11400000, guid: 0fddab5a119fc9248bcca84c3ab8c0b7, type: 2}
   attackText: {fileID: 1581959020}
   defenseText: {fileID: 1972473576}
   specialText: {fileID: 827266438}
@@ -830,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &332620290
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1971,7 +1972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerTurn: 1
-  isPlayerinBattle: 0
+  isPlayerinBattle: 1
   diceRoll: {fileID: 945721866}
   enemySOs:
   - {fileID: 11400000, guid: 746993ed33db75a40953b2c8b65d0e7b, type: 2}
@@ -1979,6 +1980,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
   - {fileID: 11400000, guid: 83e6a91cc939de345ae109982a1cd0a9, type: 2}
   - {fileID: 11400000, guid: 9b742f6408bdfef46beca0d32a07d07f, type: 2}
+  - {fileID: 11400000, guid: 0fddab5a119fc9248bcca84c3ab8c0b7, type: 2}
   log: {fileID: 588424019}
   buttons: {fileID: 27872866}
   card: {fileID: 1025688774}
@@ -5773,7 +5775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1155125379
 RectTransform:
   m_ObjectHideFlags: 0

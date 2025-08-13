@@ -20,6 +20,4 @@ public class CardSO : ScriptableObject
     public float Damage { get => damage; set => damage = value; }
     [SerializeField] private float diceMultiplier;
     public float DiceMultiplier { get => diceMultiplier; set => diceMultiplier = value; }
-    [SerializeField] private ElementType elementType;
-    public ElementType ElementType { get => elementType; set => elementType = value; }
 }
