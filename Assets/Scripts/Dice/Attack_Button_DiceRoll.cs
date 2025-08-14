@@ -58,19 +58,24 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         if (GameManager.Instance.isPlayerTurn)
         {
             // 플레이어 공격 → 적 피격
-            PlayerManager.Instance.PlayAttackAnimation();
-            EnemyManager.Instance.EnemyHitAnimation();
+            BattleSystem.ExecuteAttack(PlayerManager.Instance.Player,EnemyManager.Instance.Enemy,selectedCard, value);
 
-            BattleSystem.ExecuteAttack(
-                PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
+            PlayerManager.Instance.PlayAttackAnimation();
+            float attackTime = PlayerManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
+            yield return new WaitForSeconds(attackTime * 0.75f);
+            EnemyManager.Instance.EnemyHitAnimation();
         }
         else
         {
             // 적 공격 → 플레이어 피격
+            BattleSystem.ExecuteAttack(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+
             EnemyManager.Instance.EnemyAttackAnimation();
+            float attackTime = EnemyManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
+            yield return new WaitForSeconds(attackTime * 0.75f);
             PlayerManager.Instance.PlayHitAnimation();
 
-            BattleSystem.ExecuteAttack(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+            
         }
 
         StartCoroutine(SwitchTurnWithDelay(switchTurnDelay));

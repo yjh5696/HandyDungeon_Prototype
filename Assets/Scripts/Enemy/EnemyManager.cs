@@ -23,6 +23,7 @@ public class EnemyManager : MonoBehaviour
     private EnemySO currentEnemySO;
     private Enemy EnemyData;
 
+    public Animator Animator => _animator;
     private void Awake()
     {
         if(Instance == null)

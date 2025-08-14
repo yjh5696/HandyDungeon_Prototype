@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     private Animator _animator;
     [SerializeField] private HPBar hpBar;
 
+    public Animator Animator => _animator;
     private void Awake()
     {
         if (Instance == null)
