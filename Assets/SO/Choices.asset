@@ -20,7 +20,7 @@ MonoBehaviour:
   - "\uB3D9\uAD74 \uAE4A\uC219\uD788 \uD0D0\uD5D8\uD558\uAE30"
   - "\uAE4A\uC740 \uD611\uACE1 \uAC74\uB108\uAE30"
   - "\uC2E0\uBE44\uB85C\uC6B4 \uC0C1\uC790 \uBC1C\uACAC"
-  - "\uACE0\uB300\uC758 \uC7AC\uB2E8 \uC870\uC0AC"
+  - "\uACE0\uB300\uC758 \uC81C\uB2E8 \uC870\uC0AC"
   choiceDescriptions:
     _serializedList:
     - Key: "\uACE0\uB300 \uC720\uC801 \uD0D0\uD5D8"
@@ -37,7 +37,7 @@ MonoBehaviour:
       Value: 6
     - Key: "\uC2E0\uBE44\uB85C\uC6B4 \uC0C1\uC790 \uBC1C\uACAC"
       Value: 7
-    - Key: "\uACE0\uB300\uC758 \uC7AC\uB2E8 \uC870\uC0AC"
+    - Key: "\uACE0\uB300\uC758 \uC81C\uB2E8 \uC870\uC0AC"
       Value: 8
   subChoices:
     _serializedList:
@@ -62,5 +62,5 @@ MonoBehaviour:
       Value: 0
     - Key: "\uC2E0\uBE44\uB85C\uC6B4 \uC0C1\uC790 \uBC1C\uACAC"
       Value: 1
-    - Key: "\uACE0\uB300\uC758 \uC7AC\uB2E8 \uC870\uC0AC"
+    - Key: "\uACE0\uB300\uC758 \uC81C\uB2E8 \uC870\uC0AC"
       Value: 0
