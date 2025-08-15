@@ -24,21 +24,21 @@ MonoBehaviour:
   choiceDescriptions:
     _serializedList:
     - Key: "\uACE0\uB300 \uC720\uC801 \uD0D0\uD5D8"
-      Value: 
+      Value: 1
     - Key: "\uC228\uACA8\uC9C4 \uBCF4\uBB3C \uBC29"
-      Value: 
+      Value: 2
     - Key: "\uAC15\uB825\uD55C \uC801\uACFC\uC758 \uC870\uC6B0"
-      Value: 
+      Value: 3
     - Key: "\uC548\uC804\uD55C \uD734\uC2DD \uACF5\uAC04"
-      Value: 
+      Value: 4
     - Key: "\uB3D9\uAD74 \uAE4A\uC219\uD788 \uD0D0\uD5D8\uD558\uAE30"
-      Value: 
+      Value: 5
     - Key: "\uAE4A\uC740 \uD611\uACE1 \uAC74\uB108\uAE30"
-      Value: 
+      Value: 6
     - Key: "\uC2E0\uBE44\uB85C\uC6B4 \uC0C1\uC790 \uBC1C\uACAC"
-      Value: 
+      Value: 7
     - Key: "\uACE0\uB300\uC758 \uC7AC\uB2E8 \uC870\uC0AC"
-      Value: 
+      Value: 8
   subChoices:
     _serializedList:
     - Key: "\uAE4A\uC740 \uD611\uACE1 \uAC74\uB108\uAE30"

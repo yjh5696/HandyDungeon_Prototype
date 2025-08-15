@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -32,21 +33,21 @@ public class ChoiceManager : MonoBehaviour
 
     public void GetRandomChoice() // 선택지 버튼에 랜덤한 선택지 부여
     {
-        List<string> choiceNames = choices.Choices;
+        List<string> choiceNames = choices.Choices.ToList(); //참조되지 않도록 ToList 사용
         
         foreach (Choice choice in _choiceList)
         {
             int r = Random.Range(0, choiceNames.Count);
             string choiceName = choiceNames[r];
-            if (choices.SubChoices[choiceName] != null) //딕셔너리 키값으로 밸류값 못찾는 경우가 있음
+            if (choices.ChoicesTypes.ContainsKey(choiceName))
             {
-                choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName], choices.SubChoices[choiceName]);
+                choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName]);
+                if (choices.SubChoices.ContainsKey(choiceName)) //서브 선택지가 존재한다면 서브 선택지를 추가
+                {
+                    choice.SetSubChoices(choices.SubChoices[choiceName]);
+                }
             }
-            else
-            {
-                choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName], null);
-            }
-            choiceNames.Remove(choiceName);
+            choiceNames.Remove(choiceName); //참조된 상태로 Remove 시 SO에 있던 값 사라짐
         }
     }
 }

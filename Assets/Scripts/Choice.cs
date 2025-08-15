@@ -12,10 +12,10 @@ public class Choice : MonoBehaviour
     [SerializeField] private TMP_Text choiceFailText;
     private ChoiceType ChoiceType { get; set; }
     private List<CardSO> _choiceRewardCard;
-    private string[] _subChoices;
+    private string[] _subChoices = null;
     private int _rate;
 
-    public void SetChoice(string choice, ChoiceType type, string[] subChoices)
+    public void SetChoice(string choice, ChoiceType type)
     {
         choiceText.text = choice;
         switch (type)
@@ -43,7 +43,7 @@ public class Choice : MonoBehaviour
         }
 
         int[] rates = { 20, 50, 70 };
-        int r = Random.Range(0, rates.Length - 1);
+        int r = Random.Range(0, rates.Length);
         _rate = rates[r];
         switch (r)
         {
@@ -60,6 +60,11 @@ public class Choice : MonoBehaviour
                 choiceRateText.color = Color.green;
                 break;
         }
+    }
+
+    public void SetSubChoices(string[] subChoices)
+    {
+        _subChoices = subChoices;
     }
 
     public void ChoiceClicked()
