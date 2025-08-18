@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,10 +13,18 @@ public class Choice : MonoBehaviour
     [SerializeField] private TMP_Text choiceFailText;
     private ChoiceType ChoiceType { get; set; }
     private List<CardSO> _choiceRewardCard;
-    private string[] _subChoices = null;
+    private string[] _subChoices;
     private int _rate;
 
-    public void SetChoice(string choice, ChoiceType type)
+    public void Init()
+    {
+        choiceText.text = "";
+        choiceTypeText.text = "";
+        choiceRateText.text = "";
+        _subChoices = Array.Empty<string>();
+    }
+
+    public void SetChoice(string choice, ChoiceType type, int rate)
     {
         choiceText.text = choice;
         switch (type)
@@ -41,21 +50,19 @@ public class Choice : MonoBehaviour
                 choiceTypeSprite.color = Color.green;
                 break;
         }
-
-        int[] rates = { 20, 50, 70 };
-        int r = Random.Range(0, rates.Length);
-        _rate = rates[r];
-        switch (r)
+        
+        _rate = rate;
+        switch (_rate)
         {
-            case 0:
+            case <= 20:
                 choiceRateText.text = "낮음";
                 choiceRateText.color = Color.red;
                 break;
-            case 1:
+            case <= 50:
                 choiceRateText.text = "보통";
                 choiceRateText.color = Color.orange;
                 break;
-            case 2:
+            case <= 100:
                 choiceRateText.text = "높음";
                 choiceRateText.color = Color.green;
                 break;
@@ -69,7 +76,11 @@ public class Choice : MonoBehaviour
 
     public void ChoiceClicked()
     {
-        if (ChoiceManager.Instance != null)
+        if (_subChoices is { Length: > 0 })
+        {
+            ChoiceManager.Instance.SetSubChoiceButtons(_subChoices);
+        }
+        else
         {
             
         }
