@@ -15,7 +15,13 @@ public enum State
     Water = 2,
     Wind= 3,
     Earth = 4,
-    Ignition = 5, // 점화
+    Ignition = 5,
+    Fervor = 6,
+    Gale = 7,
+    Guard = 8,
+    Recovery = 9,
+    Shield = 10,
+    Healing = 11,
 }
 
 public enum EnemyStatusEffect

@@ -8,20 +8,20 @@ public static class BattleSystem
     public static void ExecuteAttack(Character attacker, Character target, CardSO card, int diceValue)
     {
         // 1. 침식 보정 (주사위 눈 감소)
-        diceValue = attacker.ModifyDiceRoll(diceValue);
+        diceValue = attacker.SetWaterEffect(diceValue);
 
         // 2. 기본 데미지 계산
         float baseDamage = card.Damage * (diceValue * card.DiceMultiplier);
 
         // 3. 풍식 효과 (공격력 감소)
-        baseDamage = attacker.ModifyOutgoingDamage(baseDamage, diceValue);
+        baseDamage = attacker.SetWindEffect(baseDamage, diceValue);
 
         // 4. 속성 배율
         float multiplier = ElementEffect.GetMultiplier(card.State, target.GetCurrentElement());
         float totalDamage = baseDamage * multiplier;
 
         // 5. 진창 효과 (받는 피해 증가)
-        totalDamage = target.ModifyIncomingDamage(totalDamage);
+        totalDamage = target.SetEarthEffect(totalDamage);
         totalDamage = Mathf.Round(totalDamage * 10f) / 10f;
 
         // 6. HP 감소
@@ -46,7 +46,7 @@ public static class BattleSystem
             return;
         }
 
-        // 9. 속성/디버프 적용
+        // 9. 속성 디버프 적용
         string effectLog = ElementEffect.ApplyElementEffect(target, card.State, 1);
         
 
