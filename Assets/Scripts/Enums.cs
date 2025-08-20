@@ -20,8 +20,8 @@ public enum State
     Gale = 7,
     Guard = 8,
     Recovery = 9,
-    Shield = 10,
-    Healing = 11,
+    //Shield = 10,
+    //Healing = 11,
 }
 
 public enum EnemyStatusEffect

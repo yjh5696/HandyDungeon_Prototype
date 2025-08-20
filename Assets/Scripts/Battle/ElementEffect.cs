@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class ElementEffect
 {
     public static float GetMultiplier(State attack, State defense) => 1f;
 
-    public static string ApplyElementEffect(Character target, State newElement, int baseStacks)
+    public static string ApplyElementEffect(Character attacker, Character target, State newElement, int baseStacks)
     {
         State last = target.GetLastElement();
         Debug.Log($"[ElementEffect] {target.GetUnitName()} last={last}, new={newElement}");
@@ -14,7 +15,14 @@ public static class ElementEffect
         {
             target.AddStatusStacks(newElement, baseStacks);
             target.SetLastElement(newElement);
-            return $"{newElement} 스택 {baseStacks} 증가";
+            return $"{target.GetUnitName()}에게 {newElement} 스택 {baseStacks} 증가";
+        }
+
+        if(newElement == State.Water)
+        {
+            attacker.AddStatusStacks(State.Water, baseStacks);
+            target.SetLastElement(State.Water);
+            return $"{attacker.GetUnitName()}에게 {newElement} 스택 {baseStacks} 증가";
         }
 
         // 발화
@@ -47,7 +55,7 @@ public static class ElementEffect
             target.RemoveStatus(State.Water);
             target.SetStatus("침전", (stacks + 1));
             target.TakeDamage(4 * stacks);
-            target.SetWaterEffect(stacks);
+            target.SetShieldEffect(2 * stacks, -1, 0);
             ApplyBaseDebuff(target, State.Earth, baseStacks);
             target.SetLastElement(State.Earth);
             return $"침전 발생! {4 * stacks} 피해 + 진창 {baseStacks} 스택 부여";
@@ -70,7 +78,7 @@ public static class ElementEffect
         // 기본 디버프
         target.AddStatusStacks(newElement, baseStacks);
         target.SetLastElement(newElement);
-        return $"{newElement} 디버프 {baseStacks} 스택 부여";
+        return $"{target.GetUnitName()}에게 {newElement} 디버프 {baseStacks} 스택 부여";
     }
 
     static void ApplyBaseDebuff(Character target, State element, int stacks)

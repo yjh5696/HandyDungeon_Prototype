@@ -7,8 +7,8 @@ public static class BattleSystem
 {
     public static void ExecuteAttack(Character attacker, Character target, CardSO card, int diceValue)
     {
-        // 1. 침식 보정 (주사위 눈 감소)
-        diceValue = attacker.SetWaterEffect(diceValue);
+        // 1. 침식 효과 (회복)
+        attacker.SetWaterEffect(attacker.GetStatusStacks(State.Water));
 
         // 2. 기본 데미지 계산
         float baseDamage = card.Damage * (diceValue * card.DiceMultiplier);
@@ -47,7 +47,7 @@ public static class BattleSystem
         }
 
         // 9. 속성 디버프 적용
-        string effectLog = ElementEffect.ApplyElementEffect(target, card.State, 1);
+        string effectLog = ElementEffect.ApplyElementEffect(attacker, target, card.State, 1);
         
 
         // 10. 속성 디버프 로그 출력

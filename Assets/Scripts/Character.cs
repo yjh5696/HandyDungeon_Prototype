@@ -103,8 +103,8 @@ public class Character : MonoBehaviour
             "질풍" => State.Gale,
             "수호" => State.Guard,
             "재생" => State.Recovery,
-            "보호막" => State.Shield,
-            "회복" => State.Healing,
+            //"보호막" => State.Shield,
+            //"회복" => State.Healing,
             _ => State.None
         };
     }
@@ -168,6 +168,7 @@ public class Character : MonoBehaviour
         return damage;
     }
 
+    // 수호: 발동 시 피해 감소
     public float SetGuardEffect(float Damage)
     {
         if(elementStacks.ContainsKey(State.Guard))
@@ -192,30 +193,15 @@ public class Character : MonoBehaviour
     }
 
     // 침식: 발동 시 스택 감소
-    public int SetWaterEffect(int diceValue)
+    public void SetWaterEffect(int stack)
     {
-        if (elementStacks.ContainsKey(State.Water))
-        {
-            int stacks = elementStacks[State.Water];
-            int original = diceValue;
-            diceValue = Mathf.Max(0, diceValue - stacks);
-
-            if (diceValue != original)
-            {
-                LogManager.Instance.AddLog($"침식 효과로 주사위 눈 {original} → {diceValue} 감소");
-                stacks--;
-                if (stacks <= 0)
-                {
-                    elementStacks.Remove(State.Water);
-                    LogManager.Instance.AddLog($"{unitName}의 침식 상태가 사라짐");
-                    if (CurrentElement == State.Water) CurrentElement = State.None;
-                }
-                else elementStacks[State.Water] = stacks;
-            }
-        }
-        return diceValue;
+        if(stack <= 0) return;
+        SetHealEffect(stack, -1, 0); // 회복 효과 적용
+        LogManager.Instance.AddLog($"{unitName}의 침식 효과로 {stack}만큼 회복");
+        elementStacks[State.Water] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Water, 0) - 1);
     }
 
+    // 데미지 처리
     public void TakeDamage(float amount)
     {
         if (extraDamageStacks > 0) amount += extraDamageStacks;
@@ -239,20 +225,38 @@ public class Character : MonoBehaviour
     }
     protected virtual void OnDeath() { }
     public void SetExtraDamageTaken(int stacks) => extraDamageStacks = stacks;
+    // 열정 효과
     public void SetFervorDamage(int stacks) => fervorDamage = stacks;
+    // 재생 효과
+
     public void SetRecovery(int stacks, int diceValue, int damage)
     {
-        SetShield(stacks, diceValue, damage); // 보호막 설정
-        RecoveryValue = stacks + damage;
-        Recovery = RecoveryValue * diceValue;
-        SetCurrentHp(CurrentHp + RecoveryValue);
-        LogManager.Instance.AddLog($"{unitName}이/가 {RecoveryValue} 회복");
+        SetShieldEffect(stacks, diceValue, damage); // 보호막 설정
+        SetHealEffect(stacks, diceValue, damage); // 회복 설정
         elementStacks[State.Recovery] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Recovery, 0) - 1);
     }
-    public void SetShield(int stacks, int diceValue, int damage)
+    // 보호막 효과
+    public void SetShieldEffect(int stacks, int diceValue, int damage)
     {
+        if(diceValue <= 0) return;
+        {
+            diceValue = 1;
+        }
         ShieldValue = stacks + damage;
         Shield = ShieldValue * diceValue;
+        LogManager.Instance.AddLog($"{unitName}이/가 {Shield} 보호막 획득");
+    }
+    // 회복 효과
+    public void SetHealEffect(int stacks, int diceValue, int damage)
+    {
+        if (diceValue <= 0) return;
+        {
+            diceValue = 1;
+        }
+        RecoveryValue = stacks + damage;
+        Recovery = RecoveryValue * diceValue;
+        SetCurrentHp(CurrentHp + Recovery);
+        LogManager.Instance.AddLog($"{unitName}이/가 {Recovery} 회복");
     }
 
     // 풍식 감소 (본인 턴 종료 시)
