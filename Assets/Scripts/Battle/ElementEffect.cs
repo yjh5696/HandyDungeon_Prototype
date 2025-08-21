@@ -18,13 +18,6 @@ public static class ElementEffect
             return $"{target.GetUnitName()}에게 {newElement} 스택 {baseStacks} 증가";
         }
 
-        if(newElement == State.Water)
-        {
-            attacker.AddStatusStacks(State.Water, baseStacks);
-            target.SetLastElement(State.Water);
-            return $"{attacker.GetUnitName()}에게 {newElement} 스택 {baseStacks} 증가";
-        }
-
         // 발화
         if (last == State.Fire && newElement == State.Wind)
         {
@@ -33,7 +26,7 @@ public static class ElementEffect
             target.SetStatus("발화", (stacks + 1) / 2);
             ApplyBaseDebuff(target, State.Wind, baseStacks);
             target.SetLastElement(State.Wind);
-            return $"발화 발생! 턴마다 {3 * (stacks / 2)} 피해 + 풍식 {baseStacks} 스택 부여";
+            return $"발화 발생! 턴마다 {3 * ((stacks + 1) / 2)} 피해 + 풍식 {baseStacks} 스택 부여";
         }
 
         // 와류

@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.Rendering.DebugUI;
+using static UnityEngine.UI.Image;
 
 public class Character : MonoBehaviour
 {
@@ -25,14 +28,22 @@ public class Character : MonoBehaviour
 
     // 최근 맞은 속성 기록 (유지턴 제거)
     protected State lastElement = State.None;
+    protected State lastBuffElement = State.None;
 
     public State GetLastElement() => lastElement;
+    public State GetLastBuffElement() => lastBuffElement;
     public State GetCurrentElement() => CurrentElement;
 
     public void SetLastElement(State element)
     {
         Debug.Log($"[SetLastElement] {unitName} : {lastElement} → {element}");
         lastElement = element;
+    }
+
+    public void SetLastBuffElement(State element)
+    {
+        Debug.Log($"[SetLastBuffElement] {unitName} : {lastBuffElement} → {element}");
+        lastBuffElement = element;
     }
 
     private void Start() => OnHpChanged += HpChanged;
@@ -63,7 +74,10 @@ public class Character : MonoBehaviour
             elementStacks[element] = stacks;
 
         CurrentElement = element;
-        SetLastElement(element); // 속성 부여 시 즉시 반영
+        if(element == State.Fire || element == State.Water || element == State.Wind || element == State.Earth)
+            SetLastElement(element); // 즉시 반영
+        else if(element == State.Fervor || element == State.Gale || element == State.Guard || element == State.Recovery)
+            SetLastBuffElement(element); // 즉시 반영
     }
 
     public void SetStatus(string statusName, int stacks)
@@ -105,6 +119,7 @@ public class Character : MonoBehaviour
             "재생" => State.Recovery,
             //"보호막" => State.Shield,
             //"회복" => State.Healing,
+            "진동" => State.Vibration,
             _ => State.None
         };
     }
@@ -123,6 +138,45 @@ public class Character : MonoBehaviour
             }
         }
         return baseDamage;
+    }
+
+    // 진동: 공격 시 피해 반사
+    public void SetVibrationEffect(float totalDamage, Character attacker)
+    {
+        if (elementStacks.ContainsKey(State.Vibration))
+        {
+            attacker.HitDamage(totalDamage);
+            LogManager.Instance.AddLog($"{unitName}의 진동 효과로 {attacker.GetUnitName()}에게 {totalDamage} 피해");
+            if (attacker is Player)
+            {
+                PlayerManager.Instance.PlayHitAnimation();
+            }
+            else if (attacker is Enemy)
+            {
+                EnemyManager.Instance.EnemyHitAnimation();
+            }
+            elementStacks[State.Vibration] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Vibration, 0) - 1);
+        }
+    }
+    // 소화 : 공격 시 피해 감소
+    public float SetBurndownEffect(float totalDamage)
+    {
+        if (elementStacks.ContainsKey(State.Burndown))
+        {
+            totalDamage /= 2; // 버닝 효과로 피해 절반 감소
+            elementStacks[State.Burndown] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Burndown, 0) - 1);
+            LogManager.Instance.AddLog($"{unitName}의 소화 효과로 피해 {totalDamage} 감소");
+        }
+        return totalDamage;
+    }
+
+    public void SetBurndownClear()
+    {
+        if (elementStacks.ContainsKey(State.Burndown))
+        {
+            LogManager.Instance.AddLog($"{unitName}의 소화 상태가 사라짐");
+            RemoveStatus(State.Burndown);
+        }
     }
 
     // 질풍: 홀짝 조건부 공격력 증가
@@ -193,70 +247,110 @@ public class Character : MonoBehaviour
     }
 
     // 침식: 발동 시 스택 감소
-    public void SetWaterEffect(int stack)
+    public float SetWaterEffect(float baseDamage, Character target)
     {
-        if(stack <= 0) return;
-        SetHealEffect(stack, -1, 0); // 회복 효과 적용
-        LogManager.Instance.AddLog($"{unitName}의 침식 효과로 {stack}만큼 회복");
-        elementStacks[State.Water] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Water, 0) - 1);
+        if(elementStacks.ContainsKey(State.Water))
+        {
+            int stack = elementStacks[State.Water];
+            // 회복 효과 적용
+            target.SetCurrentHp(CurrentHp + stack);
+            LogManager.Instance.AddLog($"{unitName}이/가 침식 효과로 {stack} 회복");
+
+            // 침식 효과로 피해 감소
+            baseDamage -= stack;
+            LogManager.Instance.AddLog($"{unitName}의 침식 효과로 {stack}만큼 데미지 감소");
+            elementStacks[State.Water] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Water, 0) - 1);
+        }
+        return baseDamage;
     }
 
     // 데미지 처리
     public void TakeDamage(float amount)
     {
         if (extraDamageStacks > 0) amount += extraDamageStacks;
-        if (fervorDamage > 0)
-        {
-            amount += fervorDamage;
-            LogManager.Instance.AddLog($"{unitName}에게 열정 효과로 {fervorDamage} 피해 추가");
-            elementStacks[State.Fervor] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Fervor, 0) - 1);
-
-        }
         if(Shield > 0)
         {
             Shield -= amount;
             if (Shield < 0)
                 amount = -Shield;
             else
+            {
                 amount = 0.0f;
+                //Shield = Mathf.Max(0, Shield);
+            }     
         }
         SetCurrentHp(CurrentHp - amount);
         if (CurrentHp <= 0) OnDeath();
     }
+
+    public void HitDamage(float damage)
+    {
+        if(Shield > 0)
+        {
+            Shield -= damage;
+            if (Shield < 0)
+                damage = -Shield;
+            else
+            {
+                damage = 0.0f;
+                Shield = Mathf.Max(0, Shield);
+            }     
+        }
+        float clearHp = GetCurrentHp() - damage;
+        clearHp = Mathf.Round(clearHp * 10f) / 10f;
+        SetCurrentHp(clearHp);
+    }
     protected virtual void OnDeath() { }
     public void SetExtraDamageTaken(int stacks) => extraDamageStacks = stacks;
-    // 열정 효과
-    public void SetFervorDamage(int stacks) => fervorDamage = stacks;
-    // 재생 효과
 
-    public void SetRecovery(int stacks, int diceValue, int damage)
+    // 열정 효과
+    public int SetFervorDamage()
     {
-        SetShieldEffect(stacks, diceValue, damage); // 보호막 설정
-        SetHealEffect(stacks, diceValue, damage); // 회복 설정
-        elementStacks[State.Recovery] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Recovery, 0) - 1);
+        if(elementStacks.ContainsKey(State.Fervor))
+        {
+            int stacks = GetStatusStacks(State.Fervor);
+            fervorDamage += stacks;
+            LogManager.Instance.AddLog($"{unitName}의 열정 효과로 {stacks} 데미지 추가");
+            elementStacks[State.Fervor] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Fervor, 0) - 1);
+            
+        }
+        return fervorDamage;
     }
+
+    // 재생 효과
+    public void SetRecovery(int diceValue, int damage)
+    {
+        if(elementStacks.ContainsKey(State.Recovery))
+        {
+            int stacks = elementStacks[State.Recovery];
+            SetShieldEffect(stacks, diceValue, damage); // 보호막 설정
+            SetHealEffect(stacks, diceValue, damage); // 회복 설정
+            elementStacks[State.Recovery] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Recovery, 0) - 1);
+        }
+    }
+
     // 보호막 효과
     public void SetShieldEffect(int stacks, int diceValue, int damage)
     {
-        if(diceValue <= 0) return;
+        if(diceValue <= 0)
         {
             diceValue = 1;
         }
         ShieldValue = stacks + damage;
         Shield = ShieldValue * diceValue;
-        LogManager.Instance.AddLog($"{unitName}이/가 {Shield} 보호막 획득");
+        LogManager.Instance.AddLog($"{unitName}이/가 보호막 효과로{Shield} 보호막 획득");
     }
     // 회복 효과
     public void SetHealEffect(int stacks, int diceValue, int damage)
     {
-        if (diceValue <= 0) return;
+        if (diceValue <= 0)
         {
             diceValue = 1;
         }
         RecoveryValue = stacks + damage;
         Recovery = RecoveryValue * diceValue;
         SetCurrentHp(CurrentHp + Recovery);
-        LogManager.Instance.AddLog($"{unitName}이/가 {Recovery} 회복");
+        LogManager.Instance.AddLog($"{unitName}이/가 재생 효과로 {Recovery} 회복");
     }
 
     // 풍식 감소 (본인 턴 종료 시)

@@ -171,9 +171,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCard: {fileID: 0}
   cards:
-  - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
   - {fileID: 11400000, guid: 83e6a91cc939de345ae109982a1cd0a9, type: 2}
   - {fileID: 11400000, guid: 9b742f6408bdfef46beca0d32a07d07f, type: 2}
+  - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
   - {fileID: 11400000, guid: 0fddab5a119fc9248bcca84c3ab8c0b7, type: 2}
   attackText: {fileID: 1581959020}
   defenseText: {fileID: 1972473576}
@@ -1979,9 +1979,9 @@ MonoBehaviour:
   enemySOs:
   - {fileID: 11400000, guid: 746993ed33db75a40953b2c8b65d0e7b, type: 2}
   cardSOs:
-  - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
   - {fileID: 11400000, guid: 83e6a91cc939de345ae109982a1cd0a9, type: 2}
   - {fileID: 11400000, guid: 9b742f6408bdfef46beca0d32a07d07f, type: 2}
+  - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
   - {fileID: 11400000, guid: 0fddab5a119fc9248bcca84c3ab8c0b7, type: 2}
   log: {fileID: 588424019}
   buttons: {fileID: 27872866}
@@ -3812,7 +3812,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99024004
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5224,7 +5224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -585.18677}
+  m_AnchoredPosition: {x: 0.00012207031, y: -585.4093}
   m_SizeDelta: {x: -1270, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1055311458

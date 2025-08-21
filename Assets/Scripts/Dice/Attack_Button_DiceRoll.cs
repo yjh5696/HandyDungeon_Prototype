@@ -58,7 +58,14 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         if (GameManager.Instance.isPlayerTurn)
         {
             // 플레이어 공격 → 적 피격
-            BattleSystem.ExecuteAttack(PlayerManager.Instance.Player,EnemyManager.Instance.Enemy,selectedCard, value);
+            if (selectedCard.Style == Style.Attack)
+            {
+                BattleSystem.ExecuteAttack(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
+            }
+            else if (selectedCard.Style == Style.Defence)
+            {
+                BattleSystem.ExecuteDefence(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
+            }
 
             PlayerManager.Instance.PlayAttackAnimation();
             float attackTime = PlayerManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
@@ -68,8 +75,14 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         else
         {
             // 적 공격 → 플레이어 피격
-            BattleSystem.ExecuteAttack(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
-
+            if (selectedCard.Style == Style.Attack)
+            {
+                BattleSystem.ExecuteAttack(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+            }
+            else if (selectedCard.Style == Style.Defence)
+            {
+                BattleSystem.ExecuteDefence(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+            }
             EnemyManager.Instance.EnemyAttackAnimation();
             float attackTime = EnemyManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
             yield return new WaitForSeconds(attackTime * 0.75f);

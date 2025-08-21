@@ -22,6 +22,8 @@ public enum State
     Recovery = 9,
     //Shield = 10,
     //Healing = 11,
+    Vibration = 12,
+    Burndown = 13,
 }
 
 public enum EnemyStatusEffect
