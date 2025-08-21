@@ -323,7 +323,7 @@ public class Character : MonoBehaviour
         if(elementStacks.ContainsKey(State.Recovery))
         {
             int stacks = elementStacks[State.Recovery];
-            SetShieldEffect(stacks, diceValue, damage); // 보호막 설정
+            //SetShieldEffect(stacks, diceValue, damage); // 보호막 설정
             SetHealEffect(stacks, diceValue, damage); // 회복 설정
             elementStacks[State.Recovery] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Recovery, 0) - 1);
         }
