@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class toCSV
 {
     private static string enemyCSVPath = "/CSV/Enemies.csv";
     private static string cardCSVPath = "/CSV/Cards.csv";
+    private static string choiceCSVPath = "/CSV/Choices.csv";
     
     [MenuItem("Utilities/Generate Enemies")]
     public static void GenerateEnemies()
@@ -15,11 +17,6 @@ public class toCSV
         foreach(string allLine in allLines)
         {
             string [] splitData = allLine.Split(',');
-
-            if(splitData.Length != 4)
-            {
-                Debug.Log(allLine + " Does not have 4 values");
-            }
 
             EnemySO enemy = ScriptableObject.CreateInstance<EnemySO>();
             enemy.Name = splitData[0];
@@ -44,11 +41,6 @@ public class toCSV
         foreach(string allLine in allLines)
         {
             string [] splitData = allLine.Split(',');
-
-            if(splitData.Length != 7)
-            {
-                Debug.Log(allLine + " Does not have 7 values");
-            }
 
             CardSO card = ScriptableObject.CreateInstance<CardSO>();
             card.CardName = splitData[0];
@@ -85,6 +77,59 @@ public class toCSV
             card.DiceMultiplier = float.Parse(splitData[6]);
 
             AssetDatabase.CreateAsset(card, $"Assets/SO/Cards/{card.CardName}.asset");
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+    
+    [MenuItem("Utilities/Generate Choices")]
+    public static void GenerateChoices()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + choiceCSVPath);
+
+        foreach(string allLine in allLines)
+        {
+            string [] splitData = allLine.Split(',');
+
+            ChoiceSO choice = ScriptableObject.CreateInstance<ChoiceSO>();
+            List<string> descriptions = new List<string>();
+            List<string> subChoices = new List<string>();
+            ChoiceType curType = ChoiceType.Event;
+            
+            choice.Choices.Add(splitData[0]);
+            switch (splitData[1])
+            {
+                case "Event" or "event":
+                    curType = ChoiceType.Event;
+                    break;
+                case "Treasure" or "treasure":
+                    curType = ChoiceType.Treasure;
+                    break;
+                case "Battle" or "battle":
+                    curType = ChoiceType.Battle;
+                    break;
+                case "Rest" or "rest":
+                    curType = ChoiceType.Rest;
+                    break;
+            }
+            choice.ChoicesTypes.Add(splitData[0], curType);
+            choice.ChoiceDescriptions.Add(splitData[0], splitData[2]);
+            choice.ChoiceSucceedDescriptions.Add(splitData[0], splitData[3]);
+            choice.ChoiceFailDescriptions.Add(splitData[0], splitData[4]);
+            choice.ChoiceImagesPath = splitData[5];
+            for (int i = 6; i < splitData.Length; i += 3)
+            {
+                subChoices.Add(splitData[i]);
+                choice.ChoiceSucceedDescriptions.Add(splitData[i], splitData[i + 1]);
+                choice.ChoiceFailDescriptions.Add(splitData[i], splitData[i + 2]);
+            }
+
+            if (subChoices.Count > 0)
+            {
+                choice.SubChoices.Add(splitData[0], subChoices);
+            }
+
+            AssetDatabase.CreateAsset(choice, $"Assets/SO/Choices.asset");
         }
 
         AssetDatabase.SaveAssets();

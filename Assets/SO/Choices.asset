@@ -13,54 +13,62 @@ MonoBehaviour:
   m_Name: Choices
   m_EditorClassIdentifier: 
   choices:
-  - "\uACE0\uB300 \uC720\uC801 \uD0D0\uD5D8"
-  - "\uC228\uACA8\uC9C4 \uBCF4\uBB3C \uBC29"
-  - "\uAC15\uB825\uD55C \uC801\uACFC\uC758 \uC870\uC6B0"
-  - "\uC548\uC804\uD55C \uD734\uC2DD \uACF5\uAC04"
-  - "\uB3D9\uAD74 \uAE4A\uC219\uD788 \uD0D0\uD5D8\uD558\uAE30"
-  - "\uAE4A\uC740 \uD611\uACE1 \uAC74\uB108\uAE30"
-  - "\uC2E0\uBE44\uB85C\uC6B4 \uC0C1\uC790 \uBC1C\uACAC"
-  - "\uACE0\uB300\uC758 \uC81C\uB2E8 \uC870\uC0AC"
-  choiceDescriptions:
-    _serializedList:
-    - Key: "\uACE0\uB300 \uC720\uC801 \uD0D0\uD5D8"
-      Value: 1
-    - Key: "\uC228\uACA8\uC9C4 \uBCF4\uBB3C \uBC29"
-      Value: 2
-    - Key: "\uAC15\uB825\uD55C \uC801\uACFC\uC758 \uC870\uC6B0"
-      Value: 3
-    - Key: "\uC548\uC804\uD55C \uD734\uC2DD \uACF5\uAC04"
-      Value: 4
-    - Key: "\uB3D9\uAD74 \uAE4A\uC219\uD788 \uD0D0\uD5D8\uD558\uAE30"
-      Value: 5
-    - Key: "\uAE4A\uC740 \uD611\uACE1 \uAC74\uB108\uAE30"
-      Value: 6
-    - Key: "\uC2E0\uBE44\uB85C\uC6B4 \uC0C1\uC790 \uBC1C\uACAC"
-      Value: 7
-    - Key: "\uACE0\uB300\uC758 \uC81C\uB2E8 \uC870\uC0AC"
-      Value: 8
-  subChoices:
-    _serializedList:
-    - Key: "\uAE4A\uC740 \uD611\uACE1 \uAC74\uB108\uAE30"
-      Value:
-      - "\uB2E4\uB9AC \uAC74\uB108\uAE30"
-      - "\uC0DB\uAE38\uB85C \uC6B0\uD68C\uD558\uAE30"
-      - "\uC9C1\uC811 \uC810\uD504\uD558\uAE30"
+  - "\uBCF4\uBB3C"
+  - "\uC774\uBCA4\uD2B8"
+  - "\uC804\uD22C"
+  - "\uD734\uC2DD"
   choicesTypes:
     _serializedList:
-    - Key: "\uACE0\uB300 \uC720\uC801 \uD0D0\uD5D8"
-      Value: 0
-    - Key: "\uC228\uACA8\uC9C4 \uBCF4\uBB3C \uBC29"
+    - Key: "\uBCF4\uBB3C"
       Value: 1
-    - Key: "\uAC15\uB825\uD55C \uC801\uACFC\uC758 \uC870\uC6B0"
+    - Key: "\uC774\uBCA4\uD2B8"
+      Value: 0
+    - Key: "\uC804\uD22C"
       Value: 2
-    - Key: "\uC548\uC804\uD55C \uD734\uC2DD \uACF5\uAC04"
+    - Key: "\uD734\uC2DD"
       Value: 3
-    - Key: "\uB3D9\uAD74 \uAE4A\uC219\uD788 \uD0D0\uD5D8\uD558\uAE30"
-      Value: 2
-    - Key: "\uAE4A\uC740 \uD611\uACE1 \uAC74\uB108\uAE30"
-      Value: 0
-    - Key: "\uC2E0\uBE44\uB85C\uC6B4 \uC0C1\uC790 \uBC1C\uACAC"
-      Value: 1
-    - Key: "\uACE0\uB300\uC758 \uC81C\uB2E8 \uC870\uC0AC"
-      Value: 0
+  choiceDescriptions:
+    _serializedList:
+    - Key: "\uBCF4\uBB3C"
+      Value: "{0}\uBCF4\uBB3C\uC744 \uCC3E\uB294\uB2E4{3.0}"
+    - Key: "\uC774\uBCA4\uD2B8"
+      Value: "{0}\uC774\uBCA4\uD2B8 \uC2E4\uD589{3.0}"
+    - Key: "\uC804\uD22C"
+      Value: "{0}\uC804\uD22C\uC5D0 \uB4E4\uC5B4\uAC04\uB2E4{3.0}"
+    - Key: "\uD734\uC2DD"
+      Value: "{0}\uD734\uC2DD\uD55C\uB2E4{3.0}"
+  choiceSucceedDescriptions:
+    _serializedList:
+    - Key: "\uBCF4\uBB3C"
+      Value: "{0}\uBCF4\uBB3C\uC744 \uCC3E\uC558\uB2E4{3.0}"
+    - Key: "\uC804\uD22C"
+      Value: "{0}\uC774\uACBC\uB2E4{3.0}"
+    - Key: "\uD734\uC2DD"
+      Value: "{0}\uD734\uC2DD\uC5D0 \uC131\uACF5{3.0}"
+    - Key: "\uC774\uBCA4\uD2B81"
+      Value: "{0}\uC774\uBCA4\uD2B81 \uC131\uACF5{3.0}"
+    - Key: "\uC774\uBCA4\uD2B82"
+      Value: "{0}\uC774\uBCA4\uD2B82 \uC131\uACF5{3.0}"
+    - Key: "\uC774\uBCA4\uD2B83"
+      Value: "{0}\uC774\uBCA4\uD2B83\uC131\uACF5{3.0}"
+  choiceFailDescriptions:
+    _serializedList:
+    - Key: "\uBCF4\uBB3C"
+      Value: "{0}\uBCF4\uBB3C\uC744 \uBABB\uCC3E\uC558\uB2E4{3.0}"
+    - Key: "\uC804\uD22C"
+      Value: "{0}\uC84C\uB2E4{3.0}"
+    - Key: "\uD734\uC2DD"
+      Value: "{0}\uD734\uC2DD\uC5D0 \uC2E4\uD328{3.0}"
+    - Key: "\uC774\uBCA4\uD2B81"
+      Value: "{0}\uC774\uBCA4\uD2B81 \uC2E4\uD328{3.0}"
+    - Key: "\uC774\uBCA4\uD2B82"
+      Value: "{0}\uC774\uBCA4\uD2B82 \uC2E4\uD328{3.0}"
+    - Key: "\uC774\uBCA4\uD2B83"
+      Value: "{0}\uC774\uBCA4\uD2B83 \uC2E4\uD328{3.0}"
+  subChoices:
+    _serializedList:
+    - Key: "\uC774\uBCA4\uD2B8"
+      Value:
+      - "\uC774\uBCA4\uD2B81"
+      - "\uC774\uBCA4\uD2B82"
+      - "\uC774\uBCA4\uD2B83"

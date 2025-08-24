@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,7 +6,6 @@ using UnityEngine;
 
 public class ChoiceManager : MonoBehaviour
 {
-    [SerializeField] private ChoiceSO choices;
     [SerializeField] Choice choice1;
     [SerializeField] Choice choice2;
     [SerializeField] Choice choice3;
@@ -14,7 +14,8 @@ public class ChoiceManager : MonoBehaviour
     private List<Choice> _choiceList;
     private Choice _currentChoice;
     public static ChoiceManager Instance;
-
+    public ChoiceSO choices;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -54,15 +55,15 @@ public class ChoiceManager : MonoBehaviour
         }
     }
 
-    public void SetSubChoiceButtons(string[] str) //서브 선택지가 존재 시, 현재 버튼들을 초기화하고 서브 선택지로 바꿈
+    public void SetSubChoiceButtons(List<string> str) //서브 선택지가 존재 시, 현재 버튼들을 초기화하고 서브 선택지로 바꿈
     {
-        for (int i = 0; i < str.Length; i++)
+        for (int i = 0; i < str.Count; i++)
         {
             _choiceList[i].Init();
             _choiceList[i].SetChoice(str[i], ChoiceType.Event, rates[i]);
         }
 
-        for (int i = str.Length; i < _choiceList.Count; i++)
+        for (int i = str.Count; i < _choiceList.Count; i++)
         {
             _choiceList[i].Init();
             _choiceList[i].gameObject.SetActive(false);

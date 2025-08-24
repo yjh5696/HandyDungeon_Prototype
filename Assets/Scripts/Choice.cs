@@ -1,7 +1,10 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Choice : MonoBehaviour
 {
@@ -11,9 +14,10 @@ public class Choice : MonoBehaviour
     [SerializeField] private TMP_Text choiceRateText;
     [SerializeField] private TMP_Text choiceSuccessText;
     [SerializeField] private TMP_Text choiceFailText;
+    private string _choice;
     private ChoiceType ChoiceType { get; set; }
     private List<CardSO> _choiceRewardCard;
-    private string[] _subChoices;
+    private List<string> _subChoices;
     private int _rate;
 
     public void Init()
@@ -21,11 +25,11 @@ public class Choice : MonoBehaviour
         choiceText.text = "";
         choiceTypeText.text = "";
         choiceRateText.text = "";
-        _subChoices = Array.Empty<string>();
     }
 
     public void SetChoice(string choice, ChoiceType type, int rate)
     {
+        _choice = choice;
         choiceText.text = choice;
         switch (type)
         {
@@ -69,20 +73,69 @@ public class Choice : MonoBehaviour
         }
     }
 
-    public void SetSubChoices(string[] subChoices)
+    public void SetSubChoices(List<string> subChoices)
     {
-        _subChoices = subChoices;
+        _subChoices = subChoices.ToList();
     }
 
     public void ChoiceClicked()
     {
-        if (_subChoices is { Length: > 0 })
+        ChoiceAction();
+    }
+
+    private async UniTaskVoid ChoiceAction()
+    {
+        LogManager.Instance.AddDelayedLog(_choice, 2.0f);
+        
+        GameManager.Instance.HideChoices();
+        
+        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+
+        if (ChoiceManager.Instance.choices.ChoiceDescriptions.ContainsKey(_choice))
         {
+            LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceDescriptions[_choice]);
+        }
+        
+        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+        
+        if (_subChoices is { Count: > 0 })
+        {
+            GameManager.Instance.ShowChoices();
             ChoiceManager.Instance.SetSubChoiceButtons(_subChoices);
         }
         else
         {
+            if (ChoiceType == ChoiceType.Battle)
+            {
+                GameManager.Instance.StartBattle();
+                
+                await UniTask.WaitUntil(() => !GameManager.Instance.isPlayerinBattle); //전투 끝날 때 까지 대기
+
+                if (GameManager.Instance.LastBattleWon)
+                {
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]);
+                }
+                else
+                {
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]);
+                }
+            }
+            else
+            {
+                int r = Random.Range(1, 101);
+                if (r <= _rate)
+                {
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]);
+                }
+                else
+                {
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]);
+                }
+            }
             
+            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+            GameManager.Instance.ShowChoices();
+            ChoiceManager.Instance.GetRandomChoice();
         }
     }
 }

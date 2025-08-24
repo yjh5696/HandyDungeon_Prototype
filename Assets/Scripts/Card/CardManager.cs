@@ -26,17 +26,40 @@ public class CardManager : MonoBehaviour
             Instance = this;
     }
 
-    public void DrawCard() //카드 랜덤 뽑기
+    public void DrawAttackCard() //카드 랜덤 뽑기
     {
-        int result = Random.Range(0, cards.Count);
+        int result;
+        while (true)
+        {
+            result = Random.Range(0, cards.Count);
+            if(cards[result].Style == Style.Attack) break;
+        }
         _currentAttackCard = cards[result];
         attackText.text = _currentAttackCard.CardName;
+    }
+
+    public void DrawDefenseCard()
+    {
+        int result;
+        while (true)
+        {
+            result = Random.Range(0, cards.Count);
+            if(cards[result].Style == Style.Defence) break;
+        }
+        _currentDefenseCard = cards[result];
+        defenseText.text = _currentDefenseCard.CardName;
     }
 
     public void SetStyleToAttack()
     {
         _currentStyle = Style.Attack;
         card.SetCard(_currentAttackCard);
+    }
+    
+    public void SetStyleToDefense()
+    {
+        _currentStyle = Style.Defence;
+        card.SetCard(_currentDefenseCard);
     }
 
     public void UseCard()
@@ -49,8 +72,6 @@ public class CardManager : MonoBehaviour
             case Style.Defence:
                 break;
             case Style.Special:
-                break;
-            default:
                 break;
         }
         

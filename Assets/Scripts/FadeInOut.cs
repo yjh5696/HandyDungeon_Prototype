@@ -35,8 +35,12 @@ public class FadeInOut : MonoBehaviour
 
     public void FadeIn()
     {
-        gameObject.SetActive(true);
         UFadeIn().Forget();
+    }
+    
+    public void FadeOut()
+    {
+        UFadeOut().Forget();
     }
 
     private async UniTaskVoid UFadeOut()
@@ -67,7 +71,5 @@ public class FadeInOut : MonoBehaviour
             
             await UniTask.Yield();
         }
-        
-        gameObject.SetActive(false);
     }
 }

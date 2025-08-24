@@ -7,13 +7,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public bool isPlayerTurn = true;
     public bool isPlayerinBattle = false;
+    public bool LastBattleWon = false;
     public Attack_Button_DiceRoll diceRoll;
 
     [SerializeField] private List<EnemySO> enemySOs;
     [SerializeField] private List<CardSO> cardSOs;
 
+    [SerializeField] private FadeInOut image;
     [SerializeField] private GameObject log;
-    [SerializeField] private GameObject buttons;
+    [SerializeField] private GameObject choice;
+    [SerializeField] private GameObject battle;
     [SerializeField] private GameObject card;
     [SerializeField] private GameObject action;
     [SerializeField] private GameObject dice;
@@ -32,7 +35,27 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //ChoiceManager.Instance.GetRandomChoice();
+        ChoiceManager.Instance.GetRandomChoice();
+        //EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
+        //StartPlayerTurn();
+    }
+
+    public void HideChoices()
+    {
+        choice.SetActive(false);
+    }
+
+    public void ShowChoices()
+    {
+        choice.SetActive(true);
+    }
+
+    public void StartBattle()
+    {
+        image.FadeOut();
+        choice.SetActive(false);
+        battle.SetActive(true);
+        isPlayerinBattle = true;
         EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
         StartPlayerTurn();
     }
@@ -56,7 +79,7 @@ public class GameManager : MonoBehaviour
         if (isPlayerTurn)
         {
             log.SetActive(true);
-            buttons.SetActive(true);
+            battle.SetActive(true);
             card.SetActive(false);
             action.SetActive(false);
             dice.SetActive(false);
@@ -69,14 +92,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     public void StartPlayerTurn()
     {
         LogManager.Instance.AddLog("당신의 차례입니다. 액션을 선택해주세요.");
         LogManager.Instance.AddLog($"현재 나의 체력: {PlayerManager.Instance.Player.GetCurrentHp()} / {PlayerManager.Instance.Player.GetMaxHp()}.");
         LogManager.Instance.AddLog($"현재 적의 체력: {EnemyManager.Instance.Enemy.GetCurrentHp()} / {EnemyManager.Instance.Enemy.GetMaxHp()}.");
-        CardManager.Instance.DrawCard();
+        CardManager.Instance.DrawAttackCard();
+        CardManager.Instance.DrawDefenseCard();
     }
 
     public void StartEnemyTurn()
@@ -95,7 +117,7 @@ public class GameManager : MonoBehaviour
     public void EnemyDieTurn()
     {
         log.SetActive(true);
-        buttons.SetActive(true);
+        battle.SetActive(true);
         card.SetActive(false);
         action.SetActive(false);
         dice.SetActive(false);
@@ -105,16 +127,16 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        StartCoroutine(EndGameAfterDelay(3f));
+        StartCoroutine(EndBattleAfterDelay(3f));
     }
 
-    private IEnumerator EndGameAfterDelay(float delay)
+    private IEnumerator EndBattleAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        ActuallyEndGame();
+        EndBattle();
     }
 
-    private void ActuallyEndGame()
+    private void EndBattle()
     {
         LogManager.Instance.AddSpacingLine();
         LogManager.Instance.AddLog("");
@@ -122,11 +144,25 @@ public class GameManager : MonoBehaviour
         LogManager.Instance.AddLog("");
 
         if (PlayerManager.Instance.Player.GetCurrentHp() <= 0)
+        {
             LogManager.Instance.AddLog("플레이어 패배");
+            LastBattleWon = false;
+        }
         else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
+        {
             LogManager.Instance.AddLog("플레이어 승리");
-
+            LastBattleWon = true;
+        }
+        
         LogManager.Instance.AddSpacingLine();
+        isPlayerinBattle = false;
+        
+        battle.SetActive(false);
+        action.SetActive(false);
+        dice.SetActive(false);
+        dicebtn.SetActive(true);
+        image.gameObject.SetActive(true);
+        image.FadeIn();
     }
 }
 
