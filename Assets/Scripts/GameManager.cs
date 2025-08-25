@@ -1,6 +1,9 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,11 +11,13 @@ public class GameManager : MonoBehaviour
     public bool isPlayerTurn = true;
     public bool isPlayerinBattle = false;
     public bool LastBattleWon = false;
+    public bool skipBtnClicked = false;
     public Attack_Button_DiceRoll diceRoll;
 
     [SerializeField] private List<EnemySO> enemySOs;
     [SerializeField] private List<CardSO> cardSOs;
 
+    [SerializeField] private FadeInOut startFade;
     [SerializeField] private FadeInOut image;
     [SerializeField] private GameObject log;
     [SerializeField] private GameObject choice;
@@ -21,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject action;
     [SerializeField] private GameObject dice;
     [SerializeField] private GameObject dicebtn;
+    [SerializeField] private GameObject skip;
+    [SerializeField] private GameObject traits;
 
     private void Awake()
     {
@@ -35,9 +42,44 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ChoiceManager.Instance.GetRandomChoice();
+        startFade.FadeOut(5.0f);
+        
+        StartPrologue().Forget();
+        
         //EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
         //StartPlayerTurn();
+    }
+
+    public void StartChoice()
+    {
+        LogManager.Instance.Clear();
+        choice.gameObject.SetActive(true);
+        ChoiceManager.Instance.GetRandomChoice();
+    }
+
+    public void SkipPrologue()
+    {
+        LogManager.Instance.CancelLog();
+        skipBtnClicked = true;
+    }
+
+    private async UniTaskVoid StartPrologue()
+    {
+        skip.GetComponent<Button>().interactable = false;
+        await UniTask.WaitUntil(() => !startFade.isFading);
+        
+        skip.GetComponent<Button>().interactable = true;
+
+        LogManager.Instance.StartLog("{0}프롤로그 시작 중{4.0}스킵해도 됩니다{5.0}이거 봐도 뭐 도움 안 되긴 함 ㅋㅋ{10.0}").Forget();
+        
+        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging || skipBtnClicked);
+        
+        skip.gameObject.SetActive(false);
+        
+        LogManager.Instance.Clear();
+        LogManager.Instance.AddLog("특성을 하나 선택하세요.");
+        
+        traits.SetActive(true);
     }
 
     public void HideChoices()
@@ -52,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     public void StartBattle()
     {
-        image.FadeOut();
+        image.FadeOut(1.0f);
         choice.SetActive(false);
         battle.SetActive(true);
         isPlayerinBattle = true;
@@ -162,7 +204,7 @@ public class GameManager : MonoBehaviour
         dice.SetActive(false);
         dicebtn.SetActive(true);
         image.gameObject.SetActive(true);
-        image.FadeIn();
+        image.FadeIn(1.0f);
     }
 }
 

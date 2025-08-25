@@ -9,6 +9,7 @@ public class LogManager : MonoBehaviour
 {
     public static LogManager Instance;
     public bool isLogging = false;
+    private CancellationTokenSource _cancelTokenSource;
     [SerializeField] private TMP_Text text;
 
     private void Awake()
@@ -21,7 +22,23 @@ public class LogManager : MonoBehaviour
 
     private void Start()
     {
+        _cancelTokenSource = new CancellationTokenSource();
+        
         text.text = "";
+    }
+
+    public void Clear()
+    {
+        text.text = "";
+    }
+
+    public void CancelLog()
+    {
+        _cancelTokenSource.Cancel();
+        _cancelTokenSource.Dispose();
+        
+        isLogging = false;
+        _cancelTokenSource = new CancellationTokenSource();
     }
 
     public void AddLog(string msg) //로그 추가하기
@@ -36,7 +53,7 @@ public class LogManager : MonoBehaviour
      
         isLogging = true;
         AddLog(msg);
-        await UniTask.Delay(TimeSpan.FromSeconds(delay));
+        await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: _cancelTokenSource.Token);
         isLogging = false;
     }
 
@@ -54,6 +71,11 @@ public class LogManager : MonoBehaviour
         string[] lines = str.Split('{');
         foreach (string line in lines)
         {
+            if (_cancelTokenSource.Token.IsCancellationRequested)
+            {
+                isLogging = false;
+                break;
+            }
             string log = "";
             string wt = "";
             for (int index = 0; index < line.Length; index++)
@@ -67,9 +89,11 @@ public class LogManager : MonoBehaviour
                 wt += c;
             }
 
-            await UniTask.Delay(TimeSpan.FromSeconds(double.TryParse(wt, out double t) ? t : 0));
+            await UniTask.Delay(TimeSpan.FromSeconds(double.TryParse(wt, out double t) ? t : 0), cancellationToken: _cancelTokenSource.Token);
             AddLog(log);
         }
+        
+        AddSpacingLine();
         isLogging = false;
     }
 }

@@ -80,12 +80,12 @@ public class Choice : MonoBehaviour
 
     public void ChoiceClicked()
     {
-        ChoiceAction();
+        ChoiceAction().Forget();
     }
 
     private async UniTaskVoid ChoiceAction()
     {
-        LogManager.Instance.AddDelayedLog(_choice, 2.0f);
+        LogManager.Instance.AddDelayedLog(_choice, 2.0f).Forget();
         
         GameManager.Instance.HideChoices();
         
@@ -93,7 +93,7 @@ public class Choice : MonoBehaviour
 
         if (ChoiceManager.Instance.choices.ChoiceDescriptions.ContainsKey(_choice))
         {
-            LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceDescriptions[_choice]);
+            LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceDescriptions[_choice]).Forget();
         }
         
         await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
@@ -113,11 +113,11 @@ public class Choice : MonoBehaviour
 
                 if (GameManager.Instance.LastBattleWon)
                 {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]);
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]).Forget();
                 }
                 else
                 {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]);
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
                 }
             }
             else
@@ -125,11 +125,11 @@ public class Choice : MonoBehaviour
                 int r = Random.Range(1, 101);
                 if (r <= _rate)
                 {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]);
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]).Forget();
                 }
                 else
                 {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]);
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
                 }
             }
             

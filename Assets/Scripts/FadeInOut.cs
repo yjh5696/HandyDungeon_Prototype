@@ -5,71 +5,76 @@ using Cysharp.Threading.Tasks;
 
 public class FadeInOut : MonoBehaviour
 {
-    public bool isFadeIn = true;
+    public bool isFading = false;
     
-    private CancellationTokenSource disableCancellation = new CancellationTokenSource();
+    private CancellationTokenSource _disableCancellation;
 
     private void OnEnable()
     {
-        if (disableCancellation != null)
-        {
-            disableCancellation.Dispose();
-        }
-        disableCancellation = new CancellationTokenSource();
+        _disableCancellation?.Dispose();
+        _disableCancellation = new CancellationTokenSource();
     }
 
     private void OnDisable()
     {
-        disableCancellation.Cancel();
+        _disableCancellation.Cancel();
+    }
+
+    private void OnDestroy()
+    {
+        _disableCancellation.Cancel();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (isFadeIn)
-        {
-            gameObject.SetActive(true);
-            UFadeOut().Forget();
-        }
+        _disableCancellation = new CancellationTokenSource();
     }
 
-    public void FadeIn()
+    public void FadeIn(float duration)
     {
-        UFadeIn().Forget();
+        UFadeIn(duration).Forget();
     }
     
-    public void FadeOut()
+    public void FadeOut(float duration)
     {
-        UFadeOut().Forget();
+        UFadeOut(duration).Forget();
     }
 
-    private async UniTaskVoid UFadeOut()
+    private async UniTaskVoid UFadeOut(float duration)
     {
         float elapsedTime = 0f;
-        float fadeDuration = 0.5f;
+        float fadeDuration = duration;
+        
+        isFading = true;
 
         while (elapsedTime < fadeDuration)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration));
             elapsedTime += Time.deltaTime;
             
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: _disableCancellation.Token);
         }
         
+        isFading = false;
         gameObject.SetActive(false);
     }
 
-    private async UniTaskVoid UFadeIn()
+    private async UniTaskVoid UFadeIn(float duration)
     {
         float elapsedTime = 0f;
-        float fadeDuration = 0.5f;
+        float fadeDuration = duration;
+        
+        isFading = true;
 
         while (elapsedTime < fadeDuration)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration));
             elapsedTime += Time.deltaTime;
             
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: _disableCancellation.Token);
         }
+        
+        isFading = false;
     }
 }
