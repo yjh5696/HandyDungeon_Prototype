@@ -17,6 +17,40 @@ MonoBehaviour:
   - "\uC774\uBCA4\uD2B8"
   - "\uC804\uD22C"
   - "\uD734\uC2DD"
+  - "\uBA54\uC778 1-1"
+  - "\uBA54\uC778 1-2"
+  - "\uBA54\uC778 1-3"
+  - "\uBA54\uC778 1-4"
+  - "\uBA54\uC778 2-1"
+  - "\uBA54\uC778 2-2"
+  - "\uBA54\uC778 2-3"
+  - "\uBA54\uC778 2-4"
+  stageTypes:
+    _serializedList:
+    - Key: "\uBCF4\uBB3C"
+      Value: 0
+    - Key: "\uC774\uBCA4\uD2B8"
+      Value: 0
+    - Key: "\uC804\uD22C"
+      Value: 0
+    - Key: "\uD734\uC2DD"
+      Value: 0
+    - Key: "\uBA54\uC778 1-1"
+      Value: 1
+    - Key: "\uBA54\uC778 1-2"
+      Value: 1
+    - Key: "\uBA54\uC778 1-3"
+      Value: 1
+    - Key: "\uBA54\uC778 1-4"
+      Value: 1
+    - Key: "\uBA54\uC778 2-1"
+      Value: 2
+    - Key: "\uBA54\uC778 2-2"
+      Value: 2
+    - Key: "\uBA54\uC778 2-3"
+      Value: 2
+    - Key: "\uBA54\uC778 2-4"
+      Value: 2
   choicesTypes:
     _serializedList:
     - Key: "\uBCF4\uBB3C"
@@ -27,6 +61,22 @@ MonoBehaviour:
       Value: 2
     - Key: "\uD734\uC2DD"
       Value: 3
+    - Key: "\uBA54\uC778 1-1"
+      Value: 0
+    - Key: "\uBA54\uC778 1-2"
+      Value: 0
+    - Key: "\uBA54\uC778 1-3"
+      Value: 0
+    - Key: "\uBA54\uC778 1-4"
+      Value: 0
+    - Key: "\uBA54\uC778 2-1"
+      Value: 0
+    - Key: "\uBA54\uC778 2-2"
+      Value: 0
+    - Key: "\uBA54\uC778 2-3"
+      Value: 0
+    - Key: "\uBA54\uC778 2-4"
+      Value: 0
   choiceDescriptions:
     _serializedList:
     - Key: "\uBCF4\uBB3C"
@@ -37,6 +87,14 @@ MonoBehaviour:
       Value: "{0}\uC804\uD22C\uC5D0 \uB4E4\uC5B4\uAC04\uB2E4{3.0}"
     - Key: "\uD734\uC2DD"
       Value: "{0}\uD734\uC2DD\uD55C\uB2E4{3.0}"
+    - Key: "\uBA54\uC778 1-1"
+      Value: "{0}\uBA54\uC7781 \uC774\uBCA4\uD2B81{3.0}"
+    - Key: "\uBA54\uC778 1-2"
+      Value: "{0}\uBA54\uC7781 \uC774\uBCA4\uD2B82{3.0}"
+    - Key: "\uBA54\uC778 1-3"
+      Value: "{0}\uBA54\uC7781 \uC774\uBCA4\uD2B83{3.0}"
+    - Key: "\uBA54\uC778 1-4"
+      Value: "{0}\uBA54\uC7781 \uC774\uBCA4\uD2B84{3.0}"
   choiceSucceedDescriptions:
     _serializedList:
     - Key: "\uBCF4\uBB3C"

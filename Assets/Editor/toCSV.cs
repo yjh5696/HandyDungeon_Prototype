@@ -94,30 +94,32 @@ public class toCSV
             ChoiceSO choice = ScriptableObject.CreateInstance<ChoiceSO>();
             List<string> descriptions = new List<string>();
             List<string> subChoices = new List<string>();
-            ChoiceType curType = ChoiceType.Event;
+            ChoiceType choiceType = ChoiceType.Event;
+            StageType stageType = StageType.MainStory;
             
             choice.Choices.Add(splitData[0]);
-            switch (splitData[1])
+            choice.StageTypes.Add(splitData[0], int.Parse(splitData[1]));
+            switch (splitData[2])
             {
                 case "Event" or "event":
-                    curType = ChoiceType.Event;
+                    choiceType = ChoiceType.Event;
                     break;
                 case "Treasure" or "treasure":
-                    curType = ChoiceType.Treasure;
+                    choiceType = ChoiceType.Treasure;
                     break;
                 case "Battle" or "battle":
-                    curType = ChoiceType.Battle;
+                    choiceType = ChoiceType.Battle;
                     break;
                 case "Rest" or "rest":
-                    curType = ChoiceType.Rest;
+                    choiceType = ChoiceType.Rest;
                     break;
             }
-            choice.ChoicesTypes.Add(splitData[0], curType);
-            choice.ChoiceDescriptions.Add(splitData[0], splitData[2]);
-            choice.ChoiceSucceedDescriptions.Add(splitData[0], splitData[3]);
-            choice.ChoiceFailDescriptions.Add(splitData[0], splitData[4]);
-            choice.ChoiceImagesPath = splitData[5];
-            for (int i = 6; i < splitData.Length; i += 3)
+            choice.ChoicesTypes.Add(splitData[0], choiceType);
+            choice.ChoiceDescriptions.Add(splitData[0], splitData[3]);
+            choice.ChoiceSucceedDescriptions.Add(splitData[0], splitData[4]);
+            choice.ChoiceFailDescriptions.Add(splitData[0], splitData[5]);
+            choice.ChoiceImagesPath = splitData[6];
+            for (int i = 7; i < splitData.Length; i += 3)
             {
                 subChoices.Add(splitData[i]);
                 choice.ChoiceSucceedDescriptions.Add(splitData[i], splitData[i + 1]);

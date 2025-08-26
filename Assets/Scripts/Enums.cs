@@ -49,3 +49,10 @@ public enum ChoiceType
     Battle = 2,
     Rest = 3,
 }
+
+public enum StageType
+{
+    MainStory = 0,
+    SubStory = 1,
+    Battle = 2,
+}

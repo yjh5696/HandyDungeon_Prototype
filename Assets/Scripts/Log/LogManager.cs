@@ -38,7 +38,7 @@ public class LogManager : MonoBehaviour
         _cancelTokenSource.Dispose();
         
         isLogging = false;
-        _cancelTokenSource = new CancellationTokenSource();
+        _cancelTokenSource = new CancellationTokenSource(); //토큰으로 비동기 작업 취소하면 계속 취소된 상태로 남아있어서 재생성
     }
 
     public void AddLog(string msg) //로그 추가하기
@@ -71,7 +71,7 @@ public class LogManager : MonoBehaviour
         string[] lines = str.Split('{');
         foreach (string line in lines)
         {
-            if (_cancelTokenSource.Token.IsCancellationRequested)
+            if (_cancelTokenSource.Token.IsCancellationRequested) //취소 요청이 들어오면 로그 종료
             {
                 isLogging = false;
                 break;

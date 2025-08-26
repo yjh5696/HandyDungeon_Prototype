@@ -1,7 +1,9 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class ChoiceManager : MonoBehaviour
@@ -9,6 +11,7 @@ public class ChoiceManager : MonoBehaviour
     [SerializeField] private List<Choice> choiceButtons = new List<Choice>();
     [SerializeField] private int[] rates;
     private Choice _currentChoice;
+    private List<string> _choiceNamesMain; //메인 스테이지 지우는 용
     public static ChoiceManager Instance;
     public ChoiceSO choices;
     
@@ -18,27 +21,81 @@ public class ChoiceManager : MonoBehaviour
         {
             Instance = this;
         }
+        
+        _choiceNamesMain = choices.Choices.ToList(); //참조되지 않도록 ToList 사용
     }
-
+    
     public void GetRandomChoice() // 선택지 버튼에 랜덤한 선택지 부여
     {
-        List<string> choiceNames = choices.Choices.ToList(); //참조되지 않도록 ToList 사용
-
-        foreach (Choice choice in choiceButtons)
+        if (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage] == StageType.MainStory)
         {
-            choice.gameObject.SetActive(true);
-            int r = Random.Range(0, choiceNames.Count);
-            string choiceName = choiceNames[r];
-            if (choices.ChoicesTypes.ContainsKey(choiceName))
+            foreach (Choice choice in choiceButtons)
             {
-                r = Random.Range(0, rates.Length);
-                choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName], rates[r]);
-                if (choices.SubChoices.ContainsKey(choiceName)) //서브 선택지가 존재한다면 서브 선택지를 추가
+                choice.gameObject.SetActive(true);
+                int r = Random.Range(0, _choiceNamesMain.Count);
+                string choiceName = _choiceNamesMain[r];
+                if (choices.StageTypes.ContainsKey(choiceName)) //메인 스테이지 제외 찾기
                 {
-                    choice.SetSubChoices(choices.SubChoices[choiceName]);
+                    while (true)
+                    {
+                        if (choices.StageTypes[choiceName] == GameManager.Instance.mainStageNumber)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            r = Random.Range(0, _choiceNamesMain.Count);
+                            choiceName = _choiceNamesMain[r];
+                        }
+                    }
                 }
+                if (choices.ChoicesTypes.ContainsKey(choiceName))
+                {
+                    r = Random.Range(0, rates.Length);
+                    choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName], rates[r]);
+                    if (choices.SubChoices.ContainsKey(choiceName)) //메인 선택지가 존재한다면 메인 선택지를 추가
+                    {
+                        choice.SetSubChoices(choices.SubChoices[choiceName]);
+                    }
+                }
+                _choiceNamesMain.Remove(choiceName);
             }
-            choiceNames.Remove(choiceName); //참조된 상태로 Remove 시 SO에 있던 값 사라짐
+        }
+        else
+        {
+            List<string> choiceNames = choices.Choices.ToList(); //참조되지 않도록 ToList 사용
+
+            foreach (Choice choice in choiceButtons)
+            {
+                choice.gameObject.SetActive(true);
+                int r = Random.Range(0, choiceNames.Count);
+                string choiceName = choiceNames[r];
+                if (choices.StageTypes.ContainsKey(choiceName)) //메인 스테이지 제외 찾기
+                {
+                    while (true)
+                    {
+                        if (choices.StageTypes[choiceName] > 0)
+                        {
+                            r = Random.Range(0, choiceNames.Count);
+                            choiceName = choiceNames[r];
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (choices.ChoicesTypes.ContainsKey(choiceName))
+                {
+                    r = Random.Range(0, rates.Length);
+                    choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName], rates[r]);
+                    if (choices.SubChoices.ContainsKey(choiceName)) //서브 선택지가 존재한다면 서브 선택지를 추가
+                    {
+                        choice.SetSubChoices(choices.SubChoices[choiceName]);
+                    }
+                }
+                choiceNames.Remove(choiceName); //참조된 상태로 Remove 시 SO에 있던 값 사라짐
+            }
         }
     }
 

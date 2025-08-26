@@ -19,6 +19,7 @@ public class Choice : MonoBehaviour
     private List<CardSO> _choiceRewardCard;
     private List<string> _subChoices;
     private int _rate;
+    private bool _isMainChoice;
 
     public void Init()
     {
@@ -27,7 +28,7 @@ public class Choice : MonoBehaviour
         choiceRateText.text = "";
     }
 
-    public void SetChoice(string choice, ChoiceType type, int rate)
+    public void SetChoice(string choice, ChoiceType type, int rate, bool isMainStory = false)
     {
         _choice = choice;
         choiceText.text = choice;
@@ -134,8 +135,16 @@ public class Choice : MonoBehaviour
             }
             
             await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
-            GameManager.Instance.ShowChoices();
-            ChoiceManager.Instance.GetRandomChoice();
+
+            if (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage] == StageType.Battle)
+            {
+                
+            }
+            else
+            {
+                GameManager.Instance.ShowChoices();
+                ChoiceManager.Instance.GetRandomChoice();
+            }
         }
     }
 }

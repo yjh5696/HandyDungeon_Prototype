@@ -8,6 +8,8 @@ public class ChoiceSO : ScriptableObject
 {
     [SerializeField] private List<string> choices;
     public List<string> Choices { get => choices; set => choices = value; }
+    [SerializeField] private SerializedDictionary<string, int> stageTypes;
+    public SerializedDictionary<string, int> StageTypes { get => stageTypes; set => stageTypes = value; }
     [SerializeField] private SerializedDictionary<string, ChoiceType> choicesTypes;
     public SerializedDictionary<string, ChoiceType> ChoicesTypes { get => choicesTypes; set => choicesTypes = value; }
     [SerializeField] private SerializedDictionary<string, string> choiceDescriptions;
@@ -19,5 +21,4 @@ public class ChoiceSO : ScriptableObject
     public string ChoiceImagesPath { get; set; }
     [SerializeField] private SerializedDictionary<string, List<string>> subChoices;
     public SerializedDictionary<string, List<string>> SubChoices { get => subChoices; set => subChoices = value; }
-    
 }

@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public bool LastBattleWon = false;
     public bool skipBtnClicked = false;
     public Attack_Button_DiceRoll diceRoll;
+    public int currentChapter = 0;
+    public int currentStage = 0;
+    public int mainStageNumber = 1;
 
     [SerializeField] private List<EnemySO> enemySOs;
     [SerializeField] private List<CardSO> cardSOs;
