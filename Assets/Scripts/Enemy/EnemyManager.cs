@@ -1,17 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-#if UNITY_EDITOR
-using UnityEditor.Animations;
-#endif
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
     public Enemy Enemy;
-    
+
     [SerializeField] private HPBar hpBar;
     [SerializeField] private GameObject prefab;
     [SerializeField] private float deathShowTime = 2f;
@@ -21,37 +15,35 @@ public class EnemyManager : MonoBehaviour
     private Animator _animator;
     private GameObject enemyInstance;
     private EnemySO currentEnemySO;
-    private Enemy EnemyData;
 
     public Animator Animator => _animator;
+
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
             Instance = this;
+
         _spriteRenderer = prefab.GetComponent<SpriteRenderer>();
         _animator = prefab.GetComponent<Animator>();
-        
+
         hpBar.SetCharacter(Enemy);
     }
-    
-    public void SetEnemy(float maxHp, Sprite enemySprite, RuntimeAnimatorController enemyAnimatorController) // 적 설정
+
+    public void SetEnemy(float maxHp, Sprite enemySprite, RuntimeAnimatorController enemyAnimatorController)
     {
         Enemy.SetMaxHp(maxHp);
         Enemy.SetCurrentHp(maxHp);
         Enemy.SetHpBar(hpBar);
         hpBar.SetCharacter(Enemy);
+
         if (_spriteRenderer)
-        {
             _spriteRenderer.sprite = enemySprite;
-        }
 
         if (_animator)
-        {
             _animator.runtimeAnimatorController = enemyAnimatorController;
-        }
     }
-    
-    public void SpawnEnemy(EnemySO enemy) // 적 소환
+
+    public void SpawnEnemy(EnemySO enemy)
     {
         if (enemyInstance)
             Destroy(enemyInstance);
@@ -61,9 +53,10 @@ public class EnemyManager : MonoBehaviour
         Enemy = enemyInstance.GetComponent<Enemy>();
         Enemy.SetEnemySo(enemy);
 
-        
+        // Enemy에 카드 덱 할당 (EnemySO 내 카드 덱)
+        Enemy.SetCards(enemy.EnemyCards);
+
         SetEnemy(enemy.Health, enemy.Sprite, enemy.AnimatorController);
-        
 
         _spriteRenderer = enemyInstance.GetComponent<SpriteRenderer>();
         _animator = enemyInstance.GetComponent<Animator>();
@@ -72,19 +65,15 @@ public class EnemyManager : MonoBehaviour
         currentEnemySO = enemy;
     }
 
-    // Enemy가 사망했을 때 Enemy에서 호출하는 함수
     public void OnEnemyDied()
     {
-        //LogManager.Instance.AddLog("적이 사망했습니다.");
         Debug.Log("EnemyManager: 적이 사망했습니다.");
 
         if (_animator != null)
-        {
             _animator.SetBool("enemyIsDie", true);
-        }
 
-        // 2초 딜레이 후 오브젝트 파괴 및 초기화
-        //StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
+        // 죽은 뒤 처리 (필요 시 사용)
+        // StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
     }
 
     private IEnumerator DestroyEnemyAfterDelay(float delay)
@@ -123,17 +112,20 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemy(currentEnemySO);
             GameManager.Instance.EnemyDieTurn();
         }
-            
         else
+        {
             Debug.LogWarning("EnemyManager: 다음 적 데이터가 없습니다!");
+        }
     }
 
     public void EnemyAttackAnimation()
     {
         _animator.SetTrigger("enemyIsAttack");
     }
+
     public void EnemyHitAnimation()
     {
         _animator.SetTrigger("enemyIsHit");
     }
 }
+

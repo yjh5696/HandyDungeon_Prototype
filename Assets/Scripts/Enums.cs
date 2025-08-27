@@ -3,27 +3,27 @@ using UnityEngine;
 
 public enum Style
 {
-    Attack,
-    Defence,
+    Action,
+    Support,
     Special
 }
 
 public enum State
 {
     None = 0,
-    Fire = 1,
-    Water = 2,
-    Wind= 3,
-    Earth = 4,
-    Ignition = 5,
-    Fervor = 6,
-    Gale = 7,
-    Guard = 8,
-    Recovery = 9,
-    //Shield = 10,
-    //Healing = 11,
-    Vibration = 12,
-    Burndown = 13,
+    Fire = 1, // 점화
+    Water = 2, // 침식
+    Air = 3, // 풍식
+    Land = 4, // 진창
+    Ignition = 5, // 발화
+    Fervor = 6, // 열정
+    Gale = 7, // 질풍
+    Guard = 8, // 수호
+    Recovery = 9, // 회복
+    //Shield = 10, // 보호막
+    //Healing = 11, // 치유
+    Vibration = 12, // 반동
+    Burndown = 13, // 소화
 }
 
 public enum EnemyStatusEffect
@@ -55,4 +55,33 @@ public enum StageType
     MainStory = 0,
     SubStory = 1,
     Battle = 2,
+}
+
+[System.Serializable]
+public class GameCard
+{
+    public int C_Id;
+    public string C_Name;
+    public string C_Type;
+    public string Element;
+    public string Tier;
+    public string Rare;
+    public string Effect_Type;
+    public float min_Value;
+    public float Max_Vlaue;
+    public string Calculation;
+    public string Debuff_Type;
+    public int Debuff_Stack;
+    public string Buff_Type;
+    public int Buff_Stack;
+    public string Enhanceable;
+    public int? Enhance_Count;
+    public string Target;
+    public string Card_Description;
+    public string Unnamed_18; // 빈값 컬럼 대응
+    public string CardConcept;
+    public string Unnamed_20;
+    public string Unnamed_21;
+    public string Unnamed_22;
+    public string Formula;
 }

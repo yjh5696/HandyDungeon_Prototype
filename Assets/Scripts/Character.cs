@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.Rendering.DebugUI;
@@ -46,6 +47,22 @@ public class Character : MonoBehaviour
         lastBuffElement = element;
     }
 
+    [SerializeField] private List<CardDataSO> cards; // 인스펙터에서 직접 카드 풀 할당 가능
+    public List<CardDataSO> Cards => cards; // 외부에서 읽기 전용으로 노출
+    protected CardDataSO currentCard;
+
+    public virtual void DrawAndUseCard()
+    {
+        if (cards == null || cards.Count == 0)
+        {
+            Debug.LogWarning($"{name} 카드 덱이 없습니다.");
+            return;
+        }
+        int result = Random.Range(0, cards.Count);
+        currentCard = cards[result];
+        CardManager.Instance.selectedCard = currentCard;
+        LogManager.Instance.AddLog($"{name}이/가 {currentCard.C_Name}을 사용했습니다.");
+    }
     private void Start() => OnHpChanged += HpChanged;
 
     public void SetUnitName(string name) => unitName = name;
@@ -74,7 +91,7 @@ public class Character : MonoBehaviour
             elementStacks[element] = stacks;
 
         CurrentElement = element;
-        if(element == State.Fire || element == State.Water || element == State.Wind || element == State.Earth)
+        if(element == State.Fire || element == State.Water || element == State.Air || element == State.Land)
             SetLastElement(element); // 즉시 반영
         else if(element == State.Fervor || element == State.Gale || element == State.Guard || element == State.Recovery)
             SetLastBuffElement(element); // 즉시 반영
@@ -109,8 +126,8 @@ public class Character : MonoBehaviour
         return statusName switch
         {
             "점화" => State.Fire,
-            "풍식" => State.Wind,
-            "진창" => State.Earth,
+            "풍식" => State.Air,
+            "진창" => State.Land,
             "침식" => State.Water,
             "발화" => State.Ignition,
             "열정" => State.Fervor,
@@ -125,11 +142,11 @@ public class Character : MonoBehaviour
     }
 
     // 풍식: 홀짝 조건부 공격력 감소
-    public float SetWindEffect(float baseDamage, int diceValue)
+    public float SetAirEffect(float baseDamage, int diceValue)
     {
-        if (elementStacks.ContainsKey(State.Wind))
+        if (elementStacks.ContainsKey(State.Air))
         {
-            int stacks = elementStacks[State.Wind];
+            int stacks = elementStacks[State.Air];
             if ((stacks % 2) == (diceValue % 2))
             {
                 float original = baseDamage;
@@ -198,11 +215,11 @@ public class Character : MonoBehaviour
 
 
     // 진창: 발동 시 스택 감소
-    public float SetEarthEffect(float damage)
+    public float SetLandEffect(float damage)
     {
-        if (elementStacks.ContainsKey(State.Earth))
+        if (elementStacks.ContainsKey(State.Land))
         {
-            int stacks = elementStacks[State.Earth];
+            int stacks = elementStacks[State.Land];
             float original = damage;
             damage *= 1f + stacks * 0.1f;
 
@@ -212,11 +229,11 @@ public class Character : MonoBehaviour
                 stacks--;
                 if (stacks <= 0)
                 {
-                    elementStacks.Remove(State.Earth);
+                    elementStacks.Remove(State.Land);
                     LogManager.Instance.AddLog($"{unitName}의 진창 상태가 사라짐");
-                    if (CurrentElement == State.Earth) CurrentElement = State.None;
+                    if (CurrentElement == State.Land) CurrentElement = State.None;
                 }
-                else elementStacks[State.Earth] = stacks;
+                else elementStacks[State.Land] = stacks;
             }
         }
         return damage;
@@ -356,18 +373,18 @@ public class Character : MonoBehaviour
     // 풍식 감소 (본인 턴 종료 시)
     public virtual void OnTurnEnd_WindDecrease()
     {
-        if (elementStacks.ContainsKey(State.Wind))
+        if (elementStacks.ContainsKey(State.Air))
         {
-            int stacks = elementStacks[State.Wind] - 1;
+            int stacks = elementStacks[State.Air] - 1;
             if (stacks <= 0)
             {
-                elementStacks.Remove(State.Wind);
+                elementStacks.Remove(State.Air);
                 LogManager.Instance.AddLog($"{unitName}의 풍식 상태가 사라짐");
-                if (CurrentElement == State.Wind) CurrentElement = State.None;
+                if (CurrentElement == State.Air) CurrentElement = State.None;
             }
             else
             {
-                elementStacks[State.Wind] = stacks;
+                elementStacks[State.Air] = stacks;
                 LogManager.Instance.AddLog($"{unitName}의 풍식 스택 1 감소 (남은 스택: {stacks})");
             }
         }

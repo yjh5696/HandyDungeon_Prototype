@@ -24,7 +24,7 @@ public class toCSV
             enemy.Description = splitData[2];
             string [] cards = splitData[3].Split('/');
             foreach(string card in cards)
-                enemy.EnemyCards.Add(AssetDatabase.LoadAssetAtPath<CardSO>($"Assets/SO/Cards/{card}.asset"));
+                enemy.EnemyCards.Add(AssetDatabase.LoadAssetAtPath<CardDataSO>($"Assets/SO/Cards/{card}.asset"));
             
 
             AssetDatabase.CreateAsset(enemy, $"Assets/SO/Enemies/{enemy.Name}.asset");
@@ -48,10 +48,10 @@ public class toCSV
             switch (splitData[2])
             {
                 case "Attack" or "attack":
-                    card.Style = Style.Attack;
+                    card.Style = Style.Action;
                     break;
                 case "Defense" or "defense":
-                    card.Style = Style.Defence;
+                    card.Style = Style.Support;
                     break;
                 case "Special" or "special":
                     card.Style = Style.Special;
@@ -65,8 +65,8 @@ public class toCSV
                 case "Water" or "water":
                     card.State = State.Water;
                     break;
-                case "Wind" or "wind":
-                    card.State = State.Wind;
+                case "Air" or "air":
+                    card.State = State.Air;
                     break;
                 default:
                     card.State = State.None;

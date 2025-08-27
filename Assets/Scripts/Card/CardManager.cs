@@ -1,84 +1,79 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
-    public CardSO selectedCard; //3가지 액션카드 중 현재 선택된 카드
-    
-    [SerializeField] private List<CardSO> cards;
-    [SerializeField] private TMP_Text attackText;
-    [SerializeField] private TMP_Text defenseText;
-    [SerializeField] private TMP_Text specialText;
-    [SerializeField] private Card card;
-    private CardSO _currentAttackCard;
-    private CardSO _currentDefenseCard;
-    private CardSO _currentSpecialCard;
-    private Style _currentStyle; //3가지 버튼 중 하나 누르면 선택됨
+    public CardDataSO selectedCard;
+
+    [SerializeField] private Character playerCharacter;  // 플레이어 캐릭터 참조 (인스펙터 할당)
+
+    [SerializeField] private TMP_Text cardNameText;
+    [SerializeField] private Card cardUI;  // 카드 UI 컴포넌트
+
+    private CardDataSO _currentCard;
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
+
+        if (playerCharacter == null || playerCharacter.Cards == null || playerCharacter.Cards.Count == 0)
+            Debug.LogWarning("Player Character 카드 덱이 할당되지 않았거나 비어있습니다.");
     }
 
-    public void DrawAttackCard() //카드 랜덤 뽑기
+    public void DrawCard()
     {
-        int result;
-        while (true)
+        if (playerCharacter == null)
         {
-            result = Random.Range(0, cards.Count);
-            if(cards[result].Style == Style.Attack) break;
+            Debug.LogError("playerCharacter가 할당되지 않았습니다.");
+            return;
         }
-        _currentAttackCard = cards[result];
-        attackText.text = _currentAttackCard.CardName;
-    }
 
-    public void DrawDefenseCard()
-    {
-        int result;
-        while (true)
+        var cards = playerCharacter.Cards;
+        if (cards == null || cards.Count == 0)
         {
-            result = Random.Range(0, cards.Count);
-            if(cards[result].Style == Style.Defence) break;
+            Debug.LogWarning("playerCharacter의 카드 덱이 비어있습니다.");
+            cardNameText.text = "카드 없음";
+            return;
         }
-        _currentDefenseCard = cards[result];
-        defenseText.text = _currentDefenseCard.CardName;
-    }
 
-    public void SetStyleToAttack()
-    {
-        _currentStyle = Style.Attack;
-        card.SetCard(_currentAttackCard);
-    }
-    
-    public void SetStyleToDefense()
-    {
-        _currentStyle = Style.Defence;
-        card.SetCard(_currentDefenseCard);
+        int idx = Random.Range(0, cards.Count);
+        _currentCard = cards[idx];
+
+        if (_currentCard == null)
+        {
+            Debug.LogWarning("선택된 카드가 null입니다.");
+            cardNameText.text = "카드 없음";
+            return;
+        }
+
+        if (cardNameText == null)
+        {
+            Debug.LogError("cardNameText UI 컴포넌트가 할당되지 않았습니다.");
+            return;
+        }
+
+        cardNameText.text = _currentCard.C_Name;
     }
 
     public void UseCard()
     {
-        switch (_currentStyle)
+        if (_currentCard == null)
         {
-            case Style.Attack:
-                selectedCard = _currentAttackCard;
-                break;
-            case Style.Defence:
-                break;
-            case Style.Special:
-                break;
+            Debug.LogWarning("카드가 선택되지 않았습니다.");
+            return;
         }
-        
+
+        selectedCard = _currentCard;
+        cardUI.SetCard(_currentCard);
+
         LogManager.Instance.AddSpacingLine();
-        LogManager.Instance.AddLog($"플레이어가 {selectedCard.CardName}을 사용하였습니다!");
+        LogManager.Instance.AddLog($"플레이어가 {selectedCard.C_Name}을 사용하였습니다!");
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog("주사위를 터치하여 굴려주세요.");
     }
-    
 }
+

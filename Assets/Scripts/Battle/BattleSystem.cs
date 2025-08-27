@@ -6,23 +6,26 @@ using static UnityEngine.Rendering.DebugUI;
 
 public static class BattleSystem
 {
-    public static void ExecuteAttack(Character attacker, Character target, CardSO card, int diceValue)
+    public static void ExecuteAttack(Character attacker, Character target, CardDataSO card, int diceValue)
     {
+        State cardElement = (State)System.Enum.Parse(typeof(State), card.Element);
+        State deBuffType = (State)System.Enum.Parse(typeof(State), card.Debuff_Type);
+
         int fervorDamage = 0;
         // 1. 기본 데미지 계산
-        float baseDamage = card.Damage * (diceValue * card.DiceMultiplier);
+        float baseDamage = card.min_Value * (diceValue * card.Calculation);
 
         // 2. 침식 효과 (공격력 감소 및 회복)
         baseDamage = attacker.SetWaterEffect(baseDamage, target);
 
         // 3. 풍식 효과 (조건부 공격력 감소)
-        baseDamage = attacker.SetWindEffect(baseDamage, diceValue);
+        baseDamage = attacker.SetAirEffect(baseDamage, diceValue);
 
         // 3.1. 질풍 효과 (조건부 공격력 증가)
         baseDamage = attacker.SetGaleEffect(baseDamage, diceValue);
 
         // 4. 속성 배율
-        float multiplier = ElementEffect.GetMultiplier(card.State, target.GetCurrentElement());
+        float multiplier = ElementEffect.GetMultiplier(cardElement, target.GetCurrentElement());
         float totalDamage = baseDamage * multiplier;
 
         // 5. 소화 효과 (받는 피해 감소)
@@ -30,7 +33,7 @@ public static class BattleSystem
         totalDamage = Mathf.Round(totalDamage * 10f) / 10f;
 
         // 5.1. 진창 효과 (받는 피해 증가)
-        totalDamage = target.SetEarthEffect(totalDamage);
+        totalDamage = target.SetLandEffect(totalDamage);
         totalDamage = Mathf.Round(totalDamage * 10f) / 10f;
 
         // 5.2. 수호 효과 (받는 피해 감소)
@@ -65,7 +68,7 @@ public static class BattleSystem
         }
 
         // 9. 속성 디버프 적용
-        string effectLog = ElementEffect.ApplyElementEffect(attacker, target, card.State, 1);
+        string effectLog = ElementEffect.ApplyElementEffect(attacker, target, deBuffType, card.Debuff_Stack);
         
 
         // 10. 속성 디버프 로그 출력
@@ -75,13 +78,15 @@ public static class BattleSystem
         // 11. 소화 스택 삭제
         attacker.SetBurndownClear();
     }
-    public static void ExecuteDefence(Character attacker, Character target, CardSO card, int diceValue)
+    public static void ExecuteDefence(Character attacker, Character target, CardDataSO card, int diceValue)
     {
+        State buffType = (State)System.Enum.Parse(typeof(State), card.Buff_Type);
+
         // 1. 기본 데미지 계산
-        float baseDamage = card.Damage * card.DiceMultiplier;
+        float baseDamage = card.min_Value * (diceValue * card.Calculation);
 
         // 2. 속성 연계 확인 및 속성 버프 부여
-        string effectLog = ElementBuff.ApplyBuff(attacker, target, card.State, 3);
+        string effectLog = ElementBuff.ApplyBuff(attacker, target, buffType, card.Buff_Stack);
 
         if (!string.IsNullOrEmpty(effectLog))
             LogManager.Instance.AddLog(effectLog);

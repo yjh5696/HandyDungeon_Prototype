@@ -17,6 +17,6 @@ public class EnemySO : ScriptableObject
     public float Health { get => health; set => health = value; }
     [SerializeField] private string description;
     public string Description { get => description; set => description = value; }
-    [SerializeField] private List<CardSO> enemyCards;
-    public List<CardSO> EnemyCards { get => enemyCards; }
+    [SerializeField] private List<CardDataSO> enemyCards;
+    public List<CardDataSO> EnemyCards { get => enemyCards; }
 }

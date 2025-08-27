@@ -18,7 +18,5 @@ MonoBehaviour:
   health: 100
   description: "\uBF08\uB2E4\uADC0"
   enemyCards:
-  - {fileID: 11400000, guid: b074a3e1a49a70d48a92df9dc872b5f9, type: 2}
-  - {fileID: 11400000, guid: 83e6a91cc939de345ae109982a1cd0a9, type: 2}
-  - {fileID: 11400000, guid: 9b742f6408bdfef46beca0d32a07d07f, type: 2}
-  - {fileID: 11400000, guid: 0fddab5a119fc9248bcca84c3ab8c0b7, type: 2}
+  - {fileID: 11400000, guid: 99f5d6c3dc34e1d45b8b7f0b406892b6, type: 2}
+  - {fileID: 11400000, guid: 159e6789333d07a44a8bf09fb688e274, type: 2}

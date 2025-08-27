@@ -53,16 +53,16 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         LogManager.Instance.AddLog("액션!");
         LogManager.Instance.AddLog("");
 
-        CardSO selectedCard = CardManager.Instance.selectedCard;
+        CardDataSO selectedCard = CardManager.Instance.selectedCard;
 
         if (GameManager.Instance.isPlayerTurn)
         {
             // 플레이어 공격 → 적 피격
-            if (selectedCard.Style == Style.Attack)
+            if (selectedCard.C_Type == "Action")
             {
                 BattleSystem.ExecuteAttack(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
             }
-            else if (selectedCard.Style == Style.Defence)
+            else if (selectedCard.C_Type == "Support")
             {
                 BattleSystem.ExecuteDefence(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
             }
@@ -75,11 +75,11 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         else
         {
             // 적 공격 → 플레이어 피격
-            if (selectedCard.Style == Style.Attack)
+            if (selectedCard.C_Type == "Action")
             {
                 BattleSystem.ExecuteAttack(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
             }
-            else if (selectedCard.Style == Style.Defence)
+            else if (selectedCard.C_Type == "Support")
             {
                 BattleSystem.ExecuteDefence(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
             }

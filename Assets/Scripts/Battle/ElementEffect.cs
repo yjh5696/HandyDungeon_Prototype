@@ -19,21 +19,21 @@ public static class ElementEffect
         }
 
         // 발화
-        if (last == State.Fire && newElement == State.Wind)
+        if (last == State.Fire && newElement == State.Air)
         {
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Fire));
             target.RemoveStatus(State.Fire);
             target.SetStatus("발화", (stacks + 1) / 2);
-            ApplyBaseDebuff(target, State.Wind, baseStacks);
-            target.SetLastElement(State.Wind);
+            ApplyBaseDebuff(target, State.Air, baseStacks);
+            target.SetLastElement(State.Air);
             return $"발화 발생! 턴마다 {3 * ((stacks + 1) / 2)} 피해 + 풍식 {baseStacks} 스택 부여";
         }
 
         // 와류
-        if (last == State.Wind && newElement == State.Water)
+        if (last == State.Air && newElement == State.Water)
         {
-            int stacks = Mathf.Max(1, target.GetStatusStacks(State.Wind));
-            target.RemoveStatus(State.Wind);
+            int stacks = Mathf.Max(1, target.GetStatusStacks(State.Air));
+            target.RemoveStatus(State.Air);
             target.SetStatus("와류", (stacks + 1));
             target.TakeDamage(5 * stacks);
             ApplyBaseDebuff(target, State.Water, baseStacks);
@@ -42,24 +42,24 @@ public static class ElementEffect
         }
 
         // 침전
-        if (last == State.Water && newElement == State.Earth)
+        if (last == State.Water && newElement == State.Land)
         {
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Water));
             target.RemoveStatus(State.Water);
             target.SetStatus("침전", (stacks + 1));
             target.TakeDamage(4 * stacks);
             target.SetShieldEffect(2 * stacks, -1, 0);
-            ApplyBaseDebuff(target, State.Earth, baseStacks);
-            target.SetLastElement(State.Earth);
+            ApplyBaseDebuff(target, State.Land, baseStacks);
+            target.SetLastElement(State.Land);
             return $"침전 발생! {4 * stacks} 피해 + 진창 {baseStacks} 스택 부여";
         }
 
         // 용암
-        if (last == State.Earth && newElement == State.Fire)
+        if (last == State.Land && newElement == State.Fire)
         {
-            int stacks = Mathf.Max(1, target.GetStatusStacks(State.Earth));
+            int stacks = Mathf.Max(1, target.GetStatusStacks(State.Land));
             float mult = 1f + stacks * 0.1f;
-            target.RemoveStatus(State.Earth);
+            target.RemoveStatus(State.Land);
             target.SetStatus("용암", (stacks + 1));
             target.TakeDamage(5 * stacks * mult);
             target.SetExtraDamageTaken(stacks);
@@ -79,8 +79,8 @@ public static class ElementEffect
         switch (element)
         {
             case State.Fire: target.SetStatus("점화", stacks); break;
-            case State.Wind: target.SetStatus("풍식", stacks); break;
-            case State.Earth: target.SetStatus("진창", stacks); break;
+            case State.Air: target.SetStatus("풍식", stacks); break;
+            case State.Land: target.SetStatus("진창", stacks); break;
             case State.Water: target.SetStatus("침식", stacks); break;
         }
     }
