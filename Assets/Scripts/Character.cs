@@ -47,7 +47,7 @@ public class Character : MonoBehaviour
         lastBuffElement = element;
     }
 
-    [SerializeField] private List<CardDataSO> cards; // 인스펙터에서 직접 카드 풀 할당 가능
+    [SerializeField] public List<CardDataSO> cards; // 인스펙터에서 직접 카드 풀 할당 가능
     public List<CardDataSO> Cards => cards; // 외부에서 읽기 전용으로 노출
     protected CardDataSO currentCard;
 

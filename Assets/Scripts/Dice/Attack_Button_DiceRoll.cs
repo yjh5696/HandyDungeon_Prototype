@@ -31,7 +31,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         }
         else
         {
-            string enemyName = EnemyManager.Instance.Enemy.GetEnemySo().Name;
+            string enemyName = EnemyManager.Instance.Enemy.GetEnemySo().EnemyName;
             LogManager.Instance.AddLog($"{enemyName}이/가 주사위를 굴렸습니다!");
         }
     }

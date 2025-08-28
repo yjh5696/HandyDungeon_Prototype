@@ -19,7 +19,7 @@ public class toCSV
             string [] splitData = allLine.Split(',');
 
             EnemySO enemy = ScriptableObject.CreateInstance<EnemySO>();
-            enemy.Name = splitData[0];
+            enemy.EnemyName = splitData[0];
             enemy.Health = float.Parse(splitData[1]);
             enemy.Description = splitData[2];
             string [] cards = splitData[3].Split('/');
@@ -27,7 +27,7 @@ public class toCSV
                 enemy.EnemyCards.Add(AssetDatabase.LoadAssetAtPath<CardDataSO>($"Assets/SO/Cards/{card}.asset"));
             
 
-            AssetDatabase.CreateAsset(enemy, $"Assets/SO/Enemies/{enemy.Name}.asset");
+            AssetDatabase.CreateAsset(enemy, $"Assets/SO/Enemies/{enemy.EnemyName}.asset");
         }
 
         AssetDatabase.SaveAssets();

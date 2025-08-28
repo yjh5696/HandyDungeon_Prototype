@@ -49,7 +49,8 @@ public class GameManager : MonoBehaviour
         
         //StartPrologue().Forget();
         
-        EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
+        //EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
+        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
         StartPlayerTurn();
     }
 
