@@ -7,7 +7,7 @@ public class CardDataSOGenerator : EditorWindow
 {
     private string csvFilePath = "Assets/Resources/GameCard.csv";
 
-    [MenuItem("Tools/CardData SO Generator")]
+    [MenuItem("Tools/Generate CardSOs from CSV")]
     public static void ShowWindow()
     {
         GetWindow<CardDataSOGenerator>("CardData SO 생성기");
@@ -65,12 +65,7 @@ public class CardDataSOGenerator : EditorWindow
             card.Enhance_Count = string.IsNullOrEmpty(values[15]) ? 0 : SafeParseInt(values[15]);
             card.Target = values[16];
             card.Card_Description = values[17];
-            card.Unnamed_18 = values[18];
             card.CardConcept = values[19];
-            card.Unnamed_20 = values[20];
-            card.Unnamed_21 = values[21];
-            card.Unnamed_22 = values[22];
-            card.Formula = values[23];
 
             string assetName = $"{card.C_Name}_{card.C_Id}.asset";
             string savePath = Path.Combine(folderPath, assetName);

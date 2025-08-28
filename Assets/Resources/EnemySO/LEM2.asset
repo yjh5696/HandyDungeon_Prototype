@@ -17,7 +17,9 @@ MonoBehaviour:
   element: Land
   rank: Rank3
   health: 70
-  sprite: {fileID: 0}
-  animatorController: {fileID: 0}
+  sprite: {fileID: 4723107735738678597, guid: da5a72139ad0c5945a93674a1a5f9c19, type: 3}
+  animatorController: {fileID: 9100000, guid: 13dea5066b71fc64b8c5e89ffe3d493f, type: 2}
   description: 
-  enemyCards: []
+  enemyCards:
+  - {fileID: 11400000, guid: b76f93f8f52ef894f95bc81a76645da1, type: 2}
+  - {fileID: 11400000, guid: 699ec0ab69a39ed488f05b1ec6d08ae6, type: 2}

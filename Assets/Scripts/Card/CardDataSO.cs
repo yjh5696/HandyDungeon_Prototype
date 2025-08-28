@@ -21,11 +21,6 @@ public class CardDataSO : ScriptableObject
     public int Enhance_Count;
     public string Target;
     public string Card_Description;
-    public string Unnamed_18;
     public string CardConcept;
-    public string Unnamed_20;
-    public string Unnamed_21;
-    public string Unnamed_22;
-    public string Formula;
 }
 

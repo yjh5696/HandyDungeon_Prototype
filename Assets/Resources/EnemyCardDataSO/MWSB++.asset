@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
+  m_Name: MWSB++
+  m_EditorClassIdentifier: 
+  C_Id: 59
+  C_Name: MWSB++
+  C_Type: Support
+  Element: Water
+  Tier: 
+  Rare: 
+  Effect_Type: Sheild
+  min_Value: 0.9
+  Max_Vlaue: 0
+  Calculation: 5
+  Debuff_Type: None
+  Debuff_Stack: 0
+  Buff_Type: Recovery
+  Buff_Stack: 4
+  Enhanceable: 
+  Enhance_Count: 0
+  Target: Self
+  Card_Description: "4.5~27\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.
+    \uC7AC\uC0DD 4."
+  CardConcept: 
