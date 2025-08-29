@@ -1,29 +1,44 @@
-M_ID,M_Name,M_Element,M_Rank,M_HP,M_Card1,M_Card2,M_Card3,BM_Card
-001,FNM1,Fire,Rank1,30,Tier1,Tier1,Tier2,None
-002,FNM2,Fire,Rank1,30,Tier1,Tier1,Tier2,None
-003,FRM1,Fire,Rank2,50,Tier2,Tier2,Tier3,None
-004,FRM2,Fire,Rank2,50,Tier2,Tier2,Tier3,None
-005,FEM1,Fire,Rank3,70,Tier3,,Tier4,None
-006,FEM2,Fire,Rank3,70,,,Tier4,None
-007,FBM,Fire,Rank4,90,,,,Tier5
-008,WNM1,Water,Rank1,30,Tier1,Tier1,Tier2,None
-009,WNM2,Water,Rank1,30,Tier1,Tier1,Tier2,None
-010,WRM1,Water,Rank2,50,,,,None
-011,WRM2,Water,Rank2,50,,,,None
-012,WEM1,Water,Rank3,70,,,,None
-013,WEM2,Water,Rank3,70,,,,None
-014,WBM,Water,Rank4,100,,,,Tier5
-015,ANM1,Air,Rank1,25,,,,None
-016,ANM2,Air,Rank1,20,,,,None
-017,ARM1,Air,Rank2,50,,,,None
-018,ARM2,Air,Rank2,50,,,,None
-019,AEM1,Air,Rank3,70,,,,None
-020,AEM2,Air,Rank3,70,,,,None
-021,ABM,Air,Rank4,80,,,,Tier5
-022,LNM1,Land,Rank1,30,,,,None
-023,LNM2,Land,Rank1,30,,,,None
-024,LRM1,Land,Rank2,50,,,,None
-025,LRM2,Land,Rank2,50,,,,None
-026,LEM1,Land,Rank3,70,,,,None
-027,LEM2,Land,Rank3,70,,,,None
-028,LBM,Land,Rank4,110,,,Tier4,Tier5
+M_ID,M_Name,Tribe,Chapter,M_Element,M_Rank,M_HP,M_Card1,M_Card2,M_Card3,BM_Card,,-> 숲에서 만날 수 있는 판타지 몬스터
+MONSTER_0,약탈자,Humanoid,Chapter1,Fire,Rank1,50,단검 찌르기,불씨 흩뿌리기,분노,None,,
+MONSTER_1,순찰자,Humanoid,Chapter1,Fire,Rank2,50,불화살,단검 던지기,재정비,None,,
+MONSTER_2,무장 강도,ForestHuman,Chapter1,Fire,Rank3,60,격분,화염 강타,방패 올리기,None,,
+MONSTER_3,도적 두목,ForestHuman,Chapter1,Fire,Rank4,70,화염 강타,불길 확산,견고한 갑옷,무자비한 일격,,-> 마을에서 만날 수 있는 사람 몬스터
+MONSTER_4,슬라임,Fantasy,Chapter1,Water,Rank1,50,점액 던지기,점액 방패,재생,None,,
+MONSTER_5,물뱀,Beast,Chapter1,Water,Rank2,50,단단한 비늘,휘감기,날카로운 독니,None,,
+MONSTER_6,무당 개구리,Beast,Chapter1,Water,Rank3,60,도약 공격,미끄러운 피부,무당독,None,,
+MONSTER_7,타락한 물의 정령,Element,Chapter1,Water,Rank4,70,날카로운 독니,늪지독,습지 재생,소용돌이,,숲에서 만날 수 있는 사람 몬스터
+MONSTER_8,칼날도래,Insect,Chapter1,Air,Rank1,50,날개 베기,단단한 날개,돌진 비행,None,,
+MONSTER_9,바람늑대,Beast,Chapter1,Air,Rank2,50,물어뜯기,회오리 발톱,신속,None,,
+MONSTER_10,벌레인간,Insect,Chapter1,Air,Rank3,60,신속,날카로운 칼날,포식,None,,
+MONSTER_11,웨어울프,Beast,Chapter1,Air,Rank4,70,질풍 돌진,포식,광풍화,폭풍 갈퀴,,숲 안에서 만나는 정령들
+MONSTER_12,네펜데스,Plant,Chapter1,Land,Rank1,50,위액 투척,식충회복,집어삼키기,None,,
+MONSTER_13,늑대거북,Beast,Chapter1,Land,Rank2,50,머리 들이받기,강한 재생력,껍질 방어,None,,
+MONSTER_14,목인,Plant,Chapter1,Land,Rank3,60,강한 재생력,산성 포자,대지 흔들기,None,,
+MONSTER_15,타락한 땅의 정령,Element,Chapter1,Land,Rank4,70,숲의 보호,대지 흔들기,땅 고르기,강철 갑옷,,
+MONSTER_16,건달,Humanoid,Chapter1,None,Rank1,50,몽둥이 내려치기,급소 노리기,회복약,None,,
+MONSTER_17,고블린,ForestHuman,Chapter1,None,Rank1,50,몽둥이 내려치기,회복약,방패 들기,None,,
+MONSTER_18,오크,ForestHuman,Chapter1,None,Rank2,50,내려찍기,무모한 돌진,거친 피부,None,,
+MONSTER_19,타락한 불의 정령,Element,Chapter1,None,Rank2,50,불뿜기,과열,불기둥,None,,
+MONSTER_20,타락한 바람의 정령,Element,Chapter1,None,Rank2,50,돌개 바람,소용돌이,신속,None,,
+,,,,,,,,,,,,
+,,,,,Tier1,Tier1,Tier2,,,,,
+,,,,,Tier2,Tier2,Tier3,,,,,
+,숲에서 만날 수 있는 몬스터들,마을에서 볼 수 있는 쫄몺 ㅏ람들,,,Tier3,Tier3,Tier4,,,,,
+,쫄몹류,사람류,,,Tier3,Tier4,Tier4,Tier5,,,,
+,멧돼지,깡패,,,,,,,,,,
+,고블린,화적,,,,,,,,,,
+,오크,도적,,,,,,,,,,
+,,,,,,,,,,,,
+,숲을 들어간 이후 나오는 몬스터의 종류 (내가 바라는),,,,,,,,,,,
+,숲 = 최근 어둠의 기운이 있어서 = 마왕과 연계되어서 타락해버린 정령들이 있는 숲,,,,,,,,,,,
+,(타락한) 불의 정령,,,,,,,,,,,
+,(타락한) 물의 정령,,,,,,,,,,,
+,최근 갑자기 평화롭던 정령의 숲이 알수 없는 어두운 기운에 의해 정령들이 타락했다,,,,,,,,,,,
+,아직 마왕이 부활하는건 모르지만 전조 느낌으로 위기감 쪼금 조성,,,,,,,,,,,
+,,,,,,,,,,,,
+,CHAP1,CHAP2,,,,,,,,,,
+,전조,어두운 기운이 잠식되는게 점점 많아짐 사람들이 마왕이 나오는거 아니냐고 술렁거림,,,,,,,,,,
+,CHPA3,,,,,,,,,,,
+,마왕 부활이 확인되서 모험 떠다는,,,,,,,,,,,
+,CHAP4,,,,,,,,,,,
+,마왕성 도착해서 그 안에서 마왕토벌까지 이야기,,,,,,,,,,,

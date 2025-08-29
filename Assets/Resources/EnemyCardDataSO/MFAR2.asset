@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
   m_Name: MFAR2
   m_EditorClassIdentifier: 
-  C_Id: 9
+  C_Id: 1009
   C_Name: MFAR2
   C_Type: Action
   Element: Fire

@@ -28,11 +28,7 @@ MonoBehaviour:
   Buff_Stack: 0
   Enhanceable: No
   Enhance_Count: 0
-  Target: 
-  Card_Description: 
-  Unnamed_18: 
+  Target: Self
+  Card_Description: "\uB2E4\uC74C\uD134 \uC0AC\uC6A9\uD558\uB294 \uC8FC\uC0AC\uC704
+    2\uBC30"
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

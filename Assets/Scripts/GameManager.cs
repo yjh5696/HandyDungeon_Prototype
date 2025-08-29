@@ -18,10 +18,6 @@ public class GameManager : MonoBehaviour
     public int currentStage = 0;
     public int mainStageNumber = 1;
 
-    private CardDataSO _actionCard;
-    private CardDataSO _supportCard;
-    private CardDataSO _specialCard;
-
     [SerializeField] private FadeInOut startFade;
     [SerializeField] private FadeInOut image;
     [SerializeField] private GameObject log;

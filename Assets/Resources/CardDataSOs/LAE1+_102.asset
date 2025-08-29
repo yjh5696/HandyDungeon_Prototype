@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Climax
   Effect_Type: Damage
   min_Value: 4
-  Max_Vlaue: 24
+  Max_Vlaue: 0
   Calculation: 1
   Debuff_Type: Land
   Debuff_Stack: 5
@@ -30,10 +30,5 @@ MonoBehaviour:
   Enhance_Count: 4
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 4~24\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uC9C4\uCC3D 5. \uAC15\uD654 4."
-  Unnamed_18: 
+    \uADE0\uC5F4 5. \uAC15\uD654 4."
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

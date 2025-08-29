@@ -66,6 +66,10 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             {
                 BattleSystem.ExecuteDefence(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
             }
+            else if (selectedCard.C_Type == "Special")
+            {
+                BattleSystem.ExecuteSpecial(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
+            }
 
             PlayerManager.Instance.PlayAttackAnimation();
             float attackTime = PlayerManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
@@ -82,6 +86,10 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             else if (selectedCard.C_Type == "Support")
             {
                 BattleSystem.ExecuteDefence(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+            }
+            else if (selectedCard.C_Type == "Special")
+            {
+                BattleSystem.ExecuteSpecial(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
             }
             EnemyManager.Instance.EnemyAttackAnimation();
             float attackTime = EnemyManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;

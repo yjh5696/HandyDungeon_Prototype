@@ -175,6 +175,7 @@ MonoBehaviour:
   actionCardText: {fileID: 1581959020}
   supportCardText: {fileID: 1972473576}
   specialCardText: {fileID: 827266438}
+  specialButtonImage: {fileID: 152439379}
 --- !u!1 &125654030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3725,10 +3726,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: 
+  nextTurnDiceBonus: 0
+  nextTurnDiceMultiplier: 1
+  maxElementStack: 10
   cards:
-  - {fileID: 11400000, guid: b76f93f8f52ef894f95bc81a76645da1, type: 2}
-  - {fileID: 11400000, guid: 837ae5f11c7483a45981dcdbe9f6659f, type: 2}
-  - {fileID: 11400000, guid: 9aebdc3b1def5f941abee84514ff5894, type: 2}
+  - {fileID: 11400000, guid: 7ea6776fb9f8419419283ad37084cf27, type: 2}
+  - {fileID: 11400000, guid: 8c90e141d5413e84bbe29dfc1d36acaf, type: 2}
+  - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
 --- !u!1 &844952115
 GameObject:
   m_ObjectHideFlags: 0
@@ -4539,7 +4543,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9116775
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6090,7 +6094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -576.7199}
+  m_AnchoredPosition: {x: 0.00012207031, y: -585.4093}
   m_SizeDelta: {x: -1270, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1055311458

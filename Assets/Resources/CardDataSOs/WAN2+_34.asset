@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Damage
   min_Value: 3
-  Max_Vlaue: 7.2
+  Max_Vlaue: 0
   Calculation: 0.4
   Debuff_Type: Water
   Debuff_Stack: 2
@@ -30,10 +30,5 @@ MonoBehaviour:
   Enhance_Count: 0
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 1.2~7.2\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uCE68\uC2DD 2"
-  Unnamed_18: 
+    \uC816\uC74C 2"
   CardConcept: "1\uACF5 2\uB514\uD38D"
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

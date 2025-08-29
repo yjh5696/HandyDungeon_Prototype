@@ -1,15 +1,13 @@
-// EnemyDataParser.cs
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Collections.Generic;
 
 public class EnemySOGenerator : Editor
 {
-    // CSV 파일 경로
     private static readonly string CSV_PATH = "Assets/Resources/Monster.csv";
-
-    // 생성된 EnemySO 파일들을 저장할 경로
     private static readonly string ENEMY_SO_SAVE_PATH = "Assets/Resources/EnemySO/";
+    private static readonly string CARD_SO_PATH = "EnemyCardDataSO"; // Resources 폴더 내 경로
 
     [MenuItem("Tools/Generate EnemySOs from CSV")]
     public static void GenerateEnemySOs()
@@ -20,38 +18,58 @@ public class EnemySOGenerator : Editor
             Debug.LogError($"CSV 파일을 찾을 수 없습니다: {CSV_PATH}");
             return;
         }
-
         if (!Directory.Exists(ENEMY_SO_SAVE_PATH))
         {
             Directory.CreateDirectory(ENEMY_SO_SAVE_PATH);
         }
 
-        string[] records = csvFile.text.Split('\n');
+        // 모든 카드 SO 미리 로드 (C_Name 키로 딕셔너리 생성)
+        CardDataSO[] allCards = Resources.LoadAll<CardDataSO>(CARD_SO_PATH);
+        Dictionary<string, CardDataSO> cardNameToSO = new Dictionary<string, CardDataSO>();
+        foreach (var card in allCards)
+        {
+            if (!cardNameToSO.ContainsKey(card.C_Name))
+                cardNameToSO.Add(card.C_Name, card);
+        }
 
-        // 헤더(첫 줄)를 건너뛰고 시작
+        string[] records = csvFile.text.Split('\n');
         for (int i = 1; i < records.Length; i++)
         {
             string record = records[i].Trim();
             if (string.IsNullOrEmpty(record)) continue;
-
             string[] fields = record.Split(',');
 
-            // EnemySO 인스턴스 생성
             EnemySO enemySO = ScriptableObject.CreateInstance<EnemySO>();
 
-            // CSV 데이터 할당 (카드 정보는 제외)
             enemySO.EnemyID = fields[0];
             enemySO.EnemyName = fields[1];
-            enemySO.Element = fields[2];
-            enemySO.Rank = fields[3];
-            enemySO.Health = float.Parse(fields[4]);
+            enemySO.EnemyTribe = fields[2];
+            enemySO.EnemyChapter = fields[3];
+            enemySO.Element = fields[4];
+            enemySO.Rank = fields[5];
+            enemySO.Health = float.Parse(fields[6]);
 
-            // enemyCards 리스트는 비워둡니다.
-            // EnemySO 스크립트에서 new List<CardDataSO>()로 초기화되므로 별도 처리가 필요 없습니다.
+            // 카드 이름 필드 인덱스 (M_Card1=7, M_Card2=8, M_Card3=9, BM_Card=10)
+            List<CardDataSO> enemyCards = new List<CardDataSO>();
+            for (int col = 7; col <= 10; col++)
+            {
+                if (col >= fields.Length) break; // 안전 체크
+                string cardName = fields[col].Trim();
+                if (string.IsNullOrEmpty(cardName) || cardName.ToLower() == "none")
+                    continue; // 없는 카드 넘어감
 
-            // SO 파일 저장
+                if (cardNameToSO.TryGetValue(cardName, out CardDataSO cardSO))
+                {
+                    enemyCards.Add(cardSO);
+                }
+                else
+                {
+                    Debug.LogWarning($"'{enemySO.EnemyName}' 몬스터의 카드 '{cardName}'을(를) 찾을 수 없습니다.");
+                }
+            }
+            enemySO.EnemyCards = enemyCards;
+
             string assetPath = $"{ENEMY_SO_SAVE_PATH}{enemySO.EnemyName}.asset";
-            // 만약 동일한 이름의 파일이 이미 있다면, 덮어쓰는 대신 기존 데이터를 업데이트합니다.
             EnemySO existingSO = AssetDatabase.LoadAssetAtPath<EnemySO>(assetPath);
             if (existingSO == null)
             {
@@ -60,6 +78,7 @@ public class EnemySOGenerator : Editor
             else
             {
                 EditorUtility.CopySerialized(enemySO, existingSO);
+                EditorUtility.SetDirty(existingSO);
             }
         }
 

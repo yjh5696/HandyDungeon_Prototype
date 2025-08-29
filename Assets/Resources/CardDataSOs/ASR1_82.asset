@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Rising
   Effect_Type: Heal
   min_Value: 3
-  Max_Vlaue: 7.2
+  Max_Vlaue: 0
   Calculation: 0.4
   Debuff_Type: None
   Debuff_Stack: 0
@@ -30,10 +30,5 @@ MonoBehaviour:
   Enhance_Count: 3
   Target: Self
   Card_Description: "1.2~7.2\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4.
-    \uC9C8\uD48D 2. \uAC15\uD654 3"
-  Unnamed_18: 
+    \uC21C\uD48D 2. \uAC15\uD654 3"
   CardConcept: "1\uBC29\uC5B4\uB9C9 2\uBC84\uD504"
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
@@ -15,6 +16,8 @@ public class CardManager : MonoBehaviour
     [SerializeField] private TMP_Text actionCardText;
     [SerializeField] private TMP_Text supportCardText;
     [SerializeField] private TMP_Text specialCardText;
+    [SerializeField] private UnityEngine.UI.Image specialButtonImage;
+
 
     private CardDataSO _currentCard;
 
@@ -62,6 +65,7 @@ public class CardManager : MonoBehaviour
         {
             if (card != _actionCard && card != _supportCard)
                 specialCandidates.Add(card);
+
         }
 
         if (specialCandidates.Count == 0)
@@ -73,6 +77,7 @@ public class CardManager : MonoBehaviour
         else
         {
             _specialCard = DrawRandomFrom(specialCandidates, c => true);
+            UpdateButtonColor(_specialCard);
             if (cardNameText != null)
                 cardNameText.text = "빈 카드";
         }
@@ -86,6 +91,29 @@ public class CardManager : MonoBehaviour
             specialCardText.text = _specialCard != null ? _specialCard.C_Name : "빈 카드";
 
         _currentCard = null;
+    }
+
+    private void UpdateButtonColor(CardDataSO ChangeColorCard)
+    {
+        if (specialButtonImage == null)
+            return;
+
+        if (ChangeColorCard == null)
+        {
+            specialButtonImage.color = new Color32(255, 251, 157, 255); // 기본 색상
+        }
+        else if (ChangeColorCard.C_Type == "Action")
+        {
+            specialButtonImage.color = new Color32(248, 134, 134, 255); // 빨강
+        }
+        else if (ChangeColorCard.C_Type == "Support")
+        {
+            specialButtonImage.color = new Color32(83, 255, 59, 255); // 초록
+        }
+        else
+        {
+            specialButtonImage.color = new Color32(255, 251, 157, 255); // 기본 색상(스페셜)
+        }
     }
 
     private CardDataSO DrawRandomFrom(List<CardDataSO> pool, System.Predicate<CardDataSO> pred)

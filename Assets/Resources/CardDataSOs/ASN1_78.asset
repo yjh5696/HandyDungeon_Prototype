@@ -20,20 +20,15 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Heal
   min_Value: 3
-  Max_Vlaue: 7.2
+  Max_Vlaue: 0
   Calculation: 0.4
   Debuff_Type: None
   Debuff_Stack: 0
-  Buff_Type: Gale
+  Buff_Type: None
   Buff_Stack: 0
   Enhanceable: Yes
   Enhance_Count: 2
   Target: Self
   Card_Description: "1.2~7.2\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4.
     \uAC15\uD654 2"
-  Unnamed_18: 
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

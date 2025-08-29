@@ -13,6 +13,12 @@ public class EnemySO : ScriptableObject
     [SerializeField] private string enemyName;
     public string EnemyName { get => enemyName; set => enemyName = value; }
 
+    [SerializeField] private string enemyTribe;
+    public string EnemyTribe { get => enemyTribe; set => enemyTribe = value; }
+
+    [SerializeField] private string enemyChapter;
+    public string EnemyChapter { get => enemyChapter; set => enemyChapter = value; }
+
     [SerializeField] private string element;
     public string Element { get => element; set => element = value; }
 
@@ -32,7 +38,8 @@ public class EnemySO : ScriptableObject
     [SerializeField] private string description;
     public string Description { get => description; set => description = value; }
 
-    [Header("--- 카드 데이터 (수동 할당) ---")]
+    [Header("--- 카드 데이터 ---")]
     [SerializeField] private List<CardDataSO> enemyCards = new List<CardDataSO>();
-    public List<CardDataSO> EnemyCards { get => enemyCards; }
+    public List<CardDataSO> EnemyCards { get => enemyCards; set => enemyCards = value; }
+    //public List<CardDataSO> EnemyCards { get; set; } = new List<CardDataSO>();
 }

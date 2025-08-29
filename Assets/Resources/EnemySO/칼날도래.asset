@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b389ca25969e86c40af4481905597feb, type: 3}
+  m_Name: "\uCE7C\uB0A0\uB3C4\uB798"
+  m_EditorClassIdentifier: 
+  enemyID: MONSTER_8
+  enemyName: "\uCE7C\uB0A0\uB3C4\uB798"
+  enemyTribe: Insect
+  enemyChapter: Chapter1
+  element: Air
+  rank: Rank1
+  health: 50
+  sprite: {fileID: 4723107735738678597, guid: da5a72139ad0c5945a93674a1a5f9c19, type: 3}
+  animatorController: {fileID: 9100000, guid: 13dea5066b71fc64b8c5e89ffe3d493f, type: 2}
+  description: 
+  enemyCards:
+  - {fileID: 11400000, guid: 6f3e6f57e17b6db4d870f1c441d7421d, type: 2}
+  - {fileID: 11400000, guid: 61769fe6ede43c547a13fe21427c1e8b, type: 2}
+  - {fileID: 11400000, guid: b6533795aae760643879b76c7f7c3c4e, type: 2}

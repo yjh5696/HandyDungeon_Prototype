@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Finale
   Effect_Type: Sheild
   min_Value: 3
-  Max_Vlaue: 25.2
+  Max_Vlaue: 0
   Calculation: 1.4
   Debuff_Type: None
   Debuff_Stack: 0
@@ -29,11 +29,6 @@ MonoBehaviour:
   Enhanceable: No
   Enhance_Count: 0
   Target: Self
-  Card_Description: "4.2~25.2\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.
-    \uC218\uD638 4."
-  Unnamed_18: 
+  Card_Description: "4.2~25.2\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.\uC218\uD638
+    4."
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

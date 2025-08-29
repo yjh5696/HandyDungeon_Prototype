@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Finale
   Effect_Type: Heal
   min_Value: 5
-  Max_Vlaue: 30
+  Max_Vlaue: 0
   Calculation: 1
   Debuff_Type: None
   Debuff_Stack: 0
@@ -31,9 +31,4 @@ MonoBehaviour:
   Target: Self
   Card_Description: "5~30\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4.
     \uC7AC\uC0DD 6."
-  Unnamed_18: 
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

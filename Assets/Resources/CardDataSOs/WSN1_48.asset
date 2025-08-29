@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Sheild
   min_Value: 5
-  Max_Vlaue: 18
+  Max_Vlaue: 0
   Calculation: 0.6
   Debuff_Type: None
   Debuff_Stack: 0
@@ -31,9 +31,4 @@ MonoBehaviour:
   Target: Self
   Card_Description: "3~18\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.
     \uAC15\uD654 2."
-  Unnamed_18: 
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

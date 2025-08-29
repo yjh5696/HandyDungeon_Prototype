@@ -1,122 +1,129 @@
 MC_Id,MC_Name,MC_Type,Element,Effect_Type,MC_Tier,E_Coeffici,C_Coeffici,Debuff_Type,Debuff_Stack,Buff_Type,Buff_Stack,Target,
-001,MFAN1,Action,Fire,Damage,Tier1,5,0.6,None,0,None,0,Player,적에게 3~18의 피해를 줍니다. 강화 2
-002,MFAN1+,Action,Fire,Damage,Tier2,5,0.8,None,0,None,0,Player,적에게 4~24의 피해를 줍니다.
-003,MFAN2,Action,Fire,Damage,Tier1,5,0.2,Fire,1,None,0,Player,적에게 1~6의 피해를 줍니다. 점화 1.
-004,MFAN2+,Action,Fire,Damage,Tier2,5,0.4,Fire,2,None,0,Player,적에게 2~12의 피해를 줍니다. 점화 2.
-005,MFAN3,Action,Fire,Damage,Tier1,5,0.1,Fire,2,None,0,Player,적에게 0.5~3의 피해를 줍니다. 점화 2.
-006,MFAN3+,Action,Fire,Damage,Tier2,5,0.2,Fire,3,None,0,Player,적에게 1~6의 피해를 줍니다. 점화 3.
-007,MFAR1,Action,Fire,Damage,Tier2,5,0.4,Fire,3,None,0,Player,적에게 2~12의 피해를 줍니다. 점화 3.
-008,MFAR1+,Action,Fire,Damage,Tier3,5,0.6,Fire,4,None,0,Player,적에게 3~18의 피해를 줍니다. 점화 4.
-009,MFAR2,Action,Fire,Damage,Tier2,5,0.6,Fire,2,None,0,Player,적에게 3~18의 피해를 줍니다. 점화 2. 
-010,MFAR2+,Action,Fire,Damage,Tier3,5,0.8,Fire,3,None,0,Player,적에게 4~24의 피해를 줍니다. 점화 3.
-011,MFAE1,Action,Fire,Damage,Tier3,5,0.8,Fire,4,None,0,Player,적에게 4~24의 피해를 줍니다. 점화 4.
-012,MFAE1+,Action,Fire,Damage,Tier4,5,1,Fire,5,None,0,Player,적에게 5~30의 피해를 줍니다. 점화 5.
-013,MFAE1++,Action,Fire,Damage,Tier4,5,1.2,Fire,6,None,0,Player,적에게 6~36의 피해를 줍니다. 점화 6.
-014,MFAB,Action,Fire,Damage,,5,0.4,None,0,None,0,Player,적에게 2~12의 피해를 줍니다.
-015,MFAB+,Action,Fire,Damage,,5,0.7,Fire,2,None,0,Player,적에게 3.5~21의 피해를 줍니다. 점화 2.
-016,MFAB++,Action,Fire,Damage,,5,1,Fire,4,None,0,Player,적에게 5~30의 피해를 줍니다. 점화 4.
-017,MFAB+++,Action,Fire,Damage,Tier5,5,1.3,Fire,6,None,0,Player,적에게 6.5~39의 피해를 줍니다. 점화 6.
-018,MFSN1,Support,Fire,Sheild,Tier1,2,0.6,None,0,None,0,Self,1.2~7.2의 보호막을 얻습니다. 강화2
-019,MFSN1+,Support,Fire,Sheild,Tier2,2,0.8,None,0,None,0,Self,1.6~9.6의 보호막을 얻습니다.
-020,MFSN2,Support,Fire,Heal,Tier1,2,0.2,None,0,Fervor,1,Self,0.4~2.4의 체력을 회복합니다. 열정 1.
-021,MFSN2+,Support,Fire,Heal,Tier2,2,0.4,None,0,Fervor,2,Self,0.8~4.8의 체력을 회복합니다. 열정 2.
-022,MFSR1,Support,Fire,Sheild,Tier2,2,0.6,None,0,Fervor,1,Self,1.2~7.2의 보호막을 얻습니다. 열정 1.
-023,MFSR1+,Support,Fire,Sheild,Tier3,2,0.8,None,0,Fervor,2,Self,1.6~9.6의 보호막을 얻습니다. 열정 2.
-024,MFSE1,Support,Fire,Sheild,Tier3,2,0.8,None,0,Fervor,3,Self,1.6~9.6의 보호막을 얻습니다. 열정 3.
-025,MFSE1+,Support,Fire,Sheild,Tier4,2,1,None,0,Fervor,4,Self,2~12의 보호막을 얻습니다. 열정 4.
-026,MFSE1++,Support,Fire,Sheild,Tier4,2,1.2,None,0,Fervor,5,Self,2.4~14.4의 보호막을 얻습니다. 열정 5.
-027,MFSB,Support,Fire,Sheild,,2,0.4,None,0,Fervor,2,Self,0.8~4.8의 보호막을 얻습니다. 열정 2.
-028,MFSB+,Support,Fire,Sheild,,2,0.7,None,0,Fervor,3,Self,1.4~8.4의 보호막을 얻습니다. 열정 3.
-029,MFSB++,Support,Fire,Sheild,,2,1,None,0,Fervor,4,Self,2~12의 보호막을 얻습니다. 열정 4.
-030,MFSB+++,Support,Fire,Sheild,Tier5,2,1.3,None,0,Fervor,5,Self,2.6~15.6의 보호막을 얻습니다. 열정 5.
-031,MWAN1,Action,Water,Damage,Tier1,3,0.4,Water,0,None,0,Player,적에게 1.2~7.2의 피해를 줍니다.
-032,MWAN1+,Action,Water,Damage,Tier2,3,0.6,Water,1,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 침식 1.
-033,MWAN2,Action,Water,Damage,Tier1,3,0.2,Water,1,None,0,Player,적에게 0.6~3.6의 피해를 줍니다. 침식 1.
-034,MWAN2+,Action,Water,Damage,Tier2,3,0.4,Water,2,None,0,Player,적에게 1.2~7.2의 피해를 줍니다. 침식 2
-035,MWAN3,Action,Water,Damage,Tier1,3,0.6,None,0,None,0,Player,적에게 1.8~10.8의 피해를 줍니다.
-036,MWAN3+,Action,Water,Damage,Tier2,3,0.8,None,0,None,0,Player,적에게 2.4~14.4의 피해를 줍니다.
-037,MWAR1,Action,Water,Damage,Tier2,3,0.6,Water,2,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 침식2.
-038,MWAR1+,Action,Water,Damage,Tier3,3,0.8,Water,3,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 침식 3.
-039,MWAR2,Action,Water,Damage,Tier2,3,0.8,Water,1,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 침식 1.
-040,MWAR2+,Action,Water,Damage,Tier3,3,1,Water,2,None,0,Player,적에게 3~18의 피해를 줍니다. 침식 2.
-041,MWAE1,Action,Water,Damage,Tier3,3,1,Water,3,None,0,Player,적에게 3~18의 피해를 줍니다. 침식 3.
-042,MWAE1+,Action,Water,Damage,Tier4,3,1.2,Water,4,None,0,Player,적에게 3.6~21.6의 피해를 줍니다. 침식 4.
-043,MWAE1++,Action,Water,Damage,Tier4,3,1.4,Water,5,None,0,Player,적에게 4.2~25.2의 피해를 줍니다. 침식 5.
-044,MWAB,Action,Water,Damage,,3,0.5,None,0,None,0,Player,적에게 1.5~9의 피해를 줍니다.
-045,MWAB+,Action,Water,Damage,,3,0.8,Water,2,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 침식 2.
-046,MWAB++,Action,Water,Damage,,3,1.1,Water,4,None,0,Player,적에게 3.3~19.8의 피해를 줍니다. 침식 4.
-047,MWAB+++,Action,Water,Damage,Tier5,3,1.4,Water,6,None,0,Player,적에게 4.2~25.2의 피해를 줍니다. 침식 6.
-048,MWSN1,Support,Water,Sheild,Tier1,5,0.6,None,0,None,0,Self,3~18의 보호막을 얻습니다.
-049,MWSN1+,Support,Water,Sheild,Tier2,5,0.8,None,0,None,0,Self,4~24의 보호막을 얻습니다.
-050,MWSN2,Support,Water,Heal,Tier1,5,0.1,None,0,Recovery,2,Self,0.5~3의 체력을 회복합니다. 재생 2.
-051,MWSN2+,Support,Water,Heal,Tier2,5,0.2,None,0,Recovery,3,Self,1~6의 체력을 회복합니다. 재생 3.
-052,MWSR1,Support,Water,Heal,Tier2,5,0.4,None,0,Recovery,2,Self,2~12의 체력을 회복합니다. 재생 2.
-053,MWSR1+,Support,Water,Heal,Tier3,5,0.6,None,0,Recovery,3,Self,3~18의 체력을 회복합니다. 재생 3.
-054,MWSE1,Support,Water,Heal,Tier3,5,0.6,None,0,Recovery,4,Self,3~18의 체력을 회복합니다. 재생 4.
-055,MWSE1+,Support,Water,Heal,Tier4,5,0.8,None,0,Recovery,5,Self,4~24의 체력을 회복합니다. 재생 5.
-056,MWSE1++,Support,Water,Heal,Tier4,5,1,None,0,Recovery,6,Self,5~30의 체력을 회복합니다. 재생 6.
-057,MWSB,Support,Water,Sheild,,5,0.3,None,0,None,2,Self,1.5~9의 보호막을 얻습니다. 재생 2.
-058,MWSB+,Support,Water,Sheild,,5,0.6,None,0,Recovery,3,Self,3~18의 보호막을 얻습니다. 재생 3.
-059,MWSB++,Support,Water,Sheild,,5,0.9,None,0,Recovery,4,Self,4.5~27의 보호막을 얻습니다. 재생 4.
-060,MWSB+++,Support,Water,Sheild,Tier5,5,1.2,None,0,Recovery,5,Self,6~36의 보호막을 얻습니다. 재생 5.
-061,MAAN1,Action,Air,Damage,Tier1,3,0.4,Air,0,None,0,Player,적에게 1.2~7.2의 피해를 줍니다.
-062,MAAN1+,Action,Air,Damage,Tier2,3,0.6,Air,1,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 풍식 1.
-063,MAAN2,Action,Air,Damage,Tier1,3,0.1,Air,2,None,0,Player,적에게 0.3~1.8의 피해를 줍니다. 풍식 2.
-064,MAAN2+,Action,Air,Damage,Tier2,3,0.2,Air,3,None,0,Player,적에게 0.6~3.6의 피해를 줍니다. 풍식 3.
-065,MAAN3,Action,Air,Damage,Tier1,3,0.6,None,0,None,0,Player,적에게 1.8~10.8의 피해를 줍니다.
-066,MAAN3+,Action,Air,Damage,Tier2,3,0.8,None,0,None,0,Player,적에게 2.4~14.4의 피해를 줍니다.
-067,MAAR1,Action,Air,Damage,Tier2,3,0.6,Air,2,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 풍식 2.
-068,MAAR1+,Action,Air,Damage,Tier3,3,0.8,Air,3,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 풍식 3.
-069,MAAR2,Action,Air,Damage,Tier2,3,0.4,Air,3,None,0,Player,적에게 1.2~7.2의 피해를 줍니다. 풍식 3.
-070,MAAR2+,Action,Air,Damage,Tier3,3,0.6,Air,4,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 풍식 4.
-071,MAAE1,Action,Air,Damage,Tier3,3,0.8,Air,4,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 풍식 4.
-072,MAAE1+,Action,Air,Damage,Tier4,3,1,Air,5,None,0,Player,적에게 3~18의 피해를 줍니다. 풍식 5.
-073,MAAE1++,Action,Air,Damage,Tier4,3,1.2,Air,6,None,0,Player,적에게 3.6~21.6의 피해를 줍니다. 풍식 6.
-074,MAAB,Action,Air,Damage,,3,0.5,None,0,None,0,Player,적에게 1.5~9의 피해를 줍니다.
-075,MAAB+,Action,Air,Damage,,3,0.8,Air,2,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 풍식 2.
-076,MAAB++,Action,Air,Damage,,3,1.1,Air,4,None,0,Player,적에게 3.3~19.8의 피해를 줍니다. 풍식 4.
-077,MAAB+++,Action,Air,Damage,Tier5,3,1.4,Air,6,None,0,Player,적에게 4.2~25.2의 피해를 줍니다. 풍식 6.
-078,MASN1,Support,Air,Heal,Tier1,3,0.4,None,0,Gale,0,Self,1.2~7.2의 체력을 회복합니다.
-079,MASN1+,Support,Air,Heal,Tier2,3,0.6,None,0,Gale,1,Self,1.8~10.8의 체력을 회복합니다. 질풍 1.
-080,MASN2,Support,Air,Sheild,Tier1,3,0.2,None,0,Gale,1,Self,0.6~3.6의 보호막을 얻습니다. 질풍 1.
-081,MASN2+,Support,Air,Sheild,Tier2,3,0.4,None,0,Gale,2,Self,1.2~7.2의 보호막을 얻습니다. 질풍 2.
-082,MASR1,Support,Air,Heal,Tier2,3,0.4,None,0,Gale,2,Self,1.2~7.2의 체력을 회복합니다. 질풍 2.
-083,MASR1+,Support,Air,Heal,Tier3,3,0.6,None,0,Gale,3,Self,1.8~10.8의 체력을 회복합니다. 질풍 3.
-084,MASE1,Support,Air,Sheild,Tier3,3,0.6,None,0,Gale,4,Self,1.8~10.8의 보호막을 얻습니다. 질풍 4.
-085,MASE1+,Support,Air,Sheild,Tier4,3,0.8,None,0,Gale,5,Self,2.4~14.4의 보호막을 얻습니다. 질풍 5.
-086,MASE1++,Support,Air,Sheild,Tier4,3,1,None,0,Gale,6,Self,3~18의 보호막을 얻습니다. 질풍 6.
-087,MASB,Support,Air,Heal,,3,0.3,None,0,Gale,2,Self,0.9~5.4의 체력을 회복합니다. 질풍 2.
-088,MASB+,Support,Air,Heal,,3,0.6,None,0,Gale,3,Self,1.8~10.8의 체력을 회복합니다. 질풍 3.
-089,MASB++,Support,Air,Heal,,3,0.9,None,0,Gale,4,Self,2.7~16.2의 체력을 회복합니다. 질풍 4.
-090,MASB+++,Support,Air,Heal,Tier5,3,1.2,None,0,Gale,5,Self,3.6~21.6의 체력을 회복합니다. 질풍 5.
-091,MLAN1,Action,Land,Damage,Tier1,4,0.1,Land,2,None,0,Player,적에게 0.4~2.4의 피해를 줍니다. 진창 2.
-092,MLAN1+,Action,Land,Damage,Tier2,4,0.2,Land,3,None,0,Player,적에게 0.8~4.8의 피해를 줍니다. 진창 3.
-093,MLAN2,Action,Land,Damage,Tier1,4,0.2,Land,1,None,0,Player,적에게 0.8~4.8의 피해를 줍니다. 진창 2.
-094,MLAN2+,Action,Land,Damage,Tier2,4,0.4,Land,2,None,0,Player,적에게 1.6~9.6의 피해를 줍니다. 진창 2.
-095,MLAN3,Action,Land,Damage,Tier1,4,0.4,Land,0,None,0,Player,적에게 1.6~9.6의 피해를 줍니다.
-096,MLAN3+,Action,Land,Damage,Tier2,4,0.6,Land,1,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 진창 1.
-097,MLAR1,Action,Land,Damage,Tier2,4,0.6,Land,2,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 진창 2.
-098,MLAR1+,Action,Land,Damage,Tier3,4,0.8,Land,3,None,0,Player,적에게 3.2~19.2의 피해를 줍니다. 진창 3.
-099,MLAR2,Action,Land,Damage,Tier2,4,0.8,Land,1,None,0,Player,적에게 3.2~19.2의 피해를 줍니다. 진창 1.
-100,MLAR2+,Action,Land,Damage,Tier3,4,1,Land,2,None,0,Player,적에게 4~24의 피해를 줍니다. 진창 2.
-101,MLAE1,Action,Land,Damage,Tier3,4,0.8,Land,4,None,0,Player,적에게 3.2~19.2의 피해를 줍니다. 진창 4.
-102,MLAE1+,Action,Land,Damage,Tier4,4,1,Land,5,None,0,Player,적에게 4~24의 피해를 줍니다. 진창 5.
-103,MLAE1++,Action,Land,Damage,Tier4,4,1.2,Land,6,None,0,Player,적에게 4.8~28.8의 피해를 줍니다. 진창 6.
-104,MLAB,Action,Land,Damage,,4,0.4,None,0,None,0,Player,적에게 1.6~9.6의 피해를 줍니다.
-105,MLAB+,Action,Land,Damage,,4,0.7,Land,2,None,0,Player,적에게 2.8~16.8의 피해를 줍니다. 진창 2.
-106,MLAB++,Action,Land,Damage,,4,1,Land,4,None,0,Player,적에게 4~24의 피해를 줍니다. 침식 4.
-107,MLAB+++,Action,Land,Damage,Tier5,4,1.3,Land,6,None,0,Player,적에게 5.2~31.2의 피해를 줍니다. 침식 6.
-108,MLSN1,Support,Land,Sheild,Tier1,3,0.1,None,0,Guard,2,Self,0.3~1.8의 보호막을 얻습니다. 수호 2.
-109,MLSN1+,Support,Land,Sheild,Tier2,3,0.2,None,0,Guard,3,Self,0.6~3.6의 보호막을 얻습니다. 수호 3.
-110,MLSN2,Support,Land,Heal,Tier1,3,0.4,None,0,Guard,0,Self,1.2~7.2의 체력을 회복합니다.
-111,MLSN2+,Support,Land,Heal,Tier2,3,0.6,None,0,Guard,1,Self,1.8~10.8의 체력을 회복합니다. 수호 1.
-112,MLSR1,Support,Land,Heal,Tier2,3,0.6,None,0,Guard,1,Self,1.8~10.8의 체력을 회복합니다. 수호 1.
-113,MLSR1+,Support,Land,Heal,Tier3,3,0.8,None,0,Guard,2,Self,2.4~14.4의 체력을 회복합니다. 수호 2.
-114,MLSE1,Support,Land,Sheild,Tier3,3,1,None,0,Guard,2,Self,3~18의 보호막을 얻습니다. 수호 2.
-115,MLSE1+,Support,Land,Sheild,Tier4,3,1.2,None,0,Guard,3,Self,3.6~21.6의 보호막을 얻습니다. 수호 3.
-116,MLSE1++,Support,Land,Sheild,Tier4,3,1.4,None,0,Guard,4,Self,4.2~25.2의 보호막을 얻습니다. 수호 4.
-117,MLSB1,Support,Land,Heal,,3,0.5,None,0,Guard,0,Self,1.5~9의 체력을 회복합니다.
-118,MLSB1+,Support,Land,Heal,Tier5,3,0.8,None,0,Guard,2,Self,2.4~14.4의 체력을 회복합니다. 수호 2.
-119,MLSB2,Support,Land,Heal,,3,1.1,None,0,Guard,4,Self,3.3~19.8의 체력을 회복합니다. 수호 4.
-120,MLSB2+,Support,Land,Heal,Tier5,3,1.4,None,0,Guard,6,Self,4.2~25.2의 체력을 회복합니다. 수호 6.
+1001,단검 찌르기,Action,Fire,Damage,Tier1,5,0.6,None,0,None,0,Player,적에게 3~18의 피해를 줍니다. 강화 2
+1002,단검 던지기,Action,Fire,Damage,Tier2,5,0.8,None,0,None,0,Player,적에게 4~24의 피해를 줍니다.
+1003,불뿜기,Action,Fire,Damage,Tier1,5,0.2,Fire,1,None,0,Player,적에게 1~6의 피해를 줍니다. 점화 1.
+1004,불화살,Action,Fire,Damage,Tier2,5,0.4,Fire,2,None,0,Player,적에게 2~12의 피해를 줍니다. 점화 2.
+1005,불씨 흩뿌리기,Action,Fire,Damage,Tier1,5,0.1,Fire,2,None,0,Player,적에게 0.5~3의 피해를 줍니다. 점화 2.
+1006,MFAN3+,Action,Fire,Damage,Tier2,5,0.2,Fire,3,None,0,Player,적에게 1~6의 피해를 줍니다. 점화 3.
+1007,격분,Action,Fire,Damage,Tier2,5,0.4,Fire,3,None,0,Player,적에게 2~12의 피해를 줍니다. 점화 3.
+1008,MFAR1+,Action,Fire,Damage,Tier3,5,0.6,Fire,4,None,0,Player,적에게 3~18의 피해를 줍니다. 점화 4.
+1009,MFAR2,Action,Fire,Damage,Tier2,5,0.6,Fire,2,None,0,Player,적에게 3~18의 피해를 줍니다. 점화 2. 
+1010,화염 강타,Action,Fire,Damage,Tier3,5,0.8,Fire,3,None,0,Player,적에게 4~24의 피해를 줍니다. 점화 3.
+1011,불기둥,Action,Fire,Damage,Tier3,5,0.8,Fire,4,None,0,Player,적에게 4~24의 피해를 줍니다. 점화 4.
+1012,불길 확산,Action,Fire,Damage,Tier4,5,1,Fire,5,None,0,Player,적에게 5~30의 피해를 줍니다. 점화 5.
+1013,MFAE1++,Action,Fire,Damage,Tier4,5,1.2,Fire,6,None,0,Player,적에게 6~36의 피해를 줍니다. 점화 6.
+1014,MFAB,Action,Fire,Damage,,5,0.4,None,0,None,0,Player,적에게 2~12의 피해를 줍니다.
+1015,MFAB+,Action,Fire,Damage,,5,0.7,Fire,2,None,0,Player,적에게 3.5~21의 피해를 줍니다. 점화 2.
+1016,MFAB++,Action,Fire,Damage,,5,1,Fire,4,None,0,Player,적에게 5~30의 피해를 줍니다. 점화 4.
+1017,무자비한 일격,Action,Fire,Damage,Tier5,5,1.3,Fire,6,None,0,Player,적에게 6.5~39의 피해를 줍니다. 점화 6.
+1018,MFSN1,Support,Fire,Sheild,Tier1,2,0.6,None,0,None,0,Self,1.2~7.2의 보호막을 얻습니다. 강화2
+1019,MFSN1+,Support,Fire,Sheild,Tier2,2,0.8,None,0,None,0,Self,1.6~9.6의 보호막을 얻습니다.
+1020,과열,Support,Fire,Heal,Tier1,2,0.2,None,0,Fervor,1,Self,0.4~2.4의 체력을 회복합니다. 열정 1.
+1021,MFSN2+,Support,Fire,Heal,Tier2,2,0.4,None,0,Fervor,2,Self,0.8~4.8의 체력을 회복합니다. 열정 2.
+1022,분노,Support,Fire,Sheild,Tier2,2,0.6,None,0,Fervor,1,Self,1.2~7.2의 보호막을 얻습니다. 열정 1.
+1023,재정비,Support,Fire,Sheild,Tier3,2,0.8,None,0,Fervor,2,Self,1.6~9.6의 보호막을 얻습니다. 열정 2.
+1024,MFSE1,Support,Fire,Sheild,Tier3,2,0.8,None,0,Fervor,3,Self,1.6~9.6의 보호막을 얻습니다. 열정 3.
+1025,방패 올리기,Support,Fire,Sheild,Tier4,2,1,None,0,Fervor,4,Self,2~12의 보호막을 얻습니다. 열정 4.
+1026,견고한 갑옷,Support,Fire,Sheild,Tier4,2,1.2,None,0,Fervor,5,Self,2.4~14.4의 보호막을 얻습니다. 열정 5.
+1027,MFSB,Support,Fire,Sheild,,2,0.4,None,0,Fervor,2,Self,0.8~4.8의 보호막을 얻습니다. 열정 2.
+1028,MFSB+,Support,Fire,Sheild,,2,0.7,None,0,Fervor,3,Self,1.4~8.4의 보호막을 얻습니다. 열정 3.
+1029,MFSB++,Support,Fire,Sheild,,2,1,None,0,Fervor,4,Self,2~12의 보호막을 얻습니다. 열정 4.
+1030,MFSB+++,Support,Fire,Sheild,Tier5,2,1.3,None,0,Fervor,5,Self,2.6~15.6의 보호막을 얻습니다. 열정 5.
+1031,MWAN1,Action,Water,Damage,Tier1,3,0.4,Water,0,None,0,Player,적에게 1.2~7.2의 피해를 줍니다.
+1032,MWAN1+,Action,Water,Damage,Tier2,3,0.6,Water,1,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 침식 1.
+1033,점액 던지기,Action,Water,Damage,Tier1,3,0.2,Water,1,None,0,Player,적에게 0.6~3.6의 피해를 줍니다. 침식 1.
+1034,MWAN2+,Action,Water,Damage,Tier2,3,0.4,Water,2,None,0,Player,적에게 1.2~7.2의 피해를 줍니다. 침식 2
+1035,MWAN3,Action,Water,Damage,Tier1,3,0.6,None,0,None,0,Player,적에게 1.8~10.8의 피해를 줍니다.
+1036,휘감기,Action,Water,Damage,Tier2,3,0.8,None,0,None,0,Player,적에게 2.4~14.4의 피해를 줍니다.
+1037,MWAR1,Action,Water,Damage,Tier2,3,0.6,Water,2,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 침식2.
+1038,날카로운 독니,Action,Water,Damage,Tier3,3,0.8,Water,3,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 침식 3.
+1039,MWAR2,Action,Water,Damage,Tier2,3,0.8,Water,1,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 침식 1.
+1040,도약 공격,Action,Water,Damage,Tier3,3,1,Water,2,None,0,Player,적에게 3~18의 피해를 줍니다. 침식 2.
+1041,MWAE1,Action,Water,Damage,Tier3,3,1,Water,3,None,0,Player,적에게 3~18의 피해를 줍니다. 침식 3.
+1042,무당독,Action,Water,Damage,Tier4,3,1.2,Water,4,None,0,Player,적에게 3.6~21.6의 피해를 줍니다. 침식 4.
+1043,늪지독,Action,Water,Damage,Tier4,3,1.4,Water,5,None,0,Player,적에게 4.2~25.2의 피해를 줍니다. 침식 5.
+1044,MWAB,Action,Water,Damage,,3,0.5,None,0,None,0,Player,적에게 1.5~9의 피해를 줍니다.
+1045,MWAB+,Action,Water,Damage,,3,0.8,Water,2,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 침식 2.
+1046,MWAB++,Action,Water,Damage,,3,1.1,Water,4,None,0,Player,적에게 3.3~19.8의 피해를 줍니다. 침식 4.
+1047,소용돌이,Action,Water,Damage,Tier5,3,1.4,Water,6,None,0,Player,적에게 4.2~25.2의 피해를 줍니다. 침식 6.
+1048,점액 방패,Support,Water,Sheild,Tier1,5,0.6,None,0,None,0,Self,3~18의 보호막을 얻습니다.
+1049,단단한 비늘,Support,Water,Sheild,Tier2,5,0.8,None,0,None,0,Self,4~24의 보호막을 얻습니다.
+1050,MWSN2,Support,Water,Heal,Tier1,5,0.1,None,0,Recovery,2,Self,0.5~3의 체력을 회복합니다. 재생 2.
+1051,재생,Support,Water,Heal,Tier2,5,0.2,None,0,Recovery,3,Self,1~6의 체력을 회복합니다. 재생 3.
+1052,MWSR1,Support,Water,Heal,Tier2,5,0.4,None,0,Recovery,2,Self,2~12의 체력을 회복합니다. 재생 2.
+1053,MWSR1+,Support,Water,Heal,Tier3,5,0.6,None,0,Recovery,3,Self,3~18의 체력을 회복합니다. 재생 3.
+1054,MWSE1,Support,Water,Heal,Tier3,5,0.6,None,0,Recovery,4,Self,3~18의 체력을 회복합니다. 재생 4.
+1055,미끄러운 피부,Support,Water,Heal,Tier4,5,0.8,None,0,Recovery,5,Self,4~24의 체력을 회복합니다. 재생 5.
+1056,습지 재생,Support,Water,Heal,Tier4,5,1,None,0,Recovery,6,Self,5~30의 체력을 회복합니다. 재생 6.
+1057,MWSB,Support,Water,Sheild,,5,0.3,None,0,Recovery,2,Self,1.5~9의 보호막을 얻습니다. 재생 2.
+1058,MWSB+,Support,Water,Sheild,,5,0.6,None,0,Recovery,3,Self,3~18의 보호막을 얻습니다. 재생 3.
+1059,MWSB++,Support,Water,Sheild,,5,0.9,None,0,Recovery,4,Self,4.5~27의 보호막을 얻습니다. 재생 4.
+1060,MWSB+++,Support,Water,Sheild,Tier5,5,1.2,None,0,Recovery,5,Self,6~36의 보호막을 얻습니다. 재생 5.
+1061,MAAN1,Action,Air,Damage,Tier1,3,0.4,Air,1,None,0,Player,적에게 1.2~7.2의 피해를 줍니다. 풍식 1.
+1062,회오리 발톱,Action,Air,Damage,Tier2,3,0.6,Air,2,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 풍식 2.
+1063,날개 베기,Action,Air,Damage,Tier1,3,0.1,Air,2,None,0,Player,적에게 0.3~1.8의 피해를 줍니다. 풍식 2.
+1064,MAAN2+,Action,Air,Damage,Tier2,3,0.2,Air,3,None,0,Player,적에게 0.6~3.6의 피해를 줍니다. 풍식 3.
+1065,물어뜯기,Action,Air,Damage,Tier1,3,0.6,None,0,None,0,Player,적에게 1.8~10.8의 피해를 줍니다.
+1066,돌진 비행,Action,Air,Damage,Tier2,3,0.8,None,0,None,0,Player,적에게 2.4~14.4의 피해를 줍니다.
+1067,돌개 바람,Action,Air,Damage,Tier2,3,0.6,Air,2,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 풍식 2.
+1068,날카로운 칼날,Action,Air,Damage,Tier3,3,0.8,Air,3,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 풍식 3.
+1069,소용돌이,Action,Air,Damage,Tier2,3,0.4,Air,3,None,0,Player,적에게 1.2~7.2의 피해를 줍니다. 풍식 3.
+1070,MAAR2+,Action,Air,Damage,Tier3,3,0.6,Air,4,None,0,Player,적에게 1.8~10.8의 피해를 줍니다. 풍식 4.
+1071,질풍 돌진,Action,Air,Damage,Tier3,3,0.8,Air,4,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 풍식 4.
+1072,포식,Action,Air,Damage,Tier4,3,1,Air,5,None,0,Player,적에게 3~18의 피해를 줍니다. 풍식 5.
+1073,MAAE1++,Action,Air,Damage,Tier4,3,1.2,Air,6,None,0,Player,적에게 3.6~21.6의 피해를 줍니다. 풍식 6.
+1074,MAAB,Action,Air,Damage,,3,0.5,None,0,None,0,Player,적에게 1.5~9의 피해를 줍니다.
+1075,MAAB+,Action,Air,Damage,,3,0.8,Air,2,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 풍식 2.
+1076,MAAB++,Action,Air,Damage,,3,1.1,Air,4,None,0,Player,적에게 3.3~19.8의 피해를 줍니다. 풍식 4.
+1077,폭풍 갈퀴,Action,Air,Damage,Tier5,3,1.4,Air,6,None,0,Player,적에게 4.2~25.2의 피해를 줍니다. 풍식 6.
+1078,MASN1,Support,Air,Heal,Tier1,3,0.4,None,0,Gale,0,Self,1.2~7.2의 체력을 회복합니다.
+1079,MASN1+,Support,Air,Heal,Tier2,3,0.6,None,0,Gale,1,Self,1.8~10.8의 체력을 회복합니다. 질풍 1.
+1080,단단한 날개,Support,Air,Sheild,Tier1,3,0.2,None,0,Gale,1,Self,0.6~3.6의 보호막을 얻습니다. 질풍 1.
+1081,MASN2+,Support,Air,Sheild,Tier2,3,0.4,None,0,Gale,2,Self,1.2~7.2의 보호막을 얻습니다. 질풍 2.
+1082,MASR1,Support,Air,Heal,Tier2,3,0.4,None,0,Gale,2,Self,1.2~7.2의 체력을 회복합니다. 질풍 2.
+1083,신속,Support,Air,Heal,Tier3,3,0.6,None,0,Gale,3,Self,1.8~10.8의 체력을 회복합니다. 질풍 3.
+1084,MASE1,Support,Air,Sheild,Tier3,3,0.6,None,0,Gale,4,Self,1.8~10.8의 보호막을 얻습니다. 질풍 4.
+1085,광풍화,Support,Air,Sheild,Tier4,3,0.8,None,0,Gale,5,Self,2.4~14.4의 보호막을 얻습니다. 질풍 5.
+1086,MASE1++,Support,Air,Sheild,Tier4,3,1,None,0,Gale,6,Self,3~18의 보호막을 얻습니다. 질풍 6.
+1087,MASB,Support,Air,Heal,,3,0.3,None,0,Gale,2,Self,0.9~5.4의 체력을 회복합니다. 질풍 2.
+1088,MASB+,Support,Air,Heal,,3,0.6,None,0,Gale,3,Self,1.8~10.8의 체력을 회복합니다. 질풍 3.
+1089,MASB++,Support,Air,Heal,,3,0.9,None,0,Gale,4,Self,2.7~16.2의 체력을 회복합니다. 질풍 4.
+1090,MASB+++,Support,Air,Heal,Tier5,3,1.2,None,0,Gale,5,Self,3.6~21.6의 체력을 회복합니다. 질풍 5.
+1091,위액 투척,Action,Land,Damage,Tier1,4,0.1,Land,2,None,0,Player,적에게 0.4~2.4의 피해를 줍니다. 진창 2.
+1092,MLAN1+,Action,Land,Damage,Tier2,4,0.2,Land,3,None,0,Player,적에게 0.8~4.8의 피해를 줍니다. 진창 3.
+1093,MLAN2,Action,Land,Damage,Tier1,4,0.2,Land,1,None,0,Player,적에게 0.8~4.8의 피해를 줍니다. 진창 1.
+1094,MLAN2+,Action,Land,Damage,Tier2,4,0.4,Land,2,None,0,Player,적에게 1.6~9.6의 피해를 줍니다. 진창 2.
+1095,MLAN3,Action,Land,Damage,Tier1,4,0.4,Land,0,None,0,Player,적에게 1.6~9.6의 피해를 줍니다.
+1096,머리 들이받기,Action,Land,Damage,Tier2,4,0.6,Land,1,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 진창 1.
+1097,MLAR1,Action,Land,Damage,Tier2,4,0.6,Land,2,None,0,Player,적에게 2.4~14.4의 피해를 줍니다. 진창 2.
+1098,산성 포자,Action,Land,Damage,Tier3,4,0.8,Land,3,None,0,Player,적에게 3.2~19.2의 피해를 줍니다. 진창 3.
+1099,집어삼키기,Action,Land,Damage,Tier2,4,0.8,Land,1,None,0,Player,적에게 3.2~19.2의 피해를 줍니다. 진창 1.
+1100,MLAR2+,Action,Land,Damage,Tier3,4,1,Land,2,None,0,Player,적에게 4~24의 피해를 줍니다. 진창 2.
+1101,MLAE1,Action,Land,Damage,Tier3,4,0.8,Land,4,None,0,Player,적에게 3.2~19.2의 피해를 줍니다. 진창 4.
+1102,대지 흔들기,Action,Land,Damage,Tier4,4,1,Land,5,None,0,Player,적에게 4~24의 피해를 줍니다. 진창 5.
+1103,땅 고르기,Action,Land,Damage,Tier4,4,1.2,Land,6,None,0,Player,적에게 4.8~28.8의 피해를 줍니다. 진창 6.
+1104,MLAB,Action,Land,Damage,,4,0.4,None,0,None,0,Player,적에게 1.6~9.6의 피해를 줍니다.
+1105,MLAB+,Action,Land,Damage,,4,0.7,Land,2,None,0,Player,적에게 2.8~16.8의 피해를 줍니다. 진창 2.
+1106,MLAB++,Action,Land,Damage,Tier4,4,1,Land,4,None,0,Player,적에게 4~24의 피해를 줍니다. 침식 4.
+1107,MLAB+++,Action,Land,Damage,Tier5,4,1.3,Land,6,None,0,Player,적에게 5.2~31.2의 피해를 줍니다. 침식 6.
+1108,MLSN1,Support,Land,Sheild,Tier1,3,0.1,None,0,Guard,2,Self,0.3~1.8의 보호막을 얻습니다. 수호 2.
+1109,MLSN1+,Support,Land,Sheild,Tier2,3,0.2,None,0,Guard,3,Self,0.6~3.6의 보호막을 얻습니다. 수호 3.
+1110,식충회복,Support,Land,Heal,Tier1,3,0.4,None,0,Guard,0,Self,1.2~7.2의 체력을 회복합니다.
+1111,MLSN2+,Support,Land,Heal,Tier2,3,0.6,None,0,Guard,1,Self,1.8~10.8의 체력을 회복합니다. 수호 1.
+1112,MLSR1,Support,Land,Heal,Tier2,3,0.6,None,0,Guard,1,Self,1.8~10.8의 체력을 회복합니다. 수호 1.
+1113,강한 재생력,Support,Land,Heal,Tier3,3,0.8,None,0,Guard,2,Self,2.4~14.4의 체력을 회복합니다. 수호 2.
+1114,껍질 방어,Support,Land,Sheild,Tier3,3,1,None,0,Guard,2,Self,3~18의 보호막을 얻습니다. 수호 2.
+1115,MLSE1+,Support,Land,Sheild,Tier4,3,1.2,None,0,Guard,3,Self,3.6~21.6의 보호막을 얻습니다. 수호 3.
+1116,MLSE1++,Support,Land,Sheild,Tier4,3,1.4,None,0,Guard,4,Self,4.2~25.2의 보호막을 얻습니다. 수호 4.
+1117,MLSB1,Support,Land,Heal,,3,0.5,None,0,Guard,0,Self,1.5~9의 체력을 회복합니다.
+1118,숲의 보호,Support,Land,Heal,Tier3,3,0.9,None,0,Guard,2,Self,2.4~14.4의 체력을 회복합니다. 수호 2.
+1119,MLSB2,Support,Land,Heal,,3,1.1,None,0,Guard,4,Self,3.3~19.8의 체력을 회복합니다. 수호 4.
+1120,강철 갑옷,Support,Land,Sheild,Tier5,3,1.4,None,0,Guard,6,Self,4.2~25.2의 보호막을 얻습니다. 수호 6.
+1121,몽둥이 내려치기,Action,None,Damage,Tier1,4,0.4,None,0,None,0,Player,
+1122,급소 노리기,Action,None,Damage,Tier2,4,0.6,None,0,None,0,Player,
+1123,무모한 돌진,Action,None,Damage,Tier3,4,0.8,None,0,None,0,Player,
+1124,회복약,Support,None,Heal,Tier1,4,0.3,None,0,None,0,Self,
+1125,방패 들기,Support,None,Sheild,Tier2,4,0.5,None,0,None,0,Self,
+1126,거친 피부,Support,None,Sheild,Tier3,4,0.7,None,0,None,0,Self,
+1127,내려찍기,Action,None,Damage,Tier2,4,0.6,None,0,None,0,Player,
 ,None,,,,,,,,,,,,

@@ -47,6 +47,8 @@ public class EnemyManager : MonoBehaviour
         if (_enemyInstance)
             Destroy(_enemyInstance);
 
+        Debug.Log($"SpawnEnemy 호출: {enemy.EnemyName} 카드 수: {enemy.EnemyCards.Count}");
+
         _enemyInstance = Instantiate(prefab, transform.position, transform.rotation);
         _enemyInstance.transform.parent = transform;
         Enemy = _enemyInstance.GetComponent<Enemy>();

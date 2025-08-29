@@ -13,6 +13,7 @@ public class Enemy : Character
 
         // EnemySO 내 카드 덱을 복사하여 할당
         cards = new List<CardDataSO>(enemy.EnemyCards);
+        Debug.Log($"EnemySO '{enemy.EnemyName}' 카드 수: {enemy.EnemyCards?.Count ?? -1}, Enemy 객체 cards 수: {cards?.Count ?? -1}");
     }
 
     public EnemySO GetEnemySo()

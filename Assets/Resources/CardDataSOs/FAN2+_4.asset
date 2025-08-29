@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Damage
   min_Value: 5
-  Max_Vlaue: 12
+  Max_Vlaue: 0
   Calculation: 0.4
   Debuff_Type: Fire
   Debuff_Stack: 2
@@ -31,9 +31,4 @@ MonoBehaviour:
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 2~12\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
     \uC810\uD654 2."
-  Unnamed_18: 
   CardConcept: "1\uB2E8\uACC4 \uACF5\uACA9 / 2\uB2E8\uACC4 \uB514\uBC84\uD504"
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 
