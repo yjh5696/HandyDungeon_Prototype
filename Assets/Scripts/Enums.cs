@@ -50,11 +50,12 @@ public enum ChoiceType
     Rest = 3,
 }
 
-public enum StageType
+public enum EventType
 {
     MainStory = 0,
     SubStory = 1,
     Battle = 2,
+    Boss = 3,
 }
 
 [System.Serializable]
@@ -84,4 +85,49 @@ public class GameCard
     public string Unnamed_21;
     public string Unnamed_22;
     public string Formula;
+}
+
+[System.Serializable]
+public class ChoiceEvent
+{
+    public string choiceID;
+    public int choiceChapterNumber;
+    public int choiceEventNumber;
+    public bool isRootEvent;
+    public string parentChoiceID;
+    public ChoiceType choiceEventType;
+    public string choiceName;
+    public string choiceText;
+    public float choiceRate;
+    public string choiceSuccessText;
+    public string choiceFailText;
+    public string choiceReward;
+    public string choiceLoss;
+    public string choiceRequirement;
+}
+
+[System.Serializable]
+public class MainEvent
+{
+    public string choiceID;
+    public int choiceStageNumber;
+    public int choiceEventNumber;
+    public ChoiceType choiceEventType;
+    public string choiceName;
+    public string choiceText;
+    public float choiceRate;
+    public string choiceSuccessText;
+    public string choiceFailText;
+    public string choiceReward;
+    public string choiceLoss;
+}
+
+[System.Serializable]
+public class StartScript
+{
+    public string scriptID;
+    public string chapterID;
+    public string eventID;
+    public string scriptText;
+    public float delayTime;
 }
