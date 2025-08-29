@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public int currentStage = 0;
     public int mainStageNumber = 1;
 
+    private CardDataSO _actionCard;
+    private CardDataSO _supportCard;
+    private CardDataSO _specialCard;
+
     [SerializeField] private FadeInOut startFade;
     [SerializeField] private FadeInOut image;
     [SerializeField] private GameObject log;
@@ -45,10 +49,10 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        StartPrologue().Forget();
+        //StartPrologue().Forget();
         
-        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
-        //StartPlayerTurn();
+        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
+        StartPlayerTurn();
     }
 
     public void StartChoice()

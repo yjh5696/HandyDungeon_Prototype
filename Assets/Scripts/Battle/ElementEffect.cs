@@ -48,7 +48,7 @@ public static class ElementEffect
             target.RemoveStatus(State.Water);
             target.SetStatus("침전", (stacks + 1));
             target.TakeDamage(4 * stacks);
-            target.SetShieldEffect(2 * stacks, -1, 0);
+            target.SetShieldEffect(2 * stacks, -1);
             ApplyBaseDebuff(target, State.Land, baseStacks);
             target.SetLastElement(State.Land);
             return $"침전 발생! {4 * stacks} 피해 + 진창 {baseStacks} 스택 부여";

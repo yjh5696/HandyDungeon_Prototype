@@ -52,7 +52,7 @@ public static class BattleSystem
 
         // 7. 체력 감소 로그 출력
         LogManager.Instance.AddLog($"{attacker.GetUnitName()} → {target.GetUnitName()} : {totalDamage} 데미지");
-
+        Debug.Log($"{attacker.GetUnitName()} → {target.GetUnitName()} : {totalDamage} 데미지 / {target.GetUnitName()} : {target.GetCurrentHp()}");
         // 8. 사망 여부 체크 후 처리
         if (target.GetCurrentHp() <= 0)
         {
@@ -81,10 +81,11 @@ public static class BattleSystem
     public static void ExecuteDefence(Character attacker, Character target, CardDataSO card, int diceValue)
     {
         State buffType = (State)System.Enum.Parse(typeof(State), card.Buff_Type);
+        string cardType = card.Effect_Type;
 
         // 1. 기본 데미지 계산
         float baseDamage = card.min_Value * (diceValue * card.Calculation);
-
+        Debug.Log($"[Support] 기본 회복량: {baseDamage}");
         // 2. 속성 연계 확인 및 속성 버프 부여
         string effectLog = ElementBuff.ApplyBuff(attacker, target, buffType, card.Buff_Stack);
 
@@ -92,7 +93,7 @@ public static class BattleSystem
             LogManager.Instance.AddLog(effectLog);
 
         // 3. 재생 효과 발동
-        attacker.SetRecovery(diceValue, (int)baseDamage);
+        attacker.SetRecovery(diceValue, cardType);
     }
 }
 

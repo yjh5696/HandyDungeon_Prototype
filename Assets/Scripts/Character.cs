@@ -335,36 +335,42 @@ public class Character : MonoBehaviour
     }
 
     // 재생 효과
-    public void SetRecovery(int diceValue, int damage)
+    public void SetRecovery(int diceValue, string cardType)
     {
         if(elementStacks.ContainsKey(State.Recovery))
         {
             int stacks = elementStacks[State.Recovery];
-            //SetShieldEffect(stacks, diceValue, damage); // 보호막 설정
-            SetHealEffect(stacks, diceValue, damage); // 회복 설정
+            if(cardType == "Heal")
+            {
+                SetHealEffect(stacks, diceValue); // 회복 설정
+            }
+            else if(cardType == "Shield")
+            {
+                SetShieldEffect(stacks, diceValue); // 보호막 설정
+            }
             elementStacks[State.Recovery] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Recovery, 0) - 1);
         }
     }
 
     // 보호막 효과
-    public void SetShieldEffect(int stacks, int diceValue, int damage)
+    public void SetShieldEffect(int stacks, int diceValue)
     {
         if(diceValue <= 0)
         {
             diceValue = 1;
         }
-        ShieldValue = stacks + damage;
+        ShieldValue = stacks;
         Shield = ShieldValue * diceValue;
         LogManager.Instance.AddLog($"{unitName}이/가 보호막 효과로{Shield} 보호막 획득");
     }
     // 회복 효과
-    public void SetHealEffect(int stacks, int diceValue, int damage)
+    public void SetHealEffect(int stacks, int diceValue)
     {
         if (diceValue <= 0)
         {
             diceValue = 1;
         }
-        RecoveryValue = stacks + damage;
+        RecoveryValue = stacks;
         Recovery = RecoveryValue * diceValue;
         SetCurrentHp(CurrentHp + Recovery);
         LogManager.Instance.AddLog($"{unitName}이/가 재생 효과로 {Recovery} 회복");

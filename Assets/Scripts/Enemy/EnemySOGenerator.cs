@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
-public class EnemyDataParser : Editor
+public class EnemySOGenerator : Editor
 {
     // CSV 파일 경로
     private static readonly string CSV_PATH = "Assets/Resources/Monster.csv";

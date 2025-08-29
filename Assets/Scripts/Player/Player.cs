@@ -12,7 +12,7 @@ public class Player : Character
 
     private void GetCardsFromAsset()
     {
-        this.cards = Resources.LoadAll<CardDataSO>("CardDataSOs").ToList();
+        //this.cards = Resources.LoadAll<CardDataSO>("CardDataSOs").ToList();
     }
 
     public void PlayerDie()
