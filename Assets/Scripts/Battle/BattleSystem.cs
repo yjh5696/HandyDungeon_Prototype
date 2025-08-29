@@ -125,7 +125,6 @@ public static class BattleSystem
             attacker.SetShield(baseDamage);
         }
 
-
         // 2. 속성 연계 확인 및 속성 버프 부여
         string effectLog = ElementBuff.ApplyBuff(attacker, target, buffType, card.Buff_Stack);
 
