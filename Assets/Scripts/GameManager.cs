@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dicebtn;
     [SerializeField] private GameObject skip;
     [SerializeField] private GameObject traits;
+    [SerializeField] private StartScriptSO prologueScript;
+    [SerializeField] private List<StartScriptSO> startScripts = new List<StartScriptSO>();
 
     private void Awake()
     {
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        StartPrologue().Forget();
+        StartScriptLog().Forget();
         
         //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
         //StartPlayerTurn();
@@ -64,16 +66,25 @@ public class GameManager : MonoBehaviour
         skipBtnClicked = true;
     }
 
-    private async UniTaskVoid StartPrologue()
+    private async UniTaskVoid StartScriptLog()
     {
         skip.GetComponent<Button>().interactable = false;
         await UniTask.WaitUntil(() => !startFade.isFading);
         
         skip.GetComponent<Button>().interactable = true;
 
-        LogManager.Instance.StartLog("{0}프롤로그 시작 중{4.0}스킵해도 됩니다{5.0}이거 봐도 뭐 도움 안 되긴 함 ㅋㅋ{10.0}").Forget();
-        
-        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging || skipBtnClicked);
+        foreach (StartScript script in prologueScript.StartScripts)
+        {
+            LogManager.Instance.AddDelayedLog(script.scriptText, script.delayTime).Forget();
+            
+            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging || skipBtnClicked);
+
+            if (skipBtnClicked)
+            {
+                skipBtnClicked = false;
+                break;
+            }
+        }
         
         skip.gameObject.SetActive(false);
         
@@ -93,7 +104,7 @@ public class GameManager : MonoBehaviour
         choice.SetActive(true);
     }
 
-    public void NextStage()
+    public async UniTaskVoid NextStage()
     {
         currentStage++;
         
@@ -104,16 +115,44 @@ public class GameManager : MonoBehaviour
             return;
         }
         
-        if (Stage.Chapters[currentChapter][currentStage] == StageType.MainStory) //현재 스테이지가 메인이고 스테이지를 진행한다면 다음 메인 선택지가 나오도록 함
+        if (Stage.Chapters[currentChapter][currentStage] == EventType.MainStory) //현재 스테이지가 메인이고 스테이지를 진행한다면 다음 메인 선택지가 나오도록 함
         {
             mainStageNumber++;
         }
 
-        if (Stage.Chapters[currentChapter][currentStage] == StageType.Battle)
+        if (Stage.Chapters[currentChapter][currentStage] == EventType.Battle)
         {
-            StartBattle();
+            LogManager.Instance.AddDelayedLog("적을 만났습니다!", 2.0f).Forget();
+            
+            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+            
+            LogManager.Instance.AddDelayedLog("전투가 시작됩니다...", 2.0f).Forget();
+            
+            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+
+            LogManager.Instance.AddSpacingLine();
+            
+            StartBattle("Rank1");
         }
-        else
+        else if (Stage.Chapters[currentChapter][currentStage] == EventType.Boss)
+        {
+            LogManager.Instance.AddDelayedLog("강력한 적을 만났습니다!", 2.0f).Forget();
+            
+            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+            
+            LogManager.Instance.AddDelayedLog("전투가 시작됩니다...", 2.0f).Forget();
+            
+            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+            
+            LogManager.Instance.AddDelayedLog("조심하십시오...", 1.0f).Forget();
+            
+            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+
+            LogManager.Instance.AddSpacingLine();
+            
+            StartBattle("Rank1");
+        }
+        else if(Stage.Chapters[currentChapter][currentStage] == EventType.MainStory || Stage.Chapters[currentChapter][currentStage] == EventType.SubStory)
         {
             StartChoice();
         }
@@ -124,13 +163,13 @@ public class GameManager : MonoBehaviour
         currentChapter++;
     }
 
-    public void StartBattle()
+    public void StartBattle(string enemyRank)
     {
         image.FadeOut(1.0f);
         choice.SetActive(false);
         battle.SetActive(true);
         isPlayerinBattle = true;
-        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
+        EnemySpawner.Instance.SpawnRandomEnemyByRank(enemyRank);
         StartPlayerTurn();
     }
 
@@ -228,7 +267,7 @@ public class GameManager : MonoBehaviour
         image.gameObject.SetActive(true);
         image.FadeIn(1.0f);
         
-        NextStage();
+        NextStage().Forget();
     }
 }
 

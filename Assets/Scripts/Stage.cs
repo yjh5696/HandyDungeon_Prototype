@@ -3,8 +3,8 @@ using UnityEngine;
 
 public static class Stage
 {
-    public static readonly StageType[][] Chapters =
+    public static readonly EventType[][] Chapters =
     {
-        new[] {StageType.MainStory, StageType.SubStory, StageType.Battle, StageType.SubStory, StageType.MainStory, StageType.SubStory, StageType.Battle, StageType.SubStory, StageType.MainStory, StageType.Battle},
+        new[] {EventType.MainStory, EventType.SubStory, EventType.Battle, EventType.SubStory, EventType.Boss},
     };
 }

@@ -14,12 +14,10 @@ public class Choice : MonoBehaviour
     [SerializeField] private TMP_Text choiceRateText;
     [SerializeField] private TMP_Text choiceSuccessText;
     [SerializeField] private TMP_Text choiceFailText;
-    private string _choice;
-    private ChoiceType ChoiceType { get; set; }
-    private List<CardSO> _choiceRewardCard;
-    private List<string> _subChoices;
-    private int _rate;
-    private bool _isMainChoice;
+    private ChoiceType _choiceType;
+    private ChoiceEvent _subEvent;
+    private MainEvent _mainEvent;
+    private List<ChoiceEvent> _subChoices;
 
     public void Init()
     {
@@ -28,36 +26,72 @@ public class Choice : MonoBehaviour
         choiceRateText.text = "";
     }
 
-    public void SetChoice(string choice, ChoiceType type, int rate, bool isMainStory = false)
+    public void SetChoice(MainEvent choiceEvent)
     {
-        _choice = choice;
-        choiceText.text = choice;
-        switch (type)
+        _mainEvent = choiceEvent;
+        
+        choiceText.text = _mainEvent.choiceName;
+        switch (_mainEvent.choiceEventType)
         {
             case ChoiceType.Battle:
-                ChoiceType = ChoiceType.Battle;
+                _choiceType = ChoiceType.Battle;
                 choiceTypeText.text = "전투";
                 choiceTypeSprite.color = Color.red;
                 break;
             case ChoiceType.Event:
-                ChoiceType = ChoiceType.Event;
+                _choiceType = ChoiceType.Event;
                 choiceTypeText.text = "이벤트";
                 choiceTypeSprite.color = Color.blue;
                 break;
             case ChoiceType.Treasure:
-                ChoiceType = ChoiceType.Treasure;
+                _choiceType = ChoiceType.Treasure;
                 choiceTypeText.text = "보물";
                 choiceTypeSprite.color = Color.yellow;
                 break;
             case ChoiceType.Rest:
-                ChoiceType = ChoiceType.Rest;
+                _choiceType = ChoiceType.Rest;
                 choiceTypeText.text = "휴식";
                 choiceTypeSprite.color = Color.green;
                 break;
         }
+        
+        choiceRateText.text = "메인";
+        choiceRateText.color = Color.green;
+        
+        choiceSuccessText.text = "랜덤 카드 1장";
+        choiceFailText.text = "";
+    }
 
-        _rate = rate;
-        switch (_rate)
+    public void SetChoice(ChoiceEvent choiceEvent)
+    {
+        _subEvent = choiceEvent;
+        
+        choiceText.text = _subEvent.choiceName;
+        switch (_subEvent.choiceEventType)
+        {
+            case ChoiceType.Battle:
+                _choiceType = ChoiceType.Battle;
+                choiceTypeText.text = "전투";
+                choiceTypeSprite.color = Color.red;
+                break;
+            case ChoiceType.Event:
+                _choiceType = ChoiceType.Event;
+                choiceTypeText.text = "이벤트";
+                choiceTypeSprite.color = Color.blue;
+                break;
+            case ChoiceType.Treasure:
+                _choiceType = ChoiceType.Treasure;
+                choiceTypeText.text = "보물";
+                choiceTypeSprite.color = Color.yellow;
+                break;
+            case ChoiceType.Rest:
+                _choiceType = ChoiceType.Rest;
+                choiceTypeText.text = "휴식";
+                choiceTypeSprite.color = Color.green;
+                break;
+        }
+        
+        switch (_subEvent.choiceRate)
         {
             case <= 20:
                 choiceRateText.text = "낮음";
@@ -72,11 +106,59 @@ public class Choice : MonoBehaviour
                 choiceRateText.color = Color.green;
                 break;
         }
-    }
 
-    public void SetSubChoices(List<string> subChoices)
-    {
-        _subChoices = subChoices.ToList();
+        if (_subEvent.choiceReward != "NONE")
+        {
+            string[] rewards = _subEvent.choiceReward.Split('/');
+            for (int i = 0; i < rewards.Length; i++)
+            {
+                string[] reward = rewards[i].Split('_');
+                switch (reward[0])
+                {
+                    case "PC":
+                        choiceSuccessText.text = $"+카드";
+                        break;
+                    case "GOLD":
+                        choiceSuccessText.text = $"골드 +{reward[1]}";
+                        break;
+                    case "HP":
+                        choiceSuccessText.text = $"체력 +{reward[1]}";
+                        break;
+                }
+
+                if (i < rewards.Length - 1)
+                {
+                    choiceSuccessText.text += $", ";
+                }
+            }
+        }
+
+        if (_subEvent.choiceLoss != "NONE")
+        {
+            string[] losses = _subEvent.choiceLoss.Split('/');
+            for (int i = 0; i < losses.Length; i++)
+            {
+                string[] reward = losses[i].Split('_');
+                switch (reward[0])
+                {
+                    case "PC":
+                        choiceFailText.text = $"-카드";
+                        break;
+                    case "GOLD":
+                        choiceFailText.text = $"골드 {reward[1]}";
+                        break;
+                    case "HP":
+                        choiceFailText.text = $"체력 {reward[1]}";
+                        break;
+                }
+
+                if (i < losses.Length - 1)
+                {
+                    choiceFailText.text += $", ";
+                }
+            }
+        }
+        
     }
 
     public void ChoiceClicked()
@@ -88,19 +170,16 @@ public class Choice : MonoBehaviour
     {
         switch (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage])
         {
-            case StageType.MainStory:
+            case EventType.MainStory:
                 break;
-            case StageType.SubStory:
-                LogManager.Instance.AddDelayedLog(_choice, 2.0f).Forget();
+            case EventType.SubStory:
+                LogManager.Instance.AddDelayedLog(_subEvent.choiceName, 2.0f).Forget();
 
                 GameManager.Instance.HideChoices();
 
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
-
-                if (ChoiceManager.Instance.choices.ChoiceDescriptions.ContainsKey(_choice))
-                {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceDescriptions[_choice]).Forget();
-                }
+                
+                LogManager.Instance.StartLog(_subEvent.choiceText).Forget();
 
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
@@ -111,37 +190,37 @@ public class Choice : MonoBehaviour
                 }
                 else
                 {
-                    if (ChoiceType == ChoiceType.Battle)
+                    if (_choiceType == ChoiceType.Battle)
                     {
-                        GameManager.Instance.StartBattle();
+                        GameManager.Instance.StartBattle("Rank1");
 
                         await UniTask.WaitUntil(() => !GameManager.Instance.isPlayerinBattle); //전투 끝날 때 까지 대기
 
                         if (GameManager.Instance.lastBattleWon)
                         {
                             LogManager.Instance
-                                .StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice])
+                                .StartLog(_subEvent.choiceSuccessText)
                                 .Forget();
                         }
                         else
                         {
                             LogManager.Instance
-                                .StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
+                                .StartLog(_subEvent.choiceFailText).Forget();
                         }
                     }
                     else
                     {
                         int r = Random.Range(1, 101);
-                        if (r <= _rate)
+                        if (r <= _subEvent.choiceRate)
                         {
                             LogManager.Instance
-                                .StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice])
+                                .StartLog(_subEvent.choiceSuccessText)
                                 .Forget();
                         }
                         else
                         {
                             LogManager.Instance
-                                .StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
+                                .StartLog(_subEvent.choiceFailText).Forget();
                         }
                     }
                 }
@@ -152,6 +231,8 @@ public class Choice : MonoBehaviour
 
         await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
-        GameManager.Instance.NextStage();
+        await UniTask.WaitForSeconds(3.0f);
+
+        GameManager.Instance.NextStage().Forget();
     }
 }

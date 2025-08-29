@@ -13,7 +13,8 @@ public class ChoiceManager : MonoBehaviour
     private Choice _currentChoice;
     private List<string> _choiceNamesMain; //메인 스테이지 지우는 용
     public static ChoiceManager Instance;
-    public ChoiceSO choices;
+    public ChoiceSO subEvents;
+    public ChoiceSO mainEvents;
     
     private void Awake()
     {
@@ -21,96 +22,36 @@ public class ChoiceManager : MonoBehaviour
         {
             Instance = this;
         }
-        
-        _choiceNamesMain = choices.Choices.ToList(); //참조되지 않도록 ToList 사용
     }
     
     public void GetRandomChoice() // 선택지 버튼에 랜덤한 선택지 부여
     {
-        if (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage] == StageType.MainStory)
+        if (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage] ==
+            EventType.MainStory)
         {
-            foreach (Choice choice in choiceButtons)
+            List<MainEvent> choiceEvents = this.mainEvents.MainEvents.ToList();
+            foreach (Choice button in choiceButtons)
             {
-                choice.gameObject.SetActive(true);
-                int r = Random.Range(0, _choiceNamesMain.Count);
-                string choiceName = _choiceNamesMain[r];
-                if (choices.StageTypes.ContainsKey(choiceName)) //메인 스테이지 제외 찾기
-                {
-                    while (true)
-                    {
-                        if (choices.StageTypes[choiceName] == GameManager.Instance.mainStageNumber)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            r = Random.Range(0, _choiceNamesMain.Count);
-                            choiceName = _choiceNamesMain[r];
-                        }
-                    }
-                }
-                if (choices.ChoicesTypes.ContainsKey(choiceName))
-                {
-                    r = Random.Range(0, rates.Length);
-                    choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName], rates[r]);
-                    if (choices.SubChoices.ContainsKey(choiceName)) //메인 선택지가 존재한다면 메인 선택지를 추가
-                    {
-                        choice.SetSubChoices(choices.SubChoices[choiceName]);
-                    }
-                }
-                _choiceNamesMain.Remove(choiceName);
+                int r = Random.Range(0, choiceEvents.Count);
+                button.SetChoice(choiceEvents[r]);
+                choiceEvents.RemoveAt(r);
             }
         }
-        else
+        else if (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage] ==
+                 EventType.SubStory)
         {
-            List<string> choiceNames = choices.Choices.ToList(); //참조되지 않도록 ToList 사용
-
-            foreach (Choice choice in choiceButtons)
+            List<ChoiceEvent> choiceEvents = this.subEvents.ChoiceEvent.ToList();
+            foreach (Choice button in choiceButtons)
             {
-                choice.gameObject.SetActive(true);
-                int r = Random.Range(0, choiceNames.Count);
-                string choiceName = choiceNames[r];
-                if (choices.StageTypes.ContainsKey(choiceName)) //메인 스테이지 제외 찾기
-                {
-                    while (true)
-                    {
-                        if (choices.StageTypes[choiceName] > 0)
-                        {
-                            r = Random.Range(0, choiceNames.Count);
-                            choiceName = choiceNames[r];
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-                if (choices.ChoicesTypes.ContainsKey(choiceName))
-                {
-                    r = Random.Range(0, rates.Length);
-                    choice.SetChoice(choiceName, choices.ChoicesTypes[choiceName], rates[r]);
-                    if (choices.SubChoices.ContainsKey(choiceName)) //서브 선택지가 존재한다면 서브 선택지를 추가
-                    {
-                        choice.SetSubChoices(choices.SubChoices[choiceName]);
-                    }
-                }
-                choiceNames.Remove(choiceName); //참조된 상태로 Remove 시 SO에 있던 값 사라짐
+                int r = Random.Range(0, choiceEvents.Count);
+                button.SetChoice(choiceEvents[r]);
+                choiceEvents.RemoveAt(r);
             }
         }
     }
 
-    public void SetSubChoiceButtons(List<string> str) //서브 선택지가 존재 시, 현재 버튼들을 초기화하고 서브 선택지로 바꿈
+    public void SetSubChoiceButtons(List<ChoiceEvent> subChoices) //서브 선택지가 존재 시, 현재 버튼들을 초기화하고 서브 선택지로 바꿈
     {
-        for (int i = 0; i < str.Count; i++)
-        {
-            choiceButtons[i].Init();
-            choiceButtons[i].SetChoice(str[i], ChoiceType.Event, rates[i]);
-        }
-
-        for (int i = str.Count; i < choiceButtons.Count; i++)
-        {
-            choiceButtons[i].Init();
-            choiceButtons[i].gameObject.SetActive(false);
-        }
+        
     }
 }
