@@ -111,6 +111,11 @@ public class LogManager : MonoBehaviour
                 f.Add(script.delayTime);
             }
         }
+
+        if (strs.Count == 0)
+        {
+            return;
+        }
         
         isLogging = true;
 

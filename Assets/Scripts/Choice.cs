@@ -200,11 +200,6 @@ public class Choice : MonoBehaviour
                                 .StartLog(_mainEvent.choiceSuccessText)
                                 .Forget();
                         }
-                        else
-                        {
-                            LogManager.Instance
-                                .StartLog(_mainEvent.choiceFailText).Forget();
-                        }
                     }
                     else
                     {
@@ -252,11 +247,26 @@ public class Choice : MonoBehaviour
                             LogManager.Instance
                                 .StartLog(_subEvent.choiceSuccessText)
                                 .Forget();
-                        }
-                        else
-                        {
-                            LogManager.Instance
-                                .StartLog(_subEvent.choiceFailText).Forget();
+                            
+                            if (_subEvent.choiceReward != "NONE")
+                            {
+                                string[] rewards = _subEvent.choiceReward.Split('/');
+                                for (int i = 0; i < rewards.Length; i++)
+                                {
+                                    string[] reward = rewards[i].Split('_');
+                                    switch (reward[0])
+                                    {
+                                        case "PC":
+                                            break;
+                                        case "GOLD":
+                                            break;
+                                        case "HP":
+                                            LogManager.Instance.AddDelayedLog($"체력을 {reward[1]}만큼 회복했다.", 1.0f).Forget();
+                                            PlayerManager.Instance.Player.SetCurrentHp((PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1])) > 100 ? 100 : PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]));
+                                            break;
+                                    }
+                                }
+                            }
                         }
                     }
                     else
@@ -267,11 +277,49 @@ public class Choice : MonoBehaviour
                             LogManager.Instance
                                 .StartLog(_subEvent.choiceSuccessText)
                                 .Forget();
+                            if (_subEvent.choiceReward != "NONE")
+                            {
+                                string[] rewards = _subEvent.choiceReward.Split('/');
+                                for (int i = 0; i < rewards.Length; i++)
+                                {
+                                    string[] reward = rewards[i].Split('_');
+                                    switch (reward[0])
+                                    {
+                                        case "PC":
+                                            break;
+                                        case "GOLD":
+                                            break;
+                                        case "HP":
+                                            LogManager.Instance.AddDelayedLog($"체력을 {reward[1]}만큼 회복했다.", 1.0f).Forget();
+                                            PlayerManager.Instance.Player.SetCurrentHp((PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1])) > 100 ? 100 : PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]));
+                                            break;
+                                    }
+                                }
+                            }
                         }
                         else
                         {
                             LogManager.Instance
                                 .StartLog(_subEvent.choiceFailText).Forget();
+                            if (_subEvent.choiceReward != "NONE")
+                            {
+                                string[] rewards = _subEvent.choiceReward.Split('/');
+                                for (int i = 0; i < rewards.Length; i++)
+                                {
+                                    string[] reward = rewards[i].Split('_');
+                                    switch (reward[0])
+                                    {
+                                        case "PC":
+                                            break;
+                                        case "GOLD":
+                                            break;
+                                        case "HP":
+                                            LogManager.Instance.AddDelayedLog($"체력 {reward[1]}...", 1.0f).Forget();
+                                            PlayerManager.Instance.Player.SetCurrentHp((PlayerManager.Instance.Player.GetCurrentHp() - int.Parse(reward[1])) < 0 ? 0 : PlayerManager.Instance.Player.GetCurrentHp() - int.Parse(reward[1]));
+                                            break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }

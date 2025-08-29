@@ -139,6 +139,9 @@ public class GameManager : MonoBehaviour
         {
             mainStageNumber++;
         }
+        
+        LogManager.Instance.PrintScript().Forget();
+        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
         if (Stage.Chapters[currentChapter][currentStage] == EventType.Battle)
         {
@@ -270,6 +273,8 @@ public class GameManager : MonoBehaviour
         {
             LogManager.Instance.AddLog("플레이어 패배");
             lastBattleWon = false;
+            Application.Quit();
+            return;
         }
         else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
         {
