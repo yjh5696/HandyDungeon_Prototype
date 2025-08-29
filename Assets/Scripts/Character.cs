@@ -296,11 +296,13 @@ public class Character : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (extraDamageStacks > 0) damage += extraDamageStacks;
+        damage = Mathf.Round(damage * 10f) / 10f;
         if (Shield > 0)
         {
             if (damage <= Shield)
             {
                 Shield -= damage;
+                Shield = Mathf.Round(Shield * 10f) / 10f;
                 LogManager.Instance.AddLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})");
                 damage = 0f;
             }
@@ -311,11 +313,13 @@ public class Character : MonoBehaviour
     // 데미지 처리
     public void HitDamage(float damage)
     {
+        damage = Mathf.Round(damage * 10f) / 10f;
         if (Shield > 0)
         {
             if (damage <= Shield)
             {
                 Shield -= damage;
+                Shield = Mathf.Round(Shield * 10f) / 10f;
                 LogManager.Instance.AddLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})");
                 damage = 0f;
             }
