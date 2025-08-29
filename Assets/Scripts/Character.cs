@@ -301,6 +301,7 @@ public class Character : MonoBehaviour
             if (damage <= Shield)
             {
                 Shield -= damage;
+                LogManager.Instance.AddLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})");
                 damage = 0f;
             }
         }
@@ -315,6 +316,7 @@ public class Character : MonoBehaviour
             if (damage <= Shield)
             {
                 Shield -= damage;
+                LogManager.Instance.AddLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})");
                 damage = 0f;
             }
         }
@@ -349,7 +351,7 @@ public class Character : MonoBehaviour
             {
                 SetHealEffect(stacks, diceValue); // 회복 설정
             }
-            else if(cardType == "Shield")
+            else if(cardType == "Sheild")
             {
                 SetShieldEffect(stacks, diceValue); // 보호막 설정
             }
@@ -365,8 +367,8 @@ public class Character : MonoBehaviour
             diceValue = 1;
         }
         ShieldValue = stacks;
-        Shield = ShieldValue * diceValue;
-        LogManager.Instance.AddLog($"{unitName}이/가 보호막 효과로{Shield} 보호막 획득");
+        Shield += ShieldValue * diceValue;
+        LogManager.Instance.AddLog($"{unitName}이/가 보호막 효과로{Shield} 보호막 획득 (총 보호막: {Shield})");
     }
     
     // 회복 효과

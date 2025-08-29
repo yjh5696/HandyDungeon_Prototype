@@ -120,7 +120,7 @@ public static class BattleSystem
         {
             attacker.SetHeal(baseDamage);
         }
-        else if(cardType == "Shield")
+        else if(cardType == "Sheild")
         {
             attacker.SetShield(baseDamage);
         }
