@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
         
         if(Stage.Chapters[currentChapter].Length == currentStage)
         {
+            Application.Quit();
             currentStage = 0;
             NextChapter();
             return;

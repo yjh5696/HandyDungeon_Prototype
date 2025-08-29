@@ -171,6 +171,57 @@ public class Choice : MonoBehaviour
         switch (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage])
         {
             case EventType.MainStory:
+                LogManager.Instance.AddDelayedLog(_mainEvent.choiceName, 2.0f).Forget();
+
+                GameManager.Instance.HideChoices();
+
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                
+                LogManager.Instance.StartLog(_mainEvent.choiceText).Forget();
+
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+
+                if (_subChoices is { Count: > 0 })
+                {
+                    GameManager.Instance.ShowChoices();
+                    ChoiceManager.Instance.SetSubChoiceButtons(_subChoices);
+                }
+                else
+                {
+                    if (_choiceType == ChoiceType.Battle)
+                    {
+                        GameManager.Instance.StartBattle("Rank1");
+
+                        await UniTask.WaitUntil(() => !GameManager.Instance.isPlayerinBattle); //전투 끝날 때 까지 대기
+
+                        if (GameManager.Instance.lastBattleWon)
+                        {
+                            LogManager.Instance
+                                .StartLog(_mainEvent.choiceSuccessText)
+                                .Forget();
+                        }
+                        else
+                        {
+                            LogManager.Instance
+                                .StartLog(_mainEvent.choiceFailText).Forget();
+                        }
+                    }
+                    else
+                    {
+                        int r = Random.Range(1, 101);
+                        if (r <= _mainEvent.choiceRate)
+                        {
+                            LogManager.Instance
+                                .StartLog(_mainEvent.choiceSuccessText)
+                                .Forget();
+                        }
+                        else
+                        {
+                            LogManager.Instance
+                                .StartLog(_mainEvent.choiceFailText).Forget();
+                        }
+                    }
+                }
                 break;
             case EventType.SubStory:
                 LogManager.Instance.AddDelayedLog(_subEvent.choiceName, 2.0f).Forget();
