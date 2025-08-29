@@ -13,6 +13,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     [SerializeField] private float switchTurnDelay;
     [SerializeField] private float showDiceResultTime;
     CardDataSO selectedCard = null;
+    CardDataSO SpecialCard = null;
     private void Awake()
     {
         Instance = this;
@@ -20,8 +21,8 @@ public class Attack_Button_DiceRoll : MonoBehaviour
 
     private void OnEnable()
     {
-        selectedCard = CardManager.Instance.selectedCard;
-        if (selectedCard != null && selectedCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
+        SpecialCard = CardManager.Instance.selectedCard;
+        if (SpecialCard != null && SpecialCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
         {
             int fakeDiceValue = 0;
             StartCoroutine(ShowDiceResultWithDelay(0, fakeDiceValue));
@@ -30,7 +31,8 @@ public class Attack_Button_DiceRoll : MonoBehaviour
 
     public void OnAttackButtonClicked()
     {
-        if(selectedCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
+
+        if(SpecialCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
         {
             Debug.Log("플레이어 특수 카드 사용 - 주사위 굴리지 않음");
             return;
@@ -65,6 +67,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
 
     private IEnumerator ShowDiceResultWithDelay(float delaySeconds, int value)
     {
+        selectedCard = CardManager.Instance.selectedCard;
         yield return new WaitForSeconds(delaySeconds);
 
         LogManager.Instance.AddSpacingLine();
