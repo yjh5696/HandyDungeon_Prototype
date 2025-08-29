@@ -55,7 +55,7 @@ public class CardDataSOGenerator : EditorWindow
             card.Rare = values[5];
             card.Effect_Type = values[6];
             card.min_Value = SafeParseFloat(values[7]);
-            card.Max_Vlaue = SafeParseFloat(values[9]);
+            card.Max_Value = SafeParseFloat(values[9]);
             card.Calculation = SafeParseFloat(values[8]);
             card.Debuff_Type = values[10];
             card.Debuff_Stack = SafeParseInt(values[11]);

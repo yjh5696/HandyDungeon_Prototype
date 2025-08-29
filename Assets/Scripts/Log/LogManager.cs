@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using NUnit.Framework.Constraints;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -94,6 +95,31 @@ public class LogManager : MonoBehaviour
         }
         
         AddSpacingLine();
+        isLogging = false;
+    }
+    
+    public async UniTaskVoid PrintScript()
+    {
+        List<string> strs = new List<string>();
+        List<float> f = new List<float>();
+        
+        foreach (StartScript script in GameManager.Instance.startScripts[GameManager.Instance.currentChapter].StartScripts)
+        {
+            if (script.eventID == GameManager.Instance.currentStage)
+            {
+                strs.Add(script.scriptText);
+                f.Add(script.delayTime);
+            }
+        }
+        
+        isLogging = true;
+
+        for (int i = 0; i < strs.Count; i++)
+        {
+            AddLog(strs[i]);
+            await UniTask.Delay(TimeSpan.FromSeconds(f[i]), cancellationToken: _cancelTokenSource.Token);
+        }
+
         isLogging = false;
     }
 }

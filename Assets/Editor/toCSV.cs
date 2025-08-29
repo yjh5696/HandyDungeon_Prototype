@@ -113,8 +113,8 @@ public class toCSV
                 StartScript startScript = new StartScript();
                 
                 startScript.scriptID = splitData[0];
-                startScript.chapterID = splitData[1];
-                startScript.eventID = splitData[2];
+                startScript.chapterID = int.Parse(splitData[1]);
+                startScript.eventID = int.Parse(splitData[2]);
                 startScript.scriptText = splitData[4];
                 startScript.delayTime = float.Parse(splitData[5]);
                 

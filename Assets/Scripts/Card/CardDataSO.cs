@@ -12,7 +12,7 @@ public class CardDataSO : ScriptableObject
     public string Rare;
     public string Effect_Type;
     public float min_Value;
-    public float Max_Vlaue;
+    public float Max_Value;
     public float Calculation;
     public string Debuff_Type;
     public int Debuff_Stack;

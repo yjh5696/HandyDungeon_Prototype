@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int currentChapter = 0;
     public int currentStage = 0;
     public int mainStageNumber = 1;
+    public StartScriptSO prologueScript;
+    public List<StartScriptSO> startScripts = new List<StartScriptSO>();
 
     [SerializeField] private FadeInOut startFade;
     [SerializeField] private FadeInOut image;
@@ -29,8 +31,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dicebtn;
     [SerializeField] private GameObject skip;
     [SerializeField] private GameObject traits;
-    [SerializeField] private StartScriptSO prologueScript;
-    [SerializeField] private List<StartScriptSO> startScripts = new List<StartScriptSO>();
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        StartScriptLog().Forget();
+        StartPrologue().Forget();
         
         //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
         //StartPlayerTurn();
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         skipBtnClicked = true;
     }
 
-    private async UniTaskVoid StartScriptLog()
+    private async UniTaskVoid StartPrologue()
     {
         skip.GetComponent<Button>().interactable = false;
         await UniTask.WaitUntil(() => !startFade.isFading);
@@ -102,6 +102,25 @@ public class GameManager : MonoBehaviour
     public void ShowChoices()
     {
         choice.SetActive(true);
+    }
+
+    public void StartScriptLog()
+    {
+        LogManager.Instance.Clear();
+        
+        TraitSet().Forget();
+    }
+
+    private async UniTaskVoid TraitSet()
+    {
+        HideChoices();
+        
+        LogManager.Instance.PrintScript().Forget();
+        
+        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+        
+        choice.gameObject.SetActive(true);
+        ChoiceManager.Instance.GetRandomChoice();
     }
 
     public async UniTaskVoid NextStage()
@@ -151,7 +170,7 @@ public class GameManager : MonoBehaviour
 
             LogManager.Instance.AddSpacingLine();
             
-            StartBattle("Rank1");
+            StartBattle("Rank4");
         }
         else if(Stage.Chapters[currentChapter][currentStage] == EventType.MainStory || Stage.Chapters[currentChapter][currentStage] == EventType.SubStory)
         {

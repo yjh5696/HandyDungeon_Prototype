@@ -341,13 +341,13 @@ MonoBehaviour:
     eventID: 3
     scriptText: "\uC624\uB298\uC740 \uBB34\uC5C7\uC744 \uD560\uAE4C?"
     delayTime: 1
-  - scriptID: SCRIPT_CHAPTER1_9_0
+  - scriptID: SCRIPT_CHAPTER1_4_0
     chapterID: 1
-    eventID: 9
+    eventID: 4
     scriptText: "\uC232\uC758 \uC911\uC2EC \uBD80\uB85C \uB4E4\uC5B4\uC654\uB2E4."
     delayTime: 1
-  - scriptID: SCRIPT_CHAPTER1_9_1
+  - scriptID: SCRIPT_CHAPTER1_4_1
     chapterID: 1
-    eventID: 9
+    eventID: 4
     scriptText: "\uD0C0\uB77D\uD55C \uC815\uB839 \uBCF4\uC2A4\uC640 \uC804\uD22C"
     delayTime: 1

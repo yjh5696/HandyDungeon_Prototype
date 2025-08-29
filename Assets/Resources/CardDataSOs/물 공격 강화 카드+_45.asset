@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Rising
   Effect_Type: Damage
   min_Value: 3
-  Max_Vlaue: 0
+  Max_Value: 0
   Calculation: 0.8
   Debuff_Type: Water
   Debuff_Stack: 2

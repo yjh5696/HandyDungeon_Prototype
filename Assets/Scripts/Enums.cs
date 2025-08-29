@@ -126,8 +126,8 @@ public class MainEvent
 public class StartScript
 {
     public string scriptID;
-    public string chapterID;
-    public string eventID;
+    public int chapterID;
+    public int eventID;
     public string scriptText;
     public float delayTime;
 }
