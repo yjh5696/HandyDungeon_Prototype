@@ -80,7 +80,7 @@ MonoBehaviour:
   choiceDescriptions:
     _serializedList:
     - Key: "\uBCF4\uBB3C"
-      Value: "{0}\uBCF4\uBB3C\uC744 \uCC3E\uB294\uB2E4{3.0}"
+      Value: "{0}<b>\"\uBCF4\uBB3C\uC744 \uCC3E\uB294\uB2E4\"</b>{3.0}"
     - Key: "\uC774\uBCA4\uD2B8"
       Value: "{0}\uC774\uBCA4\uD2B8 \uC2E4\uD589{3.0}"
     - Key: "\uC804\uD22C"

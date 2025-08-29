@@ -48,10 +48,10 @@ public class Enemy : Character
     {
         Debug.Log($"{_enemySo.EnemyName}이(가) 사망했습니다!");
 
-        if (EnemyManager.Instance != null)
+        if (EnemyManager.Instance)
         {
             EnemyManager.Instance.OnEnemyDied();
-            GameManager.Instance.EndGame();
+            GameManager.Instance.EndBattle(3f).Forget();
         }
     }
 }

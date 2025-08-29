@@ -95,7 +95,6 @@ public class toCSV
             List<string> descriptions = new List<string>();
             List<string> subChoices = new List<string>();
             ChoiceType choiceType = ChoiceType.Event;
-            StageType stageType = StageType.MainStory;
             
             choice.Choices.Add(splitData[0]);
             choice.StageTypes.Add(splitData[0], int.Parse(splitData[1]));

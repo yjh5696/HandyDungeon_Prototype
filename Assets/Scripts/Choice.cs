@@ -10,7 +10,7 @@ public class Choice : MonoBehaviour
 {
     [SerializeField] private TMP_Text choiceText;
     [SerializeField] private TMP_Text choiceTypeText;
-    [SerializeField] SpriteRenderer choiceTypeSprite;
+    [SerializeField] private SpriteRenderer choiceTypeSprite;
     [SerializeField] private TMP_Text choiceRateText;
     [SerializeField] private TMP_Text choiceSuccessText;
     [SerializeField] private TMP_Text choiceFailText;
@@ -55,7 +55,7 @@ public class Choice : MonoBehaviour
                 choiceTypeSprite.color = Color.green;
                 break;
         }
-        
+
         _rate = rate;
         switch (_rate)
         {
@@ -86,65 +86,72 @@ public class Choice : MonoBehaviour
 
     private async UniTaskVoid ChoiceAction()
     {
-        LogManager.Instance.AddDelayedLog(_choice, 2.0f).Forget();
-        
-        GameManager.Instance.HideChoices();
-        
-        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+        switch (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage])
+        {
+            case StageType.MainStory:
+                break;
+            case StageType.SubStory:
+                LogManager.Instance.AddDelayedLog(_choice, 2.0f).Forget();
 
-        if (ChoiceManager.Instance.choices.ChoiceDescriptions.ContainsKey(_choice))
-        {
-            LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceDescriptions[_choice]).Forget();
-        }
-        
-        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
-        
-        if (_subChoices is { Count: > 0 })
-        {
-            GameManager.Instance.ShowChoices();
-            ChoiceManager.Instance.SetSubChoiceButtons(_subChoices);
-        }
-        else
-        {
-            if (ChoiceType == ChoiceType.Battle)
-            {
-                GameManager.Instance.StartBattle();
-                
-                await UniTask.WaitUntil(() => !GameManager.Instance.isPlayerinBattle); //전투 끝날 때 까지 대기
+                GameManager.Instance.HideChoices();
 
-                if (GameManager.Instance.LastBattleWon)
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+
+                if (ChoiceManager.Instance.choices.ChoiceDescriptions.ContainsKey(_choice))
                 {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]).Forget();
+                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceDescriptions[_choice]).Forget();
+                }
+
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+
+                if (_subChoices is { Count: > 0 })
+                {
+                    GameManager.Instance.ShowChoices();
+                    ChoiceManager.Instance.SetSubChoiceButtons(_subChoices);
                 }
                 else
                 {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
-                }
-            }
-            else
-            {
-                int r = Random.Range(1, 101);
-                if (r <= _rate)
-                {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice]).Forget();
-                }
-                else
-                {
-                    LogManager.Instance.StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
-                }
-            }
-            
-            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                    if (ChoiceType == ChoiceType.Battle)
+                    {
+                        GameManager.Instance.StartBattle();
 
-            if (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage] == StageType.Battle)
-            {
-                
-            }
-            else
-            {
-                GameManager.Instance.ShowChoices();
-                ChoiceManager.Instance.GetRandomChoice();
-            }
+                        await UniTask.WaitUntil(() => !GameManager.Instance.isPlayerinBattle); //전투 끝날 때 까지 대기
+
+                        if (GameManager.Instance.lastBattleWon)
+                        {
+                            LogManager.Instance
+                                .StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice])
+                                .Forget();
+                        }
+                        else
+                        {
+                            LogManager.Instance
+                                .StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
+                        }
+                    }
+                    else
+                    {
+                        int r = Random.Range(1, 101);
+                        if (r <= _rate)
+                        {
+                            LogManager.Instance
+                                .StartLog(ChoiceManager.Instance.choices.ChoiceSucceedDescriptions[_choice])
+                                .Forget();
+                        }
+                        else
+                        {
+                            LogManager.Instance
+                                .StartLog(ChoiceManager.Instance.choices.ChoiceFailDescriptions[_choice]).Forget();
+                        }
+                    }
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
+
+        await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+
+        GameManager.Instance.NextStage();
     }
 }

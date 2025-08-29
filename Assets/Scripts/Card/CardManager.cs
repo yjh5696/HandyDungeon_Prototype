@@ -26,13 +26,13 @@ public class CardManager : MonoBehaviour
 
     public void DrawCard()
     {
-        if (playerCharacter == null)
+        if (!playerCharacter)
         {
             Debug.LogError("playerCharacter가 할당되지 않았습니다.");
             return;
         }
 
-        var cards = playerCharacter.Cards;
+        List<CardDataSO> cards = playerCharacter.Cards;
         if (cards == null || cards.Count == 0)
         {
             Debug.LogWarning("playerCharacter의 카드 덱이 비어있습니다.");
@@ -43,14 +43,14 @@ public class CardManager : MonoBehaviour
         int idx = Random.Range(0, cards.Count);
         _currentCard = cards[idx];
 
-        if (_currentCard == null)
+        if (!_currentCard)
         {
             Debug.LogWarning("선택된 카드가 null입니다.");
             cardNameText.text = "카드 없음";
             return;
         }
 
-        if (cardNameText == null)
+        if (!cardNameText)
         {
             Debug.LogError("cardNameText UI 컴포넌트가 할당되지 않았습니다.");
             return;

@@ -12,11 +12,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] public float respawnDelay = 10f;
 
     private SpriteRenderer _spriteRenderer;
-    private Animator _animator;
-    private GameObject enemyInstance;
-    private EnemySO currentEnemySO;
+    private GameObject _enemyInstance;
+    private EnemySO _currentEnemySo;
 
-    public Animator Animator => _animator;
+    public Animator Animator { get; private set; }
 
     private void Awake()
     {
@@ -24,7 +23,7 @@ public class EnemyManager : MonoBehaviour
             Instance = this;
 
         _spriteRenderer = prefab.GetComponent<SpriteRenderer>();
-        _animator = prefab.GetComponent<Animator>();
+        Animator = prefab.GetComponent<Animator>();
 
         hpBar.SetCharacter(Enemy);
     }
@@ -39,18 +38,18 @@ public class EnemyManager : MonoBehaviour
         if (_spriteRenderer)
             _spriteRenderer.sprite = enemySprite;
 
-        if (_animator)
-            _animator.runtimeAnimatorController = enemyAnimatorController;
+        if (Animator)
+            Animator.runtimeAnimatorController = enemyAnimatorController;
     }
 
     public void SpawnEnemy(EnemySO enemy)
     {
-        if (enemyInstance)
-            Destroy(enemyInstance);
+        if (_enemyInstance)
+            Destroy(_enemyInstance);
 
-        enemyInstance = Instantiate(prefab, transform.position, transform.rotation);
-        enemyInstance.transform.parent = transform;
-        Enemy = enemyInstance.GetComponent<Enemy>();
+        _enemyInstance = Instantiate(prefab, transform.position, transform.rotation);
+        _enemyInstance.transform.parent = transform;
+        Enemy = _enemyInstance.GetComponent<Enemy>();
         Enemy.SetEnemySo(enemy);
 
         // Enemy에 카드 덱 할당 (EnemySO 내 카드 덱)
@@ -58,19 +57,19 @@ public class EnemyManager : MonoBehaviour
 
         SetEnemy(enemy.Health, enemy.Sprite, enemy.AnimatorController);
 
-        _spriteRenderer = enemyInstance.GetComponent<SpriteRenderer>();
-        _animator = enemyInstance.GetComponent<Animator>();
-        enemyInstance.SetActive(true);
+        _spriteRenderer = _enemyInstance.GetComponent<SpriteRenderer>();
+        Animator = _enemyInstance.GetComponent<Animator>();
+        _enemyInstance.SetActive(true);
 
-        currentEnemySO = enemy;
+        _currentEnemySo = enemy;
     }
 
     public void OnEnemyDied()
     {
         Debug.Log("EnemyManager: 적이 사망했습니다.");
 
-        if (_animator != null)
-            _animator.SetBool("enemyIsDie", true);
+        if (Animator)
+            Animator.SetBool("enemyIsDie", true);
 
         // 죽은 뒤 처리 (필요 시 사용)
         // StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
@@ -80,10 +79,10 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (enemyInstance)
+        if (_enemyInstance)
         {
-            Destroy(enemyInstance);
-            enemyInstance = null;
+            Destroy(_enemyInstance);
+            _enemyInstance = null;
         }
 
         Enemy = null;
@@ -98,8 +97,8 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(deathShowTime);
 
-        if (enemyInstance)
-            enemyInstance.SetActive(false);
+        if (_enemyInstance)
+            _enemyInstance.SetActive(false);
 
         Enemy = null;
 
@@ -107,9 +106,9 @@ public class EnemyManager : MonoBehaviour
 
         Debug.Log("EnemyManager: 다음 적 소환");
 
-        if (currentEnemySO)
+        if (_currentEnemySo)
         {
-            SpawnEnemy(currentEnemySO);
+            SpawnEnemy(_currentEnemySo);
             GameManager.Instance.EnemyDieTurn();
         }
         else
@@ -120,12 +119,12 @@ public class EnemyManager : MonoBehaviour
 
     public void EnemyAttackAnimation()
     {
-        _animator.SetTrigger("enemyIsAttack");
+        Animator.SetTrigger("enemyIsAttack");
     }
 
     public void EnemyHitAnimation()
     {
-        _animator.SetTrigger("enemyIsHit");
+        Animator.SetTrigger("enemyIsHit");
     }
 }
 

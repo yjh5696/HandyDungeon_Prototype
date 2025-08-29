@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,15 +11,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public bool isPlayerTurn = true;
     public bool isPlayerinBattle = false;
-    public bool LastBattleWon = false;
+    public bool lastBattleWon = false;
     public bool skipBtnClicked = false;
     public Attack_Button_DiceRoll diceRoll;
     public int currentChapter = 0;
     public int currentStage = 0;
     public int mainStageNumber = 1;
-
-    [SerializeField] private List<EnemySO> enemySOs;
-    [SerializeField] private List<CardSO> cardSOs;
 
     [SerializeField] private FadeInOut startFade;
     [SerializeField] private FadeInOut image;
@@ -45,13 +43,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        startFade.FadeOut(5.0f);
+        startFade.FadeOut(1.0f);
         
-        //StartPrologue().Forget();
+        StartPrologue().Forget();
         
-        //EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
-        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
-        StartPlayerTurn();
+        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
+        //StartPlayerTurn();
     }
 
     public void StartChoice()
@@ -96,13 +93,44 @@ public class GameManager : MonoBehaviour
         choice.SetActive(true);
     }
 
+    public void NextStage()
+    {
+        currentStage++;
+        
+        if(Stage.Chapters[currentChapter].Length == currentStage)
+        {
+            currentStage = 0;
+            NextChapter();
+            return;
+        }
+        
+        if (Stage.Chapters[currentChapter][currentStage] == StageType.MainStory) //현재 스테이지가 메인이고 스테이지를 진행한다면 다음 메인 선택지가 나오도록 함
+        {
+            mainStageNumber++;
+        }
+
+        if (Stage.Chapters[currentChapter][currentStage] == StageType.Battle)
+        {
+            StartBattle();
+        }
+        else
+        {
+            StartChoice();
+        }
+    }
+
+    public void NextChapter()
+    {
+        currentChapter++;
+    }
+
     public void StartBattle()
     {
         image.FadeOut(1.0f);
         choice.SetActive(false);
         battle.SetActive(true);
         isPlayerinBattle = true;
-        EnemyManager.Instance.SpawnEnemy(enemySOs[0]);
+        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
         StartPlayerTurn();
     }
 
@@ -170,19 +198,10 @@ public class GameManager : MonoBehaviour
         StartPlayerTurn();
     }
 
-    public void EndGame()
+    public async UniTaskVoid EndBattle(float delay)
     {
-        StartCoroutine(EndBattleAfterDelay(3f));
-    }
-
-    private IEnumerator EndBattleAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        EndBattle();
-    }
-
-    private void EndBattle()
-    {
+        await UniTask.WaitForSeconds(delay);
+        
         LogManager.Instance.AddSpacingLine();
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog("전투 종료");
@@ -191,12 +210,12 @@ public class GameManager : MonoBehaviour
         if (PlayerManager.Instance.Player.GetCurrentHp() <= 0)
         {
             LogManager.Instance.AddLog("플레이어 패배");
-            LastBattleWon = false;
+            lastBattleWon = false;
         }
         else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
         {
             LogManager.Instance.AddLog("플레이어 승리");
-            LastBattleWon = true;
+            lastBattleWon = true;
         }
         
         LogManager.Instance.AddSpacingLine();
@@ -208,6 +227,8 @@ public class GameManager : MonoBehaviour
         dicebtn.SetActive(true);
         image.gameObject.SetActive(true);
         image.FadeIn(1.0f);
+        
+        NextStage();
     }
 }
 

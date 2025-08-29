@@ -5,6 +5,8 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
+    private static readonly int PlayerIsAttack = Animator.StringToHash("playerIsAttack");
+    private static readonly int PlayerIsHit = Animator.StringToHash("playerIsHit");
     public Player Player;
     public PlayerAnimator PlayerAnimator;
     private Animator _animator;
@@ -34,19 +36,19 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator GameOverDelayCoroutine()
     {
         yield return new WaitForSeconds(2f);
-        GameManager.Instance.EndGame();
+        GameManager.Instance.EndBattle(3f).Forget();
     }
 
     public void PlayAttackAnimation()
     {
         Debug.Log("플레이어 공격 애니메이션");
-        _animator.SetTrigger("playerIsAttack");
+        _animator.SetTrigger(PlayerIsAttack);
     }
 
     public void PlayHitAnimation()
     {
         Debug.Log("플레이어 피격 애니메이션");
-        _animator.SetTrigger("playerIsHit");
+        _animator.SetTrigger(PlayerIsHit);
     }
 }
 
