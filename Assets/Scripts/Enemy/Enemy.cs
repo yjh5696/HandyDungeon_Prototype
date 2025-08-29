@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class Enemy : Character
 
         // EnemySO 내 카드 덱을 복사하여 할당
         cards = new List<CardDataSO>(enemy.EnemyCards);
+        Debug.Log($"EnemySO '{enemy.EnemyName}' 카드 수: {enemy.EnemyCards?.Count ?? -1}, Enemy 객체 cards 수: {cards?.Count ?? -1}");
     }
 
     public EnemySO GetEnemySo()
@@ -47,11 +49,20 @@ public class Enemy : Character
     public void EnemyDie()
     {
         Debug.Log($"{_enemySo.EnemyName}이(가) 사망했습니다!");
-
         if (EnemyManager.Instance)
         {
             EnemyManager.Instance.OnEnemyDied();
             GameManager.Instance.EndBattle(3f).Forget();
+        }
+        EnemyManager.Instance.StartCoroutine(DestroyEnemyAfterDelay(3f));
+    }
+
+    private IEnumerator DestroyEnemyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (this != null)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
+  m_Name: "\uBD88 \uBC29\uC5B4 \uAC15\uD654 \uCE74\uB4DC+++_30"
+  m_EditorClassIdentifier: 
+  C_Id: 30
+  C_Name: "\uBD88 \uBC29\uC5B4 \uAC15\uD654 \uCE74\uB4DC+++"
+  C_Type: Support
+  Element: Fire
+  Tier: tier4
+  Rare: Finale
+  Effect_Type: Sheild
+  min_Value: 2
+  Max_Vlaue: 0
+  Calculation: 1.3
+  Debuff_Type: None
+  Debuff_Stack: 0
+  Buff_Type: Fervor
+  Buff_Stack: 5
+  Enhanceable: No
+  Enhance_Count: 0
+  Target: Self
+  Card_Description: "2.6~15.6\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.
+    \uC5F4\uC815 5."
+  CardConcept: 

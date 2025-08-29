@@ -47,6 +47,8 @@ public class EnemyManager : MonoBehaviour
         if (_enemyInstance)
             Destroy(_enemyInstance);
 
+        Debug.Log($"SpawnEnemy 호출: {enemy.EnemyName} 카드 수: {enemy.EnemyCards.Count}");
+
         _enemyInstance = Instantiate(prefab, transform.position, transform.rotation);
         _enemyInstance.transform.parent = transform;
         Enemy = _enemyInstance.GetComponent<Enemy>();
@@ -60,6 +62,7 @@ public class EnemyManager : MonoBehaviour
         _spriteRenderer = _enemyInstance.GetComponent<SpriteRenderer>();
         Animator = _enemyInstance.GetComponent<Animator>();
         _enemyInstance.SetActive(true);
+        hpBar.gameObject.SetActive(true);
 
         _currentEnemySo = enemy;
     }
@@ -67,12 +70,11 @@ public class EnemyManager : MonoBehaviour
     public void OnEnemyDied()
     {
         Debug.Log("EnemyManager: 적이 사망했습니다.");
-
         if (Animator)
             Animator.SetBool("enemyIsDie", true);
 
-        // 죽은 뒤 처리 (필요 시 사용)
-        // StartCoroutine(DestroyEnemyAfterDelay(deathShowTime));
+        // 죽은 뒤 처리 코루틴 실행
+        StartCoroutine(DestroyEnemyAndHpBarAfterDelay(deathShowTime));
     }
 
     private IEnumerator DestroyEnemyAfterDelay(float delay)
@@ -116,6 +118,28 @@ public class EnemyManager : MonoBehaviour
             Debug.LogWarning("EnemyManager: 다음 적 데이터가 없습니다!");
         }
     }
+
+    
+
+    private IEnumerator DestroyEnemyAndHpBarAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (_enemyInstance)
+        {
+            _enemyInstance.SetActive(false);
+            //_enemyInstance = null;
+        }
+
+        if (hpBar != null)
+        {
+            hpBar.gameObject.SetActive(false);
+            //hpBar = null;
+        }
+
+        //Enemy = null;
+    }
+
 
     public void EnemyAttackAnimation()
     {

@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CardData", menuName = "Card/CardData")]
 public class CardDataSO : ScriptableObject
 {
+    [Header("--- CSV 데이터 ---")]
     public int C_Id;
     public string C_Name;
     public string C_Type;

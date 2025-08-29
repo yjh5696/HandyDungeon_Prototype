@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
+  m_Name: "\uBC14\uB78C \uACF5\uACA9 \uAC15\uD654 \uCE74\uB4DC+++_77"
+  m_EditorClassIdentifier: 
+  C_Id: 77
+  C_Name: "\uBC14\uB78C \uACF5\uACA9 \uAC15\uD654 \uCE74\uB4DC+++"
+  C_Type: Action
+  Element: Air
+  Tier: tier4
+  Rare: Finale
+  Effect_Type: Damage
+  min_Value: 3
+  Max_Vlaue: 0
+  Calculation: 1.4
+  Debuff_Type: Air
+  Debuff_Stack: 6
+  Buff_Type: None
+  Buff_Stack: 0
+  Enhanceable: No
+  Enhance_Count: 0
+  Target: Enemy
+  Card_Description: "\uC801\uC5D0\uAC8C 4.2~25.2\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+    \uAD50\uB780 6."
+  CardConcept: 

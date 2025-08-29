@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
   m_Name: MLAB++
   m_EditorClassIdentifier: 
-  C_Id: 106
+  C_Id: 1106
   C_Name: MLAB++
   C_Type: Action
   Element: Land
-  Tier: 
+  Tier: Tier4
   Rare: 
   Effect_Type: Damage
   min_Value: 1

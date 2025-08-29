@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
   m_Name: MWSB
   m_EditorClassIdentifier: 
-  C_Id: 57
+  C_Id: 1057
   C_Name: MWSB
   C_Type: Support
   Element: Water
@@ -24,7 +24,7 @@ MonoBehaviour:
   Calculation: 5
   Debuff_Type: None
   Debuff_Stack: 0
-  Buff_Type: None
+  Buff_Type: Recovery
   Buff_Stack: 2
   Enhanceable: 
   Enhance_Count: 0

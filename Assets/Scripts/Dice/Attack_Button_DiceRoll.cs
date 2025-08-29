@@ -12,27 +12,45 @@ public class Attack_Button_DiceRoll : MonoBehaviour
 
     [SerializeField] private float switchTurnDelay;
     [SerializeField] private float showDiceResultTime;
-
+    CardDataSO selectedCard = null;
     private void Awake()
     {
         Instance = this;
     }
 
+    private void OnEnable()
+    {
+        selectedCard = CardManager.Instance.selectedCard;
+        if (selectedCard != null && selectedCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
+        {
+            int fakeDiceValue = 0;
+            StartCoroutine(ShowDiceResultWithDelay(0, fakeDiceValue));
+        }
+    }
+
     public void OnAttackButtonClicked()
     {
-        // 주사위 굴리기
-        diceRoll.RollDice(OnDiceRolled);
-
-        // 로그 출력
-        LogManager.Instance.AddLog("");
-        if (GameManager.Instance.isPlayerTurn)
+        if(selectedCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
         {
-            LogManager.Instance.AddLog("주사위를 굴렸습니다!");
+            Debug.Log("플레이어 특수 카드 사용 - 주사위 굴리지 않음");
+            return;
         }
         else
         {
-            string enemyName = EnemyManager.Instance.Enemy.GetEnemySo().EnemyName;
-            LogManager.Instance.AddLog($"{enemyName}이/가 주사위를 굴렸습니다!");
+            // 주사위 굴리기
+            diceRoll.RollDice(OnDiceRolled);
+
+            // 로그 출력
+            LogManager.Instance.AddLog("");
+            if (GameManager.Instance.isPlayerTurn)
+            {
+                LogManager.Instance.AddLog("주사위를 굴렸습니다!");
+            }
+            else
+            {
+                string enemyName = EnemyManager.Instance.Enemy.GetEnemySo().EnemyName;
+                LogManager.Instance.AddLog($"{enemyName}이/가 주사위를 굴렸습니다!");
+            }
         }
     }
 
@@ -53,7 +71,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         LogManager.Instance.AddLog("액션!");
         LogManager.Instance.AddLog("");
 
-        CardDataSO selectedCard = CardManager.Instance.selectedCard;
+        
 
         if (GameManager.Instance.isPlayerTurn)
         {
@@ -61,16 +79,22 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             if (selectedCard.C_Type == "Action")
             {
                 BattleSystem.ExecuteAttack(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
+                PlayerManager.Instance.PlayAttackAnimation();
+                float attackTime = PlayerManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
+                yield return new WaitForSeconds(attackTime * 0.75f);
+                EnemyManager.Instance.EnemyHitAnimation();
             }
             else if (selectedCard.C_Type == "Support")
             {
                 BattleSystem.ExecuteDefence(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
+                PlayerManager.Instance.PlayAttackAnimation();
+            }
+            else if (selectedCard.C_Type == "Special")
+            {
+                BattleSystem.ExecuteSpecial(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
+                PlayerManager.Instance.PlayAttackAnimation();
             }
 
-            PlayerManager.Instance.PlayAttackAnimation();
-            float attackTime = PlayerManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
-            yield return new WaitForSeconds(attackTime * 0.75f);
-            EnemyManager.Instance.EnemyHitAnimation();
         }
         else
         {
@@ -78,15 +102,21 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             if (selectedCard.C_Type == "Action")
             {
                 BattleSystem.ExecuteAttack(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+                EnemyManager.Instance.EnemyAttackAnimation();
+                float attackTime = EnemyManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
+                yield return new WaitForSeconds(attackTime * 0.75f);
+                PlayerManager.Instance.PlayHitAnimation();
             }
             else if (selectedCard.C_Type == "Support")
             {
                 BattleSystem.ExecuteDefence(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+                EnemyManager.Instance.EnemyAttackAnimation();
             }
-            EnemyManager.Instance.EnemyAttackAnimation();
-            float attackTime = EnemyManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
-            yield return new WaitForSeconds(attackTime * 0.75f);
-            PlayerManager.Instance.PlayHitAnimation();
+            else if (selectedCard.C_Type == "Special")
+            {
+                BattleSystem.ExecuteSpecial(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
+                EnemyManager.Instance.EnemyAttackAnimation();
+            }
 
             
         }

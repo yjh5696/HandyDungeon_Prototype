@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
   m_Name: MAAN1
   m_EditorClassIdentifier: 
-  C_Id: 61
+  C_Id: 1061
   C_Name: MAAN1
   C_Type: Action
   Element: Air
@@ -23,11 +23,12 @@ MonoBehaviour:
   Max_Vlaue: 0
   Calculation: 3
   Debuff_Type: Air
-  Debuff_Stack: 0
+  Debuff_Stack: 1
   Buff_Type: None
   Buff_Stack: 0
   Enhanceable: 
   Enhance_Count: 0
   Target: Player
-  Card_Description: "\uC801\uC5D0\uAC8C 1.2~7.2\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  Card_Description: "\uC801\uC5D0\uAC8C 1.2~7.2\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+    \uD48D\uC2DD 1."
   CardConcept: 

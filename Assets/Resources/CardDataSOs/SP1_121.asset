@@ -28,11 +28,6 @@ MonoBehaviour:
   Buff_Stack: 0
   Enhanceable: No
   Enhance_Count: 0
-  Target: 
-  Card_Description: 
-  Unnamed_18: 
+  Target: Self
+  Card_Description: "\uB514\uBC84\uD504 \uBAA8\uB450 \uC81C\uAC70"
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

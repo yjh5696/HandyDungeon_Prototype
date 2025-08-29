@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Damage
   min_Value: 4
-  Max_Vlaue: 9.6
+  Max_Vlaue: 0
   Calculation: 0.4
   Debuff_Type: Land
   Debuff_Stack: 0
@@ -31,9 +31,4 @@ MonoBehaviour:
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 1.6~9.6\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
     \uAC15\uD654 2."
-  Unnamed_18: 
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

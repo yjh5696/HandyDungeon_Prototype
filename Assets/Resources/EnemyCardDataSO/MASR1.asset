@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
   m_Name: MASR1
   m_EditorClassIdentifier: 
-  C_Id: 82
+  C_Id: 1082
   C_Name: MASR1
   C_Type: Support
   Element: Air

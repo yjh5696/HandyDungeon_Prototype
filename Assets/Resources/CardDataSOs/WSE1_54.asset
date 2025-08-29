@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Climax
   Effect_Type: Heal
   min_Value: 5
-  Max_Vlaue: 18
+  Max_Vlaue: 0
   Calculation: 0.6
   Debuff_Type: None
   Debuff_Stack: 0
@@ -31,9 +31,4 @@ MonoBehaviour:
   Target: Self
   Card_Description: "3~18\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4.
     \uC7AC\uC0DD 4. \uAC15\uD654 3"
-  Unnamed_18: 
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

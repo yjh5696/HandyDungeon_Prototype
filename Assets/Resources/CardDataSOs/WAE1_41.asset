@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Climax
   Effect_Type: Damage
   min_Value: 3
-  Max_Vlaue: 18
+  Max_Vlaue: 0
   Calculation: 1
   Debuff_Type: Water
   Debuff_Stack: 3
@@ -30,10 +30,5 @@ MonoBehaviour:
   Enhance_Count: 3
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 3~18\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uCE68\uC2DD 3. \uAC15\uD654 3."
-  Unnamed_18: 
+    \uC816\uC74C 3. \uAC15\uD654 3."
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

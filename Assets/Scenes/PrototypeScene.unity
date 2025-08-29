@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &27872867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -172,6 +172,10 @@ MonoBehaviour:
   playerCharacter: {fileID: 844405481}
   cardNameText: {fileID: 1004122172}
   cardUI: {fileID: 1025688777}
+  actionCardText: {fileID: 1581959020}
+  supportCardText: {fileID: 1972473576}
+  specialCardText: {fileID: 827266438}
+  specialButtonImage: {fileID: 152439379}
 --- !u!1 &125654030
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +296,67 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 152439379}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 27872866}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1025688774}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 471150126}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 588424019}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 27872868}
+        m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
+        m_MethodName: SelectSpecialCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &152439379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1447,7 +1511,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 27872868}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: SetStyleToDefense
+        m_MethodName: SelectSupportCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3668,7 +3732,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: 
-  cards: []
+  nextTurnDiceBonus: 0
+  nextTurnDiceMultiplier: 1
+  maxElementStack: 10
+  cards:
+  - {fileID: 11400000, guid: 7ea6776fb9f8419419283ad37084cf27, type: 2}
+  - {fileID: 11400000, guid: 8c90e141d5413e84bbe29dfc1d36acaf, type: 2}
+  - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
 --- !u!1 &844952115
 GameObject:
   m_ObjectHideFlags: 0
@@ -5168,7 +5238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: 50.50001}
+  m_AnchoredPosition: {x: 1709, y: 50.50001}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &996459330
@@ -8755,7 +8825,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 27872868}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: UseCard
+        m_MethodName: SelectActionCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9987,7 +10057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2078747269
 RectTransform:
   m_ObjectHideFlags: 0

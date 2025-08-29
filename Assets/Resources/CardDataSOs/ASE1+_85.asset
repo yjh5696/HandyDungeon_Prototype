@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Climax
   Effect_Type: Sheild
   min_Value: 3
-  Max_Vlaue: 14.4
+  Max_Vlaue: 0
   Calculation: 0.8
   Debuff_Type: None
   Debuff_Stack: 0
@@ -30,10 +30,5 @@ MonoBehaviour:
   Enhance_Count: 4
   Target: Self
   Card_Description: "2.4~14.4\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.
-    \uC9C8\uD48D 5. \uAC15\uD654 4."
-  Unnamed_18: 
+    \uC21C\uD48D 5. \uAC15\uD654 4."
   CardConcept: "2\uD68C\uBCF5 3\uBC84\uD504"
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

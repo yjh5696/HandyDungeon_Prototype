@@ -23,10 +23,10 @@ public static class ElementEffect
         {
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Fire));
             target.RemoveStatus(State.Fire);
-            target.SetStatus("발화", (stacks + 1) / 2);
+            target.SetStatus("연소", (stacks + 1) / 2);
             ApplyBaseDebuff(target, State.Air, baseStacks);
             target.SetLastElement(State.Air);
-            return $"발화 발생! 턴마다 {3 * ((stacks + 1) / 2)} 피해 + 풍식 {baseStacks} 스택 부여";
+            return $"연소 발생! 턴마다 {3 * ((stacks + 1) / 2)} 피해 + 교란 {baseStacks} 스택 부여";
         }
 
         // 와류
@@ -34,38 +34,38 @@ public static class ElementEffect
         {
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Air));
             target.RemoveStatus(State.Air);
-            target.SetStatus("와류", (stacks + 1));
+            target.SetStatus("동상", (stacks + 1));
             target.TakeDamage(5 * stacks);
             ApplyBaseDebuff(target, State.Water, baseStacks);
             target.SetLastElement(State.Water);
-            return $"와류 발생! {5 * stacks} 피해 + 침식 {baseStacks} 스택 부여";
+            return $"동상 발생! {5 * stacks} 피해 + 젖음 {baseStacks} 스택 부여";
         }
 
-        // 침전
+        // 암반화
         if (last == State.Water && newElement == State.Land)
         {
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Water));
             target.RemoveStatus(State.Water);
-            target.SetStatus("침전", (stacks + 1));
+            target.SetStatus("암반화", (stacks + 1));
             target.TakeDamage(4 * stacks);
-            target.SetShieldEffect(2 * stacks, -1, 0);
+            target.SetShieldEffect(2 * stacks, -1);
             ApplyBaseDebuff(target, State.Land, baseStacks);
             target.SetLastElement(State.Land);
-            return $"침전 발생! {4 * stacks} 피해 + 진창 {baseStacks} 스택 부여";
+            return $"암반화 발생! {4 * stacks} 피해 + 균열 {baseStacks} 스택 부여";
         }
 
-        // 용암
+        // 분화
         if (last == State.Land && newElement == State.Fire)
         {
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Land));
             float mult = 1f + stacks * 0.1f;
             target.RemoveStatus(State.Land);
-            target.SetStatus("용암", (stacks + 1));
+            target.SetStatus("분화", (stacks + 1));
             target.TakeDamage(5 * stacks * mult);
             target.SetExtraDamageTaken(stacks);
             ApplyBaseDebuff(target, State.Fire, baseStacks);
             target.SetLastElement(State.Fire);
-            return $"용암 발생! {5 * stacks * mult} 피해 + 점화 {baseStacks} 스택 부여";
+            return $"분화 발생! {5 * stacks * mult} 피해 + 점화 {baseStacks} 스택 부여";
         }
 
         // 기본 디버프
@@ -79,9 +79,9 @@ public static class ElementEffect
         switch (element)
         {
             case State.Fire: target.SetStatus("점화", stacks); break;
-            case State.Air: target.SetStatus("풍식", stacks); break;
-            case State.Land: target.SetStatus("진창", stacks); break;
-            case State.Water: target.SetStatus("침식", stacks); break;
+            case State.Air: target.SetStatus("교란", stacks); break;
+            case State.Land: target.SetStatus("균열", stacks); break;
+            case State.Water: target.SetStatus("젖음", stacks); break;
         }
     }
 }

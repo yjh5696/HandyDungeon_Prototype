@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Sheild
   min_Value: 2
-  Max_Vlaue: 9.6
+  Max_Vlaue: 0
   Calculation: 0.8
   Debuff_Type: None
   Debuff_Stack: 0
@@ -30,9 +30,4 @@ MonoBehaviour:
   Enhance_Count: 0
   Target: Self
   Card_Description: "1.6~9.6\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
-  Unnamed_18: 
   CardConcept: "3\uB2E8\uACC4 \uBCF4\uD638\uB9C9"
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

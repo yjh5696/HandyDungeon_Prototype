@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Rising
   Effect_Type: Damage
   min_Value: 4
-  Max_Vlaue: 14.4
+  Max_Vlaue: 0
   Calculation: 0.6
   Debuff_Type: Land
   Debuff_Stack: 2
@@ -30,10 +30,5 @@ MonoBehaviour:
   Enhance_Count: 3
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 2.4~14.4\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uC9C4\uCC3D 2. \uAC15\uD654 3."
-  Unnamed_18: 
+    \uADE0\uC5F4 2. \uAC15\uD654 3."
   CardConcept: "2\uACF5\uACA9 1\uB514\uBC9E"
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

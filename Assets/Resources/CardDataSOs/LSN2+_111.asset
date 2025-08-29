@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Heal
   min_Value: 3
-  Max_Vlaue: 10.8
+  Max_Vlaue: 0
   Calculation: 0.6
   Debuff_Type: None
   Debuff_Stack: 0
@@ -31,9 +31,4 @@ MonoBehaviour:
   Target: Self
   Card_Description: "1.8~10.8\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4.
     \uC218\uD638 1."
-  Unnamed_18: 
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

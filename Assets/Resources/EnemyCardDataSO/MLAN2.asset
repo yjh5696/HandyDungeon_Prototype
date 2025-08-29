@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
   m_Name: MLAN2
   m_EditorClassIdentifier: 
-  C_Id: 93
+  C_Id: 1093
   C_Name: MLAN2
   C_Type: Action
   Element: Land
@@ -30,5 +30,5 @@ MonoBehaviour:
   Enhance_Count: 0
   Target: Player
   Card_Description: "\uC801\uC5D0\uAC8C 0.8~4.8\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uC9C4\uCC3D 2."
+    \uC9C4\uCC3D 1."
   CardConcept: 

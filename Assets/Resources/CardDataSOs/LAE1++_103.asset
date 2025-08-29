@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Finale
   Effect_Type: Damage
   min_Value: 4
-  Max_Vlaue: 28.8
+  Max_Vlaue: 0
   Calculation: 1.2
   Debuff_Type: Land
   Debuff_Stack: 6
@@ -30,10 +30,5 @@ MonoBehaviour:
   Enhance_Count: 0
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 4.8~28.8\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uC9C4\uCC3D 6."
-  Unnamed_18: 
+    \uADE0\uC5F4 6."
   CardConcept: "4\uACF5 2 \uB514\uBC9E"
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 

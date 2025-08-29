@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Rising
   Effect_Type: Damage
   min_Value: 5
-  Max_Vlaue: 18
+  Max_Vlaue: 0
   Calculation: 0.6
   Debuff_Type: Fire
   Debuff_Stack: 2
@@ -31,9 +31,4 @@ MonoBehaviour:
   Target: Enemy
   Card_Description: "\uC801\uC5D0\uAC8C 3~18\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
     \uC810\uD654 2. \uAC15\uD654 3"
-  Unnamed_18: 
   CardConcept: 
-  Unnamed_20: 
-  Unnamed_21: 
-  Unnamed_22: 
-  Formula: 
