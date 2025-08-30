@@ -3736,8 +3736,8 @@ MonoBehaviour:
   nextTurnDiceMultiplier: 1
   maxElementStack: 10
   cards:
-  - {fileID: 11400000, guid: 7ea6776fb9f8419419283ad37084cf27, type: 2}
-  - {fileID: 11400000, guid: ce79858ec8da0a748b6cbf3a1bd8a8fe, type: 2}
+  - {fileID: 11400000, guid: 8eb3b4f91354e3a4590455d499da5b9a, type: 2}
+  - {fileID: 11400000, guid: 4e7997c298fd9964186ca4b503d499e5, type: 2}
   - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
 --- !u!1 &844952115
 GameObject:
@@ -4549,7 +4549,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99941134
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8243,6 +8243,18 @@ MonoBehaviour:
       - m_Target: {fileID: 27872868}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
         m_MethodName: UseCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 27872868}
+        m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
+        m_MethodName: SelectCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

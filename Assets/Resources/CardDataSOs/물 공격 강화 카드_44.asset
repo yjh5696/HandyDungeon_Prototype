@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Opening
   Effect_Type: Damage
   min_Value: 3
-  Max_Vlaue: 0
+  Max_Value: 0
   Calculation: 0.5
   Debuff_Type: None
   Debuff_Stack: 0

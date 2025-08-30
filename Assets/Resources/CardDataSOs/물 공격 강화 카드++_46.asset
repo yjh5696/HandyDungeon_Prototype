@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: Climax
   Effect_Type: Damage
   min_Value: 3
-  Max_Vlaue: 0
+  Max_Value: 0
   Calculation: 1.1
   Debuff_Type: Water
   Debuff_Stack: 4

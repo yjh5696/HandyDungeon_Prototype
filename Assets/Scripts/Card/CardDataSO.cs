@@ -23,5 +23,6 @@ public class CardDataSO : ScriptableObject
     public string Target;
     public string Card_Description;
     public string CardConcept;
+
 }
 

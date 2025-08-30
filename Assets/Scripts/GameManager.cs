@@ -213,6 +213,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            CardManager.Instance.UpgradeEnhanceableCardsOnTurnEnd();
             StartEnemyTurn();
         }
     }
@@ -283,5 +284,7 @@ public class GameManager : MonoBehaviour
         
         NextStage().Forget();
     }
+
+
 }
 
