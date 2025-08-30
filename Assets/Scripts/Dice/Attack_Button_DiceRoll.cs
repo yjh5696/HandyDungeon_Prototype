@@ -131,6 +131,18 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     {
         yield return new WaitForSeconds(delaySeconds);
 
+        if (GameManager.Instance.isPlayerTurn)
+        {
+            PlayerManager.Instance.Player.OnTurnEnd_WindDecrease();
+            PlayerManager.Instance.Player.ProcessEndTurnEffects(PlayerManager.Instance.Player);
+            // lastElement 유지턴 감소 없음
+        }
+        else
+        {
+            EnemyManager.Instance.Enemy.OnTurnEnd_WindDecrease();
+            EnemyManager.Instance.Enemy.ProcessEndTurnEffects(EnemyManager.Instance.Enemy);
+        }
+
         if (PlayerManager.Instance.Player.GetCurrentHp() <= 0 ||
             EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
         {

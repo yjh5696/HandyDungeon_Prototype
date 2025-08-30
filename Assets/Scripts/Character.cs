@@ -138,7 +138,7 @@ public class Character : MonoBehaviour
             "풍식" => State.Air,
             "진창" => State.Land,
             "침식" => State.Water,
-            "발화" => State.Ignition,
+            "연소" => State.Ignition,
             "열정" => State.Fervor,
             "질풍" => State.Gale,
             "수호" => State.Guard,
@@ -182,6 +182,11 @@ public class Character : MonoBehaviour
                 EnemyManager.Instance.EnemyHitAnimation();
             }
             elementStacks[State.Vibration] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Vibration, 0) - 1);
+            if(elementStacks[State.Vibration] == 0)
+            {
+                RemoveStatus(State.Vibration);
+                LogManager.Instance.AddLog($"{unitName}의 진동 상태가 사라짐");
+            }
         }
     }
     // 소화 : 공격 시 피해 감소
@@ -190,6 +195,7 @@ public class Character : MonoBehaviour
         if (elementStacks.ContainsKey(State.Burndown))
         {
             totalDamage /= 2; // 버닝 효과로 피해 절반 감소
+            totalDamage = Mathf.Round(totalDamage * 10f) / 10f;
             elementStacks[State.Burndown] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Burndown, 0) - 1);
             LogManager.Instance.AddLog($"{unitName}의 소화 효과로 피해 {totalDamage} 감소");
         }
@@ -216,13 +222,18 @@ public class Character : MonoBehaviour
             {
                 float original = baseDamage;
                 baseDamage += stacks * 2f; // 순풍 효과로 공격력 증가
+                baseDamage = Mathf.Round(baseDamage * 10f) / 10f;
                 LogManager.Instance.AddLog($"순풍 효과로 공격력 {original} → {baseDamage} 증가");
                 elementStacks[State.Gale] = Mathf.Max(0, stacks - 1); // 스택 감소
+                if (elementStacks[State.Gale] == 0)
+                {
+                    elementStacks.Remove(State.Gale);
+                    LogManager.Instance.AddLog($"{unitName}의 순풍 상태가 사라짐");
+                }
             }
         }
         return baseDamage;
     }
-
 
     // 균열: 발동 시 스택 감소
     public float SetLandEffect(float damage)
@@ -231,7 +242,8 @@ public class Character : MonoBehaviour
         {
             int stacks = elementStacks[State.Land];
             float original = damage;
-            damage *= 1f + stacks * 0.1f;
+            damage *= 1f + stacks * 0.05f;
+            damage = Mathf.Round(damage * 10f) / 10f;
 
             if (Mathf.Abs(original - damage) > 0.001f)
             {
@@ -241,7 +253,6 @@ public class Character : MonoBehaviour
                 {
                     elementStacks.Remove(State.Land);
                     LogManager.Instance.AddLog($"{unitName}의 균열 상태가 사라짐");
-                    if (CurrentElement == State.Land) CurrentElement = State.None;
                 }
                 else elementStacks[State.Land] = stacks;
             }
@@ -256,7 +267,9 @@ public class Character : MonoBehaviour
         {
             int stacks = elementStacks[State.Guard];
             float original = Damage;
-            Damage *= 1f - stacks * 0.1f;
+            Damage *= 1f - stacks * 0.05f;
+            Damage = Mathf.Round(Damage * 10f) / 10f;
+
             if (Mathf.Abs(original - Damage) > 0.001f)
             {
                 LogManager.Instance.AddLog($"수호 효과로 피해 {original} → {Damage} 감소");
@@ -265,7 +278,6 @@ public class Character : MonoBehaviour
                 {
                     elementStacks.Remove(State.Guard);
                     LogManager.Instance.AddLog($"{unitName}의 수호 상태가 사라짐");
-                    if (CurrentElement == State.Guard) CurrentElement = State.None;
                 }
                 else elementStacks[State.Guard] = stacks;
             }
@@ -288,12 +300,17 @@ public class Character : MonoBehaviour
             LogManager.Instance.AddLog($"{unitName}의 젖음 효과로 {stack}만큼 데미지 감소");
 
             elementStacks[State.Water] = Mathf.Max(0, stack - 1);
+            if (elementStacks[State.Water] == 0)
+            {
+                elementStacks.Remove(State.Water);
+                LogManager.Instance.AddLog($"{unitName}의 젖음 상태가 사라짐");
+            }
         }
         return baseDamage;
     }
 
     // 데미지 처리
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Character target)
     {
         if (extraDamageStacks > 0) damage += extraDamageStacks;
         damage = Mathf.Round(damage * 10f) / 10f;
@@ -307,7 +324,22 @@ public class Character : MonoBehaviour
                 damage = 0f;
             }
         }
-        SetCurrentHp(CurrentHp - damage);
+        float clearHp = GetCurrentHp() - damage;
+        clearHp = Mathf.Round(clearHp * 10f) / 10f;
+        SetCurrentHp(clearHp);
+
+        if (target.GetCurrentHp() <= 0)
+        {
+            if (target is Player player)
+            {
+                player.PlayerDie();
+            }
+            else if (target is Enemy enemy)
+            {
+                enemy.EnemyDie();
+            }
+            return;
+        }
     }
     
     // 데미지 처리
@@ -340,7 +372,12 @@ public class Character : MonoBehaviour
             fervorDamage += stacks;
             LogManager.Instance.AddLog($"{unitName}의 열정 효과로 {stacks} 데미지 추가");
             elementStacks[State.Fervor] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Fervor, 0) - 1);
-            
+            if(elementStacks[State.Fervor] == 0)
+            {
+                elementStacks.Remove(State.Fervor);
+                LogManager.Instance.AddLog($"{unitName}의 열정 상태가 사라짐");
+            }
+
         }
         return fervorDamage;
     }
@@ -360,6 +397,11 @@ public class Character : MonoBehaviour
                 SetShieldEffect(stacks, diceValue); // 보호막 설정
             }
             elementStacks[State.Recovery] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Recovery, 0) - 1);
+            if (elementStacks[State.Recovery] == 0)
+            {
+                elementStacks.Remove(State.Recovery);
+                LogManager.Instance.AddLog($"{unitName}의 재생 상태가 사라짐");
+            }
         }
     }
 
@@ -371,8 +413,9 @@ public class Character : MonoBehaviour
             diceValue = 1;
         }
         ShieldValue = stacks;
-        Shield += ShieldValue * diceValue;
-        LogManager.Instance.AddLog($"{unitName}이/가 보호막 효과로{Shield} 보호막 획득 (총 보호막: {Shield})");
+        Shield += (ShieldValue * diceValue) / 3;
+        Shield = Mathf.Round(Shield * 10f) / 10f;
+        LogManager.Instance.AddLog($"{unitName}이/가 보호막 효과로{(ShieldValue * diceValue) / 3} 보호막 획득 (총 보호막: {Shield})");
     }
     
     // 회복 효과
@@ -383,7 +426,8 @@ public class Character : MonoBehaviour
             diceValue = 1;
         }
         RecoveryValue = stacks;
-        Recovery = RecoveryValue * diceValue;
+        Recovery = (RecoveryValue * diceValue) / 3;
+        Recovery = Mathf.Round(Recovery * 10f) / 10f;
         SetCurrentHp(CurrentHp + Recovery);
         LogManager.Instance.AddLog($"{unitName}이/가 재생 효과로 {Recovery} 회복");
     }
@@ -391,12 +435,15 @@ public class Character : MonoBehaviour
     public void SetShield(float damage)
     {
         Shield += damage;
+        Shield = Mathf.Round(Shield * 10f) / 10f;
         LogManager.Instance.AddLog($"{unitName}이/가 {damage} 보호막 획득 (총 보호막: {Shield})");
     }
 
     public void SetHeal(float damage)
     {
+        damage = Mathf.Round(damage * 10f) / 10f;
         SetCurrentHp(CurrentHp + damage);
+        CurrentHp = Mathf.Round(CurrentHp * 10f) / 10f;
         LogManager.Instance.AddLog($"{unitName}이/가 {damage} 회복 (현재 체력: {CurrentHp}/{MaxHp})");
     }
 
@@ -459,7 +506,7 @@ public class Character : MonoBehaviour
     }
 
     // DOT 처리 (점화, 연소)
-    public virtual void ProcessEndTurnEffects()
+    public virtual void ProcessEndTurnEffects(Character attacker)
     {
         List<State> removeList = new List<State>();
 
@@ -471,13 +518,13 @@ public class Character : MonoBehaviour
 
             if (element == State.Fire)
             {
-                TakeDamage(stacks);
+                TakeDamage(stacks, attacker);
                 LogManager.Instance.AddLog($"점화 효과로 {unitName}에게 {stacks} 피해");
                 decrease = true;
             }
             else if (element == State.Ignition)
             {
-                TakeDamage(stacks * 3);
+                TakeDamage(stacks * 3, attacker);
                 LogManager.Instance.AddLog($"연소 효과로 {unitName}에게 {stacks * 3} 피해");
                 decrease = true;
             }
@@ -494,7 +541,6 @@ public class Character : MonoBehaviour
         {
             elementStacks.Remove(e);
             LogManager.Instance.AddLog($"{unitName}의 {e} 상태가 사라짐");
-            if (CurrentElement == e) CurrentElement = State.None;
         }
     }
 }

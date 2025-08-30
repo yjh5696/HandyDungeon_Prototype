@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool isPlayerinBattle = false;
     public bool lastBattleWon = false;
     public bool skipBtnClicked = false;
+
     public Attack_Button_DiceRoll diceRoll;
     public int currentChapter = 0;
     public int currentStage = 0;
@@ -47,10 +48,10 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        StartPrologue().Forget();
+        //StartPrologue().Forget();
         
-        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
-        //StartPlayerTurn();
+        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
+        StartPlayerTurn();
     }
 
     public void StartChoice()
@@ -198,18 +199,6 @@ public class GameManager : MonoBehaviour
 
     public void SwitchTurn()
     {
-        if (isPlayerTurn)
-        {
-            PlayerManager.Instance.Player.OnTurnEnd_WindDecrease();
-            PlayerManager.Instance.Player.ProcessEndTurnEffects();
-            // lastElement 유지턴 감소 없음
-        }
-        else
-        {
-            EnemyManager.Instance.Enemy.OnTurnEnd_WindDecrease();
-            EnemyManager.Instance.Enemy.ProcessEndTurnEffects();
-        }
-
         isPlayerTurn = !isPlayerTurn;
 
         if (isPlayerTurn)
