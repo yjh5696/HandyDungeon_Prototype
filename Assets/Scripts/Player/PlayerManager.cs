@@ -58,6 +58,19 @@ public class PlayerManager : MonoBehaviour
         playerTrait = trait;
     }
 
+    public void GrantTraitOne()
+    {
+        GrantTraitToPlayer(TraitType.Diceby20);
+    }
+    public void GrantTraitTwo()
+    {
+        GrantTraitToPlayer(TraitType.Diceby10);
+    }
+    public void GrantTraitThree()
+    {
+        GrantTraitToPlayer(TraitType.AddOne);
+    }
+
     public TraitType GetCurrentTrait()
     {
         return playerTrait;
