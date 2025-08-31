@@ -122,4 +122,9 @@ public class LogManager : MonoBehaviour
 
         isLogging = false;
     }
+
+    private void OnClick()
+    {
+        Debug.Log("Clicked");
+    }
 }
