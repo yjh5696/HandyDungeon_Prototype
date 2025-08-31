@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerAnimator PlayerAnimator;
     private Animator _animator;
     [SerializeField] private HPBar hpBar;
+    [SerializeField] private TraitType playerTrait;
 
     public Animator Animator => _animator;
     private void Awake()
@@ -49,6 +50,17 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("플레이어 피격 애니메이션");
         _animator.SetTrigger(PlayerIsHit);
+    }
+
+    // 플레이어 특성 부여 함수
+    public void GrantTraitToPlayer(TraitType trait)
+    {
+        playerTrait = trait;
+    }
+
+    public TraitType GetCurrentTrait()
+    {
+        return playerTrait;
     }
 }
 

@@ -17,12 +17,10 @@ public class DiceRoll : MonoBehaviour
 
     public void RollDice(Action<int> onResult = null)
     {
-        if (isRolling) return; // 연속 호출 방지
-
+        if (isRolling) return;
         isRolling = true;
         seq = DOTween.Sequence();
-
-        int animationFrameCount = DiceRollTime * 20; // 20 프레임/초 가정
+        int animationFrameCount = DiceRollTime * 20; // assuming 20 fps
 
         for (int i = 0; i < animationFrameCount; i++)
         {
@@ -31,21 +29,17 @@ public class DiceRoll : MonoBehaviour
                 int randomNumber = Random.Range(1, diceFaces + 1);
                 numberText.text = randomNumber.ToString();
             });
-
-            seq.AppendInterval(0.05f);  // 0.05초 대기 후 다음 숫자 표시
+            seq.AppendInterval(0.05f);
         }
 
         seq.AppendCallback(() =>
         {
             DiceResult = Random.Range(1, diceFaces + 1);
             numberText.text = DiceResult.ToString();
-
             onResult?.Invoke(DiceResult);
-
             isRolling = false;
             seq = null;
         });
-
         seq.Play();
     }
 
