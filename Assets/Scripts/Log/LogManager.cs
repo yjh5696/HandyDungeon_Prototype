@@ -28,11 +28,6 @@ public class LogManager : MonoBehaviour
         text.text = "";
     }
 
-    public void Clear()
-    {
-        text.text = "";
-    }
-
     public void CancelLog()
     {
         _cancelTokenSource.Cancel();

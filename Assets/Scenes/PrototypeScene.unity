@@ -968,8 +968,6 @@ MonoBehaviour:
   - {fileID: 844952117}
   - {fileID: 727306028}
   rates: 140000002800000046000000
-  subEvents: {fileID: 11400000, guid: 236fa010e41303a4abc29c014ee4565a, type: 2}
-  mainEvents: {fileID: 11400000, guid: dd421bcd1139ed74f874536dc9c988b3, type: 2}
 --- !u!1 &345555352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,7 +2146,7 @@ MonoBehaviour:
   image: {fileID: 996459330}
   log: {fileID: 588424019}
   choice: {fileID: 332620289}
-  battle: {fileID: 27872866}
+  battle: {fileID: 1155125378}
   card: {fileID: 1025688774}
   action: {fileID: 471150126}
   dice: {fileID: 945721864}
@@ -3739,6 +3737,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8eb3b4f91354e3a4590455d499da5b9a, type: 2}
   - {fileID: 11400000, guid: 4e7997c298fd9964186ca4b503d499e5, type: 2}
   - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
+  initCards:
+  - {fileID: 11400000, guid: 8eb3b4f91354e3a4590455d499da5b9a, type: 2}
+  - {fileID: 11400000, guid: 4e7997c298fd9964186ca4b503d499e5, type: 2}
+  - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
 --- !u!1 &844952115
 GameObject:
   m_ObjectHideFlags: 0
@@ -4549,7 +4551,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99941134
+  m_Size: 0.99998885
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4771,6 +4773,7 @@ MonoBehaviour:
   diceRoll: {fileID: 872432975}
   switchTurnDelay: 3
   showDiceResultTime: 3
+  diceButton: {fileID: 0}
 --- !u!1 &974789145
 GameObject:
   m_ObjectHideFlags: 0
@@ -5238,7 +5241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3538, y: 15}
+  m_AnchoredPosition: {x: 0, y: 15}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &996459330
@@ -6101,7 +6104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -585.4093}
+  m_AnchoredPosition: {x: 0.00012207031, y: -585.40936}
   m_SizeDelta: {x: -1270, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1055311458
@@ -6698,7 +6701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1155125379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9016,7 +9019,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 27872866}
+      - m_Target: {fileID: 1155125378}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -10069,7 +10072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2078747269
 RectTransform:
   m_ObjectHideFlags: 0

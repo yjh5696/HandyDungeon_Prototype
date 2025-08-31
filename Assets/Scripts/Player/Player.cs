@@ -18,31 +18,6 @@ public class Player : Character
     {
         Cards = initCards;
     }
-    
-    public CardDataSO GetCard(int cardID)
-    {
-        CardDataSO[] tmpCards = Resources.LoadAll<CardDataSO>("CardDataSOs").ToArray();
-        if (cardID == 0)
-        {
-            int r = Random.Range(0, tmpCards.Length);
-            Cards.Add(tmpCards[r]);
-            return tmpCards[r];
-        }
-        else
-        {
-            foreach (CardDataSO card in tmpCards)
-            {
-                if (card.C_Id != cardID)
-                {
-                    continue;
-                }
-
-                Cards.Add(card);
-                return card;
-            }
-        }
-        return null;
-    }
 
     public void PlayerDie()
     {

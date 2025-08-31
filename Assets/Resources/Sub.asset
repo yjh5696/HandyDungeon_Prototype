@@ -39,13 +39,14 @@ MonoBehaviour:
     choiceText: "{1}\uC624\uB298\uB3C4 \uBB35\uBB35\uD788 \uAC80\uC744 \uD718\uB458\uB800\uB2E4.{1}\uC18C\uC911\uD55C
       \uAC83\uB4E4\uC744 \uC9C0\uD0A4\uAE30 \uC704\uD574."
     choiceRate: 50
-    choiceSuccessText: "\"{1}\uD558\uB8E8 \uC885\uC77C \uD6C8\uB828\uD588\uB354\uB2C8"
-    choiceFailText: " \uD574\uAC00 \uC800\uBB3C\uC5B4\uAC04\uB2E4.{1}\uC624\uB298\uB3C4
-      \uBCF4\uB78C\uD55C \uD558\uB8E8\uB97C \uBCF4\uB0C8\uB2E4.\""
-    choiceReward: "{1}\uBB34\uB9AC\uD558\uAC8C \uAC80\uC744 \uD718\uB450\uB974\uB2E4
+    choiceSuccessText: "{1}\uD558\uB8E8 \uC885\uC77C \uD6C8\uB828\uD588\uB354\uB2C8
+      \uD574\uAC00 \uC800\uBB3C\uC5B4\uAC04\uB2E4.{1}\uC624\uB298\uB3C4 \uBCF4\uB78C\uD55C
+      \uD558\uB8E8\uB97C \uBCF4\uB0C8\uB2E4."
+    choiceFailText: "{1}\uBB34\uB9AC\uD558\uAC8C \uAC80\uC744 \uD718\uB450\uB974\uB2E4
       \uADFC\uC721\uD1B5\uC774 \uC0DD\uACBC\uB2E4."
-    choiceLoss: PC_0000
-    choiceRequirement: HP_-10
+    choiceReward: PC_0000
+    choiceLoss: HP_-10
+    choiceRequirement: 
   - choiceID: CHOICE_SUB_3
     choiceChapterNumber: 1
     choiceEventNumber: 1

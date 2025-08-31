@@ -170,7 +170,7 @@ public class Choice : MonoBehaviour
     {
         switch (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage])
         {
-            case EventType.MainStory:
+            case EventType.MainStory: //메인 스토리 선택지
                 LogManager.Instance.AddDelayedLog(_mainEvent.choiceName, 2.0f).Forget();
 
                 GameManager.Instance.HideChoices();
@@ -188,7 +188,7 @@ public class Choice : MonoBehaviour
                 }
                 else
                 {
-                    if (_choiceType == ChoiceType.Battle)
+                    if (_choiceType == ChoiceType.Battle) //전투 시
                     {
                         GameManager.Instance.StartBattle("Rank1");
 
@@ -209,6 +209,9 @@ public class Choice : MonoBehaviour
                             LogManager.Instance
                                 .StartLog(_mainEvent.choiceSuccessText)
                                 .Forget();
+                            
+                            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                            
                             if (_mainEvent.choiceReward != "NONE")
                             {
                                 string[] rewards = _mainEvent.choiceReward.Split('/');
@@ -218,7 +221,23 @@ public class Choice : MonoBehaviour
                                     switch (reward[0])
                                     {
                                         case "PC":
-                                            LogManager.Instance.AddDelayedLog($"{PlayerManager.Instance.Player.GetCard(int.TryParse(reward[1], out int cardID) ? cardID : 0).C_Name}을/를 획득했다.", .0f).Forget();
+                                            CardDataSO card = CardManager.Instance.FindCardById(int.TryParse(reward[1], out int cardId) ? cardId : 0);
+                                            switch (card.Element)
+                                            {
+                                                case "Air":
+                                                    LogManager.Instance.AddDelayedLog($"<color=\"green\">{card.C_Name}</color>을/를 획득했다.", .0f).Forget();
+                                                    break;
+                                                case "Fire":
+                                                    LogManager.Instance.AddDelayedLog($"<color=\"red\">{card.C_Name}</color>을/를 획득했다.", .0f).Forget();
+                                                    break;
+                                                case "Water":
+                                                    LogManager.Instance.AddDelayedLog($"<color=\"blue\">{card.C_Name}</color>을/를 획득했다.", .0f).Forget();
+                                                    break; 
+                                                case "Land":
+                                                    LogManager.Instance.AddDelayedLog($"<color=#8C7905>{card.C_Name}</color>을/를 획득했다.", .0f).Forget();
+                                                    break;
+                                            }
+                                            PlayerManager.Instance.Player.Cards.Add(card);
                                             break;
                                         case "GOLD":
                                             break;
@@ -234,11 +253,12 @@ public class Choice : MonoBehaviour
                         {
                             LogManager.Instance
                                 .StartLog(_mainEvent.choiceFailText).Forget();
+                            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
                         }
                     }
                 }
                 break;
-            case EventType.SubStory:
+            case EventType.SubStory: //서브 스토리 선택지
                 LogManager.Instance.AddDelayedLog(_subEvent.choiceName, 2.0f).Forget();
 
                 GameManager.Instance.HideChoices();
@@ -249,109 +269,181 @@ public class Choice : MonoBehaviour
 
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
-                if (_subChoices is { Count: > 0 })
+                if (_subChoices is { Count: > 0 }) //세부 선택지 존재 시
                 {
                     GameManager.Instance.ShowChoices();
                     ChoiceManager.Instance.SetSubChoiceButtons(_subChoices);
+                    return;
+                }
+
+                if (_choiceType == ChoiceType.Battle)
+                {
+                    GameManager.Instance.StartBattle("Rank1");
+
+                    await UniTask.WaitUntil(() => !GameManager.Instance.isPlayerinBattle); //전투 끝날 때 까지 대기
+
+                    if (GameManager.Instance.lastBattleWon)
+                    {
+                        LogManager.Instance
+                            .StartLog(_subEvent.choiceSuccessText)
+                            .Forget();
+
+                        if (_subEvent.choiceReward != "NONE")
+                        {
+                            string[] rewards = _subEvent.choiceReward.Split('/');
+                            for (int i = 0; i < rewards.Length; i++)
+                            {
+                                string[] reward = rewards[i].Split('_');
+                                switch (reward[0])
+                                {
+                                    case "PC":
+                                        int id = int.Parse(reward[1]);
+                                        CardDataSO card;
+                                        card = id == 0 ? CardManager.Instance.GetRandomCard() : CardManager.Instance.FindCardById(int.Parse(reward[1]));
+                                        switch (card.Element)
+                                        {
+                                            case "Air":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=\"green\">{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                            case "Fire":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=\"red\">{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                            case "Water":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=\"blue\">{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                            case "Land":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=#8C7905>{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                        }
+
+                                        PlayerManager.Instance.Player.Cards.Add(card);
+                                        break;
+                                    case "GOLD":
+                                        break;
+                                    case "HP":
+                                        LogManager.Instance.AddDelayedLog($"체력을 {reward[1]}만큼 회복했다.", 1.0f).Forget();
+                                        PlayerManager.Instance.Player.SetCurrentHp(
+                                            PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]) > 100
+                                                ? 100
+                                                : PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]));
+                                        break;
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    if (_choiceType == ChoiceType.Battle)
+                    int r = Random.Range(1, 101);
+                    if (r <= _subEvent.choiceRate)
                     {
-                        GameManager.Instance.StartBattle("Rank1");
-
-                        await UniTask.WaitUntil(() => !GameManager.Instance.isPlayerinBattle); //전투 끝날 때 까지 대기
-
-                        if (GameManager.Instance.lastBattleWon)
+                        LogManager.Instance
+                            .StartLog(_subEvent.choiceSuccessText)
+                            .Forget();
+                        if (_subEvent.choiceReward != "NONE")
                         {
-                            LogManager.Instance
-                                .StartLog(_subEvent.choiceSuccessText)
-                                .Forget();
-                            
-                            if (_subEvent.choiceReward != "NONE")
+                            string[] rewards = _subEvent.choiceReward.Split('/');
+                            for (int i = 0; i < rewards.Length; i++)
                             {
-                                string[] rewards = _subEvent.choiceReward.Split('/');
-                                for (int i = 0; i < rewards.Length; i++)
+                                string[] reward = rewards[i].Split('_');
+                                switch (reward[0])
                                 {
-                                    string[] reward = rewards[i].Split('_');
-                                    switch (reward[0])
-                                    {
-                                        case "PC":
-                                            break;
-                                        case "GOLD":
-                                            break;
-                                        case "HP":
-                                            LogManager.Instance.AddDelayedLog($"체력을 {reward[1]}만큼 회복했다.", 1.0f).Forget();
-                                            PlayerManager.Instance.Player.SetCurrentHp((PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1])) > 100 ? 100 : PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]));
-                                            break;
-                                    }
+                                    case "PC":
+                                        int cardId = int.TryParse(reward[1], out int id) ? id : 0;
+                                        Debug.Log(cardId);
+                                        CardDataSO card;
+                                        if (cardId != 0)
+                                        {
+                                            card = CardManager.Instance.FindCardById(cardId);
+                                        }
+                                        else
+                                        {
+                                            card = CardManager.Instance.GetRandomCard();
+                                        }
+
+                                        switch (card.Element)
+                                        {
+                                            case "Air":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=\"green\">{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                            case "Fire":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=\"red\">{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                            case "Water":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=\"blue\">{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                            case "Land":
+                                                LogManager.Instance
+                                                    .AddDelayedLog($"<color=#8C7905>{card.C_Name}</color>을/를 획득했다.",
+                                                        .0f).Forget();
+                                                break;
+                                        }
+
+                                        PlayerManager.Instance.Player.Cards.Add(card);
+                                        break;
+                                    case "GOLD":
+                                        break;
+                                    case "HP":
+                                        LogManager.Instance.AddDelayedLog($"체력을 {reward[1]}만큼 회복했다.", 1.0f).Forget();
+                                        PlayerManager.Instance.Player.SetCurrentHp(
+                                            PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]) > 100
+                                                ? 100
+                                                : PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]));
+                                        break;
                                 }
                             }
                         }
-                    }
+                    } //서브 이벤트 성공 시
                     else
                     {
-                        int r = Random.Range(1, 101);
-                        if (r <= _subEvent.choiceRate)
+                        LogManager.Instance
+                            .StartLog(_subEvent.choiceFailText).Forget();
+                        if (_subEvent.choiceReward != "NONE")
                         {
-                            LogManager.Instance
-                                .StartLog(_subEvent.choiceSuccessText)
-                                .Forget();
-                            if (_subEvent.choiceReward != "NONE")
+                            string[] rewards = _subEvent.choiceReward.Split('/');
+                            for (int i = 0; i < rewards.Length; i++)
                             {
-                                string[] rewards = _subEvent.choiceReward.Split('/');
-                                for (int i = 0; i < rewards.Length; i++)
+                                string[] reward = rewards[i].Split('_');
+                                switch (reward[0])
                                 {
-                                    string[] reward = rewards[i].Split('_');
-                                    switch (reward[0])
-                                    {
-                                        case "PC":
-                                            LogManager.Instance.AddDelayedLog($"{PlayerManager.Instance.Player.GetCard(int.TryParse(reward[1], out int cardID) ? cardID : 0).C_Name}을/를 획득했다.", .0f).Forget();
-                                            break;
-                                        case "GOLD":
-                                            break;
-                                        case "HP":
-                                            LogManager.Instance.AddDelayedLog($"체력을 {reward[1]}만큼 회복했다.", 1.0f).Forget();
-                                            PlayerManager.Instance.Player.SetCurrentHp((PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1])) > 100 ? 100 : PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]));
-                                            break;
-                                    }
+                                    case "PC":
+                                        break;
+                                    case "GOLD":
+                                        break;
+                                    case "HP":
+                                        LogManager.Instance.AddDelayedLog($"체력 {reward[1]}...", 1.0f).Forget();
+                                        PlayerManager.Instance.Player.SetCurrentHp(
+                                            PlayerManager.Instance.Player.GetCurrentHp() - int.Parse(reward[1]) < 0
+                                                ? 0
+                                                : PlayerManager.Instance.Player.GetCurrentHp() - int.Parse(reward[1]));
+                                        break;
                                 }
                             }
                         }
-                        else
-                        {
-                            LogManager.Instance
-                                .StartLog(_subEvent.choiceFailText).Forget();
-                            if (_subEvent.choiceReward != "NONE")
-                            {
-                                string[] rewards = _subEvent.choiceReward.Split('/');
-                                for (int i = 0; i < rewards.Length; i++)
-                                {
-                                    string[] reward = rewards[i].Split('_');
-                                    switch (reward[0])
-                                    {
-                                        case "PC":
-                                            break;
-                                        case "GOLD":
-                                            break;
-                                        case "HP":
-                                            LogManager.Instance.AddDelayedLog($"체력 {reward[1]}...", 1.0f).Forget();
-                                            PlayerManager.Instance.Player.SetCurrentHp((PlayerManager.Instance.Player.GetCurrentHp() - int.Parse(reward[1])) < 0 ? 0 : PlayerManager.Instance.Player.GetCurrentHp() - int.Parse(reward[1]));
-                                            break;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    } //서브 이벤트 실패 시
                 }
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
 
         await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
         await UniTask.WaitForSeconds(3.0f);
+        
+        LogManager.Instance.AddSpacingLine();
 
         GameManager.Instance.NextStage().Forget();
     }

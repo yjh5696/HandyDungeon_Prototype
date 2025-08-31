@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     public void StartChoice()
     {
-        LogManager.Instance.Clear();
         choice.gameObject.SetActive(true);
         ChoiceManager.Instance.GetRandomChoice();
     }
@@ -88,8 +87,7 @@ public class GameManager : MonoBehaviour
         }
         
         skip.gameObject.SetActive(false);
-        
-        LogManager.Instance.Clear();
+ 
         LogManager.Instance.AddLog("특성을 하나 선택하세요.");
         
         traits.SetActive(true);
@@ -107,8 +105,6 @@ public class GameManager : MonoBehaviour
 
     public void StartScriptLog()
     {
-        LogManager.Instance.Clear();
-        
         TraitSet().Forget();
     }
 
@@ -144,41 +140,43 @@ public class GameManager : MonoBehaviour
         LogManager.Instance.PrintScript().Forget();
         await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
-        if (Stage.Chapters[currentChapter][currentStage] == EventType.Battle)
+        switch (Stage.Chapters[currentChapter][currentStage])
         {
-            LogManager.Instance.AddDelayedLog("적을 만났습니다!", 2.0f).Forget();
+            case EventType.Battle:
+                LogManager.Instance.AddDelayedLog("적을 만났습니다!", 2.0f).Forget();
             
-            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
             
-            LogManager.Instance.AddDelayedLog("전투가 시작됩니다...", 2.0f).Forget();
+                LogManager.Instance.AddDelayedLog("전투가 시작됩니다...", 2.0f).Forget();
             
-            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
-            LogManager.Instance.AddSpacingLine();
+                LogManager.Instance.AddSpacingLine();
             
-            StartBattle("Rank1");
-        }
-        else if (Stage.Chapters[currentChapter][currentStage] == EventType.Boss)
-        {
-            LogManager.Instance.AddDelayedLog("강력한 적을 만났습니다!", 2.0f).Forget();
+                StartBattle("Rank1");
+                break;
+            case EventType.Boss:
+                LogManager.Instance.AddDelayedLog("강력한 적을 만났습니다!", 2.0f).Forget();
             
-            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
             
-            LogManager.Instance.AddDelayedLog("전투가 시작됩니다...", 2.0f).Forget();
+                LogManager.Instance.AddDelayedLog("전투가 시작됩니다...", 2.0f).Forget();
             
-            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
             
-            LogManager.Instance.AddDelayedLog("조심하십시오...", 1.0f).Forget();
+                LogManager.Instance.AddDelayedLog("조심하십시오...", 1.0f).Forget();
             
-            await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
+                await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
-            LogManager.Instance.AddSpacingLine();
+                LogManager.Instance.AddSpacingLine();
             
-            StartBattle("Rank4");
-        }
-        else if(Stage.Chapters[currentChapter][currentStage] == EventType.MainStory || Stage.Chapters[currentChapter][currentStage] == EventType.SubStory)
-        {
-            StartChoice();
+                StartBattle("Rank4");
+                break;
+            case EventType.MainStory:
+            case EventType.SubStory:
+                LogManager.Instance.AddSpacingLine();
+                StartChoice();
+                break;
         }
     }
 

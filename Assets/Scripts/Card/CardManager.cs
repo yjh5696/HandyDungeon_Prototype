@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -25,16 +26,16 @@ public class CardManager : MonoBehaviour
     private CardDataSO _supportCard;
     private CardDataSO _specialCard;
 
-    private CardDataSO[] allCards;
+    private CardDataSO[] _allCards;
 
-    private Dictionary<int, int> cardEnhanceCounts = new Dictionary<int, int>();
+    private Dictionary<int, int> _cardEnhanceCounts = new Dictionary<int, int>();
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
 
-        allCards = Resources.LoadAll<CardDataSO>("CardDataSOs");
+        _allCards = Resources.LoadAll<CardDataSO>("CardDataSOs").ToArray();
 
         if (playerCharacter == null || playerCharacter.Cards == null || playerCharacter.Cards.Count == 0)
             Debug.LogWarning("Player Character 카드 덱이 할당되지 않았거나 비어있습니다.");
@@ -77,34 +78,34 @@ public class CardManager : MonoBehaviour
         if (specialCandidates.Count == 0)
         {
             _specialCard = null;
-            if (cardNameText != null)
+            if (cardNameText)
                 cardNameText.text = "사용가능한 카드가 없음";
         }
         else
         {
             _specialCard = DrawRandomFrom(specialCandidates, c => true);
             UpdateButtonColor(_specialCard);
-            if (cardNameText != null)
+            if (cardNameText)
                 cardNameText.text = "빈 카드";
         }
 
         // 버튼 텍스트 세팅
-        if (actionCardText != null)
-            actionCardText.text = _actionCard != null ? _actionCard.C_Name : "빈 카드";
-        if (supportCardText != null)
-            supportCardText.text = _supportCard != null ? _supportCard.C_Name : "빈 카드";
-        if (specialCardText != null)
-            specialCardText.text = _specialCard != null ? _specialCard.C_Name : "빈 카드";
+        if (actionCardText)
+            actionCardText.text = _actionCard ? _actionCard.C_Name : "빈 카드";
+        if (supportCardText)
+            supportCardText.text = _supportCard ? _supportCard.C_Name : "빈 카드";
+        if (specialCardText)
+            specialCardText.text = _specialCard ? _specialCard.C_Name : "빈 카드";
 
         _currentCard = null;
     }
 
     private void UpdateButtonColor(CardDataSO ChangeColorCard)
     {
-        if (specialButtonImage == null)
+        if (!specialButtonImage)
             return;
 
-        if (ChangeColorCard == null)
+        if (!ChangeColorCard)
         {
             specialButtonImage.color = new Color32(255, 251, 157, 255); // 기본 색상
         }
@@ -185,15 +186,15 @@ public class CardManager : MonoBehaviour
         if (selectedCard.Enhanceable == "Yes")
         {
             int id = selectedCard.C_Id;
-            if (!cardEnhanceCounts.ContainsKey(id)) // 처음 사용하는 카드라면 딕셔너리에 추가
+            if (!_cardEnhanceCounts.ContainsKey(id)) // 처음 사용하는 카드라면 딕셔너리에 추가
             {
-                cardEnhanceCounts[id] = selectedCard.Enhance_Count;
+                _cardEnhanceCounts[id] = selectedCard.Enhance_Count;
             }
 
-            if (cardEnhanceCounts[id] > 0)
+            if (_cardEnhanceCounts[id] > 0)
             {
-                cardEnhanceCounts[id]--;
-                Debug.Log($"[Card Enhance] 카드: {selectedCard.C_Name} (ID: {id}), 남은 강화 횟수: {cardEnhanceCounts[id]}");
+                _cardEnhanceCounts[id]--;
+                Debug.Log($"[Card Enhance] 카드: {selectedCard.C_Name} (ID: {id}), 남은 강화 횟수: {_cardEnhanceCounts[id]}");
             }
         }
     }
@@ -226,7 +227,7 @@ public class CardManager : MonoBehaviour
             Debug.Log($"  카드: {c.C_Name} (ID: {c.C_Id})");
         }
         Debug.Log($"[Upgrade] cardEnhanceCounts 상태:");
-        foreach (var kvp in cardEnhanceCounts)
+        foreach (var kvp in _cardEnhanceCounts)
         {
             Debug.Log($"  카드 ID: {kvp.Key}, 강화 카운트: {kvp.Value}");
         }
@@ -237,13 +238,13 @@ public class CardManager : MonoBehaviour
             {
                 int id = card.C_Id;
 
-                if (!cardEnhanceCounts.ContainsKey(id))
+                if (!_cardEnhanceCounts.ContainsKey(id))
                 {
-                    cardEnhanceCounts[id] = card.Enhance_Count;
+                    _cardEnhanceCounts[id] = card.Enhance_Count;
                     Debug.Log($"[Upgrade] 딕셔너리 초기화: {card.C_Name} (ID: {id}) Enhance_Count = {card.Enhance_Count}");
                 }
 
-                if (cardEnhanceCounts[id] <= 0)
+                if (_cardEnhanceCounts[id] <= 0)
                 {
                     cardsToRemove.Add(card);
 
@@ -255,9 +256,9 @@ public class CardManager : MonoBehaviour
                         cardsToAdd.Add(nextCard);
                         LogManager.Instance.AddLog($"{card.C_Name} 강화 완료, {nextCard.C_Name}로 교체되었습니다.");
 
-                        if (!cardEnhanceCounts.ContainsKey(nextCard.C_Id))
+                        if (!_cardEnhanceCounts.ContainsKey(nextCard.C_Id))
                         {
-                            cardEnhanceCounts[nextCard.C_Id] = nextCard.Enhance_Count;
+                            _cardEnhanceCounts[nextCard.C_Id] = nextCard.Enhance_Count;
                             Debug.Log($"[Upgrade] 딕셔너리 초기화: {nextCard.C_Name} (ID: {nextCard.C_Id}) Enhance_Count = {nextCard.Enhance_Count}");
                         }
                     }
@@ -269,7 +270,7 @@ public class CardManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"[Upgrade] 강화 중: {card.C_Name} (ID: {id}), 남은 강화 카운트: {cardEnhanceCounts[id]}");
+                    Debug.Log($"[Upgrade] 강화 중: {card.C_Name} (ID: {id}), 남은 강화 카운트: {_cardEnhanceCounts[id]}");
                 }
             }
         }
@@ -277,7 +278,7 @@ public class CardManager : MonoBehaviour
         foreach (var removeCard in cardsToRemove)
         {
             cards.Remove(removeCard);
-            cardEnhanceCounts.Remove(removeCard.C_Id);
+            _cardEnhanceCounts.Remove(removeCard.C_Id);
             Debug.Log($"[Upgrade] 카드 제거: {removeCard.C_Name} (ID: {removeCard.C_Id})");
         }
         foreach (var addCard in cardsToAdd)
@@ -290,14 +291,23 @@ public class CardManager : MonoBehaviour
 
 
     // 카드 ID로 카드 데이터를 찾는 함수 
-    private CardDataSO FindCardById(int id)
+    public CardDataSO FindCardById(int id)
     {
-        foreach (var card in allCards)
+        return _allCards.FirstOrDefault(card => card.C_Id == id);
+    }
+
+    public CardDataSO GetRandomCard()
+    {
+        int r = Random.Range(0, _allCards.Length);
+        while (true)
         {
-            if (card.C_Id == id)
-                return card;
+            if (_allCards[r].Tier != "tier1")
+            {
+                r = Random.Range(0, _allCards.Length);
+                continue;
+            }
+            return _allCards[r];
         }
-        return null;
     }
 
 }
