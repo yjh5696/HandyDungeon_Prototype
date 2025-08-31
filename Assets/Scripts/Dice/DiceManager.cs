@@ -37,7 +37,7 @@ public class DiceManager : MonoBehaviour
     {
         if (playerDices.Count > 0)
             return playerDices[0];
-        var dice = Instantiate(playerDicePrefab, playerDicePositions[0].position, Quaternion.identity, transform);
+        var dice = Instantiate(playerDicePrefab, playerDicePositions[0].position, Quaternion.identity, playerDicePositions[0].transform);
         playerDices.Add(dice);
         return dice;
     }
@@ -46,7 +46,7 @@ public class DiceManager : MonoBehaviour
     {
         if (enemyDices.Count > 0)
             return enemyDices[0];
-        var dice = Instantiate(enemyDicePrefab, enemyDicePositions[0].position, Quaternion.identity, transform);
+        var dice = Instantiate(enemyDicePrefab, enemyDicePositions[0].position, Quaternion.identity, enemyDicePositions[0].transform);
         enemyDices.Add(dice);
         return dice;
     }
