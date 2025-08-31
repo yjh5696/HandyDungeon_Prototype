@@ -54,6 +54,24 @@ public class EnemySpawner : MonoBehaviour
         EnemyManager.Instance.SpawnEnemy(enemyToSpawn);
     }
 
+    public void SpawnRandomEnemy(string info)
+    {
+        string[] splitInfo = info.Split('_');
+        
+        List<EnemySO> filteredList = enemyDatabase.Where(enemy => enemy.Rank == splitInfo[0] && enemy.EnemyTribe == splitInfo[1]).ToList();
+        
+        if (filteredList.Count == 0)
+        {
+            Debug.LogWarning($"'{splitInfo[0]}' Rank / '{splitInfo[1]}' TribeType를 가진 적을 찾을 수 없습니다.");
+            return;
+        }
+        
+        int randomIndex = Random.Range(0, filteredList.Count);
+        EnemySO enemyToSpawn = filteredList[randomIndex];
+        
+        EnemyManager.Instance.SpawnEnemy(enemyToSpawn);
+    }
+
     /// <summary>
     /// (참고용) 모든 적 중에서 무작위로 하나를 소환하는 기존 함수
     /// </summary>

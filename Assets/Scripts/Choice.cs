@@ -63,7 +63,7 @@ public class Choice : MonoBehaviour
             _ => Color.green
         };
 
-        if (_mainEvent.choiceReward != "NONE")
+        if (_mainEvent.choiceReward == "NONE")
         {
             string[] rewards = _mainEvent.choiceReward.Split('/');
             for (int i = 0; i < rewards.Length; i++)
@@ -75,7 +75,7 @@ public class Choice : MonoBehaviour
                         int cardId = int.TryParse(reward[1], out int id) ? id : 0;
                         if (cardId == 0)
                         {
-                            choiceSuccessText.text += "<color=black>랜덤 카드</color> +1";
+                            choiceSuccessText.text += "<color=black>??? 카드</color> +1";
                         }
                         else
                         {
@@ -83,19 +83,19 @@ public class Choice : MonoBehaviour
                             switch (card.Element)
                             {
                                 case "Air":
-                                    choiceSuccessText.text += $"<color=#2C9E19>바람 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#2C9E19>바람 속성 카드</color>";
                                     break;
                                 case "Fire":
-                                    choiceSuccessText.text += $"<color=#F23C16>불 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#F23C16>불 속성 카드</color>";
                                     break;
                                 case "Water":
-                                    choiceSuccessText.text += $"<color=#153696>물 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#153696>물 속성 카드</color>";
                                     break;
                                 case "Land":
-                                    choiceSuccessText.text += $"<color=#AD8018>땅 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#AD8018>땅 속성 카드</color>";
                                     break;
                                 case "None":
-                                    choiceSuccessText.text += $"<color=#F23C16>스페셜 카드</color>";
+                                    choiceSuccessText.text += "<color=#F23C16>스페셜 카드</color>";
                                     break;
                             }
                         }
@@ -158,6 +158,7 @@ public class Choice : MonoBehaviour
             if (_subEvent.choiceReward != "NONE")
             {
                 string[] rewards = _subEvent.choiceReward.Split('/');
+                Debug.Log(rewards[0]);
                 for (int i = 0; i < rewards.Length; i++)
                 {
                     string[] reward = rewards[i].Split('_');
@@ -167,7 +168,7 @@ public class Choice : MonoBehaviour
                             int cardId = int.TryParse(reward[1], out int id) ? id : 0;
                             if (cardId == 0)
                             {
-                                choiceSuccessText.text += "<color=black>랜덤 카드</color> +1";
+                                choiceSuccessText.text += "<color=black>??? 카드</color> +1";
                             }
                             else
                             {
@@ -207,7 +208,7 @@ public class Choice : MonoBehaviour
                 }
             }
 
-            if (_subEvent.choiceLoss != "NONE")
+            if (_subEvent.choiceLoss == "NONE")
             {
                 string[] losses = _subEvent.choiceLoss.Split('/');
                 for (int i = 0; i < losses.Length; i++)
@@ -376,7 +377,7 @@ public class Choice : MonoBehaviour
                         return;
                     }
 
-                    if (_choiceType == ChoiceType.Battle)
+                    if (_choiceType == ChoiceType.Battle) //선택지 타입이 전투
                     {
                         GameManager.Instance.StartBattle("Rank1");
 
@@ -400,7 +401,7 @@ public class Choice : MonoBehaviour
                                             int id = int.Parse(reward[1]);
                                             CardDataSO card = id == 0
                                                 ? CardManager.Instance.GetRandomCard()
-                                                : CardManager.Instance.FindCardById(int.Parse(reward[1]));
+                                                : CardManager.Instance.FindCardById(id);
                                             switch (card.Element)
                                             {
                                                 case "Air":
@@ -431,7 +432,6 @@ public class Choice : MonoBehaviour
                                                             .0f).Forget();
                                                     break;
                                             }
-
                                             PlayerManager.Instance.Player.Cards.Add(card);
                                             break;
                                         case "GOLD":
@@ -449,7 +449,7 @@ public class Choice : MonoBehaviour
                             }
                         }
                     }
-                    else
+                    else //전투 이외의 선택지 선택
                     {
                         int r = Random.Range(1, 101);
                         if (r <= _subEvent.choiceRate)
@@ -457,6 +457,7 @@ public class Choice : MonoBehaviour
                             LogManager.Instance
                                 .StartLog(_subEvent.choiceSuccessText)
                                 .Forget();
+                            Debug.Log(_subEvent.choiceReward);
                             if (_subEvent.choiceReward != "NONE")
                             {
                                 string[] rewards = _subEvent.choiceReward.Split('/');
@@ -467,9 +468,10 @@ public class Choice : MonoBehaviour
                                     {
                                         case "PC":
                                             int cardId = int.TryParse(reward[1], out int id) ? id : 0;
-                                            CardDataSO card = cardId != 0
-                                                ? CardManager.Instance.FindCardById(cardId)
-                                                : CardManager.Instance.GetRandomCard();
+                                            Debug.Log(cardId);
+                                            CardDataSO card = id == 0
+                                                ? CardManager.Instance.GetRandomCard()
+                                                : CardManager.Instance.FindCardById(id);
                                             switch (card.Element)
                                             {
                                                 case "Air":
@@ -500,7 +502,6 @@ public class Choice : MonoBehaviour
                                                             .0f).Forget();
                                                     break;
                                             }
-
                                             PlayerManager.Instance.Player.Cards.Add(card);
                                             break;
                                         case "GOLD":
@@ -516,7 +517,7 @@ public class Choice : MonoBehaviour
                                     }
                                 }
                             }
-                        } //서브 이벤트 성공 시
+                        }
                         else
                         {
                             LogManager.Instance

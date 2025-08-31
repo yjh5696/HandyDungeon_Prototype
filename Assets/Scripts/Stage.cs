@@ -7,4 +7,6 @@ public static class Stage
     {
         new[] {EventType.MainStory, EventType.SubStory, EventType.Battle, EventType.SubStory, EventType.Boss},
     };
+
+    public static readonly string[][] Enemies = { new[] { "", "", "Rank2_Element", "", "Rank4_Element" } };
 }

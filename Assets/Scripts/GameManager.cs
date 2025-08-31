@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
 
                 LogManager.Instance.AddSpacingLine();
             
-                StartBattle("Rank1");
+                StartBattle(Stage.Enemies[currentChapter][currentStage]);
                 break;
             case EventType.Boss:
                 LogManager.Instance.AddDelayedLog("강력한 적을 만났습니다!", 2.0f).Forget();
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 
                 LogManager.Instance.AddSpacingLine();
             
-                StartBattle("Rank4");
+                StartBattle(Stage.Enemies[currentChapter][currentStage]);
                 break;
             case EventType.MainStory:
             case EventType.SubStory:
@@ -185,13 +185,13 @@ public class GameManager : MonoBehaviour
         currentChapter++;
     }
 
-    public void StartBattle(string enemyRank)
+    public void StartBattle(string enemyInfo)
     {
         image.FadeOut(1.0f);
         choice.SetActive(false);
         battle.SetActive(true);
         isPlayerinBattle = true;
-        EnemySpawner.Instance.SpawnRandomEnemyByRank(enemyRank);
+        EnemySpawner.Instance.SpawnRandomEnemy(enemyInfo);
         StartPlayerTurn();
     }
 
