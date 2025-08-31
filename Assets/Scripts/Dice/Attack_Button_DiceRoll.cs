@@ -146,6 +146,20 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     private void OnLeftDiceRolled(int value)
     {
         diceButton.interactable = false;
+        if(playerTrait == TraitType.Diceby20)
+        {
+            if(value % 2 == 1)
+            {
+                value = 1;
+            }
+        }
+        else if (playerTrait == TraitType.Diceby10)
+        {
+            if(value == 2 || value == 3)
+            {
+                value = 1;
+            }
+        }
         playerDiceValue = value;
         playerDiceSum += value;
         LogManager.Instance.AddLog("");
