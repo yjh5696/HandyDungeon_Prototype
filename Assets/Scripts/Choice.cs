@@ -58,7 +58,7 @@ public class Choice : MonoBehaviour
         choiceRateText.text = "메인";
         choiceRateText.color = Color.green;
         
-        choiceSuccessText.text = "랜덤 카드 1장";
+        choiceSuccessText.text = "+카드";
         choiceFailText.text = "";
     }
 
@@ -209,6 +209,26 @@ public class Choice : MonoBehaviour
                             LogManager.Instance
                                 .StartLog(_mainEvent.choiceSuccessText)
                                 .Forget();
+                            if (_mainEvent.choiceReward != "NONE")
+                            {
+                                string[] rewards = _mainEvent.choiceReward.Split('/');
+                                for (int i = 0; i < rewards.Length; i++)
+                                {
+                                    string[] reward = rewards[i].Split('_');
+                                    switch (reward[0])
+                                    {
+                                        case "PC":
+                                            LogManager.Instance.AddDelayedLog($"{PlayerManager.Instance.Player.GetCard(int.TryParse(reward[1], out int cardID) ? cardID : 0).C_Name}을/를 획득했다.", .0f).Forget();
+                                            break;
+                                        case "GOLD":
+                                            break;
+                                        case "HP":
+                                            LogManager.Instance.AddDelayedLog($"체력을 {reward[1]}만큼 회복했다.", 1.0f).Forget();
+                                            PlayerManager.Instance.Player.SetCurrentHp((PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1])) > 100 ? 100 : PlayerManager.Instance.Player.GetCurrentHp() + int.Parse(reward[1]));
+                                            break;
+                                    }
+                                }
+                            }
                         }
                         else
                         {
@@ -286,6 +306,7 @@ public class Choice : MonoBehaviour
                                     switch (reward[0])
                                     {
                                         case "PC":
+                                            LogManager.Instance.AddDelayedLog($"{PlayerManager.Instance.Player.GetCard(int.TryParse(reward[1], out int cardID) ? cardID : 0).C_Name}을/를 획득했다.", .0f).Forget();
                                             break;
                                         case "GOLD":
                                             break;

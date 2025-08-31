@@ -3739,6 +3739,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ea6776fb9f8419419283ad37084cf27, type: 2}
   - {fileID: 11400000, guid: 8c90e141d5413e84bbe29dfc1d36acaf, type: 2}
   - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
+  initCards:
+  - {fileID: 11400000, guid: 7ea6776fb9f8419419283ad37084cf27, type: 2}
+  - {fileID: 11400000, guid: 8c90e141d5413e84bbe29dfc1d36acaf, type: 2}
+  - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
 --- !u!1 &844952115
 GameObject:
   m_ObjectHideFlags: 0
@@ -4549,7 +4553,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99503404
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

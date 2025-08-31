@@ -13,8 +13,8 @@ public class Enemy : Character
         _enemySo = enemy;
 
         // EnemySO 내 카드 덱을 복사하여 할당
-        cards = new List<CardDataSO>(enemy.EnemyCards);
-        Debug.Log($"EnemySO '{enemy.EnemyName}' 카드 수: {enemy.EnemyCards?.Count ?? -1}, Enemy 객체 cards 수: {cards?.Count ?? -1}");
+        Cards = new List<CardDataSO>(enemy.EnemyCards);
+        Debug.Log($"EnemySO '{enemy.EnemyName}' 카드 수: {enemy.EnemyCards?.Count ?? -1}, Enemy 객체 cards 수: {Cards?.Count ?? -1}");
     }
 
     public EnemySO GetEnemySo()
@@ -25,20 +25,20 @@ public class Enemy : Character
     // 외부에서 카드덱 직접 할당 가능
     public void SetCards(List<CardDataSO> cardPool)
     {
-        cards = cardPool;
+        Cards = cardPool;
     }
 
 
     public override void DrawAndUseCard()
     {
-        if (cards == null || cards.Count == 0)
+        if (Cards == null || Cards.Count == 0)
         {
             Debug.LogWarning("적 카드 덱이 비어있거나 설정되지 않았습니다.");
             return;
         }
 
-        int result = Random.Range(0, cards.Count);
-        _currentEnemyCard = cards[result];
+        int result = Random.Range(0, Cards.Count);
+        _currentEnemyCard = Cards[result];
 
         CardManager.Instance.selectedCard = _currentEnemyCard;
 
