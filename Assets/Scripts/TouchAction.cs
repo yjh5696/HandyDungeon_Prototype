@@ -109,6 +109,15 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Press"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""1c63b38c-41de-4a26-af5a-1792f49fd3d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -133,6 +142,17 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
                     ""action"": ""Tap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8e3c1fe-d011-4889-85b0-9dd9608f178e"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
         m_Touch_Position = m_Touch.FindAction("Position", throwIfNotFound: true);
         m_Touch_Tap = m_Touch.FindAction("Tap", throwIfNotFound: true);
+        m_Touch_Press = m_Touch.FindAction("Press", throwIfNotFound: true);
     }
 
     ~@TouchAction()
@@ -225,6 +246,7 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
     private List<ITouchActions> m_TouchActionsCallbackInterfaces = new List<ITouchActions>();
     private readonly InputAction m_Touch_Position;
     private readonly InputAction m_Touch_Tap;
+    private readonly InputAction m_Touch_Press;
     /// <summary>
     /// Provides access to input actions defined in input action map "Touch".
     /// </summary>
@@ -244,6 +266,10 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Touch/Tap".
         /// </summary>
         public InputAction @Tap => m_Wrapper.m_Touch_Tap;
+        /// <summary>
+        /// Provides access to the underlying input action "Touch/Press".
+        /// </summary>
+        public InputAction @Press => m_Wrapper.m_Touch_Press;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -276,6 +302,9 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
             @Tap.started += instance.OnTap;
             @Tap.performed += instance.OnTap;
             @Tap.canceled += instance.OnTap;
+            @Press.started += instance.OnPress;
+            @Press.performed += instance.OnPress;
+            @Press.canceled += instance.OnPress;
         }
 
         /// <summary>
@@ -293,6 +322,9 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
             @Tap.started -= instance.OnTap;
             @Tap.performed -= instance.OnTap;
             @Tap.canceled -= instance.OnTap;
+            @Press.started -= instance.OnPress;
+            @Press.performed -= instance.OnPress;
+            @Press.canceled -= instance.OnPress;
         }
 
         /// <summary>
@@ -347,5 +379,12 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTap(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Press" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPress(InputAction.CallbackContext context);
     }
 }

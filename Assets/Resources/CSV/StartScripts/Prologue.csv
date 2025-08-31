@@ -1,19 +1,29 @@
-0,0,0,PROLOGUE,무명 액션 배우로 근근이 생계를 이어가던 ‘김배우’.,1
-0,0,0,PROLOGUE,하루하루 버티던 그녀에게 어느 날 낯선 문자 한 통이 도착했다.,1
-0,0,0,PROLOGUE,'안녕하세요 김배우님.,1
-0,0,0,PROLOGUE,영화 ‘검성의 모험담’의 주인공을 맡아 주셨으면 합니다.,1
-0,0,0,PROLOGUE,완성 시기를 장담할 수 없고 촬영이 시작되면 장기간 현장에서 머물러야 할지도 모릅니다.,1
-0,0,0,PROLOGUE,힘든 상황이 닥칠 수 있지만 부디 ‘김배우님’을 저희 영화의 주인공으로 모시고 싶습니다.',1
-0,0,0,PROLOGUE,막막한 미래 속에서 이런 기회는 흔치 않았다.,1
-0,0,0,PROLOGUE,의심스러웠지만… 배우로 살아남기 위해 그녀는 결정을 내렸다.,1
-0,0,0,PROLOGUE,'수락하겠습니다.',1
-0,0,0,PROLOGUE,문자를 전송하는 순간 눈부신 빛이 그녀를 감싸 안았다.,1
-0,0,0,PROLOGUE,그리고 세상에서 사라졌다.,1
-0,0,0,PROLOGUE, ,1
-0,0,0,PROLOGUE,신과 마왕이 존재하고 검과 마법이 공존하는 세계 ‘이스테돈’.,1
-0,0,0,PROLOGUE,그곳에는 단신으로 단 하나의 검으로 마왕을 쓰러뜨린 전설의 검성 ‘엘’이 있었다.,1
-0,0,0,PROLOGUE,당신은 그 영웅담을 영화로 남기기 위해 소환된 사람.,1
-0,0,0,PROLOGUE,엘의 어린 시절부터 마침내 마왕을 무찌른 순간까지—,1
-0,0,0,PROLOGUE,그 발자취를 따라가며 그녀가 겪은 모험과 시련을 재현하라.,1
-0,0,0,PROLOGUE,"모든 장면을 완성했을 때 영화는 전설이 되고",1
-0,0,0,PROLOGUE,당신의 이야기는 ‘검성의 모험담’이 된다.,1
+SCRIPT_PROLOGUE_1,0,0,PROLOGUE,무명 액션 배우로 근근이 생계를 이어가던 ‘김배우’.,2
+SCRIPT_PROLOGUE_2,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_3,0,0,PROLOGUE,하루하루 버티던 그녀에게 어느 날 낯선 문자 한 통이 도착했다.,2
+SCRIPT_PROLOGUE_4,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_5,0,0,PROLOGUE,<i>'안녕하세요 김배우님.',2
+SCRIPT_PROLOGUE_6,0,0,PROLOGUE,영화 ‘검성의 모험담’의 주인공을 맡아 주셨으면 합니다.,2
+SCRIPT_PROLOGUE_7,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_8,0,0,PROLOGUE,완성 시기를 장담할 수 없고 촬영이 시작되면 장기간 현장에서 머물러야 할지도 모릅니다.,2
+SCRIPT_PROLOGUE_9,0,0,PROLOGUE,힘든 상황이 닥칠 수 있지만 부디 ‘김배우님’을 저희 영화의 주인공으로 모시고 싶습니다.'</i>,2
+SCRIPT_PROLOGUE_10,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_11,0,0,PROLOGUE,막막한 미래 속에서 이런 기회는 흔치 않았다.,2
+SCRIPT_PROLOGUE_12,0,0,PROLOGUE,의심스러웠지만… 배우로 살아남기 위해 그녀는 결정을 내렸다.,2
+SCRIPT_PROLOGUE_13,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_14,0,0,PROLOGUE,수락하겠습니다.',2
+SCRIPT_PROLOGUE_15,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_16,0,0,PROLOGUE,문자를 전송하는 순간 눈부신 빛이 그녀를 감싸 안았다.,2
+SCRIPT_PROLOGUE_17,0,0,PROLOGUE,그리고 세상에서 사라졌다.,4
+SCRIPT_PROLOGUE_18,0,0,PROLOGUE, ,1
+SCRIPT_PROLOGUE_19,0,0,PROLOGUE,신과 마왕이 존재하고 검과 마법이 공존하는 세계 ‘이스테돈’.,2
+SCRIPT_PROLOGUE_20,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_21,0,0,PROLOGUE,그곳에는 단신으로 단 하나의 검으로 마왕을 쓰러뜨린 전설의 검성 ‘엘’이 있었다.,2
+SCRIPT_PROLOGUE_22,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_23,0,0,PROLOGUE,당신은 그 영웅담을 영화로 남기기 위해 소환된 사람.,2
+SCRIPT_PROLOGUE_24,0,0,PROLOGUE,엘의 어린 시절부터 마침내 마왕을 무찌른 순간까지—,2
+SCRIPT_PROLOGUE_25,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_26,0,0,PROLOGUE,그 발자취를 따라가며 그녀가 겪은 모험과 시련을 재현하라.,2
+SCRIPT_PROLOGUE_27,0,0,PROLOGUE,모든 장면을 완성했을 때 영화는 전설이 되고.,2
+SCRIPT_PROLOGUE_28,0,0,PROLOGUE,,1
+SCRIPT_PROLOGUE_29,0,0,PROLOGUE,당신의 이야기는 ‘검성의 모험담’이 된다.,2

@@ -17,337 +17,371 @@ MonoBehaviour:
     chapterID: 1
     eventID: 0
     scriptText: "\uC18C\uB140. \uC5D8. \uB2E4\uC12F \uC0B4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_1
     chapterID: 1
     eventID: 0
     scriptText: "\uC2DC\uAC04\uC774 \uD758\uB7EC\uB3C4 \uADF8\uB0A0\uC758 \uC545\uBABD\uC740
       \uC0AC\uB77C\uC9C0\uC9C0 \uC54A\uC558\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_2
     chapterID: 1
     eventID: 0
     scriptText: "\uC0AC\uB791\uD558\uB294 \uBD80\uBAA8\uAC00 \uB208\uC55E\uC5D0\uC11C
       \uCC28\uAC11\uAC8C \uC2DD\uC5B4\uAC00\uB358 \uADF8 \uAD11\uACBD."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_3
     chapterID: 1
     eventID: 0
     scriptText: "\uADF8 \uB054\uCC0D\uD55C \uAE30\uC5B5\uC740 \uB9E4\uC77C \uBC24
       \uAFC8\uC18D\uC5D0\uC11C \uB418\uC0B4\uC544\uB098 \uADF8\uB140\uB97C \uAD34\uB86D\uD614\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_4
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_5
     chapterID: 1
     eventID: 0
     scriptText: "\uD3C9\uD654\uB85C\uC6B4 \uC232\uC5D0\uC11C \uC9C0\uB0B4\uB358 \uC5B4\uB290
       \uB0A0 \uC5D8\uC740 \uC785\uC220\uC744 \uAE68\uBB3C\uBA70 \uB9D0\uD588\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_6
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_7
     chapterID: 1
     eventID: 0
     scriptText: "\u201C...\uAC15\uD574\uC9C0\uACE0 \uC2F6\uC5B4\uC694. \uB2F9\uC2E0\uCC98\uB7FC.\u201D"
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_8
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_9
     chapterID: 1
     eventID: 0
     scriptText: "\uB0A8\uC790\uB294 \uC7A0\uC2DC \uB208\uAE38\uC744 \uACE0\uC815\uD55C
       \uCC44 \uC5D8\uC744 \uC9C0\uCF1C\uBCF4\uC558\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_10
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_11
     chapterID: 1
     eventID: 0
     scriptText: "\u201C\uC800\uC5D0\uAC8C \uAC80\uC744 \uC54C\uB824\uC8FC\uC138\uC694."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_12
     chapterID: 1
     eventID: 0
     scriptText: "\uADF8\uB54C\uCC98\uB7FC \uBB34\uB825\uD558\uAC8C \uBAA8\uB4E0 \uAC78
       \uC783\uACE0 \uC2F6\uC9C0 \uC54A\uC544\uC694."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_13
     chapterID: 1
     eventID: 0
     scriptText: "\uC774\uC81C\uB294 \uC18C\uC911\uD55C \uAC83\uB4E4\uC744 \uC9C0\uD0A4\uACE0
       \uC2F6\uC2B5\uB2C8\uB2E4.\u201D"
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_14
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_15
     chapterID: 1
     eventID: 0
     scriptText: "\uB0A8\uC790\uB294 \uB300\uB2F5 \uB300\uC2E0 \uCE68\uBB35\uC73C\uB85C
       \uC751\uD588\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_16
     chapterID: 1
     eventID: 0
     scriptText: "\uADF8 \uB208\uBE5B\uC740 \uC27D\uAC8C \uC77D\uD788\uC9C0 \uC54A\uC558\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_17
     chapterID: 1
     eventID: 0
     scriptText: "\uAE38\uACE0 \uAE34 \uC815\uC801 \uB05D\uC5D0 \uADF8\uC758 \uC785\uC774
       \uC5F4\uB838\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_18
     chapterID: 1
     eventID: 0
     scriptText: "\u201C...\uC88B\uB2E4.\u201D"
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_19
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_20
     chapterID: 1
     eventID: 0
     scriptText: "\uB0B4\uC2EC \uAC70\uC808\uB2F9\uD560\uAE4C \uBD88\uC548\uD588\uB358
       \uC5D8\uC758 \uC5BC\uAD74\uC774 \uD658\uD558\uAC8C \uBC1D\uC544\uC84C\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_21
     chapterID: 1
     eventID: 0
     scriptText: "\u201C\uC815\uB9D0\u2014\u201D"
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_22
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_23
     chapterID: 1
     eventID: 0
     scriptText: "\u201C\uD558\uC9C0\uB9CC.\u201D"
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_24
     chapterID: 1
     eventID: 0
     scriptText: "\uB2E8\uD638\uD55C \uBAA9\uC18C\uB9AC\uAC00 \uADF8\uB140\uC758 \uB9D0\uC744
       \uB04A\uC5C8\uB2E4. \uB0A8\uC790\uC758 \uD45C\uC815\uC740 \uC5B4\uB290\uC0C8
       \uAD73\uC5B4 \uC788\uC5C8\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_25
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_26
     chapterID: 1
     eventID: 0
     scriptText: "\u201C\uC9C0\uD0A4\uACE0\uC790 \uD558\uB294 \uB9C8\uC74C. \uADF8\uAC83\uC774
       \uC0AC\uB77C\uC9C4\uB2E4\uBA74... \uB098\uB294 \uB2E8 \uD55C \uC790\uB8E8\uC758
       \uAC80\uB3C4 \uAC00\uB974\uCE58\uC9C0 \uC54A\uACA0\uB2E4.\u201D"
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_27
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_28
     chapterID: 1
     eventID: 0
     scriptText: "\uC5D8\uC740 \uAE4A\uC740 \uC228\uC744 \uB0B4\uC26C\uBA70 \uACE0\uAC1C\uB97C
       \uB044\uB355\uC600\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_29
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_30
     chapterID: 1
     eventID: 0
     scriptText: "\uC5D8\uC774 \uACE0\uAC1C\uB97C \uB044\uB355\uAC70\uB9AC\uB294 \uAC83\uC744
       \uBCF8 \uB0A8\uC790\uB294 \uC790\uC2E0\uC758 \uD5C8\uB9AC\uCDA4\uC5D0 \uC788\uB294
       \uAC80\uC744 \uD480\uC5B4 \uC5D8\uC5D0\uAC8C \uC8FC\uC5C8\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_31
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_32
     chapterID: 1
     eventID: 0
     scriptText: "\"\"\"\uAC80\uC744 \uC7A1\uC544\uB77C. \uADF8\uB9AC\uACE0 \uB108\uC758
       \uB9C8\uC74C\uC774 \uC6C0\uC9C1\uC774\uB294\uB300\uB85C \uAC80\uC744 \uC6C0\uC9C1\uC5EC\uB77C.\"\"\""
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_0_33
     chapterID: 1
     eventID: 0
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_0_34
     chapterID: 1
     eventID: 0
     scriptText: "\uAC80\uC744 \uBC1B\uC740 \uC5D8\uC740 \uAC80\uC9D1 \uC18D \uAC80\uC744
       \uBF51\uC558\uB2E4. \uADF8\uB9AC\uACE0\u2014"
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_1_0
     chapterID: 1
     eventID: 1
     scriptText: "\uC18C\uB140. \uC5D8. \uC77C\uACF1 \uC0B4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_1_1
     chapterID: 1
     eventID: 1
     scriptText: "\uAC80\uC744 \uBC1B\uC740\uC9C0\uB3C4 \uC5B4\uB144 2\uB144."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_1_2
     chapterID: 1
     eventID: 1
     scriptText: "2\uB144 \uB3D9\uC548 \uC5D8\uC740 \uBB35\uBB35\uD788 \uAC80\uC744
       \uD718\uB458\uB800\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_1_3
     chapterID: 1
     eventID: 1
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_1_4
     chapterID: 1
     eventID: 1
     scriptText: "\uC5EC\uB290\uB54C\uC640 \uAC19\uC774 \uC544\uCE68 \uC77C\uCC0D
       \uC77C\uC5B4\uB098 \uC218\uB828\uC744 \uD55C\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_1_5
     chapterID: 1
     eventID: 1
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_1_6
     chapterID: 1
     eventID: 1
     scriptText: "\uC218\uB828\uC744 \uB9C8\uCE58\uACE0 \uC7A0\uC2DC \uC228\uC744
       \uB3CC\uB9AC\uBA70 \uC0DD\uAC01\uD588\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_1_7
     chapterID: 1
     eventID: 1
     scriptText: "\uC624\uB298\uC740 \uBB34\uC5C7\uC744 \uD560\uAE4C?'"
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_0
     chapterID: 1
     eventID: 2
     scriptText: "\uC18C\uB140. \uC5D8. 9\uC0B4"
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_1
     chapterID: 1
     eventID: 2
     scriptText: "\uC694\uC998 \uB9C8\uC744\uC5D0 \uAC08 \uB54C\uB9C8\uB2E4 \uB4A4\uC22D\uC22D\uD55C
       \uC18C\uBB38\uC774 \uADC0\uC5D0 \uB4E4\uB9B0\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_2
     chapterID: 1
     eventID: 2
     scriptText: "\uD0C0\uB77D\uD55C \uC815\uB839\uC744 \uC232\uC5D0\uC11C \uBCF4\uC558\uB2E4.'
       \uB77C\uB294 \uC18C\uBB38."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_3
     chapterID: 1
     eventID: 2
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_2_4
     chapterID: 1
     eventID: 2
     scriptText: "\uADF8 \uC18C\uBB38\uC774 \uB4E4\uB9B4\uB54C \uB9C8\uB2E4 \uC5B4\uB9B4
       \uC801 \uADF8 \uC77C\uC774 \uC0DD\uAC01\uB098 \uAC00\uC2B4\uC774 \uC6B1\uC52C\uAC70\uB9B0\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_5
     chapterID: 1
     eventID: 2
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_2_6
     chapterID: 1
     eventID: 2
     scriptText: "\uC560\uC368 \uBB34\uC2DC\uD558\uBA70 \uB9C8\uC744\uC744 \uB098\uC640
       \uC9D1\uC73C\uB85C \uAC00\uB358 \uC911. \uC5D8\uC740 \uB450 \uB208\uC744 \uC758\uC2EC\uD588\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_7
     chapterID: 1
     eventID: 2
     scriptText: "\uC232 \uC18D \uC0AC\uC774. \uD0C0\uB77D\uD55C \uC815\uB839\uC774
       \uBCF4\uC600\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_8
     chapterID: 1
     eventID: 2
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_2_9
     chapterID: 1
     eventID: 2
     scriptText: "\uC5D8\uC740 \uC815\uB839\uC744 \uCAD3\uC544 \uC232 \uC18D\uC73C\uB85C
       \uB4E4\uC5B4\uAC14\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_10
     chapterID: 1
     eventID: 2
     scriptText: "\uB098\uBB47\uAC00\uC9C0\uC5D0 \uAE01\uD600 \uBAB8\uC5D0 \uC0C1\uCC98\uAC00
       \uB098\uB294 \uAC83\uB3C4 \uC54C\uC9C0 \uBABB\uD55C\uCC44. \uC5D8\uC740 \uC815\uB839\uC744
       \uB4A4\uCAD3\uC544\uAC14\uB2E4."
-    delayTime: 0.5
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_11
     chapterID: 1
     eventID: 2
     scriptText: 
-    delayTime: 0.5
+    delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_2_12
     chapterID: 1
     eventID: 2
     scriptText: "\uB9C8\uCE68\uB0B4 \uB9C8\uC8FC\uD55C \uC815\uB839. \uC5B4\uB9B4
       \uC801 \uBD80\uBAA8\uB2D8\uC744 \uC8FD\uC774\uACE0 \uB9C8\uC744 \uC0AC\uB78C\uB4E4\uC744
       \uC8FD\uC778 \uC815\uB839\uB4E4\uACFC \uAC19\uC740 \uBAA8\uC2B5\uC774\uC600\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_2_13
     chapterID: 1
     eventID: 2
     scriptText: "\uBD84\uB178\uB97C \uCC38\uC9C0 \uBABB\uD55C \uC5D8\uC740 \uC815\uB839\uC5D0\uAC8C
       \uB2EC\uB824\uB4E4\uC5C8\uB2E4."
-    delayTime: 1
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_3_0
     chapterID: 1
     eventID: 3
-    scriptText: "\uC18C\uB140. \uC5D8. 10\uC0B4"
-    delayTime: 1
+    scriptText: "\uC18C\uB140. \uC5D8. 15\uC0B4"
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_3_1
     chapterID: 1
     eventID: 3
-    scriptText: "\uC624\uB298\uC740 \uBB34\uC5C7\uC744 \uD560\uAE4C?"
-    delayTime: 1
+    scriptText: "<b>\uCC55\uD130 1 \uCD5C\uC885 \uBCF4\uC2A4\uC640\uC758 \uC804\uD22C\uC785\uB2C8\uB2E4.
+      \uC2A4\uD0B5\uB41C \uC2A4\uD1A0\uB9AC \uBD80\uBD84\uC774 \uC788\uC2B5\uB2C8\uB2E4."
+    delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_4_0
     chapterID: 1
     eventID: 4
-    scriptText: "\uC232\uC758 \uC911\uC2EC \uBD80\uB85C \uB4E4\uC5B4\uC654\uB2E4."
+    scriptText: 
     delayTime: 1
   - scriptID: SCRIPT_CHAPTER1_4_1
     chapterID: 1
     eventID: 4
-    scriptText: "\uD0C0\uB77D\uD55C \uC815\uB839 \uBCF4\uC2A4\uC640 \uC804\uD22C"
+    scriptText: "\uB9C8\uCE68\uB0B4 \uD0C0\uB77D\uD55C \uC232\uC758 \uC911\uC2EC\uBD80\uC5D0
+      \uB3C4\uCC29\uD588\uB2E4."
+    delayTime: 2
+  - scriptID: SCRIPT_CHAPTER1_4_2
+    chapterID: 1
+    eventID: 4
+    scriptText: 
     delayTime: 1
+  - scriptID: SCRIPT_CHAPTER1_4_3
+    chapterID: 1
+    eventID: 4
+    scriptText: "12\uB144 \uC804. \uBD80\uBAA8\uB2D8\uC744 \uC8FD\uC778 \uADF8 \uC815\uB839\uC774\uC600\uB2E4."
+    delayTime: 2
+  - scriptID: SCRIPT_CHAPTER1_4_4
+    chapterID: 1
+    eventID: 4
+    scriptText: 
+    delayTime: 1
+  - scriptID: SCRIPT_CHAPTER1_4_5
+    chapterID: 1
+    eventID: 4
+    scriptText: "\uC5D8\uC740 \uBBF8\uCE60 \uAC83 \uAC19\uC740 \uBD84\uB178\uB97C
+      \uAFB9 \uCC38\uACE0 \uC774\uB97C \uAF49 \uAE68\uBB3C\uC5C8\uB2E4."
+    delayTime: 2
+  - scriptID: SCRIPT_CHAPTER1_4_6
+    chapterID: 1
+    eventID: 4
+    scriptText: 
+    delayTime: 2
+  - scriptID: SCRIPT_CHAPTER1_4_7
+    chapterID: 1
+    eventID: 4
+    scriptText: "\uB450 \uC190\uC73C\uB85C \uAC80\uC744 \uAF49 \uC950\uBA70 \uD0C0\uB77D\uD55C
+      \uC815\uB839\uC5D0\uAC8C \uB2EC\uB824\uAC14\uB2E4."
+    delayTime: 2

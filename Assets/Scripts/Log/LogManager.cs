@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LogManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class LogManager : MonoBehaviour
     public bool isExpandable = true;
     private CancellationTokenSource _cancelTokenSource;
     private bool _isExpanded = false;
+    private ScrollRect _scrollRect;
     
     
     [SerializeField] private TMP_Text text;
@@ -22,6 +24,8 @@ public class LogManager : MonoBehaviour
         {
             Instance = this;
         }
+        
+        _scrollRect = GetComponent<ScrollRect>();
     }
 
     private void Start()
@@ -58,8 +62,8 @@ public class LogManager : MonoBehaviour
 
     public void AddSpacingLine()
     {
-        if (text)
-            text.text += "\n----------------------------------\n";
+        //if (text)
+            //text.text += "\n----------------------------------\n";
     }
 
     public async UniTaskVoid StartLog(string str)
@@ -150,6 +154,11 @@ public class LogManager : MonoBehaviour
             _isExpanded = false;
             rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 585);
             transform.position += new Vector3(0, 1.6f, 0);
+
+            if (_scrollRect)
+            {
+                _scrollRect.normalizedPosition = new Vector2(_scrollRect.normalizedPosition.x, 0f);
+            }
         }
         else
         {

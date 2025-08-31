@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
             
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
-                LogManager.Instance.AddSpacingLine();
+                //LogManager.Instance.AddSpacingLine();
                 
                 LogManager.Instance.isExpandable = true;
                 LogManager.Instance.ExpandLog();
