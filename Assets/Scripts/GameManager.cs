@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dicebtn;
     [SerializeField] private GameObject skip;
     [SerializeField] private GameObject traits;
+    [SerializeField] private GameObject playerBuffContainer;
+    [SerializeField] private GameObject playerDebuffContainer;
+    [SerializeField] private GameObject enemyBuffContainer;
+    [SerializeField] private GameObject enemyDebuffContainer;
 
     private void Awake()
     {
@@ -48,10 +52,10 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        StartPrologue().Forget();
+        //StartPrologue().Forget();
         
-        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
-        //StartPlayerTurn();
+        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
+        StartPlayerTurn();
     }
 
     public void StartChoice()
@@ -145,7 +149,12 @@ public class GameManager : MonoBehaviour
             case EventType.Battle:
                 LogManager.Instance.ExpandLog();
                 LogManager.Instance.isExpandable = false;
-                
+
+                playerBuffContainer.gameObject.SetActive(true);
+                playerDebuffContainer.gameObject.SetActive(true);
+                enemyBuffContainer.gameObject.SetActive(true);
+                enemyDebuffContainer.gameObject.SetActive(true);
+
                 LogManager.Instance.AddDelayedLog("적을 만났습니다!", 2.0f).Forget();
             
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
@@ -230,6 +239,7 @@ public class GameManager : MonoBehaviour
 
     public void StartPlayerTurn()
     {
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(PlayerManager.Instance.Player.GetCurrentStatesWithStacks(), true);
         LogManager.Instance.AddLog("당신의 차례입니다. 액션을 선택해주세요.");
         LogManager.Instance.AddLog($"현재 나의 체력: {PlayerManager.Instance.Player.GetCurrentHp()} / {PlayerManager.Instance.Player.GetMaxHp()}.");
         LogManager.Instance.AddLog($"현재 적의 체력: {EnemyManager.Instance.Enemy.GetCurrentHp()} / {EnemyManager.Instance.Enemy.GetMaxHp()}.");
@@ -243,7 +253,7 @@ public class GameManager : MonoBehaviour
             isPlayerTurn = !isPlayerTurn;
             return;
         }
-
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(EnemyManager.Instance.Enemy.GetCurrentStatesWithStacks(), false);
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog("적의 차례입니다.");
         EnemyManager.Instance.Enemy.DrawAndUseCard();
@@ -262,6 +272,11 @@ public class GameManager : MonoBehaviour
 
     public async UniTaskVoid EndBattle(float delay)
     {
+        playerBuffContainer.gameObject.SetActive(false);
+        playerDebuffContainer.gameObject.SetActive(false);
+        enemyBuffContainer.gameObject.SetActive(false);
+        enemyDebuffContainer.gameObject.SetActive(false);
+
         await UniTask.WaitForSeconds(delay);
         
         LogManager.Instance.AddSpacingLine();
