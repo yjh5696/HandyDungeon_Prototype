@@ -5447,7 +5447,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1690292385}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99929893
+  m_Size: 0.9989477
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5579,8 +5579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f096625f508d947b7e785277feebcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftDiceRoll: {fileID: 0}
-  rightDiceRoll: {fileID: 0}
+  leftDiceRoll: {fileID: 872432975}
+  rightDiceRoll: {fileID: 1444008178}
   diceButton: {fileID: 1883118492}
   switchTurnDelay: 3
   showDiceResultTime: 3
@@ -6619,7 +6619,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -585.40906}
+  m_AnchoredPosition: {x: 0.00012207031, y: -585.4093}
   m_SizeDelta: {x: -1270, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1055311458
