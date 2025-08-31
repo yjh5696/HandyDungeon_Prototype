@@ -301,12 +301,12 @@ public class CardManager : MonoBehaviour
         int r = Random.Range(0, _allCards.Length);
         while (true)
         {
-            if (_allCards[r].Tier != "tier1")
+            if (_allCards[r].Tier == "tier1")
             {
-                r = Random.Range(0, _allCards.Length);
-                continue;
+                return _allCards[r];
             }
-            return _allCards[r];
+
+            r = Random.Range(0, _allCards.Length);
         }
     }
 
