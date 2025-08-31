@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using static UnityEngine.Rendering.GPUSort;
 
 public class Enemy : Character
 {
     private EnemySO _enemySo;
     private CardDataSO _currentEnemyCard;
     public CardDataSO CurrentEnemyCard => _currentEnemyCard;
+
+    private bool hasUsedSupportCard = false;
 
     public void SetEnemySo(EnemySO enemy)
     {
@@ -37,11 +41,36 @@ public class Enemy : Character
             return;
         }
 
-        int result = Random.Range(0, Cards.Count);
-        _currentEnemyCard = Cards[result];
+        float healthRatio = (float)EnemyManager.Instance.Enemy.GetCurrentHp() / EnemyManager.Instance.Enemy.GetMaxHp();
+        List<CardDataSO> filteredCards;
+
+        if (healthRatio <= 0.5f && !hasUsedSupportCard)
+        {
+            filteredCards = Cards.Where(card => card.C_Type == "Support").ToList();
+
+            if (filteredCards.Count > 0)
+            {
+                int result = Random.Range(0, filteredCards.Count);
+                _currentEnemyCard = filteredCards[result];
+                hasUsedSupportCard = true; // 1번 사용 후 true 처리
+            }
+            else
+            {
+                Debug.LogWarning("지원 카드가 없습니다.");
+                return;
+            }
+        }
+        else
+        {
+            filteredCards = Cards.Where(card => card.C_Type == "Action").ToList();
+            if (filteredCards.Count == 0)
+                filteredCards = Cards;
+
+            int result = Random.Range(0, filteredCards.Count);
+            _currentEnemyCard = filteredCards[result];
+        }
 
         CardManager.Instance.selectedCard = _currentEnemyCard;
-
         LogManager.Instance.AddLog($"{_enemySo.EnemyName}이/가 {_currentEnemyCard.C_Name}을 사용하였습니다!");
         GameManager.Instance.diceRoll.OnAttackButtonClicked();
     }

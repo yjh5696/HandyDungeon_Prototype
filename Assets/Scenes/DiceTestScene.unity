@@ -335,6 +335,115 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &431844106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 431844109}
+  - component: {fileID: 431844108}
+  - component: {fileID: 431844107}
+  m_Layer: 0
+  m_Name: Dices (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &431844107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431844106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668d2610b9719384094920e63061ed60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dices:
+  - {fileID: -5420220854288092238, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  - {fileID: 7934114944782325874, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  - {fileID: 7117374334740126191, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  - {fileID: 1094064525842813209, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  - {fileID: -880043905950401250, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  - {fileID: -5478230469006044976, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  enemyDices: []
+  DiceRollTime: 0
+--- !u!212 &431844108
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431844106}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 5
+  m_Sprite: {fileID: -3192813042056521047, guid: 6a607b83c49487d4284de82b0225b04d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.66, y: 2.66}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &431844109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431844106}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.98, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1786407532
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +829,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceRoll: {fileID: 2080779687}
-  baseValue: 5
+  switchTurnDelay: 0
+  showDiceResultTime: 0
+  diceButton: {fileID: 0}
 --- !u!1 &2080779684
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,12 +933,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dices:
-  - {fileID: -5420220854288092238, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
-  - {fileID: 7934114944782325874, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
-  - {fileID: 7117374334740126191, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
-  - {fileID: 1094064525842813209, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
-  - {fileID: -880043905950401250, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
-  - {fileID: -5478230469006044976, guid: 617baaa24e4eb0440b673f344b4c410d, type: 3}
+  - {fileID: -3192813042056521047, guid: 6a607b83c49487d4284de82b0225b04d, type: 3}
+  - {fileID: -331008377807675630, guid: 43ccba6b5ce61b44d847391b7c4cff20, type: 3}
+  - {fileID: 5416247237039652621, guid: 483c6412a8f5e434aa703dc492323a82, type: 3}
+  - {fileID: 2668696867174232700, guid: 68ad605f51bc36644962f4fb1149be31, type: 3}
+  - {fileID: 868484756255905647, guid: 3db7424c16732514ab9c61aed5d0cbc6, type: 3}
+  - {fileID: -608224756955341217, guid: cf552f2ca350de847b8b176588ad87ca, type: 3}
+  - {fileID: 7453213341464752863, guid: d9285b4413961fe40824e10be3fca710, type: 3}
+  - {fileID: -1274726569525891319, guid: af0326386de8804498af9ed43f2d886a, type: 3}
+  - {fileID: -6267049540752861472, guid: a461189f03a5d7448a4b0999553946f0, type: 3}
+  - {fileID: 1826200104818556250, guid: d78b55423a12df247a9b8c0250a8c2e5, type: 3}
+  - {fileID: 2878639081429162397, guid: 511e0e2e5ad16a443bbedda36909dc48, type: 3}
+  - {fileID: 7831084954331787424, guid: 721ec2b41cc1b7e48b1f5bc3241760f5, type: 3}
+  - {fileID: -2842001518428496087, guid: da86e40141a351541b1ee1b1bad151eb, type: 3}
+  - {fileID: 6396688367983506525, guid: 24b99cf7aff0b4045916f548661d065f, type: 3}
+  - {fileID: -1016425637908944910, guid: a2ff3e81585b5c1449f6f77fa57b818a, type: 3}
+  - {fileID: -1455246192664756930, guid: 71a08d2599b04464e93d482b6f8be1bc, type: 3}
+  - {fileID: -195301743051171606, guid: 68ca8a8a25d34524aaffc9856109bd7f, type: 3}
+  - {fileID: 258691680147092952, guid: c37ccc1ba04f886409d13352d927ec78, type: 3}
+  - {fileID: 4941738147397875124, guid: 75b85814f53b7d641b63f18c54973e7d, type: 3}
+  - {fileID: 2681621050815518421, guid: c3b2eea52d585fc4c9a0dc7d031212df, type: 3}
+  enemyDices: []
+  DiceRollTime: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -836,3 +963,4 @@ SceneRoots:
   - {fileID: 2056484439}
   - {fileID: 59956527}
   - {fileID: 2080779686}
+  - {fileID: 431844109}
