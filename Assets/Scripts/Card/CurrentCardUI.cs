@@ -96,8 +96,8 @@ public class CurrentCardUI : MonoBehaviour
         switch (state)
         {
             case "Fire": return "Ignition";
-            case "Water": return "Ice";
-            case "Air": return "Rock";
+            case "Water": return "Rock";
+            case "Air": return "Ice";
             case "Land": return "Explosion";
             case "Fervor": return "Burndown";
             case "Gale": return "Vibration";
@@ -119,41 +119,29 @@ public class CurrentCardUI : MonoBehaviour
         }
 
         // 카드 속성 아이콘 및 설명 출력
-        baseElementIcon.sprite = GetIconSprite(card.Element);
-        elementText.text = GetElementDescription(card.Element);
-        baseElement2Icon.sprite = GetIconSprite(card.Element);
-        plusElementIcon.sprite = GetPlusIconSprite(card.Element);
-        upgradeElementIcon.sprite = GetUpgradeIconSprite(card.Element);
-        upgradeCountText.text = GetElementDescription(card.Element);
+        if(card.C_Type == "Action")
+        {
+            baseElementIcon.sprite = GetIconSprite(card.Debuff_Type);
+            elementText.text = GetElementDescription(card.Debuff_Type);
+            baseElement2Icon.sprite = GetIconSprite(card.Debuff_Type);
+            plusElementIcon.sprite = GetPlusIconSprite(card.Debuff_Type);
+            upgradeElementIcon.sprite = GetUpgradeIconSprite(card.Debuff_Type);
+            upgradeElementText.text = GetElementDescription(GetUpgradeElement(card.Debuff_Type));
+        }
+        else
+        {
+            baseElementIcon.sprite = GetIconSprite(card.Buff_Type);
+            elementText.text = GetElementDescription(card.Buff_Type);
+            baseElement2Icon.sprite = GetIconSprite(card.Buff_Type);
+            plusElementIcon.sprite = GetPlusIconSprite(card.Buff_Type);
+            upgradeElementIcon.sprite = GetUpgradeIconSprite(card.Buff_Type);
+            upgradeElementText.text = GetElementDescription(GetUpgradeElement(card.Buff_Type));
+        }
 
-
-        // 강화 남은 횟수 표시
-        int left = CardManager.Instance._cardEnhanceCounts.ContainsKey(card.C_Id)
-                ? CardManager.Instance._cardEnhanceCounts[card.C_Id]
-                : card.Enhance_Count;
-        upgradeCountText.text = $"강화까지 남은 횟수 : {left}";
+        string remainCountText = CardManager.Instance.GetEnhanceCountString(card.C_Id);
+        upgradeCountText.text = $"{remainCountText}";
 
         gameObject.SetActive(true);
-    }
-
-
-    // 예시: 카드 속성/연계 정보 받아 표시
-    public void Open(CardData card)
-    {
-        // 아이콘 표시
-        baseElementIcon.sprite = GetElementIcon(card.BaseElement);
-        baseElement2Icon.sprite = GetElementIcon(card.CombineElement); // 조합 필요 없으면 비활성화
-        plusElementIcon.sprite = GetElementIcon(card.ResultElement);  // 결과 속성 없으면 비활성화
-
-        // 설명 텍스트
-        elementText.text = GetElementDescription(card.BaseElement);
-        upgradeElementText.text = GetCombinationDescription(card.BaseElement, card.CombineElement);
-
-        // 남은 강화 횟수 텍스트 (있으면)
-        upgradeCountText.text = $"강화까지 남은 횟수 : {card.UpgradeRemainCount}";
-
-        // 패널 활성화
-        effectCardPanel.SetActive(true);
     }
 
     public void Close()
@@ -184,7 +172,5 @@ public class CurrentCardUI : MonoBehaviour
         };
     }
 
-
-    string GetCombinationDescription(ElementType baseType, ElementType subType) { /* ... */ }
 }
 
