@@ -127,7 +127,7 @@ public partial class @TouchAction: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""30bdf904-ab0a-41bd-9906-0dae3fd41885"",
                     ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": ""Tap(duration=0.05,pressPoint=0.1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Tap"",

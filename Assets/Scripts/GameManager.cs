@@ -143,6 +143,9 @@ public class GameManager : MonoBehaviour
         switch (Stage.Chapters[currentChapter][currentStage])
         {
             case EventType.Battle:
+                LogManager.Instance.ExpandLog();
+                LogManager.Instance.isExpandable = false;
+                
                 LogManager.Instance.AddDelayedLog("적을 만났습니다!", 2.0f).Forget();
             
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
@@ -152,10 +155,16 @@ public class GameManager : MonoBehaviour
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
                 LogManager.Instance.AddSpacingLine();
+                
+                LogManager.Instance.isExpandable = true;
+                LogManager.Instance.ExpandLog();
             
                 StartBattle(Stage.Enemies[currentChapter][currentStage]);
                 break;
             case EventType.Boss:
+                LogManager.Instance.ExpandLog();
+                LogManager.Instance.isExpandable = false;
+                
                 LogManager.Instance.AddDelayedLog("강력한 적을 만났습니다!", 2.0f).Forget();
             
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
@@ -169,6 +178,9 @@ public class GameManager : MonoBehaviour
                 await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
                 LogManager.Instance.AddSpacingLine();
+                
+                LogManager.Instance.isExpandable = true;
+                LogManager.Instance.ExpandLog();
             
                 StartBattle(Stage.Enemies[currentChapter][currentStage]);
                 break;

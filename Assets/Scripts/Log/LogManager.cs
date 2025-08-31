@@ -1,19 +1,18 @@
 using Cysharp.Threading.Tasks;
-using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class LogManager : MonoBehaviour
 {
     public static LogManager Instance;
     public bool isLogging = false;
+    public bool isExpandable = true;
     private CancellationTokenSource _cancelTokenSource;
     private bool _isExpanded = false;
-    private bool _isExpandable = true;
+    
     
     [SerializeField] private TMP_Text text;
 
@@ -104,7 +103,7 @@ public class LogManager : MonoBehaviour
     {
         List<string> strs = new List<string>();
         List<float> f = new List<float>();
-
+        
         foreach (StartScript script in GameManager.Instance.startScripts[GameManager.Instance.currentChapter]
                      .StartScripts)
         {
@@ -121,6 +120,8 @@ public class LogManager : MonoBehaviour
         }
 
         isLogging = true;
+        ExpandLog();
+        isExpandable = false;
 
         for (int i = 0; i < strs.Count; i++)
         {
@@ -129,31 +130,32 @@ public class LogManager : MonoBehaviour
         }
 
         isLogging = false;
+        isExpandable = true;
+        Instance.ExpandLog();
     }
 
     public void ExpandLog()
     {
-        if(!_isExpandable) return;
+        if(!isExpandable) return;
         
         RectTransform rectTransform = transform as RectTransform;
+        
+        if (!rectTransform)
+        {
+            return;
+        }
 
         if (_isExpanded)
         {
             _isExpanded = false;
-            if (rectTransform != null)
-            {
-                rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 585);
-                transform.position += new Vector3(0, 1.6f, 0);
-            }
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 585);
+            transform.position += new Vector3(0, 1.6f, 0);
         }
         else
         {
             _isExpanded = true;
-            if (rectTransform != null)
-            {
-                rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 1500);
-                transform.position -= new Vector3(0, 1.6f, 0);
-            }
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 1500);
+            transform.position -= new Vector3(0, 1.6f, 0);
         }
     }
 }

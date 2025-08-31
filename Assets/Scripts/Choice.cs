@@ -252,6 +252,9 @@ public class Choice : MonoBehaviour
 
         private async UniTaskVoid ChoiceAction()
         {
+            LogManager.Instance.ExpandLog();
+            LogManager.Instance.isExpandable = false;
+            
             switch (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage])
             {
                 case EventType.MainStory: //메인 스토리 선택지
@@ -566,7 +569,9 @@ public class Choice : MonoBehaviour
             await UniTask.WaitForSeconds(3.0f);
 
             LogManager.Instance.AddSpacingLine();
-
+            LogManager.Instance.isExpandable = true;
+            LogManager.Instance.ExpandLog();
+            
             GameManager.Instance.NextStage().Forget();
         }
 }
