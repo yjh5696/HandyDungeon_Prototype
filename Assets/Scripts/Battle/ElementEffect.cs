@@ -35,7 +35,7 @@ public static class ElementEffect
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Air));
             target.RemoveStatus(State.Air);
             target.SetStatus("동상", (stacks + 1));
-            target.TakeDamage(5 * stacks);
+            target.TakeDamage(5 * stacks, target);
             ApplyBaseDebuff(target, State.Water, baseStacks);
             target.SetLastElement(State.Water);
             return $"동상 발생! {5 * stacks} 피해 + 젖음 {baseStacks} 스택 부여";
@@ -47,7 +47,7 @@ public static class ElementEffect
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Water));
             target.RemoveStatus(State.Water);
             target.SetStatus("암반화", (stacks + 1));
-            target.TakeDamage(4 * stacks);
+            target.TakeDamage(4 * stacks, target);
             target.SetShieldEffect(2 * stacks, -1);
             ApplyBaseDebuff(target, State.Land, baseStacks);
             target.SetLastElement(State.Land);
@@ -61,7 +61,7 @@ public static class ElementEffect
             float mult = 1f + stacks * 0.1f;
             target.RemoveStatus(State.Land);
             target.SetStatus("분화", (stacks + 1));
-            target.TakeDamage(5 * stacks * mult);
+            target.TakeDamage(5 * stacks * mult, target);
             target.SetExtraDamageTaken(stacks);
             ApplyBaseDebuff(target, State.Fire, baseStacks);
             target.SetLastElement(State.Fire);
@@ -71,7 +71,14 @@ public static class ElementEffect
         // 기본 디버프
         target.AddStatusStacks(newElement, baseStacks);
         target.SetLastElement(newElement);
-        return $"{target.GetUnitName()}에게 {newElement} 디버프 {baseStacks} 스택 부여";
+        if(newElement != State.None)
+        {
+            return $"{target.GetUnitName()}에게 {newElement} 디버프 {baseStacks} 스택 부여";
+        }
+        else
+        {
+            return string.Empty;
+        }
     }
 
     static void ApplyBaseDebuff(Character target, State element, int stacks)

@@ -19,7 +19,7 @@ public class ElementBuff
         {
             attacker.AddStatusStacks(newElement, baseStacks);
             stacks = attacker.GetStatusStacks(newElement) + attacker.GetStatusStacks(last);
-            target.TakeDamage(stacks * 5);
+            target.TakeDamage(stacks * 5, target);
             stacks = Math.Abs(last - newElement);
             attacker.RemoveStatus(last);
             attacker.RemoveStatus(newElement);
@@ -42,7 +42,10 @@ public class ElementBuff
         attacker.AddStatusStacks(newElement, baseStacks);
         stacks = Mathf.Max(1, attacker.GetStatusStacks(newElement));
         attacker.SetLastBuffElement(newElement);
-        return $"{attacker.GetUnitName()}에게 {newElement} 버프 {baseStacks} 스택 부여";
+        if(newElement != State.None)
+            return $"{attacker.GetUnitName()}에게 {newElement} 버프 {baseStacks} 스택 부여";
+        else
+            return string.Empty;
     }
 }
 

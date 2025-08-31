@@ -113,6 +113,7 @@ public static class BattleSystem
 
         // 1. 기본 회복량 계산
         float baseDamage = card.min_Value * (diceValue * card.Calculation);
+        baseDamage = Mathf.Round(baseDamage * 10f) / 10f;
         Debug.Log($"[Support] 기본 회복량: {baseDamage}");
 
         // 1.1 기본 회복 및 보호막

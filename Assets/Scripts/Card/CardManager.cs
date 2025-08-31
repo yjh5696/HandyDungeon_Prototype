@@ -25,10 +25,16 @@ public class CardManager : MonoBehaviour
     private CardDataSO _supportCard;
     private CardDataSO _specialCard;
 
+    private CardDataSO[] allCards;
+
+    private Dictionary<int, int> cardEnhanceCounts = new Dictionary<int, int>();
+
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
+
+        allCards = Resources.LoadAll<CardDataSO>("CardDataSOs");
 
         if (playerCharacter == null || playerCharacter.Cards == null || playerCharacter.Cards.Count == 0)
             Debug.LogWarning("Player Character 카드 덱이 할당되지 않았거나 비어있습니다.");
@@ -173,17 +179,25 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private void UpdateCardUI()
+    // 카드 사용 함수
+    public void SelectCard()
     {
-        if (_currentCard != null)
-            cardNameText.text = _currentCard.C_Name;
-        else
-            cardNameText.text = "카드 없음";
+        if (selectedCard.Enhanceable == "Yes")
+        {
+            int id = selectedCard.C_Id;
+            if (!cardEnhanceCounts.ContainsKey(id)) // 처음 사용하는 카드라면 딕셔너리에 추가
+            {
+                cardEnhanceCounts[id] = selectedCard.Enhance_Count;
+            }
 
-        Canvas.ForceUpdateCanvases();
+            if (cardEnhanceCounts[id] > 0)
+            {
+                cardEnhanceCounts[id]--;
+                Debug.Log($"[Card Enhance] 카드: {selectedCard.C_Name} (ID: {id}), 남은 강화 횟수: {cardEnhanceCounts[id]}");
+            }
+        }
     }
 
-    // 카드 사용 함수
     public void UseCard()
     {
         if (_currentCard == null)
@@ -193,10 +207,97 @@ public class CardManager : MonoBehaviour
         }
         selectedCard = _currentCard;
         //cardUI.SetCard(_currentCard);
+
         LogManager.Instance.AddSpacingLine();
         LogManager.Instance.AddLog($"플레이어가 {selectedCard.C_Name}을 사용하였습니다!");
         LogManager.Instance.AddLog("");
         LogManager.Instance.AddLog("주사위를 터치하여 굴려주세요.");
+    }
+
+    public void UpgradeEnhanceableCardsOnTurnEnd()
+    {
+        List<CardDataSO> cards = playerCharacter.Cards;
+        List<CardDataSO> cardsToRemove = new List<CardDataSO>();
+        List<CardDataSO> cardsToAdd = new List<CardDataSO>();
+
+        Debug.Log($"[Upgrade] 현재 카드 풀 상태:");
+        foreach (var c in cards)
+        {
+            Debug.Log($"  카드: {c.C_Name} (ID: {c.C_Id})");
+        }
+        Debug.Log($"[Upgrade] cardEnhanceCounts 상태:");
+        foreach (var kvp in cardEnhanceCounts)
+        {
+            Debug.Log($"  카드 ID: {kvp.Key}, 강화 카운트: {kvp.Value}");
+        }
+
+        foreach (var card in cards)
+        {
+            if (card.Enhanceable == "Yes")
+            {
+                int id = card.C_Id;
+
+                if (!cardEnhanceCounts.ContainsKey(id))
+                {
+                    cardEnhanceCounts[id] = card.Enhance_Count;
+                    Debug.Log($"[Upgrade] 딕셔너리 초기화: {card.C_Name} (ID: {id}) Enhance_Count = {card.Enhance_Count}");
+                }
+
+                if (cardEnhanceCounts[id] <= 0)
+                {
+                    cardsToRemove.Add(card);
+
+                    CardDataSO nextCard = FindCardById(id + 1);
+                    Debug.Log($"[Upgrade] 카드 {card.C_Name} (ID: {id}) 강화 완료, 다음 카드 ID: {id + 1}");
+
+                    if (nextCard != null)
+                    {
+                        cardsToAdd.Add(nextCard);
+                        LogManager.Instance.AddLog($"{card.C_Name} 강화 완료, {nextCard.C_Name}로 교체되었습니다.");
+
+                        if (!cardEnhanceCounts.ContainsKey(nextCard.C_Id))
+                        {
+                            cardEnhanceCounts[nextCard.C_Id] = nextCard.Enhance_Count;
+                            Debug.Log($"[Upgrade] 딕셔너리 초기화: {nextCard.C_Name} (ID: {nextCard.C_Id}) Enhance_Count = {nextCard.Enhance_Count}");
+                        }
+                    }
+                    else
+                    {
+                        LogManager.Instance.AddLog($"{card.C_Name}의 강화 카드({id + 1})를 찾을 수 없습니다.");
+                        Debug.LogWarning($"[Upgrade] 강화 카드 없음: {card.C_Name} (ID: {id}), 다음 카드 ID: {id + 1}");
+                    }
+                }
+                else
+                {
+                    Debug.Log($"[Upgrade] 강화 중: {card.C_Name} (ID: {id}), 남은 강화 카운트: {cardEnhanceCounts[id]}");
+                }
+            }
+        }
+
+        foreach (var removeCard in cardsToRemove)
+        {
+            cards.Remove(removeCard);
+            cardEnhanceCounts.Remove(removeCard.C_Id);
+            Debug.Log($"[Upgrade] 카드 제거: {removeCard.C_Name} (ID: {removeCard.C_Id})");
+        }
+        foreach (var addCard in cardsToAdd)
+        {
+            cards.Add(addCard);
+            Debug.Log($"[Upgrade] 카드 추가: {addCard.C_Name} (ID: {addCard.C_Id})");
+        }
+    }
+
+
+
+    // 카드 ID로 카드 데이터를 찾는 함수 
+    private CardDataSO FindCardById(int id)
+    {
+        foreach (var card in allCards)
+        {
+            if (card.C_Id == id)
+                return card;
+        }
+        return null;
     }
 
 }
