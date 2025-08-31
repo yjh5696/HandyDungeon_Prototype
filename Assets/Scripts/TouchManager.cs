@@ -45,7 +45,7 @@ public class TouchManager : MonoBehaviour
         eventData.position = _touchAction.Touch.Position.ReadValue<Vector2>();
         List<RaycastResult> results = new List<RaycastResult>();
         graphicRaycaster.Raycast(eventData, results);
-        foreach (var result in results.Where(result => result.gameObject.name == "Log"))
+        foreach (RaycastResult result in results.Where(result => result.gameObject.name == "Log"))
         {
             LogManager.Instance.ExpandLog();
         }

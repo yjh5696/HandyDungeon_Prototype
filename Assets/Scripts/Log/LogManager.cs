@@ -13,7 +13,7 @@ public class LogManager : MonoBehaviour
     public bool isLogging = false;
     private CancellationTokenSource _cancelTokenSource;
     private bool _isExpanded = false;
-    private bool _isExpandable;
+    private bool _isExpandable = true;
     
     [SerializeField] private TMP_Text text;
 
