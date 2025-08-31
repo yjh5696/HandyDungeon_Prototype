@@ -29,7 +29,11 @@ public class ChoiceManager : MonoBehaviour
     
     public void GetRandomChoice() // 선택지 버튼에 랜덤한 선택지 부여
     {
-        foreach (Choice choice in choiceButtons) choice.gameObject.SetActive(true);
+        foreach (Choice choice in choiceButtons)
+        {
+            choice.gameObject.SetActive(true);
+            choice.Init();
+        }
         switch (Stage.Chapters[GameManager.Instance.currentChapter][GameManager.Instance.currentStage])
         {
             case EventType.MainStory:

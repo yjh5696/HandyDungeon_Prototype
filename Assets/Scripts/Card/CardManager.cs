@@ -293,7 +293,8 @@ public class CardManager : MonoBehaviour
     // 카드 ID로 카드 데이터를 찾는 함수 
     public CardDataSO FindCardById(int id)
     {
-        return _allCards.FirstOrDefault(card => card.C_Id == id);
+        CardDataSO card = _allCards.FirstOrDefault(card => card.C_Id == id);
+        return !card ? null : card;
     }
 
     public CardDataSO GetRandomCard()

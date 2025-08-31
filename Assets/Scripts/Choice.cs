@@ -19,9 +19,8 @@ public class Choice : MonoBehaviour
 
     public void Init()
     {
-        choiceText.text = "";
-        choiceTypeText.text = "";
-        choiceRateText.text = "";
+        choiceSuccessText.text = "성공 - ";
+        choiceFailText.text = "실패 - ";
     }
 
     public void SetChoice(MainEvent choiceEvent)
@@ -63,7 +62,7 @@ public class Choice : MonoBehaviour
             _ => Color.green
         };
 
-        if (_mainEvent.choiceReward == "NONE")
+        if (_mainEvent.choiceReward != "NONE")
         {
             string[] rewards = _mainEvent.choiceReward.Split('/');
             for (int i = 0; i < rewards.Length; i++)
@@ -83,19 +82,19 @@ public class Choice : MonoBehaviour
                             switch (card.Element)
                             {
                                 case "Air":
-                                    choiceSuccessText.text += "<color=#2C9E19>바람 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#2C9E19>바람 속성 카드</color> +1";
                                     break;
                                 case "Fire":
-                                    choiceSuccessText.text += "<color=#F23C16>불 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#F23C16>불 속성 카드</color> +1";
                                     break;
                                 case "Water":
-                                    choiceSuccessText.text += "<color=#153696>물 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#153696>물 속성 카드</color> +1";
                                     break;
                                 case "Land":
-                                    choiceSuccessText.text += "<color=#AD8018>땅 속성 카드</color>";
+                                    choiceSuccessText.text += "<color=#AD8018>땅 속성 카드</color> +1";
                                     break;
                                 case "None":
-                                    choiceSuccessText.text += "<color=#F23C16>스페셜 카드</color>";
+                                    choiceSuccessText.text += "<color=#F23C16>스페셜 카드</color> +1";
                                     break;
                             }
                         }
@@ -113,6 +112,10 @@ public class Choice : MonoBehaviour
                     choiceSuccessText.text += ", ";
                 }
             }
+        }
+        else
+        {
+            choiceFailText.text = "성공 - ";
         }
     }
 
@@ -158,7 +161,6 @@ public class Choice : MonoBehaviour
             if (_subEvent.choiceReward != "NONE")
             {
                 string[] rewards = _subEvent.choiceReward.Split('/');
-                Debug.Log(rewards[0]);
                 for (int i = 0; i < rewards.Length; i++)
                 {
                     string[] reward = rewards[i].Split('_');
@@ -176,19 +178,19 @@ public class Choice : MonoBehaviour
                                 switch (card.Element)
                                 {
                                     case "Air":
-                                        choiceSuccessText.text += $"<color=#2C9E19>바람 속성 카드</color>";
+                                        choiceSuccessText.text += $"<color=#2C9E19>바람 속성 카드</color> +1";
                                         break;
                                     case "Fire":
-                                        choiceSuccessText.text += $"<color=#F23C16>불 속성 카드</color>";
+                                        choiceSuccessText.text += $"<color=#F23C16>불 속성 카드</color> +1";
                                         break;
                                     case "Water":
-                                        choiceSuccessText.text += $"<color=#153696>물 속성 카드</color>";
+                                        choiceSuccessText.text += $"<color=#153696>물 속성 카드</color> +1";
                                         break;
                                     case "Land":
-                                        choiceSuccessText.text += $"<color=#AD8018>땅 속성 카드</color>";
+                                        choiceSuccessText.text += $"<color=#AD8018>땅 속성 카드</color> +1";
                                         break;
                                     case "None":
-                                        choiceSuccessText.text += $"<color=#F23C16>스페셜 카드</color>";
+                                        choiceSuccessText.text += $"<color=#F23C16>스페셜 카드</color> +1";
                                         break;
                                 }
                             }
@@ -207,8 +209,12 @@ public class Choice : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                choiceSuccessText.text = "성공 - ";
+            }
 
-            if (_subEvent.choiceLoss == "NONE")
+            if (_subEvent.choiceLoss != "NONE")
             {
                 string[] losses = _subEvent.choiceLoss.Split('/');
                 for (int i = 0; i < losses.Length; i++)
@@ -232,6 +238,10 @@ public class Choice : MonoBehaviour
                         choiceFailText.text += ", ";
                     }
                 }
+            }
+            else
+            {
+                choiceSuccessText.text = "실패 - ";
             }
         }
 
@@ -295,10 +305,10 @@ public class Choice : MonoBehaviour
                                         switch (reward[0])
                                         {
                                             case "PC":
-                                                int id = int.Parse(reward[1]);
-                                                CardDataSO card = id == 0
+                                                int cardId = int.TryParse(reward[1], out int id) ? id : 0;
+                                                CardDataSO card = cardId == 0
                                                     ? CardManager.Instance.GetRandomCard()
-                                                    : CardManager.Instance.FindCardById(id);
+                                                    : CardManager.Instance.FindCardById(cardId);
                                                 switch (card.Element)
                                                 {
                                                     case "Air":
