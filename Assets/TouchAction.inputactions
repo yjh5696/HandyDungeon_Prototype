@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "TouchAction",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "23bba3c0-0eda-4f55-a5a4-9696fb7bb702",
+            "actions": [
+                {
+                    "name": "Position",
+                    "type": "PassThrough",
+                    "id": "0efa38d4-786e-42bd-b6c7-c336ebcc3658",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Tap",
+                    "type": "PassThrough",
+                    "id": "be315424-0ab7-49cc-92a3-bc720cb21ace",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "04186912-de49-47f0-b198-d4f24c89120e",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30bdf904-ab0a-41bd-9906-0dae3fd41885",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

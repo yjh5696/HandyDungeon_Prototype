@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LogManager : MonoBehaviour
 {
     public static LogManager Instance;
     public bool isLogging = false;
     private CancellationTokenSource _cancelTokenSource;
+    private bool _isExpanded = false;
+    private bool _isExpandable;
+    
     [SerializeField] private TMP_Text text;
 
     private void Awake()
@@ -24,7 +28,7 @@ public class LogManager : MonoBehaviour
     private void Start()
     {
         _cancelTokenSource = new CancellationTokenSource();
-        
+
         text.text = "";
     }
 
@@ -32,21 +36,21 @@ public class LogManager : MonoBehaviour
     {
         _cancelTokenSource.Cancel();
         _cancelTokenSource.Dispose();
-        
+
         isLogging = false;
         _cancelTokenSource = new CancellationTokenSource(); //토큰으로 비동기 작업 취소하면 계속 취소된 상태로 남아있어서 재생성
     }
 
     public void AddLog(string msg) //로그 추가하기
     {
-        if(text)
+        if (text)
             text.text += "\n" + msg;
     }
 
     public async UniTaskVoid AddDelayedLog(string msg, float delay)
     {
         await UniTask.WaitUntil(() => !isLogging);
-     
+
         isLogging = true;
         AddLog(msg);
         await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: _cancelTokenSource.Token);
@@ -62,7 +66,7 @@ public class LogManager : MonoBehaviour
     public async UniTaskVoid StartLog(string str)
     {
         await UniTask.WaitUntil(() => !isLogging);
-        
+
         isLogging = true;
         string[] lines = str.Split('{');
         foreach (string line in lines)
@@ -72,6 +76,7 @@ public class LogManager : MonoBehaviour
                 isLogging = false;
                 break;
             }
+
             string log = "";
             string wt = "";
             for (int index = 0; index < line.Length; index++)
@@ -82,23 +87,26 @@ public class LogManager : MonoBehaviour
                     log = line.Remove(0, index + 1);
                     break;
                 }
+
                 wt += c;
             }
 
-            await UniTask.Delay(TimeSpan.FromSeconds(double.TryParse(wt, out double t) ? t : 0), cancellationToken: _cancelTokenSource.Token);
+            await UniTask.Delay(TimeSpan.FromSeconds(double.TryParse(wt, out double t) ? t : 0),
+                cancellationToken: _cancelTokenSource.Token);
             AddLog(log);
         }
-        
+
         AddSpacingLine();
         isLogging = false;
     }
-    
+
     public async UniTaskVoid PrintScript()
     {
         List<string> strs = new List<string>();
         List<float> f = new List<float>();
-        
-        foreach (StartScript script in GameManager.Instance.startScripts[GameManager.Instance.currentChapter].StartScripts)
+
+        foreach (StartScript script in GameManager.Instance.startScripts[GameManager.Instance.currentChapter]
+                     .StartScripts)
         {
             if (script.eventID == GameManager.Instance.currentStage)
             {
@@ -111,7 +119,7 @@ public class LogManager : MonoBehaviour
         {
             return;
         }
-        
+
         isLogging = true;
 
         for (int i = 0; i < strs.Count; i++)
@@ -123,8 +131,29 @@ public class LogManager : MonoBehaviour
         isLogging = false;
     }
 
-    private void OnClick()
+    public void ExpandLog()
     {
-        Debug.Log("Clicked");
+        if(!_isExpandable) return;
+        
+        RectTransform rectTransform = transform as RectTransform;
+
+        if (_isExpanded)
+        {
+            _isExpanded = false;
+            if (rectTransform != null)
+            {
+                rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 585);
+                transform.position += new Vector3(0, 1.6f, 0);
+            }
+        }
+        else
+        {
+            _isExpanded = true;
+            if (rectTransform != null)
+            {
+                rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 1500);
+                transform.position -= new Vector3(0, 1.6f, 0);
+            }
+        }
     }
 }
