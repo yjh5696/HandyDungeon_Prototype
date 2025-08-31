@@ -72,7 +72,7 @@ public class Enemy : Character
 
         CardManager.Instance.selectedCard = _currentEnemyCard;
         LogManager.Instance.AddLog($"{_enemySo.EnemyName}이/가 {_currentEnemyCard.C_Name}을 사용하였습니다!");
-        GameManager.Instance.diceRoll.OnAttackButtonClicked();
+        GameManager.Instance.diceRoll.TryEnemyProCessDiceResult(_currentEnemyCard);
     }
 
     public void EnemyDie()

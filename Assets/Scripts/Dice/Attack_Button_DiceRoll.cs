@@ -1,96 +1,241 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Attack_Button_DiceRoll : MonoBehaviour
 {
     public static Attack_Button_DiceRoll Instance;
-    public DiceRoll diceRoll;
-    [SerializeField] private float switchTurnDelay;
-    [SerializeField] private float showDiceResultTime;
+
+    [SerializeField] private DiceRoll leftDiceRoll;    // 플레이어 주사위
+    [SerializeField] private DiceRoll rightDiceRoll;   // 적 주사위
+    [SerializeField] private GameObject ChanceDice;     // 찬스 주사위 오브젝트
+
     [SerializeField] private Button diceButton;
 
-    CardDataSO selectedCard = null;
-    CardDataSO SpecialCard = null;
+    [SerializeField] private TMP_Text[] playerHistoryTexts;
+    [SerializeField] private TMP_Text[] enemyHistoryTexts;
+
+    [SerializeField] private float switchTurnDelay;
+    [SerializeField] private float showDiceResultTime;
+
+    private CardDataSO selectedCard = null;
+
+    private CancellationTokenSource cts = null;
 
     private bool isDiceRolling = false;
+    private bool isSkipping = false;
+    private bool isProcessing = false;
+
+    private int? enemyDiceValue = null;
+    private int? playerDiceValue = null;
+
+    private int playerExtraRollCount = 2;
+    private int enemyExtraRollCount = 1;
+
+    private int playerHistoryIndex = 0;
+    private int enemyHistoryIndex = 0;
+
+    private int playerDiceSum = 0;
+    private int enemyDiceSum = 0;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private async void OnEnable()
+    private void OnEnable()
     {
-        SpecialCard = CardManager.Instance.selectedCard;
         diceButton.interactable = true;
-        if (SpecialCard != null && SpecialCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
-        {
-            int fakeDiceValue = 0;
-            await ShowDiceResultWithDelayAsync(0, fakeDiceValue);
-        }
+    }
+
+    public void SetPlayerExtraRolls(int count)
+    {
+        playerExtraRollCount = count;
+    }
+
+    public void SetEnemyExtraRolls(int count)
+    {
+        enemyExtraRollCount = count;
     }
 
     public void OnAttackButtonClicked()
     {
-        if (SpecialCard != null && SpecialCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
-        {
-            Debug.Log("플레이어 특수 카드 사용 - 주사위 굴리지 않음");
-            return;
-        }
-
+        Debug.Log("주사위 굴림");
         if (isDiceRolling)
         {
-            // 주사위가 굴러가는 중에 버튼 다시 눌리면 즉시 결과 고정
-            diceRoll.ForceFinishRoll(OnDiceRolled);
-            diceButton.interactable = false;
+            if (!isSkipping)
+            {
+                isSkipping = true;
+                // 애니메이션 즉시 종료
+                leftDiceRoll.ForceFinishRoll(OnLeftDiceRolled);
+                rightDiceRoll.ForceFinishRoll(OnRightDiceRolled);
+                // 버튼은 딜레이 중 비활성 상태이므로 따로 조치 필요 없음
+            }
             return;
         }
 
+        isSkipping = false;
+        selectedCard = CardManager.Instance.selectedCard;
+
         isDiceRolling = true;
-        diceRoll.RollDice(OnDiceRolled);
-        LogManager.Instance.AddLog("");
-        if (GameManager.Instance.isPlayerTurn)
+        enemyDiceValue = null;
+        playerDiceValue = null;
+        playerDiceSum = 0;
+        enemyDiceSum = 0;
+
+        if (selectedCard != null && selectedCard.C_Type == "Special" && GameManager.Instance.isPlayerTurn)
         {
-            LogManager.Instance.AddLog("주사위를 굴렸습니다!");
+            playerDiceValue = 0; // 플레이어 주사위 무시값
+            rightDiceRoll.RollDice(OnRightDiceRolled);
+            LogManager.Instance.AddLog("");
+            LogManager.Instance.AddLog("적 주사위를 굴렸습니다!");
         }
         else
         {
-            string enemyName = EnemyManager.Instance.Enemy.GetEnemySo().EnemyName;
-            LogManager.Instance.AddLog($"{enemyName}이/가 주사위를 굴렸습니다!");
+            leftDiceRoll.RollDice(OnLeftDiceRolled);
+            rightDiceRoll.RollDice(OnRightDiceRolled);
+            LogManager.Instance.AddLog("");
+            LogManager.Instance.AddLog("주사위를 굴렸습니다!");
         }
     }
 
-    private async void OnDiceRolled(int value)
+    private void OnLeftDiceRolled(int value)
     {
+        diceButton.interactable = false;
+        playerDiceValue = value;
+        playerDiceSum += value;
         LogManager.Instance.AddLog("");
-        LogManager.Instance.AddLog($"주사위 눈이 {value}가/이 나왔습니다!");
-        Debug.Log($"주사위 눈이 {value}가/이 나왔습니다!");
+        LogManager.Instance.AddLog($"플레이어 주사위 눈이 {value}가/이 나왔습니다! (누적합: {playerDiceSum})");
+        Debug.Log($"플레이어 주사위 눈이 {value}가/이 나왔습니다! (누적합: {playerDiceSum})");
+        TryProcessDiceResult();
+    }
+
+    private void OnRightDiceRolled(int value)
+    {
+        diceButton.interactable = false;
+        enemyDiceValue = value;
+        enemyDiceSum += value;
+        LogManager.Instance.AddLog("");
+        LogManager.Instance.AddLog($"적 주사위 눈이 {value}가/이 나왔습니다! (누적합: {enemyDiceSum})");
+        Debug.Log($"적 주사위 눈이 {value}가/이 나왔습니다! (누적합: {enemyDiceSum})");
+        TryProcessDiceResult();
+    }
+
+    public async void TryProcessDiceResult()
+    {
+        if (!playerDiceValue.HasValue || !enemyDiceValue.HasValue) return;
+
+        LogManager.Instance.AddLog($"결과 누적 합: 플레이어 {playerDiceSum} / 적 {enemyDiceSum}");
+
+        bool playerRollAgain = (playerExtraRollCount > 0);
+        bool enemyRollAgain = (enemyExtraRollCount > 0);
+
+        // 딜레이 중 버튼 비활성화, 사용자 입력 제한
+        diceButton.interactable = false;
+
+        // 딜레이는 반드시 끝까지 기다림 — 스킵 시 애니만 종료
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+
+        // 딜레이 끝나면 스킵 여부 상관없이 버튼 활성화
+        diceButton.interactable = true;
+        isSkipping = false; // 딜레이 끝나면 스킵 상태 초기화
+
+        if (playerRollAgain && enemyRollAgain)
+        {
+            SavePlayerDiceHistory(playerDiceValue.Value);
+            SaveEnemyDiceHistory(enemyDiceValue.Value);
+            playerExtraRollCount--;
+            enemyExtraRollCount--;
+            playerDiceValue = null;
+            enemyDiceValue = null;
+
+            leftDiceRoll.RollDice(OnLeftDiceRolled);
+            rightDiceRoll.RollDice(OnRightDiceRolled);
+            LogManager.Instance.AddLog($"플레이어와 적 모두 추가 주사위 굴림, 남은 횟수: {playerExtraRollCount}, {enemyExtraRollCount}");
+            return;
+        }
+        else if (playerRollAgain)
+        {
+            SavePlayerDiceHistory(playerDiceValue.Value);
+            playerExtraRollCount--;
+            playerDiceValue = null;
+
+            leftDiceRoll.RollDice(OnLeftDiceRolled);
+            LogManager.Instance.AddLog($"플레이어 추가 주사위 기회 사용, 남은 횟수: {playerExtraRollCount}");
+            return;
+        }
+        else if (enemyRollAgain)
+        {
+            SaveEnemyDiceHistory(enemyDiceValue.Value);
+            enemyExtraRollCount--;
+            enemyDiceValue = null;
+
+            rightDiceRoll.RollDice(OnRightDiceRolled);
+            LogManager.Instance.AddLog($"적 추가 주사위 기회 사용, 남은 횟수: {enemyExtraRollCount}");
+            return;
+        }
+
+        // 추가 주사위 더 없으면 최종 처리
         isDiceRolling = false;
-        await ShowDiceResultWithDelayAsync(showDiceResultTime, value);
+        diceButton.interactable = false;
+        selectedCard = CardManager.Instance.selectedCard;
+
+        await ShowDiceResultWithDelayAsync(showDiceResultTime, playerDiceSum);
+    }
+
+
+    private void SavePlayerDiceHistory(int value)
+    {
+        if (playerHistoryIndex < playerHistoryTexts.Length)
+        {
+            playerHistoryTexts[playerHistoryIndex].text = value.ToString();
+            playerHistoryTexts[playerHistoryIndex].gameObject.SetActive(true);
+            foreach (Transform child in playerHistoryTexts[playerHistoryIndex].transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            playerHistoryIndex++;
+        }
+    }
+
+    private void SaveEnemyDiceHistory(int value)
+    {
+        if (enemyHistoryIndex < enemyHistoryTexts.Length)
+        {
+            enemyHistoryTexts[enemyHistoryIndex].text = value.ToString();
+            enemyHistoryTexts[enemyHistoryIndex].gameObject.SetActive(true);
+            foreach (Transform child in enemyHistoryTexts[enemyHistoryIndex].transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            enemyHistoryIndex++;
+        }
+    }
+    public async void TryEnemyProCessDiceResult(CardDataSO enemyCard)
+    {
+        if (isDiceRolling) return;
+        isDiceRolling = true;
+        selectedCard = enemyCard;
+        await ShowDiceResultWithDelayAsync(showDiceResultTime, enemyDiceValue.Value);
     }
 
     private async UniTask ShowDiceResultWithDelayAsync(float delaySeconds, int value, CancellationToken ct = default)
     {
-        selectedCard = CardManager.Instance.selectedCard;
-        await UniTask.Delay(System.TimeSpan.FromSeconds(delaySeconds), cancellationToken: ct);
-
+        await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), cancellationToken: ct);
         LogManager.Instance.AddSpacingLine();
         LogManager.Instance.AddLog("액션!");
         LogManager.Instance.AddLog("");
-
         if (GameManager.Instance.isPlayerTurn)
         {
             if (selectedCard.C_Type == "Action")
             {
                 BattleSystem.ExecuteAttack(PlayerManager.Instance.Player, EnemyManager.Instance.Enemy, selectedCard, value);
                 PlayerManager.Instance.PlayAttackAnimation();
-
                 var attackTime = PlayerManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
-                await UniTask.Delay(System.TimeSpan.FromSeconds(attackTime * 0.75), cancellationToken: ct);
-
+                await UniTask.Delay(TimeSpan.FromSeconds(attackTime * 0.75), cancellationToken: ct);
                 EnemyManager.Instance.EnemyHitAnimation();
             }
             else if (selectedCard.C_Type == "Support")
@@ -110,10 +255,8 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             {
                 BattleSystem.ExecuteAttack(EnemyManager.Instance.Enemy, PlayerManager.Instance.Player, selectedCard, value);
                 EnemyManager.Instance.EnemyAttackAnimation();
-
                 var attackTime = EnemyManager.Instance.Animator.GetCurrentAnimatorStateInfo(0).length;
-                await UniTask.Delay(System.TimeSpan.FromSeconds(attackTime * 0.75), cancellationToken: ct);
-
+                await UniTask.Delay(TimeSpan.FromSeconds(attackTime * 0.75), cancellationToken: ct);
                 PlayerManager.Instance.PlayHitAnimation();
             }
             else if (selectedCard.C_Type == "Support")
@@ -132,8 +275,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
 
     private async UniTask SwitchTurnWithDelayAsync(float delaySeconds, CancellationToken ct = default)
     {
-        await UniTask.Delay(System.TimeSpan.FromSeconds(delaySeconds), cancellationToken: ct);
-
+        await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), cancellationToken: ct);
         if (GameManager.Instance.isPlayerTurn)
         {
             PlayerManager.Instance.Player.OnTurnEnd_WindDecrease();
@@ -145,13 +287,52 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             EnemyManager.Instance.Enemy.ProcessEndTurnEffects(EnemyManager.Instance.Enemy);
         }
 
-        if (PlayerManager.Instance.Player.GetCurrentHp() <= 0 ||
-            EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
+        // player, enemy 사망 시 턴 전환 중단
+        if (PlayerManager.Instance.Player.GetCurrentHp() <= 0 || EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
         {
-            return; // 사망 시 턴 전환 안 함
+            return;
         }
-        diceButton.interactable = true;
+
         GameManager.Instance.SwitchTurn();
+
+        if (GameManager.Instance.isPlayerTurn)
+        {
+            diceButton.interactable = true;
+            isDiceRolling = false;
+            playerDiceSum = 0;
+            enemyDiceSum = 0;
+            ChanceDice.SetActive(false);
+
+            // 이전 플레이어 히스토리 초기화
+            ClearPlayerDiceHistory();
+
+            // 이전 적 히스토리 초기화
+            ClearEnemyDiceHistory();
+
+        }
+        else
+        {
+            diceButton.interactable = false;
+        }
+    }
+
+    // 히스토리 초기화 함수 정의
+    private void ClearPlayerDiceHistory()
+    {
+        playerHistoryIndex = 0;
+        foreach (var text in playerHistoryTexts)
+        {
+            text.gameObject.SetActive(false);
+        }
+    }
+
+    private void ClearEnemyDiceHistory()
+    {
+        enemyHistoryIndex = 0;
+        foreach (var text in enemyHistoryTexts)
+        {
+            text.gameObject.SetActive(false);
+        }
     }
 }
 
