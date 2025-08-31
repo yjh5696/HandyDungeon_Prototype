@@ -32,8 +32,10 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     private int? enemyDiceValue = null;
     private int? playerDiceValue = null;
 
-    private int playerExtraRollCount = 2;
-    private int enemyExtraRollCount = 1;
+    public int playerExtraRollCount = 0;
+    public int enemyExtraRollCount = 0;
+
+    private TraitType playerTrait = TraitType.None;
 
     private int playerHistoryIndex = 0;
     private int enemyHistoryIndex = 0;
@@ -49,6 +51,46 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     private void OnEnable()
     {
         diceButton.interactable = true;
+        TraitType currentTrait = PlayerManager.Instance.GetCurrentTrait();
+
+        // 가져온 특성으로 세팅
+        SetPlayerTrait(currentTrait);
+    }
+
+    public void SetPlayerTrait(TraitType trait)
+    {
+        playerTrait = trait;
+        switch (playerTrait)
+        {
+            case TraitType.Diceby20:
+                leftDiceRoll.diceFaces = 20;
+                rightDiceRoll.diceFaces = 6;
+                break;
+            case TraitType.Diceby10:
+                leftDiceRoll.diceFaces = 10;
+                rightDiceRoll.diceFaces = 6;
+                break;
+            case TraitType.AddOne:
+            case TraitType.None:
+                leftDiceRoll.diceFaces = 6;
+                rightDiceRoll.diceFaces = 6;
+                break;
+        }
+    }
+
+    private int ApplyTraitToDiceRoll(int roll)
+    {
+        switch (playerTrait)
+        {
+            case TraitType.Diceby20:
+                return (roll % 2 == 1) ? 1 : 20;
+            case TraitType.Diceby10:
+                return (roll == 2 || roll == 3) ? 1 : 10;
+            case TraitType.AddOne:
+                return roll + 1;
+            default:
+                return roll;
+        }
     }
 
     public void SetPlayerExtraRolls(int count)
@@ -72,7 +114,6 @@ public class Attack_Button_DiceRoll : MonoBehaviour
                 // 애니메이션 즉시 종료
                 leftDiceRoll.ForceFinishRoll(OnLeftDiceRolled);
                 rightDiceRoll.ForceFinishRoll(OnRightDiceRolled);
-                // 버튼은 딜레이 중 비활성 상태이므로 따로 조치 필요 없음
             }
             return;
         }
@@ -105,6 +146,20 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     private void OnLeftDiceRolled(int value)
     {
         diceButton.interactable = false;
+        if(playerTrait == TraitType.Diceby20)
+        {
+            if(value % 2 == 1)
+            {
+                value = 1;
+            }
+        }
+        else if (playerTrait == TraitType.Diceby10)
+        {
+            if(value == 2 || value == 3)
+            {
+                value = 1;
+            }
+        }
         playerDiceValue = value;
         playerDiceSum += value;
         LogManager.Instance.AddLog("");
@@ -182,6 +237,12 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         isDiceRolling = false;
         diceButton.interactable = false;
         selectedCard = CardManager.Instance.selectedCard;
+
+        if(playerTrait == TraitType.AddOne)
+        {
+            playerDiceSum += playerDiceSum;
+            LogManager.Instance.AddLog($"플레이어 특성 '1 추가' 적용 후 최종 합: {playerDiceSum}");
+        }
 
         await ShowDiceResultWithDelayAsync(showDiceResultTime, playerDiceSum);
     }

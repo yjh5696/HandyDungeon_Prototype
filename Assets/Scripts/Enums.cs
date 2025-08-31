@@ -42,6 +42,14 @@ public enum PlayerStatusEffect
     Wind = 3,
 }
 
+public enum TraitType
+{
+    None = 0,
+    Diceby20 = 1,
+    Diceby10 = 2,
+    AddOne = 3,
+}
+
 public enum ChoiceType
 {
     Event = 0,
