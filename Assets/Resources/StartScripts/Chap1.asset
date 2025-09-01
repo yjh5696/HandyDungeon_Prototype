@@ -340,7 +340,7 @@ MonoBehaviour:
     chapterID: 1
     eventID: 3
     scriptText: "<b>\uCC55\uD130 1 \uCD5C\uC885 \uBCF4\uC2A4\uC640\uC758 \uC804\uD22C\uC785\uB2C8\uB2E4.
-      \uC2A4\uD0B5\uB41C \uC2A4\uD1A0\uB9AC \uBD80\uBD84\uC774 \uC788\uC2B5\uB2C8\uB2E4."
+      \uC2A4\uD0B5\uB41C \uC2A4\uD1A0\uB9AC \uBD80\uBD84\uC774 \uC788\uC2B5\uB2C8\uB2E4</b>."
     delayTime: 2
   - scriptID: SCRIPT_CHAPTER1_4_0
     chapterID: 1

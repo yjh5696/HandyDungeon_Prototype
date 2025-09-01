@@ -618,9 +618,8 @@ public class Choice : MonoBehaviour
 
             await UniTask.WaitUntil(() => !LogManager.Instance.isLogging);
 
-            await UniTask.WaitForSeconds(3.0f);
-
-            LogManager.Instance.AddSpacingLine();
+            await UniTask.WaitForSeconds(1.0f);
+            
             LogManager.Instance.isExpandable = true;
             LogManager.Instance.ExpandLog();
             

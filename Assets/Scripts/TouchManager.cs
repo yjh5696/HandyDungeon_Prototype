@@ -37,6 +37,11 @@ public class TouchManager : MonoBehaviour
 
     private void OnLogPressed(InputAction.CallbackContext obj)
     {
+        if (!LogManager.Instance.isLogging || GameManager.Instance.isPlayerinBattle)
+        {
+            return;
+        }
+        
         if (Camera.main == null)
         {
             Debug.LogWarning("No camera found");
@@ -54,15 +59,17 @@ public class TouchManager : MonoBehaviour
         graphicRaycaster.Raycast(eventData, results);
         foreach (RaycastResult result in results.Where(result => result.gameObject.name == "Log"))
         {
-            if (LogManager.Instance.isLogging)
-            {
-                Time.timeScale = 3.0f;
-            }
+            Time.timeScale = 1.5f;
         }
     }
 
     private void OnLogTapped(InputAction.CallbackContext obj)
     {
+        if(GameManager.Instance.isPlayerinBattle)
+        {
+            return;
+        }
+        
         if (Camera.main == null)
         {
             Debug.LogWarning("No camera found");
@@ -88,5 +95,7 @@ public class TouchManager : MonoBehaviour
     {
         _touchAction.Disable();
         _touchAction.Touch.Tap.performed -= OnLogTapped;
+        _touchAction.Touch.Press.performed -= OnLogPressed;
+        _touchAction.Touch.Press.canceled -= OnLogReleased;
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -46,7 +47,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         
         if(Stage.Chapters[currentChapter].Length == currentStage)
         {
-            Application.Quit();
+            SceneManager.LoadScene("StartScene");
             currentStage = 0;
             NextChapter();
             return;
@@ -216,6 +216,15 @@ public class GameManager : MonoBehaviour
         //CardInventoryButton.SetActive(true);
         EnemySpawner.Instance.SpawnRandomEnemy(enemyInfo);
         StartPlayerTurn();
+
+        CheckBattleEnd().Forget();
+    }
+
+    private async UniTaskVoid CheckBattleEnd()
+    {
+        await UniTask.WaitUntil(() => !isPlayerinBattle);
+
+        NextStage().Forget();
     }
 
     public void SwitchTurn()
@@ -291,7 +300,7 @@ public class GameManager : MonoBehaviour
         {
             LogManager.Instance.AddLog("플레이어 패배");
             lastBattleWon = false;
-            Application.Quit();
+            SceneManager.LoadScene("StartScene");
             return;
         }
         else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
@@ -309,8 +318,6 @@ public class GameManager : MonoBehaviour
         dicebtn.SetActive(true);
         image.gameObject.SetActive(true);
         image.FadeIn(1.0f);
-        
-        NextStage().Forget();
     }
 
 

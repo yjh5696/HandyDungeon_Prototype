@@ -108,6 +108,8 @@ public class LogManager : MonoBehaviour
         List<string> strs = new List<string>();
         List<float> f = new List<float>();
         
+        isLogging = true;
+        
         foreach (StartScript script in GameManager.Instance.startScripts[GameManager.Instance.currentChapter]
                      .StartScripts)
         {
@@ -122,8 +124,7 @@ public class LogManager : MonoBehaviour
         {
             return;
         }
-
-        isLogging = true;
+        
         ExpandLog();
         isExpandable = false;
 
