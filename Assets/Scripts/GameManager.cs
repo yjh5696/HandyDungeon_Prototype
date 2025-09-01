@@ -53,10 +53,10 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        //StartPrologue().Forget();
+        StartPrologue().Forget();
         
-        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank2");
-        StartPlayerTurn();
+        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank2");
+        //StartPlayerTurn();
     }
 
     public void StartChoice()
