@@ -332,6 +332,8 @@ public class Choice : MonoBehaviour
                                                         .AddDelayedLog(
                                                             $"{cardPack.cardPackName}을/를 획득했다.", 1.0f)
                                                         .Forget();
+                                                    
+                                                    PlayerManager.Instance.Player.Cards.AddRange(cardPack.cards);
                                                 }
                                                 break;
                                             case "PC":
@@ -446,6 +448,7 @@ public class Choice : MonoBehaviour
                                                     .AddDelayedLog(
                                                         $"{cardPack.cardPackName}을/를 획득했다.", 1.0f)
                                                     .Forget();
+                                                PlayerManager.Instance.Player.Cards.AddRange(cardPack.cards);
                                             }
                                             break;
                                         case "PC":
@@ -526,6 +529,7 @@ public class Choice : MonoBehaviour
                                                     .AddDelayedLog(
                                                         $"{cardPack.cardPackName}을/를 획득했다.", 1.0f)
                                                     .Forget();
+                                                PlayerManager.Instance.Player.Cards.AddRange(cardPack.cards);
                                             }
                                             break;
                                         case "PC":

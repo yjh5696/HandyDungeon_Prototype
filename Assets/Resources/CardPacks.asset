@@ -14,70 +14,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPacks:
   - cardPackID: 1
-    cardPackName: "\uBD88 \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardPackName: "<color=#F23C16>\uBD88 \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8</color>"
     cardAmount: 11
     cards:
-    - {fileID: 11400000, guid: 4f527636d66e93b46b1fda60194a026c, type: 2}
-    - {fileID: 11400000, guid: a1d5c6d3d05c6364cbdb4113d2f56420, type: 2}
-    - {fileID: 11400000, guid: ae44d81a7dd810b42b3d2f077d77b100, type: 2}
-    - {fileID: 11400000, guid: 1fefabef6db836b4581dc477f7cd0865, type: 2}
-    - {fileID: 11400000, guid: c87e889da13a0e34fbd16029131de846, type: 2}
-    - {fileID: 11400000, guid: bf6e99bf65d013642b796cd9028a4e5d, type: 2}
-    - {fileID: 11400000, guid: d7c48286fbdf38a4badaa649b1e0dc55, type: 2}
-    - {fileID: 11400000, guid: ccefe31654100b34b9e13a1ffad1f6c6, type: 2}
-    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
-    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
-    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    - {fileID: 11400000, guid: 20a8217a164a6f442a52cbf8c78dbafa, type: 2}
+    - {fileID: 11400000, guid: aa1a0333e014add4c89c485979e5946c, type: 2}
+    - {fileID: 11400000, guid: 6e2ac829f08c700488028eaa38da6dd9, type: 2}
+    - {fileID: 11400000, guid: fa84cd4bd8a544b4d9bf4c2fb7f52096, type: 2}
+    - {fileID: 11400000, guid: 3826fe597247a3e45a1b91b477d1b99f, type: 2}
+    - {fileID: 11400000, guid: 64e117241d168ea459bafb44c475b926, type: 2}
+    - {fileID: 11400000, guid: 8cf4f16fd96b13d488c2b9013a111249, type: 2}
+    - {fileID: 11400000, guid: 055dd030cb1a96344a95b745f07ce990, type: 2}
+    - {fileID: 11400000, guid: 4adef67cd5bdf824b92472cbd22ee75f, type: 2}
+    - {fileID: 11400000, guid: 68f712af16f1ed549863652ac60930da, type: 2}
+    - {fileID: 11400000, guid: 77daf2a8a7291574dbd9670c67ece892, type: 2}
     cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uBD88 \uC18D\uC131
       \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"
   - cardPackID: 2
-    cardPackName: "\uBC14\uB78C \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardPackName: "<color=#2C9E19>\uBC14\uB78C \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8</color>"
     cardAmount: 11
     cards:
-    - {fileID: 11400000, guid: bf6e99bf65d013642b796cd9028a4e5d, type: 2}
-    - {fileID: 11400000, guid: d7c48286fbdf38a4badaa649b1e0dc55, type: 2}
-    - {fileID: 11400000, guid: ccefe31654100b34b9e13a1ffad1f6c6, type: 2}
-    - {fileID: 11400000, guid: 610b37f4b20e8014680a501946d87e56, type: 2}
-    - {fileID: 11400000, guid: 8e226278265f5e546b4f0cddd5111d5c, type: 2}
-    - {fileID: 11400000, guid: c86fad504336d9d4bae9ef3eaa16df11, type: 2}
-    - {fileID: 11400000, guid: 73dca9fc370e8a54cb9d323c2598e7d6, type: 2}
-    - {fileID: 11400000, guid: 67437a1c77dcbb24ab262aee9b2576ac, type: 2}
-    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
-    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
-    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    - {fileID: 11400000, guid: 64e117241d168ea459bafb44c475b926, type: 2}
+    - {fileID: 11400000, guid: 8cf4f16fd96b13d488c2b9013a111249, type: 2}
+    - {fileID: 11400000, guid: 055dd030cb1a96344a95b745f07ce990, type: 2}
+    - {fileID: 11400000, guid: f99d5ec81dafcb24eb401e3ab0e6ac5b, type: 2}
+    - {fileID: 11400000, guid: 473ed25ef9d0b194598aec522bfafc47, type: 2}
+    - {fileID: 11400000, guid: 2be741e66d2e86a40826f7068bc26093, type: 2}
+    - {fileID: 11400000, guid: 040ce4be357ed70439026e409554b85c, type: 2}
+    - {fileID: 11400000, guid: 3dda993e3a2026343bed7ed7282129f8, type: 2}
+    - {fileID: 11400000, guid: 4adef67cd5bdf824b92472cbd22ee75f, type: 2}
+    - {fileID: 11400000, guid: 68f712af16f1ed549863652ac60930da, type: 2}
+    - {fileID: 11400000, guid: 77daf2a8a7291574dbd9670c67ece892, type: 2}
     cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uBC14\uB78C
       \uC18D\uC131 \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"
   - cardPackID: 3
-    cardPackName: "\uBB3C \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardPackName: "<color=#153696>\uBB3C \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8</color>"
     cardAmount: 11
     cards:
-    - {fileID: 11400000, guid: c86fad504336d9d4bae9ef3eaa16df11, type: 2}
-    - {fileID: 11400000, guid: 73dca9fc370e8a54cb9d323c2598e7d6, type: 2}
-    - {fileID: 11400000, guid: 67437a1c77dcbb24ab262aee9b2576ac, type: 2}
-    - {fileID: 11400000, guid: c83e1373e68ffc34ea4aa65c091e80be, type: 2}
-    - {fileID: 11400000, guid: 16b457aaf832b3847b951d06006b0ef2, type: 2}
-    - {fileID: 11400000, guid: 81e5ec475eb0f1a42bcc7ec76c171866, type: 2}
-    - {fileID: 11400000, guid: 68d1f3b9f2c684e4ab14ce4fcb4301e0, type: 2}
-    - {fileID: 11400000, guid: 6cc7e595cf39a81419bc5e86b6c9af7f, type: 2}
-    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
-    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
-    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    - {fileID: 11400000, guid: 2be741e66d2e86a40826f7068bc26093, type: 2}
+    - {fileID: 11400000, guid: 040ce4be357ed70439026e409554b85c, type: 2}
+    - {fileID: 11400000, guid: 3dda993e3a2026343bed7ed7282129f8, type: 2}
+    - {fileID: 11400000, guid: b7186280913c05c49b73d3c43f3024b5, type: 2}
+    - {fileID: 11400000, guid: fb339c51960795f41b12dc261a92ba15, type: 2}
+    - {fileID: 11400000, guid: 28597456325cb64499c54389fcfb00be, type: 2}
+    - {fileID: 11400000, guid: 8d6549ae4fcc05d418870f2e52c014c4, type: 2}
+    - {fileID: 11400000, guid: b6d0bb2d88733ac4699ecb470021f4cc, type: 2}
+    - {fileID: 11400000, guid: 4adef67cd5bdf824b92472cbd22ee75f, type: 2}
+    - {fileID: 11400000, guid: 68f712af16f1ed549863652ac60930da, type: 2}
+    - {fileID: 11400000, guid: 77daf2a8a7291574dbd9670c67ece892, type: 2}
     cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uBB3C \uC18D\uC131
       \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"
   - cardPackID: 4
-    cardPackName: "\uB545 \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardPackName: "<color=#AD8018>\uB545 \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8</color>"
     cardAmount: 11
     cards:
-    - {fileID: 11400000, guid: 81e5ec475eb0f1a42bcc7ec76c171866, type: 2}
-    - {fileID: 11400000, guid: 68d1f3b9f2c684e4ab14ce4fcb4301e0, type: 2}
-    - {fileID: 11400000, guid: 6cc7e595cf39a81419bc5e86b6c9af7f, type: 2}
-    - {fileID: 11400000, guid: c3156013881639742a2bbcb4e3e0396f, type: 2}
-    - {fileID: 11400000, guid: ae9610314af87774286d93290d45c8e1, type: 2}
-    - {fileID: 11400000, guid: 4f527636d66e93b46b1fda60194a026c, type: 2}
-    - {fileID: 11400000, guid: a1d5c6d3d05c6364cbdb4113d2f56420, type: 2}
-    - {fileID: 11400000, guid: ae44d81a7dd810b42b3d2f077d77b100, type: 2}
-    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
-    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
-    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    - {fileID: 11400000, guid: 28597456325cb64499c54389fcfb00be, type: 2}
+    - {fileID: 11400000, guid: 8d6549ae4fcc05d418870f2e52c014c4, type: 2}
+    - {fileID: 11400000, guid: b6d0bb2d88733ac4699ecb470021f4cc, type: 2}
+    - {fileID: 11400000, guid: dbd624c65fdac6f42b985c466c9143b8, type: 2}
+    - {fileID: 11400000, guid: 9059ac03cdfd86f439e5eccfe5a0ecdc, type: 2}
+    - {fileID: 11400000, guid: 20a8217a164a6f442a52cbf8c78dbafa, type: 2}
+    - {fileID: 11400000, guid: aa1a0333e014add4c89c485979e5946c, type: 2}
+    - {fileID: 11400000, guid: 6e2ac829f08c700488028eaa38da6dd9, type: 2}
+    - {fileID: 11400000, guid: 4adef67cd5bdf824b92472cbd22ee75f, type: 2}
+    - {fileID: 11400000, guid: 68f712af16f1ed549863652ac60930da, type: 2}
+    - {fileID: 11400000, guid: 77daf2a8a7291574dbd9670c67ece892, type: 2}
     cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uB545 \uC18D\uC131
       \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"
