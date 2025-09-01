@@ -7018,10 +7018,7 @@ MonoBehaviour:
   nextTurnDiceMultiplier: 1
   maxElementStack: 10
   cards: []
-  initCards:
-  - {fileID: 11400000, guid: 2677cb41e0c11834280b13557c09711e, type: 2}
-  - {fileID: 11400000, guid: d33fcfa9eac7da04d87f13cffe3ccfcf, type: 2}
-  - {fileID: 11400000, guid: ab7f3171555e8f74b9e50e76c7099dec, type: 2}
+  initCards: []
 --- !u!1 &871142925
 GameObject:
   m_ObjectHideFlags: 0

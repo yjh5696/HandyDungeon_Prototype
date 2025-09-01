@@ -1,4 +1,4 @@
-Card_Id,CARD_OUTPUT_Name,C_Type,Element,Tier,Rare,Effect_Type,E_Coeffici,C_Coeffici,Calculation,Debuff_Type,Debuff_Stack,Buff_Type,Buff_Stack,Enhanceable,Enhance_Count,Target,Card_Description,CARD_INSIDE_NAME,,,,,카드 컨셉(주석용),(속성계수 * 카드계수 * 주사위)
+Card_Id(PC),CARD_OUTPUT_Name,C_Type,Element,Tier,Rare,Effect_Type,E_Coeffici,C_Coeffici,Calculation,Debuff_Type,Debuff_Stack,Buff_Type,Buff_Stack,Enhanceable,Enhance_Count,Target,Card_Description,CARD_INSIDE_NAME,,,,,카드 컨셉(주석용),(속성계수 * 카드계수 * 주사위)
 0001,FAN1,Action,Fire,tier1,Opening,Damage,5,0.4,5 * 0.4 * N,None,0,None,0,Yes,2,Enemy,적에게 2~12의 피해를 줍니다. 강화 2,CARD_ACTION_FIRE_NOMAL_1,,,,,3단계 공격,
 0002,FAN1+,Action,Fire,tier2,Opening,Damage,5,0.5,5 * 0.5 * N,None,0,None,0,No,None,Enemy,적에게 3~15의 피해를 줍니다.,CARD_ACTION_FIRE_NOMAL_2,,,,,,
 0003,FAN2,Action,Fire,tier1,Opening,Damage,5,0.2,5 * 0.2 * N,Fire,1,None,0,Yes,2,Enemy,적에게 1~6의 피해를 줍니다. 점화 1. 강화 2,CARD_ACTION_FIRE_NOMAL_3,,,,,,
