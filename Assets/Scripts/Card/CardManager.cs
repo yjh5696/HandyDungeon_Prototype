@@ -352,7 +352,7 @@ public class CardManager : MonoBehaviour
 
     public CardPack FindCardPackById(int id)
     {
-        if(id >= _cardPacks.CardPacks.Count || id < 0) return null;
+        if(id > _cardPacks.CardPacks.Count || id <= 0) return null;
         return _cardPacks.CardPacks.Find(x => x.cardPackID == id);
     }
 
