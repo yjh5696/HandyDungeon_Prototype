@@ -19,8 +19,8 @@ MonoBehaviour:
   Tier: Tier1
   Rare: 
   Effect_Type: Heal
-  min_Value: 0.3
-  Max_Vlaue: 0
+  min_Value: 0.2
+  Max_Value: 0
   Calculation: 4
   Debuff_Type: None
   Debuff_Stack: 0

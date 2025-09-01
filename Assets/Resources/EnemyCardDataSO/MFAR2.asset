@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: 
   Effect_Type: Damage
   min_Value: 0.6
-  Max_Vlaue: 0
+  Max_Value: 0
   Calculation: 5
   Debuff_Type: Fire
   Debuff_Stack: 2
@@ -30,5 +30,5 @@ MonoBehaviour:
   Enhance_Count: 0
   Target: Player
   Card_Description: "\uC801\uC5D0\uAC8C 3~18\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uC810\uD654 2. "
+    \uC810\uD654 2. \uAC15\uD654 3"
   CardConcept: 

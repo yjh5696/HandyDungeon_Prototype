@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyChapter: Chapter1
   element: None
   rank: Rank2
-  health: 50
+  health: 30
   sprite: {fileID: 4723107735738678597, guid: da5a72139ad0c5945a93674a1a5f9c19, type: 3}
   animatorController: {fileID: 9100000, guid: 13dea5066b71fc64b8c5e89ffe3d493f, type: 2}
   description: 
@@ -26,3 +26,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40d38937caa44d04889bbdd52b7de3ca, type: 2}
   - {fileID: 11400000, guid: ed0e4cc8a96f6144abf0c266bd53d34c, type: 2}
   - {fileID: 11400000, guid: 228b99d6d4056ef49b7521c993a15fe1, type: 2}
+  flipX: 1

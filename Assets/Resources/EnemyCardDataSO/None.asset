@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: 
   Effect_Type: 
   min_Value: 0
-  Max_Vlaue: 0
+  Max_Value: 0
   Calculation: 0
   Debuff_Type: 
   Debuff_Stack: 0

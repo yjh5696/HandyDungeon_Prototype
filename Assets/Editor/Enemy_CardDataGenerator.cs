@@ -42,11 +42,8 @@ public class Emeny_CardDataGenerator
             cardSO.Buff_Type = fields[10];
             int.TryParse(fields[11], out cardSO.Buff_Stack);
             cardSO.Target = fields[12];
-            // 마지막 열은 카드의 설명으로 매핑
-            if (fields.Length > 13)
-            {
-                cardSO.Card_Description = fields[13];
-            }
+            cardSO.Card_Description = fields[13];
+            
             // C_Name이 비어있으면 기본 이름으로 지정
             if (string.IsNullOrEmpty(cardSO.C_Name))
             {

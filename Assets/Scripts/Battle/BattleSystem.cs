@@ -51,6 +51,7 @@ public static class BattleSystem
         totalDamage += fervorDamage;
 
         totalDamage = Mathf.Max(0, totalDamage); // 최소 데미지 1로 설정
+        totalDamage = Mathf.Round(totalDamage);
 
         // 6. HP 감소
         target.HitDamage(totalDamage);
@@ -73,7 +74,7 @@ public static class BattleSystem
         }
 
         // 7. 체력 감소 로그 출력
-        LogManager.Instance.AddLog($"{attacker.GetUnitName()} → {target.GetUnitName()} : {totalDamage} 데미지");
+        LogManager.Instance.AddDelayedLog($"{ attacker.GetUnitName()} → { target.GetUnitName()} : { totalDamage} 데미지", 1);
         Debug.Log($"{attacker.GetUnitName()} → {target.GetUnitName()} : {totalDamage} 데미지 / {target.GetUnitName()} : {target.GetCurrentHp()}");
         
         // 8.속성 디버프 적용 
@@ -146,19 +147,19 @@ public static class BattleSystem
             case "SP1":
                 // 예: 디버프 스택 모두 초기화
                 attacker.ClearDebuffStacks();
-                LogManager.Instance.AddLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 디버프 스택 초기화");
+                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 디버프 스택 초기화", 1);
                 break;
 
             case "SP2":
                 // 예: 다음 턴 주사위 ×2
                 attacker.NextTurnDiceMultiplier(2);
-                LogManager.Instance.AddLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 ×2");
+                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 ×2", 1);
                 break;
 
             case "SP3":
                 // 예: 다음 턴 주사위 +3
                 attacker.AddNextTurnDiceBouns(3);
-                LogManager.Instance.AddLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 +3");
+                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 +3", 1);
                 break;
 
             default:

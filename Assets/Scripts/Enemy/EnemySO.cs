@@ -42,4 +42,7 @@ public class EnemySO : ScriptableObject
     [SerializeField] private List<CardDataSO> enemyCards = new List<CardDataSO>();
     public List<CardDataSO> EnemyCards { get => enemyCards; set => enemyCards = value; }
     //public List<CardDataSO> EnemyCards { get; set; } = new List<CardDataSO>();
+
+    [Header("--- 좌우 뒤집기 여부 ---")]
+    public bool flipX = false;
 }

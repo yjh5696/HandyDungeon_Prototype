@@ -12,9 +12,23 @@ public class Enemy : Character
 
     private bool hasUsedSupportCard = false;
 
+    public SpriteRenderer spriteRenderer;
+    private void Awake()
+    {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null)
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+    }
+
     public void SetEnemySo(EnemySO enemy)
     {
         _enemySo = enemy;
+
+        spriteRenderer.sprite = enemy.Sprite;
+        spriteRenderer.flipX = enemy.flipX;
 
         // EnemySO 내 카드 덱을 복사하여 할당
         Cards = new List<CardDataSO>(enemy.EnemyCards);

@@ -18,6 +18,7 @@ public class CardManager : MonoBehaviour
     [SerializeField] private TMP_Text supportCardText;
     [SerializeField] private TMP_Text specialCardText;
     [SerializeField] private UnityEngine.UI.Image specialButtonImage;
+    [SerializeField] private UnityEngine.UI.Image CardEffectButton;
 
     private CardPackSO _cardPacks;
 
@@ -198,6 +199,42 @@ public class CardManager : MonoBehaviour
                 _cardEnhanceCounts[id]--;
                 Debug.Log($"[Card Enhance] 카드: {selectedCard.C_Name} (ID: {id}), 남은 강화 횟수: {_cardEnhanceCounts[id]}");
             }
+        }
+    }
+
+    public string GetEnhanceCountString(int cardId)
+    {
+        if (_cardEnhanceCounts.TryGetValue(cardId, out int count))
+        {
+            return count.ToString();
+        }
+
+        CardDataSO card = FindCardById(cardId);
+        if (card != null)
+        {
+            if (card.Enhanceable == "Yes")
+            {
+                return card.Enhance_Count.ToString();
+            }
+            else if (card.Enhanceable == "No")
+            {
+                return "최종형태";
+            }
+        }
+
+        // 딕셔너리에도 없고 카드 정보가 없으면 기본
+        return "정보 없음";
+    }
+
+    public void CardEffectON()
+    {
+        if(selectedCard.C_Type == "Special")
+        {
+            CardEffectButton.gameObject.SetActive(false);
+        }
+        else if(selectedCard.C_Type == "Action" || selectedCard.C_Type == "Support")
+        {
+            CardEffectButton.gameObject.SetActive(true);
         }
     }
 

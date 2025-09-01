@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3d9b4ce3bda294fb3d36ca3585a27c, type: 3}
+  m_Name: _11
+  m_EditorClassIdentifier: 
+  C_Id: 11
+  C_Name: 
+  C_Type: Action
+  Element: Fire
+  Tier: tier1
+  Rare: Climax
+  Effect_Type: Damage
+  min_Value: 5
+  Max_Value: 0
+  Calculation: 0.6
+  Debuff_Type: Fire
+  Debuff_Stack: 4
+  Buff_Type: None
+  Buff_Stack: 0
+  Enhanceable: Yes
+  Enhance_Count: 3
+  Target: Enemy
+  Card_Description: "\uC801\uC5D0\uAC8C 3~18\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+    \uC810\uD654 4. \uAC15\uD654 3."
+  CardConcept: 

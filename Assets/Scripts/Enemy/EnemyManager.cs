@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -11,11 +12,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float deathShowTime = 2f;
     [SerializeField] public float respawnDelay = 10f;
 
+    public EnemySO[] enemyDataList;
+
     private SpriteRenderer _spriteRenderer;
     private GameObject _enemyInstance;
     private EnemySO _currentEnemySo;
 
+    public SpriteRenderer spriteRenderer;
+
     public Animator Animator { get; private set; }
+
 
     private void Awake()
     {
@@ -24,6 +30,13 @@ public class EnemyManager : MonoBehaviour
 
         _spriteRenderer = prefab.GetComponent<SpriteRenderer>();
         Animator = prefab.GetComponent<Animator>();
+
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null)
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
 
         hpBar.SetCharacter(Enemy);
     }
@@ -40,6 +53,10 @@ public class EnemyManager : MonoBehaviour
 
         if (Animator)
             Animator.runtimeAnimatorController = enemyAnimatorController;
+    }
+    public EnemySO GetEnemySOByName(string enemyName)
+    {
+        return enemyDataList.FirstOrDefault(so => so.name == enemyName);
     }
 
     public void SpawnEnemy(EnemySO enemy)
@@ -63,6 +80,12 @@ public class EnemyManager : MonoBehaviour
         Animator = _enemyInstance.GetComponent<Animator>();
         _enemyInstance.SetActive(true);
         hpBar.gameObject.SetActive(true);
+
+        if (_spriteRenderer)
+            _spriteRenderer.sprite = enemy.Sprite;
+
+        if (Animator)
+            Animator.runtimeAnimatorController = enemy.AnimatorController;
 
         _currentEnemySo = enemy;
     }

@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyChapter: Chapter1
   element: Water
   rank: Rank1
-  health: 50
+  health: 20
   sprite: {fileID: 4723107735738678597, guid: da5a72139ad0c5945a93674a1a5f9c19, type: 3}
   animatorController: {fileID: 9100000, guid: 13dea5066b71fc64b8c5e89ffe3d493f, type: 2}
   description: 
@@ -26,3 +26,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f0c23e6f48d9c094e8bdf157af34cd96, type: 2}
   - {fileID: 11400000, guid: a6b1f1e551a61974483275b75e485005, type: 2}
   - {fileID: 11400000, guid: 11e5babff45fdfd46bf692dc19608b53, type: 2}
+  flipX: 1

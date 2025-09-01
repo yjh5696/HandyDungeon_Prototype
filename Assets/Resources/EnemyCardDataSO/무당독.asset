@@ -19,8 +19,8 @@ MonoBehaviour:
   Tier: Tier4
   Rare: 
   Effect_Type: Damage
-  min_Value: 1.2
-  Max_Vlaue: 0
+  min_Value: 0.8
+  Max_Value: 0
   Calculation: 3
   Debuff_Type: Water
   Debuff_Stack: 4
@@ -29,6 +29,6 @@ MonoBehaviour:
   Enhanceable: 
   Enhance_Count: 0
   Target: Player
-  Card_Description: "\uC801\uC5D0\uAC8C 3.6~21.6\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uCE68\uC2DD 4."
+  Card_Description: "\uC801\uC5D0\uAC8C 2~14\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+    \uC816\uC74C 4. \uAC15\uD654 4."
   CardConcept: 

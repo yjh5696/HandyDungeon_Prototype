@@ -5,7 +5,6 @@ public class CardDataSO : ScriptableObject
 {
     [Header("--- CSV 데이터 ---")]
     public int C_Id;
-    public string C_InName;
     public string C_Name;
     public string C_Type;
     public string Element;
