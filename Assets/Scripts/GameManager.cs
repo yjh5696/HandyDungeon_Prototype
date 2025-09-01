@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerDebuffContainer;
     [SerializeField] private GameObject enemyBuffContainer;
     [SerializeField] private GameObject enemyDebuffContainer;
+    [SerializeField] private GameObject CardInventoryButton;
 
     private void Awake()
     {
@@ -52,10 +53,10 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        //StartPrologue().Forget();
+        StartPrologue().Forget();
         
-        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
-        StartPlayerTurn();
+        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank1");
+        //StartPlayerTurn();
     }
 
     public void StartChoice()
@@ -212,6 +213,7 @@ public class GameManager : MonoBehaviour
         choice.SetActive(false);
         battle.SetActive(true);
         isPlayerinBattle = true;
+        //CardInventoryButton.SetActive(true);
         EnemySpawner.Instance.SpawnRandomEnemy(enemyInfo);
         StartPlayerTurn();
     }
@@ -272,6 +274,7 @@ public class GameManager : MonoBehaviour
 
     public async UniTaskVoid EndBattle(float delay)
     {
+        CardInventoryButton.SetActive(false);
         playerBuffContainer.gameObject.SetActive(false);
         playerDebuffContainer.gameObject.SetActive(false);
         enemyBuffContainer.gameObject.SetActive(false);

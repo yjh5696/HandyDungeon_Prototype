@@ -51,6 +51,7 @@ public static class BattleSystem
         totalDamage += fervorDamage;
 
         totalDamage = Mathf.Max(0, totalDamage); // 최소 데미지 1로 설정
+        totalDamage = Mathf.Round(totalDamage);
 
         // 6. HP 감소
         target.HitDamage(totalDamage);

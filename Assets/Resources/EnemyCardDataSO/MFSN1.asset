@@ -18,9 +18,9 @@ MonoBehaviour:
   Element: Fire
   Tier: Tier1
   Rare: 
-  Effect_Type: Sheild
-  min_Value: 0.6
-  Max_Vlaue: 0
+  Effect_Type: Shield
+  min_Value: 0.3
+  Max_Value: 0
   Calculation: 2
   Debuff_Type: None
   Debuff_Stack: 0
@@ -29,6 +29,6 @@ MonoBehaviour:
   Enhanceable: 
   Enhance_Count: 0
   Target: Self
-  Card_Description: "1.2~7.2\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.
+  Card_Description: "1~4\uC758 \uBCF4\uD638\uB9C9\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.
     \uAC15\uD6542"
   CardConcept: 

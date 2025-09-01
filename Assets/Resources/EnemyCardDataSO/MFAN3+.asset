@@ -20,7 +20,7 @@ MonoBehaviour:
   Rare: 
   Effect_Type: Damage
   min_Value: 0.2
-  Max_Vlaue: 0
+  Max_Value: 0
   Calculation: 5
   Debuff_Type: Fire
   Debuff_Stack: 3

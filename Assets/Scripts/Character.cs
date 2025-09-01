@@ -179,6 +179,7 @@ public class Character : MonoBehaviour
     {
         if (elementStacks.ContainsKey(State.Vibration))
         {
+            totalDamage = Mathf.Round(totalDamage);
             attacker.HitDamage(totalDamage);
             LogManager.Instance.AddDelayedLog($"{unitName}의 진동 효과로 {attacker.GetUnitName()}에게 {totalDamage} 피해", 1);
             if (attacker is Player)
@@ -197,7 +198,7 @@ public class Character : MonoBehaviour
         if (elementStacks.ContainsKey(State.Burndown))
         {
             totalDamage /= 2; // 버닝 효과로 피해 절반 감소
-            totalDamage = Mathf.Round(totalDamage * 10f) / 10f;
+            totalDamage = Mathf.Round(totalDamage);
             elementStacks[State.Burndown] = Mathf.Max(0, elementStacks.GetValueOrDefault(State.Burndown, 0) - 1);
             LogManager.Instance.AddDelayedLog($"{unitName}의 소화 효과로 피해 {totalDamage} 감소", 1);
         }
@@ -224,7 +225,7 @@ public class Character : MonoBehaviour
             {
                 float original = baseDamage;
                 baseDamage += stacks * 2f; // 순풍 효과로 공격력 증가
-                baseDamage = Mathf.Round(baseDamage * 10f) / 10f;
+                baseDamage = Mathf.Round(baseDamage);
                 LogManager.Instance.AddDelayedLog($"순풍 효과로 공격력 {original} → {baseDamage} 증가", 1);
             }
         }
@@ -239,7 +240,7 @@ public class Character : MonoBehaviour
             int stacks = elementStacks[State.Land];
             float original = damage;
             damage *= 1f + stacks * 0.05f;
-            damage = Mathf.Round(damage * 10f) / 10f;
+            damage = Mathf.Round(damage);
 
             if (Mathf.Abs(original - damage) > 0.001f)
             {
@@ -257,7 +258,7 @@ public class Character : MonoBehaviour
             int stacks = elementStacks[State.Guard];
             float original = Damage;
             Damage *= 1f - stacks * 0.05f;
-            Damage = Mathf.Round(Damage * 10f) / 10f;
+            Damage = Mathf.Round(Damage);
 
             if (Mathf.Abs(original - Damage) > 0.001f)
             {
@@ -288,19 +289,19 @@ public class Character : MonoBehaviour
     public void TakeDamage(float damage, Character target)
     {
         if (extraDamageStacks > 0) damage += extraDamageStacks;
-        damage = Mathf.Round(damage * 10f) / 10f;
+        damage = Mathf.Round(damage);
         if (Shield > 0)
         {
             if (damage <= Shield)
             {
                 Shield -= damage;
-                Shield = Mathf.Round(Shield * 10f) / 10f;
+                Shield = Mathf.Round(Shield);
                 LogManager.Instance.AddDelayedLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})", 1);
                 damage = 0f;
             }
         }
         float clearHp = GetCurrentHp() - damage;
-        clearHp = Mathf.Round(clearHp * 10f) / 10f;
+        clearHp = Mathf.Round(clearHp);
         SetCurrentHp(clearHp);
 
         if (target.GetCurrentHp() <= 0)
@@ -320,19 +321,19 @@ public class Character : MonoBehaviour
     // 데미지 처리
     public void HitDamage(float damage)
     {
-        damage = Mathf.Round(damage * 10f) / 10f;
+        damage = Mathf.Round(damage);
         if (Shield > 0)
         {
             if (damage <= Shield)
             {
                 Shield -= damage;
-                Shield = Mathf.Round(Shield * 10f) / 10f;
+                Shield = Mathf.Round(Shield);
                 LogManager.Instance.AddDelayedLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})", 1);
                 damage = 0f;
             }
         }
         float clearHp = GetCurrentHp() - damage;
-        clearHp = Mathf.Round(clearHp * 10f) / 10f;
+        clearHp = Mathf.Round(clearHp);
         SetCurrentHp(clearHp);
     }
     protected virtual void OnDeath() { }
@@ -377,7 +378,7 @@ public class Character : MonoBehaviour
         }
         ShieldValue = stacks;
         Shield += (ShieldValue * diceValue) / 3;
-        Shield = Mathf.Round(Shield * 10f) / 10f;
+        Shield = Mathf.Round(Shield);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 보호막 효과로{(ShieldValue * diceValue) / 3} 보호막 획득 (총 보호막: {Shield})", 1);
     }
     
@@ -390,7 +391,7 @@ public class Character : MonoBehaviour
         }
         RecoveryValue = stacks;
         Recovery = (RecoveryValue * diceValue) / 3;
-        Recovery = Mathf.Round(Recovery * 10f) / 10f;
+        Recovery = Mathf.Round(Recovery);
         SetCurrentHp(CurrentHp + Recovery);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 재생 효과로 {Recovery} 회복", 1);
     }
@@ -398,15 +399,15 @@ public class Character : MonoBehaviour
     public void SetShield(float damage)
     {
         Shield += damage;
-        Shield = Mathf.Round(Shield * 10f) / 10f;
+        Shield = Mathf.Round(Shield);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 {damage} 보호막 획득 (총 보호막: {Shield})", 1);
     }
 
     public void SetHeal(float damage)
     {
-        damage = Mathf.Round(damage * 10f) / 10f;
+        damage = Mathf.Round(damage);
         SetCurrentHp(CurrentHp + damage);
-        CurrentHp = Mathf.Round(CurrentHp * 10f) / 10f;
+        CurrentHp = Mathf.Round(CurrentHp);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 {damage} 회복 (현재 체력: {CurrentHp}/{MaxHp})", 1);
     }
 
@@ -521,6 +522,21 @@ public class Character : MonoBehaviour
             {
                 elementStacks[State.Recovery] = stacks;
                 LogManager.Instance.AddDelayedLog($"{unitName}의 재생 스택 1 감소 (남은 스택: {stacks})", 1);
+            }
+        }
+        // 진동 상태 처리
+        if (elementStacks.ContainsKey(State.Vibration))
+        {
+            int stacks = elementStacks[State.Vibration] - 1;
+            if (stacks <= 0)
+            {
+                LogManager.Instance.AddDelayedLog($"{unitName}의 진동 상태가 사라짐", 1);
+                if (CurrentElement == State.Vibration) CurrentElement = State.None;
+            }
+            else
+            {
+                elementStacks[State.Vibration] = stacks;
+                LogManager.Instance.AddDelayedLog($"{unitName}의 진동 스택 1 감소 (남은 스택: {stacks})", 1);
             }
         }
     }

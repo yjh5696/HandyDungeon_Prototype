@@ -18,9 +18,9 @@ MonoBehaviour:
   Element: None
   Tier: Tier2
   Rare: 
-  Effect_Type: Sheild
-  min_Value: 0.5
-  Max_Vlaue: 0
+  Effect_Type: Shield
+  min_Value: 0.3
+  Max_Value: 0
   Calculation: 4
   Debuff_Type: None
   Debuff_Stack: 0

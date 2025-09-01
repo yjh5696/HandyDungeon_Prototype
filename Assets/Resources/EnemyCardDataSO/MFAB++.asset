@@ -19,8 +19,8 @@ MonoBehaviour:
   Tier: 
   Rare: 
   Effect_Type: Damage
-  min_Value: 1
-  Max_Vlaue: 0
+  min_Value: 0.7
+  Max_Value: 0
   Calculation: 5
   Debuff_Type: Fire
   Debuff_Stack: 4
@@ -29,6 +29,6 @@ MonoBehaviour:
   Enhanceable: 
   Enhance_Count: 0
   Target: Player
-  Card_Description: "\uC801\uC5D0\uAC8C 5~30\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
-    \uC810\uD654 4."
+  Card_Description: "\uC801\uC5D0\uAC8C 4~21\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+    \uC810\uD654 4. \uAC15\uD654 4."
   CardConcept: 

@@ -48,7 +48,8 @@ public class CardDataSOGenerator : EditorWindow
             CardDataSO card = ScriptableObject.CreateInstance<CardDataSO>();
 
             card.C_Id = SafeParseInt(values[0]);
-            card.C_Name = values[1];
+            card.C_Name = values[18];
+            Debug.Log($"Card Name: {values[18]}");
             card.C_Type = values[2];
             card.Element = values[3];
             card.Tier = values[4];
@@ -65,7 +66,7 @@ public class CardDataSOGenerator : EditorWindow
             card.Enhance_Count = string.IsNullOrEmpty(values[15]) ? 0 : SafeParseInt(values[15]);
             card.Target = values[16];
             card.Card_Description = values[17];
-            card.CardConcept = values[19];
+            //card.CardConcept = values[19];
 
             string assetName = $"{card.C_Name}_{card.C_Id}.asset";
             string savePath = Path.Combine(folderPath, assetName);
