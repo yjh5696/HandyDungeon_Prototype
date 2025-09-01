@@ -316,6 +316,16 @@ public class Character : MonoBehaviour
             }
             return;
         }
+        if(PlayerManager.Instance.Player.GetCurrentHp() <= 0)
+        {
+            PlayerManager.Instance.Player.PlayerDie();
+            return;
+        }
+        else if(EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
+        {
+            EnemyManager.Instance.Enemy.EnemyDie();
+            return;
+        }
     }
     
     // 데미지 처리
@@ -335,6 +345,17 @@ public class Character : MonoBehaviour
         float clearHp = GetCurrentHp() - damage;
         clearHp = Mathf.Round(clearHp);
         SetCurrentHp(clearHp);
+
+        if (PlayerManager.Instance.Player.GetCurrentHp() <= 0)
+        {
+            PlayerManager.Instance.Player.PlayerDie();
+            return;
+        }
+        else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
+        {
+            EnemyManager.Instance.Enemy.EnemyDie();
+            return;
+        }
     }
     protected virtual void OnDeath() { }
     public void SetExtraDamageTaken(int stacks) => extraDamageStacks = stacks;
