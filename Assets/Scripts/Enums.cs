@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -138,4 +139,14 @@ public class StartScript
     public int eventID;
     public string scriptText;
     public float delayTime;
+}
+
+[System.Serializable]
+public class CardPack
+{
+    public int cardPackID;
+    public string cardPackName;
+    public int cardAmount;
+    public List<CardDataSO> cards;
+    public string cardPackDescription;
 }

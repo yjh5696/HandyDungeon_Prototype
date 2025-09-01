@@ -9,6 +9,8 @@ public class toCSV
     private static string mainCSVPath = "/Resources/CSV/Choice/Main.csv";
     private static string subCSVPath = "/Resources/CSV/Choice/Sub.csv";
     private static string scriptCSVPath = "/Resources/CSV/StartScripts/";
+    private static string cardPackCSVPath = "/Resources/CSV/CardPack.csv";
+    
     
     [MenuItem("Utilities/Generate Sub Choices")]
     public static void GenerateChoices()
@@ -124,5 +126,35 @@ public class toCSV
             AssetDatabase.CreateAsset(startScriptSO, $"Assets/Resources/StartScripts/{Path.GetFileNameWithoutExtension(path)}.asset");
             AssetDatabase.SaveAssets();
         }
+    }
+
+    [MenuItem("Utilities/Generate CardPack")]
+    public static void GenerateCardPack()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + cardPackCSVPath);
+        CardPackSO cardPackSO = ScriptableObject.CreateInstance<CardPackSO>();
+
+        foreach (string allLine in allLines)
+        {
+            string [] splitData = allLine.Split(',');
+            CardPack cardPack = new CardPack();
+            
+            cardPack.cardPackID = int.Parse(splitData[0]);
+            cardPack.cardPackName = splitData[1];
+            cardPack.cardAmount = int.Parse(splitData[2]);
+            cardPack.cards = new List<CardDataSO>();
+            List<CardDataSO> allCards = Resources.LoadAll<CardDataSO>("CardDataSOs").ToList();
+            string[] splitCards = splitData[3].Split('/');
+            foreach (string cardID in splitCards)
+            {
+                cardPack.cards.Add(allCards.Find(card => card.C_Id == int.Parse(cardID)));
+            }
+            cardPack.cardPackDescription = splitData[4];
+            
+            cardPackSO.CardPacks.Add(cardPack);
+        }
+        
+        AssetDatabase.CreateAsset(cardPackSO, $"Assets/Resources/CardPacks.asset");
+        AssetDatabase.SaveAssets();
     }
 }

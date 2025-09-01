@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69190c8680586f408b6e04b732f47cc, type: 3}
+  m_Name: CardPacks
+  m_EditorClassIdentifier: 
+  cardPacks:
+  - cardPackID: 1
+    cardPackName: "\uBD88 \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardAmount: 11
+    cards:
+    - {fileID: 11400000, guid: 4f527636d66e93b46b1fda60194a026c, type: 2}
+    - {fileID: 11400000, guid: a1d5c6d3d05c6364cbdb4113d2f56420, type: 2}
+    - {fileID: 11400000, guid: ae44d81a7dd810b42b3d2f077d77b100, type: 2}
+    - {fileID: 11400000, guid: 1fefabef6db836b4581dc477f7cd0865, type: 2}
+    - {fileID: 11400000, guid: c87e889da13a0e34fbd16029131de846, type: 2}
+    - {fileID: 11400000, guid: bf6e99bf65d013642b796cd9028a4e5d, type: 2}
+    - {fileID: 11400000, guid: d7c48286fbdf38a4badaa649b1e0dc55, type: 2}
+    - {fileID: 11400000, guid: ccefe31654100b34b9e13a1ffad1f6c6, type: 2}
+    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
+    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
+    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uBD88 \uC18D\uC131
+      \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"
+  - cardPackID: 2
+    cardPackName: "\uBC14\uB78C \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardAmount: 11
+    cards:
+    - {fileID: 11400000, guid: bf6e99bf65d013642b796cd9028a4e5d, type: 2}
+    - {fileID: 11400000, guid: d7c48286fbdf38a4badaa649b1e0dc55, type: 2}
+    - {fileID: 11400000, guid: ccefe31654100b34b9e13a1ffad1f6c6, type: 2}
+    - {fileID: 11400000, guid: 610b37f4b20e8014680a501946d87e56, type: 2}
+    - {fileID: 11400000, guid: 8e226278265f5e546b4f0cddd5111d5c, type: 2}
+    - {fileID: 11400000, guid: c86fad504336d9d4bae9ef3eaa16df11, type: 2}
+    - {fileID: 11400000, guid: 73dca9fc370e8a54cb9d323c2598e7d6, type: 2}
+    - {fileID: 11400000, guid: 67437a1c77dcbb24ab262aee9b2576ac, type: 2}
+    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
+    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
+    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uBC14\uB78C
+      \uC18D\uC131 \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"
+  - cardPackID: 3
+    cardPackName: "\uBB3C \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardAmount: 11
+    cards:
+    - {fileID: 11400000, guid: c86fad504336d9d4bae9ef3eaa16df11, type: 2}
+    - {fileID: 11400000, guid: 73dca9fc370e8a54cb9d323c2598e7d6, type: 2}
+    - {fileID: 11400000, guid: 67437a1c77dcbb24ab262aee9b2576ac, type: 2}
+    - {fileID: 11400000, guid: c83e1373e68ffc34ea4aa65c091e80be, type: 2}
+    - {fileID: 11400000, guid: 16b457aaf832b3847b951d06006b0ef2, type: 2}
+    - {fileID: 11400000, guid: 81e5ec475eb0f1a42bcc7ec76c171866, type: 2}
+    - {fileID: 11400000, guid: 68d1f3b9f2c684e4ab14ce4fcb4301e0, type: 2}
+    - {fileID: 11400000, guid: 6cc7e595cf39a81419bc5e86b6c9af7f, type: 2}
+    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
+    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
+    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uBB3C \uC18D\uC131
+      \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"
+  - cardPackID: 4
+    cardPackName: "\uB545 \uC18D\uC131 \uCE74\uB4DC \uAFB8\uB7EC\uBBF8"
+    cardAmount: 11
+    cards:
+    - {fileID: 11400000, guid: 81e5ec475eb0f1a42bcc7ec76c171866, type: 2}
+    - {fileID: 11400000, guid: 68d1f3b9f2c684e4ab14ce4fcb4301e0, type: 2}
+    - {fileID: 11400000, guid: 6cc7e595cf39a81419bc5e86b6c9af7f, type: 2}
+    - {fileID: 11400000, guid: c3156013881639742a2bbcb4e3e0396f, type: 2}
+    - {fileID: 11400000, guid: ae9610314af87774286d93290d45c8e1, type: 2}
+    - {fileID: 11400000, guid: 4f527636d66e93b46b1fda60194a026c, type: 2}
+    - {fileID: 11400000, guid: a1d5c6d3d05c6364cbdb4113d2f56420, type: 2}
+    - {fileID: 11400000, guid: ae44d81a7dd810b42b3d2f077d77b100, type: 2}
+    - {fileID: 11400000, guid: 61418c1e48974b846a60b9e6a6124ab9, type: 2}
+    - {fileID: 11400000, guid: f6b20b27d6de5594d8c5c0f3b80433c7, type: 2}
+    - {fileID: 11400000, guid: 0193aaf91f791cf47b8a7c24c95abcb3, type: 2}
+    cardPackDescription: "\uCC55\uD1301 \uBA54\uC778 \uC774\uBCA4\uD2B8 \uB545 \uC18D\uC131
+      \uAC15\uD654\uCE74\uB4DC \uC120\uD0DD \uC2DC"

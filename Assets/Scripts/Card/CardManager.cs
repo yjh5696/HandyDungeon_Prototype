@@ -19,6 +19,7 @@ public class CardManager : MonoBehaviour
     [SerializeField] private TMP_Text specialCardText;
     [SerializeField] private UnityEngine.UI.Image specialButtonImage;
 
+    private CardPackSO _cardPacks;
 
     private CardDataSO _currentCard;
 
@@ -36,6 +37,7 @@ public class CardManager : MonoBehaviour
             Instance = this;
 
         _allCards = Resources.LoadAll<CardDataSO>("CardDataSOs").ToArray();
+        _cardPacks = Resources.Load<CardPackSO>("CardPacks");
 
         if (playerCharacter == null || playerCharacter.Cards == null || playerCharacter.Cards.Count == 0)
             Debug.LogWarning("Player Character 카드 덱이 할당되지 않았거나 비어있습니다.");
@@ -309,6 +311,12 @@ public class CardManager : MonoBehaviour
 
             r = Random.Range(0, _allCards.Length);
         }
+    }
+
+    public CardPack FindCardPackById(int id)
+    {
+        if(id >= _cardPacks.CardPacks.Count || id < 0) return null;
+        return _cardPacks.CardPacks.Find(x => x.cardPackID == id);
     }
 
 }

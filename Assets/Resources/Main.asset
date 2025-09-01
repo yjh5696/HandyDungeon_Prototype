@@ -29,7 +29,7 @@ MonoBehaviour:
     choiceRate: 100
     choiceSuccessText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
     choiceFailText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
-    choiceReward: PC_0044
+    choiceReward: CP_0003
     choiceLoss: NONE
   - choiceID: CHOICE_MAIN_1_0
     choiceStageNumber: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
     choiceRate: 100
     choiceSuccessText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
     choiceFailText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
-    choiceReward: PC_0104
+    choiceReward: CP_0004
     choiceLoss: NONE
   - choiceID: CHOICE_MAIN_2_0
     choiceStageNumber: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
     choiceRate: 100
     choiceSuccessText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
     choiceFailText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
-    choiceReward: PC_0074
+    choiceReward: CP_0002
     choiceLoss: NONE
   - choiceID: CHOICE_MAIN_3_0
     choiceStageNumber: 1
@@ -78,5 +78,5 @@ MonoBehaviour:
     choiceRate: 100
     choiceSuccessText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
     choiceFailText: "{1}\uBB34\uC5B8\uAC00 \uAE68\uB2EC\uC558\uB2E4. "
-    choiceReward: PC_0014
+    choiceReward: CP_0001
     choiceLoss: NONE

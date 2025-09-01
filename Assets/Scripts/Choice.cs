@@ -70,6 +70,14 @@ public class Choice : MonoBehaviour
                 string[] reward = rewards[i].Split('_');
                 switch (reward[0])
                 {
+                    case "CP":
+                        int cardPackId = int.Parse(reward[1]);
+                        CardPack cardPack = CardManager.Instance.FindCardPackById(cardPackId);
+                        if (cardPack != null)
+                        {
+                            choiceSuccessText.text += $"{cardPack.cardPackName}";
+                        }
+                        break;
                     case "PC":
                         int cardId = int.TryParse(reward[1], out int id) ? id : 0;
                         if (cardId == 0)
@@ -166,6 +174,14 @@ public class Choice : MonoBehaviour
                     string[] reward = rewards[i].Split('_');
                     switch (reward[0])
                     {
+                        case "CP":
+                            int cardPackId = int.Parse(reward[1]);
+                            CardPack cardPack = CardManager.Instance.FindCardPackById(cardPackId);
+                            if (cardPack != null)
+                            {
+                                choiceSuccessText.text += $"{cardPack.cardPackName}";
+                            }
+                            break;
                         case "PC":
                             int cardId = int.TryParse(reward[1], out int id) ? id : 0;
                             if (cardId == 0)
@@ -307,6 +323,17 @@ public class Choice : MonoBehaviour
                                         string[] reward = t.Split('_');
                                         switch (reward[0])
                                         {
+                                            case "CP":
+                                                int cardPackId = int.Parse(reward[1]);
+                                                CardPack cardPack = CardManager.Instance.FindCardPackById(cardPackId);
+                                                if (cardPack != null)
+                                                {
+                                                    LogManager.Instance
+                                                        .AddDelayedLog(
+                                                            $"{cardPack.cardPackName}을/를 획득했다.", 1.0f)
+                                                        .Forget();
+                                                }
+                                                break;
                                             case "PC":
                                                 int cardId = int.TryParse(reward[1], out int id) ? id : 0;
                                                 CardDataSO card = cardId == 0
@@ -410,6 +437,17 @@ public class Choice : MonoBehaviour
                                     string[] reward = t.Split('_');
                                     switch (reward[0])
                                     {
+                                        case "CP":
+                                            int cardPackId = int.Parse(reward[1]);
+                                            CardPack cardPack = CardManager.Instance.FindCardPackById(cardPackId);
+                                            if (cardPack != null)
+                                            {
+                                                LogManager.Instance
+                                                    .AddDelayedLog(
+                                                        $"{cardPack.cardPackName}을/를 획득했다.", 1.0f)
+                                                    .Forget();
+                                            }
+                                            break;
                                         case "PC":
                                             int id = int.Parse(reward[1]);
                                             CardDataSO card = id == 0
@@ -420,29 +458,29 @@ public class Choice : MonoBehaviour
                                                 case "Air":
                                                     LogManager.Instance
                                                         .AddDelayedLog(
-                                                            $"<color=#2C9E19>{card.C_Name}</color>을/를 획득했다.", .0f)
+                                                            $"<color=#2C9E19>{card.C_Name}</color>을/를 획득했다.", 1.0f)
                                                         .Forget();
                                                     break;
                                                 case "Fire":
                                                     LogManager.Instance
                                                         .AddDelayedLog($"<color=#F23C16>{card.C_Name}</color>을/를 획득했다.",
-                                                            .0f).Forget();
+                                                            1.0f).Forget();
                                                     break;
                                                 case "Water":
                                                     LogManager.Instance
                                                         .AddDelayedLog(
-                                                            $"<color=#153696>{card.C_Name}</color>을/를 획득했다.", .0f)
+                                                            $"<color=#153696>{card.C_Name}</color>을/를 획득했다.", 1.0f)
                                                         .Forget();
                                                     break;
                                                 case "Land":
                                                     LogManager.Instance
                                                         .AddDelayedLog($"<color=#AD8018>{card.C_Name}</color>을/를 획득했다.",
-                                                            .0f).Forget();
+                                                            1.0f).Forget();
                                                     break;
                                                 case "None":
                                                     LogManager.Instance
                                                         .AddDelayedLog($"<color=#BF05F2>{card.C_Name}</color>을/를 획득했다.",
-                                                            .0f).Forget();
+                                                            1.0f).Forget();
                                                     break;
                                             }
                                             PlayerManager.Instance.Player.Cards.Add(card);
@@ -479,9 +517,19 @@ public class Choice : MonoBehaviour
                                     string[] reward = t.Split('_');
                                     switch (reward[0])
                                     {
+                                        case "CP":
+                                            int cardPackId = int.Parse(reward[1]);
+                                            CardPack cardPack = CardManager.Instance.FindCardPackById(cardPackId);
+                                            if (cardPack != null)
+                                            {
+                                                LogManager.Instance
+                                                    .AddDelayedLog(
+                                                        $"{cardPack.cardPackName}을/를 획득했다.", 1.0f)
+                                                    .Forget();
+                                            }
+                                            break;
                                         case "PC":
                                             int cardId = int.TryParse(reward[1], out int id) ? id : 0;
-                                            Debug.Log(cardId);
                                             CardDataSO card = id == 0
                                                 ? CardManager.Instance.GetRandomCard()
                                                 : CardManager.Instance.FindCardById(id);
@@ -490,29 +538,29 @@ public class Choice : MonoBehaviour
                                                 case "Air":
                                                     LogManager.Instance
                                                         .AddDelayedLog(
-                                                            $"<color=#2C9E19>{card.C_Name}</color>을/를 획득했다.", .0f)
+                                                            $"<color=#2C9E19>{card.C_Name}</color>을/를 획득했다.", 1.0f)
                                                         .Forget();
                                                     break;
                                                 case "Fire":
                                                     LogManager.Instance
                                                         .AddDelayedLog($"<color=#F23C16>{card.C_Name}</color>을/를 획득했다.",
-                                                            .0f).Forget();
+                                                            1.0f).Forget();
                                                     break;
                                                 case "Water":
                                                     LogManager.Instance
                                                         .AddDelayedLog(
-                                                            $"<color=#153696>{card.C_Name}</color>을/를 획득했다.", .0f)
+                                                            $"<color=#153696>{card.C_Name}</color>을/를 획득했다.", 1.0f)
                                                         .Forget();
                                                     break;
                                                 case "Land":
                                                     LogManager.Instance
                                                         .AddDelayedLog($"<color=#AD8018>{card.C_Name}</color>을/를 획득했다.",
-                                                            .0f).Forget();
+                                                            1.0f).Forget();
                                                     break;
                                                 case "None":
                                                     LogManager.Instance
                                                         .AddDelayedLog($"<color=#BF05F2>{card.C_Name}</color>을/를 획득했다.",
-                                                            .0f).Forget();
+                                                            1.0f).Forget();
                                                     break;
                                             }
                                             PlayerManager.Instance.Player.Cards.Add(card);
