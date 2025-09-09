@@ -10,6 +10,7 @@ public class TouchManager : MonoBehaviour
     public static TouchManager Instance;
     
     private TouchAction _touchAction;
+    private bool isTapped = false;
     [SerializeField] private GraphicRaycaster graphicRaycaster;
     
     private void Awake()
@@ -25,7 +26,7 @@ public class TouchManager : MonoBehaviour
     private void OnEnable()
     {
         _touchAction.Enable();
-        _touchAction.Touch.Tap.performed += OnLogTapped;
+        _touchAction.Touch.Tap.started += OnLogTapped;
         _touchAction.Touch.Press.performed += OnLogPressed;
         _touchAction.Touch.Press.canceled += OnLogReleased;
     }
@@ -41,6 +42,11 @@ public class TouchManager : MonoBehaviour
         {
             return;
         }
+
+        if (isTapped)
+        {
+            return;
+        }
         
         if (Camera.main == null)
         {
@@ -52,14 +58,14 @@ public class TouchManager : MonoBehaviour
         {
             return;
         }
-
+        
         PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = _touchAction.Touch.Position.ReadValue<Vector2>();
         List<RaycastResult> results = new List<RaycastResult>();
         graphicRaycaster.Raycast(eventData, results);
         foreach (RaycastResult result in results.Where(result => result.gameObject.name == "Log"))
         {
-            Time.timeScale = 1.5f;
+            Time.timeScale = 2.0f;
         }
     }
 
@@ -80,6 +86,8 @@ public class TouchManager : MonoBehaviour
         {
             return;
         }
+        
+        isTapped = true;
 
         PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = _touchAction.Touch.Position.ReadValue<Vector2>();
@@ -89,12 +97,14 @@ public class TouchManager : MonoBehaviour
         {
             LogManager.Instance.ExpandLog();
         }
+
+        isTapped = false;
     }
     
     private void OnDisable()
     {
         _touchAction.Disable();
-        _touchAction.Touch.Tap.performed -= OnLogTapped;
+        _touchAction.Touch.Tap.started -= OnLogTapped;
         _touchAction.Touch.Press.performed -= OnLogPressed;
         _touchAction.Touch.Press.canceled -= OnLogReleased;
     }
