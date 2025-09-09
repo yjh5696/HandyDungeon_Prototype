@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject action;
     [SerializeField] private GameObject dice;
     [SerializeField] private GameObject dicebtn;
+    [SerializeField] private GameObject invenbtn;
     [SerializeField] private GameObject skip;
     [SerializeField] private GameObject traits;
     [SerializeField] private GameObject playerBuffContainer;
@@ -213,7 +214,7 @@ public class GameManager : MonoBehaviour
         choice.SetActive(false);
         battle.SetActive(true);
         isPlayerinBattle = true;
-        //CardInventoryButton.SetActive(true);
+        invenbtn.SetActive(true);
         EnemySpawner.Instance.SpawnRandomEnemy(enemyInfo);
         StartPlayerTurn();
 
@@ -239,6 +240,7 @@ public class GameManager : MonoBehaviour
             action.SetActive(false);
             dice.SetActive(false);
             dicebtn.SetActive(true);
+            invenbtn.SetActive(true);
             StartPlayerTurn();
         }
         else
