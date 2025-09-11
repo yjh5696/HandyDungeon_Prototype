@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class CardInventoryUI : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class CardInventoryUI : MonoBehaviour
     [SerializeField] GameObject enemybuff;
     [SerializeField] GameObject playerdebuff;
     [SerializeField] GameObject enemydebuff;
+    [SerializeField] GameObject inventoryUI;
 
     public float space = 50;
 
@@ -28,8 +30,22 @@ public class CardInventoryUI : MonoBehaviour
         scrollRect = GetComponent<ScrollRect>();
     }
 
-    public void OnEnable()
+    public async void OpenInventory()
     {
+        // 인벤토리 창(inventoryUI) 활성화
+        inventoryUI.SetActive(true);
+
+        // 다른 UI 요소 비활성화
+        log.SetActive(false);
+        btns.SetActive(false);
+        playerbuff.SetActive(false);
+        enemybuff.SetActive(false);
+        playerdebuff.SetActive(false);
+        enemydebuff.SetActive(false);
+
+        await UniTask.Yield();
+
+        // 인벤토리 새로고침 로직 실행
         Refresh(PlayerCardList);
     }
 
@@ -65,25 +81,17 @@ public class CardInventoryUI : MonoBehaviour
                 }
             cardSlots.Add(go);
 
-            float y = 0f;
-            for(int i = 0; i < cardSlots.Count; i++)
-            {
-                cardSlots[i].anchoredPosition = new Vector2(0, -y);
-                y += (cardSlots[i].sizeDelta.y + space);
-            }
-
-            scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, y);
+            
         }
-    }
+        // 3. 카드 슬롯 위치 조정 및 Content 크기 조정
+        float y = 0f;
+        for (int i = 0; i < cardSlots.Count; i++)
+        {
+            cardSlots[i].anchoredPosition = new Vector2(0, -y);
+            y += (cardSlots[i].sizeDelta.y + space);
+        }
 
-    public void Close()
-    {
-        log.SetActive(false);
-        btns.SetActive(false);
-        playerbuff.SetActive(false);
-        enemybuff.SetActive(false);
-        playerdebuff.SetActive(false);
-        enemydebuff.SetActive(false);
+        scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, y);
     }
 }
 

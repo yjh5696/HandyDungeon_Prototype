@@ -14,7 +14,7 @@ public static class BattleSystem
         // 0. 주사위 값 수정
         diceValue += attacker.nextTurnDiceBonus;
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
-        Debug.Log($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})");
+        LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
         attacker.ClearDiceBouns();
 
         int fervorDamage = 0;
@@ -106,7 +106,7 @@ public static class BattleSystem
         // 0. 주사위 값 수정
         diceValue += attacker.nextTurnDiceBonus;
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
-
+        LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
         attacker.ClearDiceBouns();
 
         State buffType = (State)System.Enum.Parse(typeof(State), card.Buff_Type);
@@ -142,21 +142,22 @@ public static class BattleSystem
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
         Debug.Log($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})");
         attacker.ClearDiceBouns();
-        switch (card.C_Name)
+
+        switch (card.C_Id)
         {
-            case "SP1":
+            case 121:
                 // 예: 디버프 스택 모두 초기화
                 attacker.ClearDebuffStacks();
                 LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 디버프 스택 초기화", 1);
                 break;
 
-            case "SP2":
+            case 122:
                 // 예: 다음 턴 주사위 ×2
                 attacker.NextTurnDiceMultiplier(2);
                 LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 ×2", 1);
                 break;
 
-            case "SP3":
+            case 123:
                 // 예: 다음 턴 주사위 +3
                 attacker.AddNextTurnDiceBouns(3);
                 LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 +3", 1);

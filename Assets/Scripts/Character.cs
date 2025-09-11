@@ -584,6 +584,7 @@ public class Character : MonoBehaviour
     public void AddNextTurnDiceBouns(int bonus)
     {
         nextTurnDiceBonus += bonus;
+        Debug.Log($"[AddNextTurnDiceBouns] {unitName} : nextTurnDiceBonus :+{nextTurnDiceBonus}");
         LogManager.Instance.AddDelayedLog($"{unitName}의 다음 턴 주사위 값이 {bonus}만큼 증가합니다.", 1);
     }
 
@@ -591,6 +592,7 @@ public class Character : MonoBehaviour
     public void NextTurnDiceMultiplier(int multiplier)
     {
         nextTurnDiceMultiplier *= multiplier;
+        Debug.Log($"[NextTurnDiceMultiplier] {unitName} : nextTurnDiceMultiplier :{nextTurnDiceMultiplier}배");
         LogManager.Instance.AddDelayedLog($"{unitName}의 다음 턴 주사위 값이 {multiplier}배로 증가합니다.", 1);
     }
 
