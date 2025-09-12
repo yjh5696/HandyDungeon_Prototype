@@ -19,7 +19,7 @@ public static class BattleSystem
 
         int fervorDamage = 0;
         // 1. 기본 데미지 계산
-        float baseDamage = card.min_Value * (diceValue * card.Calculation);
+        int baseDamage = (int)(card.min_Value * (diceValue * card.Calculation));
 
         // 2. 젖음 효과 (공격력 감소 및 회복)
         baseDamage = attacker.SetWaterEffect(baseDamage, target);
@@ -51,13 +51,13 @@ public static class BattleSystem
         totalDamage += fervorDamage;
 
         totalDamage = Mathf.Max(0, totalDamage); // 최소 데미지 1로 설정
-        totalDamage = Mathf.Round(totalDamage);
+        int totalDamages = (int)totalDamage;
 
         // 6. HP 감소
-        target.HitDamage(totalDamage);
+        target.HitDamage(totalDamages);
 
         // 6.1. 진동 효과 (반사 피해)
-        target.SetVibrationEffect(totalDamage, attacker);
+        target.SetVibrationEffect(totalDamages, attacker);
 
         // 6.1. 진동 효과로 인한 사망 여부 체크 후 처리
         if (attacker.GetCurrentHp() <= 0)
@@ -113,8 +113,7 @@ public static class BattleSystem
         string cardType = card.Effect_Type;
 
         // 1. 기본 회복량 계산
-        float baseDamage = card.min_Value * (diceValue * card.Calculation);
-        baseDamage = Mathf.Round(baseDamage * 10f) / 10f;
+        int baseDamage = (int)(card.min_Value * (diceValue * card.Calculation));
         Debug.Log($"[Support] 기본 회복량: {baseDamage}");
 
         // 1.1 기본 회복 및 보호막

@@ -59,13 +59,14 @@ public static class ElementEffect
         {
             int stacks = Mathf.Max(1, target.GetStatusStacks(State.Land));
             float mult = 1f + stacks * 0.1f;
+            int damage = (int)(5 * stacks * mult);
             target.RemoveStatus(State.Land);
             target.SetStatus("분화", (stacks + 1));
-            target.TakeDamage(5 * stacks * mult, target);
+            target.TakeDamage(damage, target);
             target.SetExtraDamageTaken(stacks);
             ApplyBaseDebuff(target, State.Fire, baseStacks);
             target.SetLastElement(State.Fire);
-            return $"분화 발생! {5 * stacks * mult} 피해 + 점화 {baseStacks} 스택 부여";
+            return $"분화 발생! {damage} 피해 + 점화 {baseStacks} 스택 부여";
         }
 
         // 기본 디버프

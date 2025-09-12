@@ -23,10 +23,10 @@ public class Character : MonoBehaviour
     protected Dictionary<State, int> elementStacks = new Dictionary<State, int>();
     protected int extraDamageStacks = 0;
     protected int fervorDamage = 0;
-    protected float RecoveryValue = 0;
-    protected float Recovery = 0;
-    protected float ShieldValue = 0;
-    protected float Shield = 0;
+    protected int RecoveryValue = 0;
+    protected int Recovery = 0;
+    protected int ShieldValue = 0;
+    protected int Shield = 0;
 
     [SerializeField] int maxElementStack = 10;
 
@@ -158,15 +158,15 @@ public class Character : MonoBehaviour
     }
 
     // 교란: 홀짝 조건부 공격력 감소
-    public float SetAirEffect(float baseDamage, int diceValue)
+    public int SetAirEffect(int baseDamage, int diceValue)
     {
         if (elementStacks.ContainsKey(State.Air))
         {
             int stacks = elementStacks[State.Air];
             if ((stacks % 2) == (diceValue % 2))
             {
-                float original = baseDamage;
-                baseDamage = Mathf.Max(0, baseDamage - stacks * 2f);
+                int original = baseDamage;
+                baseDamage = Mathf.Max(0, baseDamage - stacks * 2);
                 LogManager.Instance.AddDelayedLog($"교란 효과로 공격력 {original} → {baseDamage} 감소", 1);
             }
         }
@@ -174,11 +174,10 @@ public class Character : MonoBehaviour
     }
 
     // 진동: 공격 시 피해 반사
-    public void SetVibrationEffect(float totalDamage, Character attacker)
+    public void SetVibrationEffect(int totalDamage, Character attacker)
     {
         if (elementStacks.ContainsKey(State.Vibration))
         {
-            totalDamage = Mathf.Round(totalDamage);
             attacker.HitDamage(totalDamage);
             LogManager.Instance.AddDelayedLog($"{unitName}의 진동 효과로 {attacker.GetUnitName()}에게 {totalDamage} 피해", 1);
             if (attacker is Player)
@@ -215,16 +214,15 @@ public class Character : MonoBehaviour
     }
 
     // 순풍: 홀짝 조건부 공격력 증가
-    public float SetGaleEffect(float baseDamage, int diceValue)
+    public int SetGaleEffect(int baseDamage, int diceValue)
     {
         if(elementStacks.ContainsKey(State.Gale))
         {
             int stacks = elementStacks[State.Gale];
             if ((stacks % 2) == (diceValue % 2))
-            {
-                float original = baseDamage;
-                baseDamage += stacks * 2f; // 순풍 효과로 공격력 증가
-                baseDamage = Mathf.Round(baseDamage);
+            {int
+                 original = baseDamage;
+                baseDamage += stacks * 2; // 순풍 효과로 공격력 증가
                 LogManager.Instance.AddDelayedLog($"순풍 효과로 공격력 {original} → {baseDamage} 증가", 1);
             }
         }
@@ -268,7 +266,7 @@ public class Character : MonoBehaviour
     }
 
     // 젖음: 발동 시 스택 감소
-    public float SetWaterEffect(float baseDamage, Character target)
+    public int SetWaterEffect(int baseDamage, Character target)
     {
         if (elementStacks.ContainsKey(State.Water))
         {
@@ -285,18 +283,17 @@ public class Character : MonoBehaviour
     }
 
     // 데미지 처리
-    public void TakeDamage(float damage, Character target)
+    public void TakeDamage(int damage, Character target)
     {
         if (extraDamageStacks > 0) damage += extraDamageStacks;
-        damage = Mathf.Round(damage);
+        damage = damage;
         if (Shield > 0)
         {
             if (damage <= Shield)
             {
                 Shield -= damage;
-                Shield = Mathf.Round(Shield);
                 LogManager.Instance.AddDelayedLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})", 1);
-                damage = 0f;
+                damage = 0;
             }
         }
         float clearHp = GetCurrentHp() - damage;
@@ -328,17 +325,15 @@ public class Character : MonoBehaviour
     }
     
     // 데미지 처리
-    public void HitDamage(float damage)
+    public void HitDamage(int damage)
     {
-        damage = Mathf.Round(damage);
         if (Shield > 0)
         {
             if (damage <= Shield)
             {
                 Shield -= damage;
-                Shield = Mathf.Round(Shield);
                 LogManager.Instance.AddDelayedLog($"{unitName}이/가 보호막으로 {damage} 피해 방어 (남은 보호막: {Shield})", 1);
-                damage = 0f;
+                damage = 0;
             }
         }
         float clearHp = GetCurrentHp() - damage;
@@ -398,7 +393,6 @@ public class Character : MonoBehaviour
         }
         ShieldValue = stacks;
         Shield += (ShieldValue * diceValue) / 3;
-        Shield = Mathf.Round(Shield);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 보호막 효과로{(ShieldValue * diceValue) / 3} 보호막 획득 (총 보호막: {Shield})", 1);
     }
     
@@ -411,21 +405,18 @@ public class Character : MonoBehaviour
         }
         RecoveryValue = stacks;
         Recovery = (RecoveryValue * diceValue) / 3;
-        Recovery = Mathf.Round(Recovery);
         SetCurrentHp(CurrentHp + Recovery);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 재생 효과로 {Recovery} 회복", 1);
     }
 
-    public void SetShield(float damage)
+    public void SetShield(int damage)
     {
         Shield += damage;
-        Shield = Mathf.Round(Shield);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 {damage} 보호막 획득 (총 보호막: {Shield})", 1);
     }
 
-    public void SetHeal(float damage)
+    public void SetHeal(int damage)
     {
-        damage = Mathf.Round(damage);
         SetCurrentHp(CurrentHp + damage);
         CurrentHp = Mathf.Round(CurrentHp);
         LogManager.Instance.AddDelayedLog($"{unitName}이/가 {damage} 회복 (현재 체력: {CurrentHp}/{MaxHp})", 1);
