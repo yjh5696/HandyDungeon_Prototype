@@ -54,10 +54,10 @@ public class GameManager : MonoBehaviour
     {
         startFade.FadeOut(1.0f);
         
-        //StartPrologue().Forget();
+        StartPrologue().Forget();
         
-        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank2");
-        StartPlayerTurn();
+        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank4");
+        //StartPlayerTurn();
     }
 
     public void StartChoice()
@@ -216,6 +216,10 @@ public class GameManager : MonoBehaviour
         isPlayerinBattle = true;
         invenbtn.SetActive(true);
         EnemySpawner.Instance.SpawnRandomEnemy(enemyInfo);
+        playerBuffContainer.gameObject.SetActive(true);
+        playerDebuffContainer.gameObject.SetActive(true);
+        enemyBuffContainer.gameObject.SetActive(true);
+        enemyDebuffContainer.gameObject.SetActive(true);
         StartPlayerTurn();
 
         CheckBattleEnd().Forget();
@@ -290,7 +294,10 @@ public class GameManager : MonoBehaviour
         playerDebuffContainer.gameObject.SetActive(false);
         enemyBuffContainer.gameObject.SetActive(false);
         enemyDebuffContainer.gameObject.SetActive(false);
-
+        BuffDebuffUIManager.Instance.ClearEnemyContainer();
+        EnemyManager.Instance.Enemy.ClearDebuffStacks();
+        EnemyManager.Instance.Enemy.ClearBuffStacks();
+        
         await UniTask.WaitForSeconds(delay);
         
         LogManager.Instance.AddSpacingLine();

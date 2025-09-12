@@ -95,6 +95,7 @@ public class Enemy : Character
         if (EnemyManager.Instance)
         {
             EnemyManager.Instance.OnEnemyDied();
+            
             GameManager.Instance.EndBattle(3f).Forget();
         }
         EnemyManager.Instance.StartCoroutine(DestroyEnemyAfterDelay(3f));

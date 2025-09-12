@@ -20,6 +20,7 @@ public class InventoryUI : MonoBehaviour
             return;
         }
         string PlayerTrait = PlayerManager.Instance.GetTraitPlayer().ToString();
+        Debug.Log($"플레이어 특성: {PlayerTrait}");
         mytrait.text = $"{PlayerTrait}";
         traitText.text = $"{GettraitText(PlayerTrait)}";
     }

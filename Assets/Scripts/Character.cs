@@ -570,6 +570,23 @@ public class Character : MonoBehaviour
 
         LogManager.Instance.AddDelayedLog($"{unitName}의 디버프 스택이 초기화되었습니다.", 1);
     }
+    // 버프 스택 초기화
+    public void ClearBuffStacks()
+    {
+        // 버프 상태들만 따로 관리
+        State[] buffs = new State[] { State.Fervor, State.Recovery, State.Gale, State.Guard, State.Burndown, State.Vibration };
+        foreach (var buff in buffs)
+        {
+            if (elementStacks.ContainsKey(buff))
+                elementStacks.Remove(buff);
+        }
+
+        // CurrentElement가 디버프 상태면 초기화
+        if (Array.Exists(buffs, d => d == CurrentElement))
+            CurrentElement = State.None;
+
+        LogManager.Instance.AddDelayedLog($"{unitName}의 디버프 스택이 초기화되었습니다.", 1);
+    }
 
     // 다음 턴 주사위 보너스
     public void AddNextTurnDiceBouns(int bonus)

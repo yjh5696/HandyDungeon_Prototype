@@ -14,7 +14,8 @@ public static class BattleSystem
         // 0. 주사위 값 수정
         diceValue += attacker.nextTurnDiceBonus;
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
-        LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
+        if(attacker.nextTurnDiceBonus != 0 || attacker.nextTurnDiceMultiplier != 1)
+            LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
         attacker.ClearDiceBouns();
 
         int fervorDamage = 0;
@@ -106,7 +107,8 @@ public static class BattleSystem
         // 0. 주사위 값 수정
         diceValue += attacker.nextTurnDiceBonus;
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
-        LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
+        if(attacker.nextTurnDiceBonus != 0 || attacker.nextTurnDiceMultiplier != 1)
+            LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
         attacker.ClearDiceBouns();
 
         State buffType = (State)System.Enum.Parse(typeof(State), card.Buff_Type);
@@ -139,7 +141,8 @@ public static class BattleSystem
     {
         diceValue += attacker.nextTurnDiceBonus;
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
-        Debug.Log($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})");
+        if(attacker.nextTurnDiceBonus != 0 || attacker.nextTurnDiceMultiplier != 1)
+            Debug.Log($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})");
         attacker.ClearDiceBouns();
 
         switch (card.C_Id)

@@ -34,7 +34,6 @@ public class BuffDebuffUIManager : MonoBehaviour
         Instance = this;
     }
 
-
     bool IsDebuff(State state) => (int)state >= 1 && (int)state <= 5;
 
     Sprite GetIconSprite(State state)
@@ -123,10 +122,16 @@ public class BuffDebuffUIManager : MonoBehaviour
 
 
 
-    void ClearChildren(Transform container)
+    public void ClearChildren(Transform container)
     {
         for (int i = container.childCount - 1; i >= 0; i--)
             Destroy(container.GetChild(i).gameObject);
+    }
+
+    public void ClearEnemyContainer()
+    {
+        ClearChildren(enemyBuffContainer);
+        ClearChildren(enemyDebuffContainer);
     }
 }
 
