@@ -10,7 +10,7 @@ public class EnemySO : ScriptableObject
     public string EnemyID { get => enemyID; set => enemyID = value; }
 
     // UnityEngine.Object의 'name'과 충돌을 피하기 위해 'enemyName'으로 변경
-    [SerializeField] private string enemyName;
+    public string enemyName;
     public string EnemyName { get => enemyName; set => enemyName = value; }
 
     [SerializeField] private string enemyTribe;

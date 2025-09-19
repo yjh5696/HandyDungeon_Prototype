@@ -15,7 +15,7 @@ public static class BattleSystem
         diceValue += attacker.nextTurnDiceBonus;
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
         if(attacker.nextTurnDiceBonus != 0 || attacker.nextTurnDiceMultiplier != 1)
-            LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
+            LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 0.5f).Forget();
         attacker.ClearDiceBouns();
 
         int fervorDamage = 0;
@@ -75,7 +75,7 @@ public static class BattleSystem
         }
 
         // 7. 체력 감소 로그 출력
-        LogManager.Instance.AddDelayedLog($"{ attacker.GetUnitName()} → { target.GetUnitName()} : { totalDamage} 데미지", 1);
+        LogManager.Instance.AddDelayedLog($"{ attacker.GetUnitName()} → { target.GetUnitName()} : { totalDamage} 데미지", 0.5f).Forget();
         Debug.Log($"{attacker.GetUnitName()} → {target.GetUnitName()} : {totalDamage} 데미지 / {target.GetUnitName()} : {target.GetCurrentHp()}");
         
         // 8.속성 디버프 적용 
@@ -83,7 +83,7 @@ public static class BattleSystem
 
         // 9. 속성 디버프 로그 출력
         if (!string.IsNullOrEmpty(effectLog))
-            LogManager.Instance.AddLog(effectLog);
+            LogManager.Instance.AddDelayedLog(effectLog, 0.5f).Forget();
 
         // 10. 사망 여부 체크 후 처리
         if (target.GetCurrentHp() <= 0)
@@ -101,6 +101,15 @@ public static class BattleSystem
 
         // 11. 소화 스택 삭제
         attacker.SetBurndownClear();
+
+        // 12. 턴 종료 후 효과 발동
+        attacker.ProcessEndTurnEffects(attacker);
+
+        // 13. UI 업데이트
+        var playerStates = PlayerManager.Instance.Player.GetCurrentStatesWithStacks();
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(playerStates, true);
+        var enemyStates = EnemyManager.Instance.Enemy.GetCurrentStatesWithStacks();
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(enemyStates, false);
     }
     public static void ExecuteDefence(Character attacker, Character target, CardDataSO card, int diceValue)
     {
@@ -108,7 +117,7 @@ public static class BattleSystem
         diceValue += attacker.nextTurnDiceBonus;
         diceValue = diceValue * attacker.nextTurnDiceMultiplier;
         if(attacker.nextTurnDiceBonus != 0 || attacker.nextTurnDiceMultiplier != 1)
-            LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 1);
+            LogManager.Instance.AddDelayedLog($"[Attack] 수정된 주사위 값: {diceValue} (보너스: {attacker.nextTurnDiceBonus}, 배수: {attacker.nextTurnDiceMultiplier})", 0.5f).Forget();
         attacker.ClearDiceBouns();
 
         State buffType = (State)System.Enum.Parse(typeof(State), card.Buff_Type);
@@ -132,10 +141,19 @@ public static class BattleSystem
         string effectLog = ElementBuff.ApplyBuff(attacker, target, buffType, card.Buff_Stack);
 
         if (!string.IsNullOrEmpty(effectLog))
-            LogManager.Instance.AddLog(effectLog);
+            LogManager.Instance.AddDelayedLog(effectLog, 0.5f).Forget();
 
         // 3. 재생 효과 발동
         attacker.SetRecovery(diceValue, cardType);
+
+        // 4. 턴 종료 후 효과 발동
+        attacker.ProcessEndTurnEffects(attacker);
+
+        // 5. UI 업데이트
+        var playerStates = PlayerManager.Instance.Player.GetCurrentStatesWithStacks();
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(playerStates, true);
+        var enemyStates = EnemyManager.Instance.Enemy.GetCurrentStatesWithStacks();
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(enemyStates, false);
     }
     public static void ExecuteSpecial(Character attacker, Character target, CardDataSO card, int diceValue)
     {
@@ -150,25 +168,34 @@ public static class BattleSystem
             case 121:
                 // 예: 디버프 스택 모두 초기화
                 attacker.ClearDebuffStacks();
-                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 디버프 스택 초기화", 1);
+                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 디버프 스택 초기화", 0.5f).Forget();
                 break;
 
             case 122:
                 // 예: 다음 턴 주사위 ×2
                 attacker.NextTurnDiceMultiplier(2);
-                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 ×2", 1);
+                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 ×2", 0.5f).Forget();
                 break;
 
             case 123:
                 // 예: 다음 턴 주사위 +3
                 attacker.AddNextTurnDiceBouns(3);
-                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 +3", 1);
+                LogManager.Instance.AddDelayedLog($"{attacker.GetUnitName()}의 {card.C_Name} 효과: 다음 턴 주사위 +3", 0.5f).Forget();
                 break;
 
             default:
                 Debug.LogWarning($"알 수 없는 스페셜 카드 효과: {card.C_Name}");
                 break;
         }
+
+        // 턴 종료 후 효과 발동
+        attacker.ProcessEndTurnEffects(attacker);
+
+        // UI 업데이트
+        var playerStates = PlayerManager.Instance.Player.GetCurrentStatesWithStacks();
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(playerStates, true);
+        var enemyStates = EnemyManager.Instance.Enemy.GetCurrentStatesWithStacks();
+        BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(enemyStates, false);
     }
 }
 

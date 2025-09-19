@@ -31,11 +31,8 @@ public class Attack_Button_DiceRoll : MonoBehaviour
 
     private CardDataSO selectedCard = null;
 
-    private CancellationTokenSource cts = null;
-
     private bool isDiceRolling = false;
     private bool isSkipping = false;
-    private bool isProcessing = false;
 
     private int? enemyDiceValue = null;
     private int? playerDiceValue = null;
@@ -132,11 +129,11 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             leftDiceRoll.RollDice(OnLeftDiceRolled);
             rightDiceRoll.RollDice(OnRightDiceRolled);
             LogManager.Instance.AddLog("");
-            LogManager.Instance.AddDelayedLog("주사위를 굴렸습니다!", 1);
+            LogManager.Instance.AddDelayedLog("주사위를 굴렸습니다!", 0.5f).Forget();
         }
     }
 
-    private async void OnLeftDiceRolled(int value)
+    private void OnLeftDiceRolled(int value)
     {
         diceButton.interactable = false;
         if(playerTrait == TraitType.Diceby20)
@@ -157,7 +154,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         playerDiceSum += value;
 
         LogManager.Instance.AddLog("");
-        LogManager.Instance.AddDelayedLog($"플레이어의 연기력이 {value}가/이 나왔습니다! (누적합: {playerDiceSum})", 1);
+        LogManager.Instance.AddDelayedLog($"플레이어의 연기력이 {value}가/이 나왔습니다! (누적합: {playerDiceSum})", 0.5f).Forget();
         Debug.Log($"플레이어 주사위 눈이 {value}가/이 나왔습니다! (누적합: {playerDiceSum})");
         TryProcessDiceResult();
     }
@@ -168,7 +165,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         enemyDiceValue = value;
         enemyDiceSum += value;
         LogManager.Instance.AddLog("");
-        LogManager.Instance.AddDelayedLog($"적의 연기력이 {value}가/이 나왔습니다! (누적합: {playerDiceSum})", 1);
+        LogManager.Instance.AddDelayedLog($"적의 연기력이 {value}가/이 나왔습니다! (누적합: {enemyDiceSum})", 0.5f).Forget();
         Debug.Log($"적 주사위 눈이 {value}가/이 나왔습니다! (누적합: {enemyDiceSum})");
         TryProcessDiceResult();
     }
@@ -176,8 +173,6 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     public async void TryProcessDiceResult()
     {
         if (!playerDiceValue.HasValue || !enemyDiceValue.HasValue) return;
-
-        LogManager.Instance.AddDelayedLog($"연기력 합: 플레이어 {playerDiceSum} / 적 {enemyDiceSum}", 1);
 
         bool playerRollAgain = (playerExtraRollCount > 0);
         bool enemyRollAgain = (enemyExtraRollCount > 0);
@@ -203,7 +198,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
 
             leftDiceRoll.RollDice(OnLeftDiceRolled);
             rightDiceRoll.RollDice(OnRightDiceRolled);
-            LogManager.Instance.AddDelayedLog($"플레이어와 적 모두 추가 주사위 굴림, 남은 횟수: {playerExtraRollCount}, {enemyExtraRollCount}", 1);
+            LogManager.Instance.AddDelayedLog($"플레이어와 적 모두 추가 주사위 굴림, 남은 횟수: {playerExtraRollCount}, {enemyExtraRollCount}", 0.5f).Forget();
             return;
         }
         else if (playerRollAgain)
@@ -213,7 +208,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             playerDiceValue = null;
 
             leftDiceRoll.RollDice(OnLeftDiceRolled);
-            LogManager.Instance.AddDelayedLog($"플레이어 추가 주사위 기회 사용, 남은 횟수: {playerExtraRollCount}", 1);
+            LogManager.Instance.AddDelayedLog($"플레이어 추가 주사위 기회 사용, 남은 횟수: {playerExtraRollCount}", 0.5f).Forget();
             return;
         }
         else if (enemyRollAgain)
@@ -223,7 +218,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
             enemyDiceValue = null;
 
             rightDiceRoll.RollDice(OnRightDiceRolled);
-            LogManager.Instance.AddDelayedLog($"적 추가 주사위 기회 사용, 남은 횟수: {enemyExtraRollCount}", 1);
+            LogManager.Instance.AddDelayedLog($"적 추가 주사위 기회 사용, 남은 횟수: {enemyExtraRollCount}", 0.5f).Forget();
             return;
         }
 
@@ -235,7 +230,7 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         if(playerTrait == TraitType.AddOne)
         {
             playerDiceSum += playerDiceSum;
-            LogManager.Instance.AddDelayedLog($"플레이어 특성 '1 추가' 적용 후 최종 합: {playerDiceSum}", 1);
+            LogManager.Instance.AddDelayedLog($"플레이어 특성 '1 추가' 적용 후 최종 합: {playerDiceSum}", 0.5f).Forget();
         }
 
         await ShowDiceResultWithDelayAsync(showDiceResultTime, playerDiceSum);
@@ -281,8 +276,8 @@ public class Attack_Button_DiceRoll : MonoBehaviour
     {
         await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), cancellationToken: ct);
         LogManager.Instance.AddSpacingLine();
-        LogManager.Instance.AddLog("액션!");
-        LogManager.Instance.AddLog("");
+        LogManager.Instance.AddDelayedLog("액션!", 0.5f).Forget();
+        LogManager.Instance.AddDelayedLog("", 0.5f).Forget();
         if (GameManager.Instance.isPlayerTurn)
         {
             if (selectedCard.C_Type == "Action")
@@ -335,16 +330,14 @@ public class Attack_Button_DiceRoll : MonoBehaviour
         if (GameManager.Instance.isPlayerTurn)
         {
             PlayerManager.Instance.Player.OnTurnEnd_WindDecrease();
-            PlayerManager.Instance.Player.ProcessEndTurnEffects(PlayerManager.Instance.Player);
-            EnemyManager.Instance.Enemy.ProcessEndTurnEffects(EnemyManager.Instance.Enemy);
+            //PlayerManager.Instance.Player.ProcessEndTurnEffects(PlayerManager.Instance.Player);
             var playerStates = PlayerManager.Instance.Player.GetCurrentStatesWithStacks();
             BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(playerStates, true);  // 플레이어 UI 갱신
         }
         else
         {
             EnemyManager.Instance.Enemy.OnTurnEnd_WindDecrease();
-            PlayerManager.Instance.Player.ProcessEndTurnEffects(PlayerManager.Instance.Player);
-            EnemyManager.Instance.Enemy.ProcessEndTurnEffects(EnemyManager.Instance.Enemy);
+            //EnemyManager.Instance.Enemy.ProcessEndTurnEffects(EnemyManager.Instance.Enemy);
             var enemyStates = EnemyManager.Instance.Enemy.GetCurrentStatesWithStacks();
             BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(enemyStates, false);  // 적 UI 갱신
         }

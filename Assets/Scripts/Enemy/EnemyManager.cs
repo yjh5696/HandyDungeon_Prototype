@@ -64,12 +64,13 @@ public class EnemyManager : MonoBehaviour
         if (_enemyInstance)
             Destroy(_enemyInstance);
 
-        Debug.Log($"SpawnEnemy 호출: {enemy.EnemyName} 카드 수: {enemy.EnemyCards.Count}");
+        Debug.Log($"SpawnEnemy 호출: {enemy.enemyName} 카드 수: {enemy.EnemyCards.Count}");
 
         _enemyInstance = Instantiate(prefab, transform.position, transform.rotation);
         _enemyInstance.transform.parent = transform;
         Enemy = _enemyInstance.GetComponent<Enemy>();
         Enemy.SetEnemySo(enemy);
+        Enemy.SetEnemyName(enemy.enemyName);
 
         // Enemy에 카드 덱 할당 (EnemySO 내 카드 덱)
         Enemy.SetCards(enemy.EnemyCards);
@@ -173,5 +174,6 @@ public class EnemyManager : MonoBehaviour
     {
         Animator.SetTrigger("enemyIsHit");
     }
+
 }
 

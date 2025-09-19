@@ -6995,11 +6995,11 @@ MonoBehaviour:
   maxElementStack: 10
   cards: []
   initCards:
-  - {fileID: 11400000, guid: 5540484faced93c4aabaddbc88ba1551, type: 2}
+  - {fileID: 11400000, guid: 65a69ea702e14a14caf523e428042ac1, type: 2}
   - {fileID: 11400000, guid: a96eaef50e21e0a4083215830db5b29a, type: 2}
   - {fileID: 11400000, guid: 84af006fdfa3e424da656e548856087b, type: 2}
   - {fileID: 11400000, guid: d2274d1a06f02a8469117b3676d7ed5e, type: 2}
-  - {fileID: 11400000, guid: b92e2f40c676e6547b6181e8c4ea9490, type: 2}
+  - {fileID: 11400000, guid: cbac747b2e702874c803e8572a23ec0b, type: 2}
   - {fileID: 11400000, guid: 34ef04ba5256de04581fc05e9db61c0f, type: 2}
 --- !u!1 &871142925
 GameObject:

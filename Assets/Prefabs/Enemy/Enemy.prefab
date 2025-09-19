@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 8605956544606621573, guid: 45e9593f441926a4bb7bf26ffbef8c84, type: 3}
+  m_Sprite: {fileID: 5757750083339748195, guid: 7e6d940b4a2d8a048a4a30ca44d53388, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 97619965090742576}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7a3e906dc955639498541f5ca0f46ebb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 62120d2572099b449a0bbcd4fb08a6ff, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -129,3 +129,4 @@ MonoBehaviour:
   maxElementStack: 10
   cards: []
   spriteRenderer: {fileID: 0}
+  enemyName: 

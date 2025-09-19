@@ -6,6 +6,7 @@ using static UnityEngine.Rendering.GPUSort;
 
 public class Enemy : Character
 {
+    public static Enemy Instance;
     private EnemySO _enemySo;
     private CardDataSO _currentEnemyCard;
     public CardDataSO CurrentEnemyCard => _currentEnemyCard;
@@ -13,6 +14,7 @@ public class Enemy : Character
     private bool hasUsedSupportCard = false;
 
     public SpriteRenderer spriteRenderer;
+    public string enemyName;
     private void Awake()
     {
         if (spriteRenderer == null)
@@ -32,10 +34,11 @@ public class Enemy : Character
 
         // EnemySO 내 카드 덱을 복사하여 할당
         Cards = new List<CardDataSO>(enemy.EnemyCards);
-        Debug.Log($"EnemySO '{enemy.EnemyName}' 카드 수: {enemy.EnemyCards?.Count ?? -1}, Enemy 객체 cards 수: {Cards?.Count ?? -1}");
+        Debug.Log($"EnemySO '{enemy.enemyName}' 카드 수: {enemy.EnemyCards?.Count ?? -1}, Enemy 객체 cards 수: {Cards?.Count ?? -1}");
     }
 
     public EnemySO GetEnemySo()
+
     {
         return _enemySo;
     }
@@ -108,5 +111,17 @@ public class Enemy : Character
         {
             Destroy(gameObject);
         }
+    }
+
+    public string GetEnemyName()
+    {
+        enemyName = _enemySo.enemyName;
+        return enemyName;
+    }
+
+    public string SetEnemyName(string name)
+    {
+        enemyName = name;
+        return enemyName;
     }
 }

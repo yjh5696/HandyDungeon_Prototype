@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -52,12 +53,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        startFade.FadeOut(1.0f);
+        //startFade.FadeOut(1.0f);
         
-        StartPrologue().Forget();
+        //StartPrologue().Forget();
         
-        //EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank4");
-        //StartPlayerTurn();
+        EnemySpawner.Instance.SpawnRandomEnemyByRank("Rank4");
+        StartPlayerTurn();
     }
 
     public void StartChoice()
@@ -257,7 +258,7 @@ public class GameManager : MonoBehaviour
     public void StartPlayerTurn()
     {
         BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(PlayerManager.Instance.Player.GetCurrentStatesWithStacks(), true);
-        LogManager.Instance.AddLog("당신의 차례입니다. 액션을 선택해주세요.");
+        LogManager.Instance.AddLog($"당신의 차례입니다. 액션을 선택해주세요.");
         LogManager.Instance.AddLog($"현재 나의 체력: {PlayerManager.Instance.Player.GetCurrentHp()} / {PlayerManager.Instance.Player.GetMaxHp()}.");
         LogManager.Instance.AddLog($"현재 적의 체력: {EnemyManager.Instance.Enemy.GetCurrentHp()} / {EnemyManager.Instance.Enemy.GetMaxHp()}.");
         CardManager.Instance.DrawCard();
@@ -271,8 +272,8 @@ public class GameManager : MonoBehaviour
             return;
         }
         BuffDebuffUIManager.Instance.UpdateBuffDebuffUI(EnemyManager.Instance.Enemy.GetCurrentStatesWithStacks(), false);
-        LogManager.Instance.AddLog("");
-        LogManager.Instance.AddLog("적의 차례입니다.");
+        LogManager.Instance.AddLog($"");
+        LogManager.Instance.AddLog($"적의 차례입니다.");
         EnemyManager.Instance.Enemy.DrawAndUseCard();
     }
 
@@ -295,26 +296,26 @@ public class GameManager : MonoBehaviour
         enemyBuffContainer.gameObject.SetActive(false);
         enemyDebuffContainer.gameObject.SetActive(false);
         BuffDebuffUIManager.Instance.ClearEnemyContainer();
-        EnemyManager.Instance.Enemy.ClearDebuffStacks();
-        EnemyManager.Instance.Enemy.ClearBuffStacks();
+        //EnemyManager.Instance.Enemy.ClearDebuffStacks();
+        //EnemyManager.Instance.Enemy.ClearBuffStacks();
         
         await UniTask.WaitForSeconds(delay);
         
         LogManager.Instance.AddSpacingLine();
-        LogManager.Instance.AddLog("");
-        LogManager.Instance.AddLog("전투 종료");
-        LogManager.Instance.AddLog("");
+        LogManager.Instance.AddLog($"");
+        LogManager.Instance.AddLog($"전투 종료");
+        LogManager.Instance.AddLog($"");
 
         if (PlayerManager.Instance.Player.GetCurrentHp() <= 0)
         {
-            LogManager.Instance.AddLog("플레이어 패배");
+            LogManager.Instance.AddLog($"플레이어 패배");
             lastBattleWon = false;
             SceneManager.LoadScene("StartScene");
             return;
         }
         else if (EnemyManager.Instance.Enemy.GetCurrentHp() <= 0)
         {
-            LogManager.Instance.AddLog("플레이어 승리");
+            LogManager.Instance.AddLog($"플레이어 승리");
             lastBattleWon = true;
         }
         
